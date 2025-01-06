@@ -18,4 +18,20 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, Verify>> verify(params) async {
+    try {
+
+      // TODO
+      final response = await remoteDataSource.verify(params.code, "");
+      return Right(Verify(
+        accessToken: response.accessToken,
+        expiresIn: response.expiresIn,
+        type: response.type,
+      ));
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

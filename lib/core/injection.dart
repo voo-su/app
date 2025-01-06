@@ -5,6 +5,7 @@ import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dar
 import 'package:voo_su/data/repositories/auth_repository_impl.dart';
 import 'package:voo_su/domain/repositories/auth_repository.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
+import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
 final sl = GetIt.instance;
@@ -21,16 +22,19 @@ Future<void> init() async {
   sl.registerLazySingleton(() => channel);
 
   // Data sources
-  sl.registerLazySingleton(() => AuthRemoteDataSource(AuthServiceClient(channel)));
+  sl.registerLazySingleton(
+    () => AuthRemoteDataSource(AuthServiceClient(channel)),
+  );
 
   // Repository
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => VerifyUseCase(sl()));
 
   // Bloc
   sl.registerFactory(
-    () => AuthBloc(sl()),
+    () => AuthBloc(sl(), sl()),
   );
 }

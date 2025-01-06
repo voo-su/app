@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/presentation/theme/colors.dart';
+import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/auth/login.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
@@ -19,7 +20,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoginLogged) {
-          //
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRouter.verify,
+            ModalRoute.withName(''),
+          );
         }
       },
       child: Scaffold(

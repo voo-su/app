@@ -13,4 +13,13 @@ class AuthRemoteDataSource {
 
     return await client.login(request);
   }
+
+  Future<AuthVerifyResponse> verify(String token, String code) async {
+    final request = AuthVerifyRequest(
+      code: code,
+      token: token,
+    );
+
+    return await client.verify(request);
+  }
 }

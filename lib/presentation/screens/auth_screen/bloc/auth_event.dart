@@ -8,3 +8,9 @@ class LoginAuth extends AuthEvent {
 
   LoginAuth(this.params);
 }
+
+class VerifyAuth extends AuthEvent {
+  final VerifyParams params;
+
+  VerifyAuth(this.params);
+}

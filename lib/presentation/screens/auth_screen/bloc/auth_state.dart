@@ -30,3 +30,12 @@ class AuthLoginLogged extends AuthState {
   @override
   List<Object> get props => [login];
 }
+
+class AuthVerifyLogged extends AuthState {
+  final Verify verify;
+
+  AuthVerifyLogged(this.verify);
+
+  @override
+  List<Object> get props => [verify];
+}

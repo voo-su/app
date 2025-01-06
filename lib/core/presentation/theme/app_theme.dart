@@ -18,6 +18,6 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(foregroundColor: lightSecondaryColor)),
     colorScheme: ColorScheme.light(secondary: lightSecondaryColor)
-        .copyWith(background: lightSecondaryColor),
+        .copyWith(surface: lightSecondaryColor),
   );
 }
