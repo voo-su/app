@@ -1,22 +1,35 @@
-import 'package:grpc/grpc.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/core/injection.dart' as di;
+import 'package:voo_su/core/presentation//theme/app_theme.dart';
+import 'package:voo_su/core/router.dart';
+import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
 Future<void> main() async {
-  final channel = ClientChannel(
-    '192.168.0.2',
-    port: 50051,
-    options: const ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
 
-  final client  = AuthServiceClient(channel);
+  runApp(const App());
+}
 
-  final request = AuthLoginRequest(
-    email: "info@magomedcoder.ru",
-    platform: "android",
-  );
+class App extends StatelessWidget {
+  const App({super.key});
 
-  final login = await client.login(request);
-print(login.token);
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.sl<AuthBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRouter.auth,
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        title: 'Voo.su',
+        theme: AppTheme.lightTheme,
+      ),
+    );
+  }
 }

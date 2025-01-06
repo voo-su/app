@@ -39,6 +39,17 @@ dependencies:
   grpc: ^4.0.1
   protobuf: ^3.1.0
 
+  # State management
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+
+  # Dependency injection
+  get_it: ^8.0.3
+
+  # Functional programming
+  equatable: ^2.0.7
+  dartz: ^0.10.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
