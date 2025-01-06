@@ -1,26 +1,26 @@
 import 'package:equatable/equatable.dart';
 
-class LoginParams {
+class AuthLoginParams {
   final String email;
 
-  const LoginParams({
+  const AuthLoginParams({
     required this.email,
   });
 }
 
-class VerifyParams {
+class AuthVerifyParams {
   final String code;
 
-  const VerifyParams({
+  const AuthVerifyParams({
     required this.code,
   });
 }
 
-class Login extends Equatable {
+class AuthLogin extends Equatable {
   final int expiresIn;
   final String token;
 
-  const Login({
+  const AuthLogin({
     required this.expiresIn,
     required this.token,
   });
@@ -29,12 +29,12 @@ class Login extends Equatable {
   List<Object> get props => [expiresIn, token];
 }
 
-class Verify extends Equatable {
+class AuthVerify extends Equatable {
   final String accessToken;
   final int expiresIn;
   final String type;
 
-  const Verify({
+  const AuthVerify({
     required this.accessToken,
     required this.expiresIn,
     required this.type,

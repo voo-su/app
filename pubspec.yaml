@@ -50,6 +50,10 @@ dependencies:
   equatable: ^2.0.7
   dartz: ^0.10.1
 
+  # Local storage
+  shared_preferences: ^2.3.5
+  flutter_secure_storage: ^9.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

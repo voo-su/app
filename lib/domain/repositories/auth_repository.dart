@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:voo_su/core/error/failures.dart';
-import 'package:voo_su/domain/entities/auth/login.dart';
+import 'package:voo_su/domain/entities/auth.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, Login>> login(LoginParams params);
+  Future<Either<Failure, AuthLogin>> login(AuthLoginParams params);
 
-  Future<Either<Failure, Verify>> verify(VerifyParams params);
+  Future<Either<Failure, AuthVerify>> verify(AuthVerifyParams params);
 }

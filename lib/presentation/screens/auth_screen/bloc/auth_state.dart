@@ -23,7 +23,7 @@ class AuthLoggedFail extends AuthState {
 }
 
 class AuthLoginLogged extends AuthState {
-  final Login login;
+  final AuthLogin login;
 
   AuthLoginLogged(this.login);
 
@@ -32,7 +32,7 @@ class AuthLoginLogged extends AuthState {
 }
 
 class AuthVerifyLogged extends AuthState {
-  final Verify verify;
+  final AuthVerify verify;
 
   AuthVerifyLogged(this.verify);
 

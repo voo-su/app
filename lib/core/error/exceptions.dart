@@ -3,3 +3,5 @@ class RouteException implements Exception {
 
   const RouteException(this.message);
 }
+
+class CacheException implements Exception {}

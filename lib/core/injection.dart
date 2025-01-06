@@ -1,5 +1,8 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:grpc/grpc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
 import 'package:voo_su/data/repositories/auth_repository_impl.dart';
@@ -19,15 +22,27 @@ Future<void> init() async {
     ),
   );
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+  const secureStorage = FlutterSecureStorage();
+
+  sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingleton(() => secureStorage);
   sl.registerLazySingleton(() => channel);
 
-  // Data sources
+  // Data sources - remote
   sl.registerLazySingleton(
     () => AuthRemoteDataSource(AuthServiceClient(channel)),
   );
 
+  // Data sources - local
+  sl.registerLazySingleton<AuthLocalDataSource>(
+    () => AuthLocalDataSourceImpl(sharedPreferences: sl(), secureStorage: sl()),
+  );
+
   // Repository
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(sl(), sl()),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/presentation/theme/colors.dart';
 import 'package:voo_su/core/router.dart';
-import 'package:voo_su/domain/entities/auth/login.dart';
+import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -101,9 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   fixedSize: const Size(327, 52),
                 ),
                 onPressed: () {
-                  context
-                      .read<AuthBloc>()
-                      .add(LoginAuth(LoginParams(email: emailController.text)));
+                  context.read<AuthBloc>().add(
+                      LoginAuth(AuthLoginParams(email: emailController.text)));
                 },
                 child: const Text(
                   "Войти",

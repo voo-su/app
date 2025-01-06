@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/presentation//theme/colors.dart';
-import 'package:voo_su/domain/entities/auth/login.dart';
+import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/widgets/otp_text_field.dart';
 
@@ -82,7 +82,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   fixedSize: const Size(327, 52),
                 ),
                 onPressed: () {
-                  context.read<AuthBloc>().add(VerifyAuth(VerifyParams(
+                  context.read<AuthBloc>().add(VerifyAuth(AuthVerifyParams(
                         code: otp1Controller.text +
                             otp2Controller.text +
                             otp3Controller.text +
