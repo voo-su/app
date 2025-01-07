@@ -5,7 +5,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/presentation/theme/app_theme.dart';
 import 'package:voo_su/core/router.dart';
+import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
+import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +25,10 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => di.sl<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              di.sl<ChatBloc>()..add(const Chats(FilterChatParams())),
         ),
       ],
       child: MaterialApp(

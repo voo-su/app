@@ -28,8 +28,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   });
 
   @override
-  Future<void> setLogin(AuthLoginModel login) {
-    return sharedPreferences.setString(authLoginKey, loginModelToJson(login));
+  Future<void> setLogin(AuthLoginModel login) async {
+     sharedPreferences.setString(authLoginKey, loginModelToJson(login));
   }
 
   @override
@@ -48,8 +48,9 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<void> setVerify(AuthVerifyModel verify) {
-    return sharedPreferences.setString(authKey, verifyModelToJson(verify));
+  Future<void> setVerify(AuthVerifyModel verify) async {
+    sharedPreferences.setString(authKey, verifyModelToJson(verify));
+    await secureStorage.write(key: authKey, value: verify.accessToken);
   }
 
   @override
