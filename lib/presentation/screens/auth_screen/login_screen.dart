@@ -4,6 +4,7 @@ import 'package:voo_su/core/presentation/theme/colors.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,22 +31,22 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Column(
           children: [
             const SizedBox(height: 80),
-            const Center(
+            Center(
               child: Text(
-                "Мы так рады видеть вас",
-                style: TextStyle(
+                AppLocalizations.of(context)!.greeting,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            const Wrap(
+            Wrap(
               children: [
                 Center(
                   child: Text(
-                    "Вход или регистрация",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.loginOrRegister,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
@@ -102,11 +103,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: () {
                   context.read<AuthBloc>().add(
-                      LoginAuth(AuthLoginParams(email: emailController.text)));
+                      LoginAuth(AuthLoginParams(email: emailController.text)),
+                  );
                 },
-                child: const Text(
-                  "Войти",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.login,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Color(0xFFF7F7FC),
                   ),

@@ -38,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, AuthVerify>> verify(params) async {
     try {
       final result = await localDataSource.getLogin();
-      final response = await remoteDataSource.verify(params.code, result.token);
+      final response = await remoteDataSource.verify(result.token, params.code);
 
       localDataSource.setVerify(AuthVerifyModel(
         accessToken: response.accessToken,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:voo_su/core/presentation//theme/colors.dart';
+import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/widgets/otp_text_field.dart';
@@ -25,29 +27,32 @@ class _VerifyScreenState extends State<VerifyScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthVerifyLogged) {
-          print("Успешно");
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRouter.chats,
+            ModalRoute.withName(''),
+          );
         }
       },
       child: Scaffold(
         body: Column(
           children: [
             const SizedBox(height: 80),
-            const Center(
+            Center(
               child: Text(
-                "Введите код",
-                style: TextStyle(
+                AppLocalizations.of(context)!.enterCode,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            const Wrap(
+            Wrap(
               children: [
                 Center(
                   child: Text(
-                    "Пожалуйста, введите в форму ниже код, который мы отправили вам.",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.enterCodeBelow,
+                    style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
                     ),
@@ -91,9 +96,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             otp6Controller.text,
                       )));
                 },
-                child: const Text(
-                  "Подтвердить",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.confirm,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Color(0xFFF7F7FC),
                   ),

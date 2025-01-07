@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:voo_su/core/injection.dart' as di;
-import 'package:voo_su/core/presentation//theme/app_theme.dart';
+import 'package:voo_su/core/presentation/theme/app_theme.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
@@ -28,6 +30,15 @@ class App extends StatelessWidget {
         initialRoute: AppRouter.auth,
         onGenerateRoute: AppRouter.onGenerateRoute,
         title: 'Voo.su',
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ru'),
+        ],
         theme: AppTheme.lightTheme,
       ),
     );
