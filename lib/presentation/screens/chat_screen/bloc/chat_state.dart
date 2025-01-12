@@ -3,33 +3,31 @@ part of 'chat_bloc.dart';
 @immutable
 abstract class ChatState extends Equatable {}
 
-class ChatInitial extends ChatState {
+class InitialState extends ChatState {
   @override
   List<Object> get props => [];
 }
 
-class ChatLoading extends ChatState {
+class LoadingState extends ChatState {
   @override
   List<Object> get props => [];
 }
 
-class ChatLoaded extends ChatState {
+class SuccessState extends ChatState {
   final List<Chat> chats;
-  final FilterChatParams params;
 
-  ChatLoaded({
-    required this.chats,
-    required this.params,
+  SuccessState({
+    required this.chats
   });
 
   @override
-  List<Object> get props => [chats, params];
+  List<Object> get props => [chats];
 }
 
-class ChatError extends ChatState {
+class ErrorState extends ChatState {
   final Failure failure;
 
-  ChatError({
+  ErrorState({
     required this.failure,
   });
 

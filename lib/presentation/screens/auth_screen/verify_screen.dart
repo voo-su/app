@@ -26,7 +26,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthVerifyLogged) {
+        if (state is SuccessState) {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRouter.chats,
             ModalRoute.withName(''),
@@ -87,7 +87,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   fixedSize: const Size(327, 52),
                 ),
                 onPressed: () {
-                  context.read<AuthBloc>().add(VerifyAuth(AuthVerifyParams(
+                  context.read<AuthBloc>().add(VerifyEvent(AuthVerifyParams(
                         code: otp1Controller.text +
                             otp2Controller.text +
                             otp3Controller.text +

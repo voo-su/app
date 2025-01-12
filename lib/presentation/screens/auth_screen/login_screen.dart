@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:voo_su/core/presentation/theme/colors.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthLoginLogged) {
+        if (state is SuccessState) {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRouter.verify,
             ModalRoute.withName(''),
@@ -103,8 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: () {
                   context.read<AuthBloc>().add(
-                      LoginAuth(AuthLoginParams(email: emailController.text)),
-                  );
+                        LoginEvent(
+                          AuthLoginParams(email: emailController.text),
+                        ),
+                      );
                 },
                 child: Text(
                   AppLocalizations.of(context)!.login,

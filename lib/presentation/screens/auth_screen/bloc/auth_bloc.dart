@@ -17,34 +17,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(
     this._loginUseCase,
     this._verifyUseCase,
-  ) : super(AuthInitial()) {
-    on<LoginAuth>(_onLogin);
-    on<VerifyAuth>(_onVerify);
+  ) : super(InitialState()) {
+    on<LoginEvent>(_onLogin);
+    on<VerifyEvent>(_onVerify);
   }
 
-  void _onLogin(LoginAuth event, Emitter<AuthState> emit) async {
+  void _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     try {
-      emit(AuthLoading());
+      emit(LoadingState());
       final result = await _loginUseCase(event.params);
       result.fold(
-        (failure) => emit(AuthLoggedFail(failure)),
-        (login) => emit(AuthLoginLogged(login)),
+        (failure) => emit(ErrorState(failure: failure)),
+        (success) => emit(SuccessState()),
       );
     } catch (e) {
-      emit(AuthLoggedFail(ExceptionFailure()));
+      emit(ErrorState(failure: ExceptionFailure()));
     }
   }
 
-  void _onVerify(VerifyAuth event, Emitter<AuthState> emit) async {
+  void _onVerify(VerifyEvent event, Emitter<AuthState> emit) async {
     try {
-      emit(AuthLoading());
+      emit(LoadingState());
       final result = await _verifyUseCase(event.params);
       result.fold(
-        (failure) => emit(AuthLoggedFail(failure)),
-        (verify) => emit(AuthVerifyLogged(verify)),
+        (failure) => emit(ErrorState(failure: failure)),
+        (success) => emit(SuccessState()),
       );
     } catch (e) {
-      emit(AuthLoggedFail(ExceptionFailure()));
+      emit(ErrorState(failure: ExceptionFailure()));
     }
   }
 }

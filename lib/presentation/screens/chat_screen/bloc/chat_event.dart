@@ -1,13 +1,9 @@
 part of 'chat_bloc.dart';
 
-abstract class ChatEvent extends Equatable {
-  const ChatEvent();
-}
-
-class Chats extends ChatEvent {
+class ChatEvent extends Equatable {
   final FilterChatParams params;
 
-  const Chats(this.params);
+  const ChatEvent(this.params);
 
   @override
   List<Object> get props => [];

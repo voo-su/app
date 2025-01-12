@@ -28,7 +28,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              di.sl<ChatBloc>()..add(const Chats(FilterChatParams())),
+              di.sl<ChatBloc>()..add(const ChatEvent(FilterChatParams())),
         ),
       ],
       child: MaterialApp(
