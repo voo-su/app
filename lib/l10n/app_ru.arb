@@ -7,5 +7,7 @@
   "confirm": "Подтвердить",
   "noChats": "Чатов пока нет",
   "pleaseWait": "Пожалуйста, подождите...",
-  "errorOccurred": "Произошла ошибка"
+  "errorOccurred": "Произошла ошибка",
+  "contacts": "Контакты",
+  "nothingFound": "Ничего не найдено"
 }

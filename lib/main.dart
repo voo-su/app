@@ -8,6 +8,8 @@ import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
+import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
+import 'package:voo_su/domain/entities/contact.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +32,16 @@ class App extends StatelessWidget {
           create: (context) =>
               di.sl<ChatBloc>()..add(const ChatEvent(FilterChatParams())),
         ),
+        BlocProvider(
+          create: (context) =>
+              di.sl<ContactBloc>()..add(const ContactEvent(FilterContactParams())),
+        ),
       ],
       child: MaterialApp(
+        title: 'Voo.su',
         debugShowCheckedModeBanner: false,
         initialRoute: AppRouter.auth,
         onGenerateRoute: AppRouter.onGenerateRoute,
-        title: 'Voo.su',
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
