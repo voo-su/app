@@ -3,7 +3,9 @@ import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/auth.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, AuthLogin>> login(AuthLoginParams params);
+  Future<Either<Failure, AuthLogin>> login(String email);
 
-  Future<Either<Failure, AuthVerify>> verify(AuthVerifyParams params);
+  Future<Either<Failure, AuthVerify>> verify(String code);
+
+  Future<Either> logout();
 }

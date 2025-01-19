@@ -4,12 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/presentation/theme/app_theme.dart';
-import 'package:voo_su/core/router.dart';
-import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
-import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/presentation/screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,23 +23,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => di.sl<AuthBloc>(),
-        ),
-        BlocProvider(
-          create: (context) =>
-              di.sl<ChatBloc>()..add(const ChatEvent(FilterChatParams())),
-        ),
-        BlocProvider(
-          create: (context) =>
-              di.sl<ContactBloc>()..add(const ContactEvent(FilterContactParams())),
-        ),
+        BlocProvider(create: (context) => di.sl<AuthBloc>()),
+        BlocProvider(create: (context) => di.sl<ChatBloc>()),
+        BlocProvider(create: (context) => di.sl<ContactBloc>()),
       ],
       child: MaterialApp(
-        title: 'Voo.su',
+        title: 'VooSu',
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRouter.auth,
-        onGenerateRoute: AppRouter.onGenerateRoute,
+        home: const SplashScreen(),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

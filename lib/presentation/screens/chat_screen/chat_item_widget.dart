@@ -28,7 +28,7 @@ class ChatItemWidget extends StatelessWidget {
                 if (chat.isOnline)
                   const CircleAvatar(
                     radius: 7,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.red,
                   ),
               ],
             ),

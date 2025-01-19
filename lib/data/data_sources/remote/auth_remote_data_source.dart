@@ -22,4 +22,9 @@ class AuthRemoteDataSource {
 
     return await client.verify(request);
   }
+
+  Future<AuthLogoutResponse> logout(String token) async {
+    final request = AuthLogoutRequest(accessToken: token);
+    return await client.logout(request);
+  }
 }

@@ -4,13 +4,13 @@ part of 'auth_bloc.dart';
 abstract class AuthEvent {}
 
 class LoginEvent extends AuthEvent {
-  final AuthLoginParams params;
+  final String email;
 
-  LoginEvent(this.params);
+  LoginEvent({required this.email});
 }
 
 class VerifyEvent extends AuthEvent {
-  final AuthVerifyParams params;
+  final String code;
 
-  VerifyEvent(this.params);
+  VerifyEvent({required this.code});
 }

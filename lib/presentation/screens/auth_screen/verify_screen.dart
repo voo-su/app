@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:voo_su/core/presentation//theme/colors.dart';
 import 'package:voo_su/core/router.dart';
-import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/widgets/otp_text_field.dart';
 
@@ -80,21 +78,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: lightPrimaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   fixedSize: const Size(327, 52),
                 ),
                 onPressed: () {
-                  context.read<AuthBloc>().add(VerifyEvent(AuthVerifyParams(
-                        code: otp1Controller.text +
-                            otp2Controller.text +
-                            otp3Controller.text +
-                            otp4Controller.text +
-                            otp5Controller.text +
-                            otp6Controller.text,
-                      )));
+                  context.read<AuthBloc>().add(
+                      VerifyEvent(code: otp1Controller.text +
+                        otp2Controller.text +
+                        otp3Controller.text +
+                        otp4Controller.text +
+                        otp5Controller.text +
+                        otp6Controller.text,
+                  ),);
                 },
                 child: Text(
                   AppLocalizations.of(context)!.confirm,

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voo_su/core/error/failures.dart';
-import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 
@@ -25,7 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoadingState());
-      final result = await _loginUseCase(event.params);
+      final result = await _loginUseCase(event.email);
       result.fold(
         (failure) => emit(ErrorState(failure: failure)),
         (success) => emit(SuccessState()),
@@ -38,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onVerify(VerifyEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoadingState());
-      final result = await _verifyUseCase(event.params);
+      final result = await _verifyUseCase(event.code);
       result.fold(
         (failure) => emit(ErrorState(failure: failure)),
         (success) => emit(SuccessState()),

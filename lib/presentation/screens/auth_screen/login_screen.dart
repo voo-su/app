@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:voo_su/core/presentation/theme/colors.dart';
 import 'package:voo_su/core/router.dart';
-import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -95,7 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: lightPrimaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -103,9 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: () {
                   context.read<AuthBloc>().add(
-                        LoginEvent(
-                          AuthLoginParams(email: emailController.text),
-                        ),
+                        LoginEvent(email: emailController.text),
                       );
                 },
                 child: Text(

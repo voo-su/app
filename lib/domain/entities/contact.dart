@@ -25,6 +25,6 @@ class ContactResponse {
   ContactResponse({required this.contacts});
 }
 
-class FilterContactParams {
-  const FilterContactParams();
+class ContactParams {
+  const ContactParams();
 }

@@ -28,10 +28,10 @@ class ContactListWidget extends StatelessWidget {
             return ListView.builder(
               itemCount: state.contacts.length,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.only(
-                top: 14,
-                bottom: (80 + MediaQuery.of(context).padding.bottom),
-              ),
+              // padding: EdgeInsets.only(
+              //   top: 14,
+              //   bottom: (80 + MediaQuery.of(context).padding.bottom),
+              // ),
               itemBuilder: (context, index) => ContactItemWidget(
                 contact: state.contacts[index],
               ),

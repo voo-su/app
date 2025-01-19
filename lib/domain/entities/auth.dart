@@ -1,21 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-class AuthLoginParams {
-  final String email;
-
-  const AuthLoginParams({
-    required this.email,
-  });
-}
-
-class AuthVerifyParams {
-  final String code;
-
-  const AuthVerifyParams({
-    required this.code,
-  });
-}
-
 class AuthLogin extends Equatable {
   final int expiresIn;
   final String token;

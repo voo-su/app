@@ -37,6 +37,6 @@ class ChatResponse {
   ChatResponse({required this.chats});
 }
 
-class FilterChatParams {
-  const FilterChatParams();
+class ChatParams {
+  const ChatParams();
 }

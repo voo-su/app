@@ -16,9 +16,9 @@ class AuthRepositoryImpl implements AuthRepository {
   );
 
   @override
-  Future<Either<Failure, AuthLogin>> login(params) async {
+  Future<Either<Failure, AuthLogin>> login(email) async {
     try {
-      final response = await remoteDataSource.login(params.email, "android");
+      final response = await remoteDataSource.login(email, "android");
 
       localDataSource.setLogin(AuthLoginModel(
         expiresIn: response.expiresIn,
@@ -35,10 +35,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthVerify>> verify(params) async {
+  Future<Either<Failure, AuthVerify>> verify(code) async {
     try {
       final result = await localDataSource.getLogin();
-      final response = await remoteDataSource.verify(result.token, params.code);
+      final response = await remoteDataSource.verify(result.token, code);
 
       localDataSource.setVerify(AuthVerifyModel(
         accessToken: response.accessToken,
@@ -51,6 +51,20 @@ class AuthRepositoryImpl implements AuthRepository {
         expiresIn: response.expiresIn,
         type: response.type,
       ));
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either> logout() async {
+    try {
+      final result = await localDataSource.getLogin();
+      final response = await remoteDataSource.logout(result.token);
+
+      // TODO DELETE
+
+      return Right(nil());
     } on Failure catch (failure) {
       return Left(failure);
     }

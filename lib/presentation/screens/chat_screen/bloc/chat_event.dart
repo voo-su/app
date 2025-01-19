@@ -1,7 +1,7 @@
 part of 'chat_bloc.dart';
 
 class ChatEvent extends Equatable {
-  final FilterChatParams params;
+  final ChatParams params;
 
   const ChatEvent(this.params);
 

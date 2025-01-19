@@ -1,7 +1,7 @@
 part of 'contact_bloc.dart';
 
 class ContactEvent extends Equatable {
-  final FilterContactParams params;
+  final ContactParams params;
 
   const ContactEvent(this.params);
 
