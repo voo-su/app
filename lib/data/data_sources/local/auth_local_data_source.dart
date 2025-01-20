@@ -29,7 +29,11 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> setLogin(AuthLoginModel login) async {
-     sharedPreferences.setString(authLoginKey, loginModelToJson(login));
+    try {
+      sharedPreferences.setString(authLoginKey, loginModelToJson(login));
+    } catch (e) {
+      throw CacheException();
+    }
   }
 
   @override
@@ -49,8 +53,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> setVerify(AuthVerifyModel verify) async {
-    sharedPreferences.setString(authKey, verifyModelToJson(verify));
-    await secureStorage.write(key: authKey, value: verify.accessToken);
+    try {
+      sharedPreferences.setString(authKey, verifyModelToJson(verify));
+      await secureStorage.write(key: authKey, value: verify.accessToken);
+    } catch (e) {
+      throw CacheException();
+    }
   }
 
   @override
@@ -70,10 +78,14 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<String> getToken() async {
-    String? token = await secureStorage.read(key: authKey);
-    if (token != null) {
-      return Future.value(token);
-    } else {
+    try {
+      String? token = await secureStorage.read(key: authKey);
+      if (token != null) {
+        return Future.value(token);
+      } else {
+        throw CacheException();
+      }
+    } catch (e) {
       throw CacheException();
     }
   }

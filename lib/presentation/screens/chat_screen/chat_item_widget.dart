@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
 
 class ChatItemWidget extends StatelessWidget {
   final Chat chat;
@@ -14,6 +15,14 @@ class ChatItemWidget extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MessageScreen(chat: chat),
+          ),
+        );
+      },
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.07,
         child: Row(
