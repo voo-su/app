@@ -33,8 +33,8 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   final channel = ClientChannel(
-    '192.168.0.2',
-    port: 50051,
+    'grpc.voo.su',
+    port: 443,
     options: const ChannelOptions(
       credentials: ChannelCredentials.insecure(),
     ),

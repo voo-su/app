@@ -19,8 +19,7 @@ class ChatRepositoryImpl implements ChatRepository {
     try {
       final String token = await localDataSource.getToken();
       final response = await remoteDataSource.list(token);
-      print("response.items");
-      print(response.items);
+
       List<Chat> chatList = response.items
           .map((item) => Chat(
                 id: item.id,

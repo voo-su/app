@@ -36,3 +36,17 @@ class MessageParams {
     required this.limit,
   });
 }
+
+class SendMessageParams {
+  final int chatType;
+  final int receiverId;
+  final int recordId;
+  final String message;
+
+  const SendMessageParams({
+    required this.chatType,
+    required this.receiverId,
+    required this.recordId,
+    required this.message,
+  });
+}

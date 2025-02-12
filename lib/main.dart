@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:voo_su/core/injection.dart' as di;
-import 'package:voo_su/core/presentation/theme/app_theme.dart';
+import 'package:voo_su/core/theme/app_theme.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';

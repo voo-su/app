@@ -34,4 +34,16 @@ class MessageRepositoryImpl implements MessageRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, String>> sendMessage(params) async {
+    try {
+      final String token = await localDataSource.getToken();
+      final response = await remoteDataSource.sendMessage(token, params);
+
+      return Right(response.id);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

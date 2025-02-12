@@ -26,4 +26,22 @@ class MessageRemoteDataSource {
       ),
     );
   }
+
+  Future<SendMessageResponse> sendMessage(
+    String token,
+    SendMessageParams params,
+  ) async {
+    final request = SendMessageRequest(
+      chatType: Int64(params.chatType),
+      receiverId: Int64(params.receiverId),
+      message: params.message,
+    );
+
+    return await client.send(
+      request,
+      options: CallOptions(
+        metadata: {"Authorization": token},
+      ),
+    );
+  }
 }
