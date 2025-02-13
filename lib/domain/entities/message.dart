@@ -4,13 +4,21 @@ class Message extends Equatable {
   final String id;
   final int chatType;
   final int msgType;
+  final int receiverId;
+  final int userId;
   final String content;
+  final bool isRead;
+  final String createdAt;
 
   const Message({
     required this.id,
     required this.chatType,
     required this.msgType,
+    required this.receiverId,
+    required this.userId,
     required this.content,
+    required this.isRead,
+    required this.createdAt,
   });
 
   @override

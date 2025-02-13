@@ -10,7 +10,7 @@ abstract class AuthLocalDataSource {
 
   Future<void> setVerify(AuthVerifyModel verify);
 
-  Future<AuthVerifyModel> getVerify();
+  Future<AuthVerifyModel> getAuth();
 
   Future<String> getToken();
 }
@@ -31,6 +31,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> setLogin(AuthLoginModel login) async {
     try {
       sharedPreferences.setString(authLoginKey, loginModelToJson(login));
+      //await secureStorage.write(key: authLoginKey, value: loginModelToJson(login));
     } catch (e) {
       throw CacheException();
     }
@@ -38,12 +39,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<AuthLoginModel> getLogin() async {
-    if (sharedPreferences.getBool('first_run') ?? true) {
-      await secureStorage.deleteAll();
-      sharedPreferences.setBool('first_run', false);
-    }
-
     final jsonString = sharedPreferences.getString(authLoginKey);
+    //final jsonString = await secureStorage.read(key: authLoginKey);
     if (jsonString != null) {
       return Future.value(loginModelFromJson(jsonString));
     } else {
@@ -55,20 +52,18 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> setVerify(AuthVerifyModel verify) async {
     try {
       sharedPreferences.setString(authKey, verifyModelToJson(verify));
-      await secureStorage.write(key: authKey, value: verify.accessToken);
+      sharedPreferences.remove(authLoginKey);
+      //await secureStorage.write(key: authKey, value: verifyModelToJson(verify));
+      //await secureStorage.write(key: authLoginKey, value: verifyModelToJson(verify));
     } catch (e) {
       throw CacheException();
     }
   }
 
   @override
-  Future<AuthVerifyModel> getVerify() async {
-    if (sharedPreferences.getBool('first_run') ?? true) {
-      await secureStorage.deleteAll();
-      sharedPreferences.setBool('first_run', false);
-    }
-
+  Future<AuthVerifyModel> getAuth() async {
     final jsonString = sharedPreferences.getString(authKey);
+    //final jsonString = await secureStorage.read(key: authKey);
     if (jsonString != null) {
       return Future.value(verifyModelFromJson(jsonString));
     } else {
@@ -78,14 +73,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<String> getToken() async {
-    try {
-      String? token = await secureStorage.read(key: authKey);
-      if (token != null) {
-        return Future.value(token);
-      } else {
-        throw CacheException();
-      }
-    } catch (e) {
+    String? jsonString = sharedPreferences.getString(authKey);
+    //String? jsonString = await secureStorage.read(key: authKey);
+    if (jsonString != null) {
+      final token = verifyModelFromJson(jsonString);
+      return Future.value(token.accessToken);
+    } else {
       throw CacheException();
     }
   }

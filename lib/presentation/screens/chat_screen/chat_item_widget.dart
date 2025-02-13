@@ -51,8 +51,7 @@ class ChatItemWidget extends StatelessWidget {
                   Text(
                     chat.name,
                     style: TextStyle(
-                      fontWeight:
-                          !chat.isSeen ? FontWeight.bold : FontWeight.w400,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Flexible(
@@ -61,20 +60,13 @@ class ChatItemWidget extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontWeight:
-                            !chat.isSeen ? FontWeight.bold : FontWeight.w400,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            const Spacer(),
-            if (chat.isSeen)
-              CircleAvatar(
-                radius: 8,
-                backgroundImage: NetworkImage(chat.avatar),
-              ),
           ],
         ),
       ),

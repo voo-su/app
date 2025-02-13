@@ -22,7 +22,7 @@ class ContactRepositoryImpl implements ContactRepository {
 
       List<Contact> contactList = response.items
           .map((item) => Contact(
-                id: item.id,
+                id: item.id.toInt(),
                 username: item.username,
                 name: item.name,
                 surname: item.surname,

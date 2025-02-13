@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class Chat extends Equatable {
   final int id;
   final int chatType;
+  final int receiverId;
   final String username;
   final String avatar;
   final String name;
@@ -10,12 +11,14 @@ class Chat extends Equatable {
   final String msgText;
   final int unreadNum;
   final String updatedAt;
-  final bool isSeen;
   final bool isOnline;
+  final bool isDisturb;
+  final bool isBot;
 
   const Chat({
     required this.id,
     required this.chatType,
+    required this.receiverId,
     required this.username,
     required this.avatar,
     required this.name,
@@ -23,8 +26,9 @@ class Chat extends Equatable {
     required this.msgText,
     required this.unreadNum,
     required this.updatedAt,
-    required this.isSeen,
     required this.isOnline,
+    required this.isDisturb,
+    required this.isBot,
   });
 
   @override

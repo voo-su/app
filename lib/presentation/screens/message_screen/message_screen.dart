@@ -21,10 +21,9 @@ class _MessageScreenState extends State<MessageScreen> {
   @override
   void initState() {
     super.initState();
-
     context.read<MessageBloc>().add(MessageEvent(MessageParams(
           chatType: widget.chat.chatType,
-          receiverId: widget.chat.id,
+          receiverId: widget.chat.receiverId,
           recordId: 0,
           limit: 30,
         )));

@@ -22,19 +22,19 @@ class ChatRepositoryImpl implements ChatRepository {
 
       List<Chat> chatList = response.items
           .map((item) => Chat(
-                id: item.id,
+                id: item.id.toInt(),
                 chatType: item.chatType,
+                receiverId: item.receiverId.toInt(),
                 username: item.username,
                 avatar: item.avatar,
                 name: item.name,
                 surname: item.surname,
                 msgText: item.msgText,
-                unreadNum: item.unreadNum,
+                unreadNum: item.unreadNum.toInt(),
                 updatedAt: item.updatedAt,
-
-                // TODO
-                isSeen: false,
-                isOnline: false,
+                isOnline: item.isOnline,
+                isDisturb: item.isDisturb,
+                isBot: item.isBot,
               ))
           .toList();
 

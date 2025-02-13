@@ -21,12 +21,12 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await remoteDataSource.login(email, "android");
 
       localDataSource.setLogin(AuthLoginModel(
-        expiresIn: response.expiresIn,
+        expiresIn: response.expiresIn.toInt(),
         token: response.token,
       ));
 
       return Right(AuthLogin(
-        expiresIn: response.expiresIn,
+        expiresIn: response.expiresIn.toInt(),
         token: response.token,
       ));
     } on Failure catch (failure) {
@@ -42,13 +42,13 @@ class AuthRepositoryImpl implements AuthRepository {
 
       localDataSource.setVerify(AuthVerifyModel(
         accessToken: response.accessToken,
-        expiresIn: response.expiresIn,
+        expiresIn: response.expiresIn.toInt(),
         type: response.type,
       ));
 
       return Right(AuthVerify(
         accessToken: response.accessToken,
-        expiresIn: response.expiresIn,
+        expiresIn: response.expiresIn.toInt(),
         type: response.type,
       ));
     } on Failure catch (failure) {

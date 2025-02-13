@@ -24,8 +24,12 @@ class MessageRepositoryImpl implements MessageRepository {
           .map((item) => Message(
                 id: item.id,
                 chatType: item.chatType,
+                receiverId: item.receiverId.toInt(),
+                userId: item.userId.toInt(),
                 msgType: item.msgType,
                 content: item.content,
+                isRead: item.isRead,
+                createdAt: item.createdAt,
               ))
           .toList();
 
