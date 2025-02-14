@@ -60,6 +60,9 @@ dependencies:
   intl: any
   fixnum: ^1.1.1
 
+  # Icons
+  flutter_svg: ^2.0.17
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

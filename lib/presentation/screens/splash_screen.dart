@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/home_screen.dart';
@@ -22,11 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _checkAuthStatus() async {
     final prefs = await SharedPreferences.getInstance();
-
-    bool isAuthenticated = prefs.getBool(authKey) ?? false;
-
     Timer(const Duration(seconds: 3), () {
-      if (isAuthenticated) {
+      String? token = prefs.getString(authKey);
+      if (token != null) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -51,10 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.bottomCenter,
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.5,
-            child: const Image(
-              width: 200,
-              height: 200,
-              image: AssetImage("assets/images/logo.png"),
+            child: SvgPicture.asset(
+              "assets/images/logo.svg",
+              width: 100,
+              height: 100,
             ),
           ),
           Padding(

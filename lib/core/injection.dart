@@ -35,9 +35,9 @@ Future<void> init() async {
   final channel = ClientChannel(
     'grpc.voo.su',
     port: 443,
-    options: const ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-    ),
+    // options: const ChannelOptions(
+    //   credentials: ChannelCredentials.insecure(),
+    // ),
   );
 
   final sharedPreferences = await SharedPreferences.getInstance();

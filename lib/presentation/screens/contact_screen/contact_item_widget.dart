@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 
 class ContactItemWidget extends StatelessWidget {
   final Contact contact;
@@ -13,6 +14,9 @@ class ContactItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    // print(
+    //     " name - ${contact.name}  surname - ${contact.surname}  username - ${contact.username}");
+
     return InkWell(
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.07,
@@ -22,9 +26,12 @@ class ContactItemWidget extends StatelessWidget {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(contact.avatar),
-                ),
+                AvatarWidget(
+                  avatarUrl: contact.avatar,
+                  name: contact.name,
+                  surname: contact.surname,
+                  username: contact.username,
+                )
               ],
             ),
             const SizedBox(width: 16),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
+import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 
 class ChatItemWidget extends StatelessWidget {
   final Chat chat;
@@ -13,6 +16,7 @@ class ChatItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    String formattedTime = _formatDateOrTime(chat.updatedAt);
 
     return InkWell(
       onTap: () {
@@ -24,45 +28,85 @@ class ChatItemWidget extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.07,
+        height: size.height * 0.08,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(chat.avatar),
+                AvatarWidget(
+                  avatarUrl: chat.avatar,
+                  name: chat.name,
+                  surname: chat.surname,
+                  username: chat.username,
+                  isOnline: chat.isOnline,
                 ),
-                if (chat.isOnline)
-                  const CircleAvatar(
-                    radius: 7,
-                    backgroundColor: Colors.red,
-                  ),
               ],
             ),
             const SizedBox(width: 16),
-            SizedBox(
-              width: size.width * 0.75,
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    chat.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      '${chat.msgText} - ${chat.updatedAt}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          chat.name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.lightOnSurface20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
+                      Text(
+                        formattedTime,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.lightOnSurface40,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          chat.msgText,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.darkOnSurface60,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      if (chat.unreadNum > 0)
+                        Container(
+                          margin: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7.5, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: AppColors.lightPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            chat.unreadNum > 99
+                                ? "99+"
+                                : chat.unreadNum.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),
@@ -71,5 +115,31 @@ class ChatItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _formatDateOrTime(String dateTime) {
+    try {
+      final DateFormat format = DateFormat("yyyy-MM-dd HH:mm:ss");
+      final DateTime parsedDate = format.parse(dateTime);
+      final DateTime now = DateTime.now();
+
+      final Duration difference = now.difference(parsedDate);
+
+      if (difference.inHours < 24 && parsedDate.day == now.day) {
+        return DateFormat("HH:mm").format(parsedDate);
+      } else if (difference.inDays < 7) {
+        return _getWeekdayName(parsedDate.weekday);
+      } else {
+        return DateFormat("dd.MM.yyyy").format(parsedDate);
+      }
+    } catch (e) {
+      debugPrint("Ошибка форматирования даты: $e");
+      return "";
+    }
+  }
+
+  String _getWeekdayName(int weekday) {
+    const List<String> weekdays = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+    return weekdays[weekday - 1];
   }
 }
