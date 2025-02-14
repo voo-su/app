@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/message.dart';
 
 class MessageItemWidget extends StatelessWidget {
-  final Message message;
+  // final Message message;
+  final String text;
 
-  const MessageItemWidget({
-    super.key,
-    required this.message,
-  });
+  const MessageItemWidget(
+      {super.key,
+      // required this.message,
+      required this.text});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        print("message");
+      },
       child: Column(
         children: [
           Padding(
@@ -20,10 +23,11 @@ class MessageItemWidget extends StatelessWidget {
             child: SizedBox(
               child: Column(
                 children: [
-                  Text(message.id),
-                  Text(message.chatType.toString()),
-                  Text(message.msgType.toString()),
-                  Text(message.content),
+                  Text(text)
+                  // Text(message.id),
+                  // Text(message.chatType.toString()),
+                  // Text(message.msgType.toString()),
+                  // Text(message.content),
                 ],
               ),
             ),

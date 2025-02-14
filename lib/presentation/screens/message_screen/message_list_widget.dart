@@ -9,32 +9,95 @@ class MessageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> testMessages = [
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+      "Привет! Как дела?",
+      "Привет! Всё хорошо, а у тебя?",
+      "Тоже отлично. Чем занимаешься?",
+      "Работаю",
+    ];
+
     return Expanded(
       child: BlocBuilder<MessageBloc, MessageState>(
         builder: (context, state) {
           if (state is LoadingState) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.pleaseWait),
-            );
+            // return Center(
+            //   child: Text(AppLocalizations.of(context)!.pleaseWait),
+            // );
           }
 
           if (state is SuccessState) {
-            if (state.messages.isEmpty) {
-              return Center(
-                child: Text(AppLocalizations.of(context)!.nothingFound),
-              );
-            }
+            // if (state.messages.isEmpty) {
+            //   return Center(
+            //     child: Text(AppLocalizations.of(context)!.nothingFound),
+            //   );
+            // }
 
             return ListView.builder(
-              itemCount: state.messages.length,
+              itemCount: testMessages.length,
+              // itemCount: state.messages.length,
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.only(
                 top: 14,
                 bottom: (80 + MediaQuery.of(context).padding.bottom),
               ),
               itemBuilder: (context, index) => MessageItemWidget(
-               message: state.messages[index],
+                text: testMessages[index],
               ),
+              // itemBuilder: (context, index) => MessageItemWidget(
+              //   message: state.messages[index],
+              // ),
             );
           } else {
             return Center(

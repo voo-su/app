@@ -93,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: TextButton(
                 style: TextButton.styleFrom(
+                  backgroundColor: Colors.amber,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
