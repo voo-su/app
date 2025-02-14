@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.7.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -40,8 +40,8 @@ dependencies:
   protobuf: ^3.1.0
 
   # State management
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
 
   # Dependency injection
   get_it: ^8.0.3
@@ -51,8 +51,8 @@ dependencies:
   dartz: ^0.10.1
 
   # Local storage
-  shared_preferences: ^2.3.5
-  flutter_secure_storage: ^9.2.3
+  shared_preferences: ^2.5.2
+  flutter_secure_storage: ^9.2.4
 
   # Localization
   flutter_localizations:
@@ -115,3 +115,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true

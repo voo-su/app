@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:voo_su/l10n/generated/app_localizations.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_item_widget.dart';
 

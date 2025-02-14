@@ -10,5 +10,6 @@
   "errorOccurred": "Произошла ошибка",
   "chats": "Чаты",
   "contacts": "Контакты",
-  "nothingFound": "Ничего не найдено"
+  "nothingFound": "Ничего не найдено",
+  "search": "Поиск"
 }

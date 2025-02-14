@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:voo_su/l10n/generated/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/theme/app_theme.dart';
@@ -49,11 +49,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-
-/*
-
-Авторизация через безопасное хранилище - потом
-сохранение авторизации
-
-*/

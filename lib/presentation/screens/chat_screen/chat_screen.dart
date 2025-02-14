@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/l10n/generated/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_list_widget.dart';
 
 import 'bloc/chat_bloc.dart';
@@ -36,14 +37,14 @@ class _ChatScreenState extends State<ChatScreen> {
           flexibleSpace: SafeArea(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text(
-                    "Чаты",
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.chats,
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
                       color: AppColors.lightOnSurface20,
@@ -53,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      hintText: "Поиск",
+                      hintText: AppLocalizations.of(context)!.search,
                       hintStyle: TextStyle(color: AppColors.lightOnSurface60),
                       filled: true,
                       fillColor: AppColors.lightSecondarySurface,

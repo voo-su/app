@@ -11,4 +11,4 @@ PRODUCT_NAME = VooSu
 PRODUCT_BUNDLE_IDENTIFIER = su.voo.desktop
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 Voo.su. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 VooSu All rights reserved.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:voo_su/l10n/generated/app_localizations.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
