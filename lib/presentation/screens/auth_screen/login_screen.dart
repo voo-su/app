@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/l10n/generated/app_localizations.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 

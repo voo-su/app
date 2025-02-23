@@ -86,7 +86,7 @@ class ChatItemWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (chat.unreadNum > 0)
+                      if (chat.unreadCount > 0)
                         Container(
                           margin: const EdgeInsets.only(left: 8),
                           padding: const EdgeInsets.symmetric(
@@ -96,9 +96,9 @@ class ChatItemWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            chat.unreadNum > 99
+                            chat.unreadCount > 99
                                 ? "99+"
-                                : chat.unreadNum.toString(),
+                                : chat.unreadCount.toString(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,

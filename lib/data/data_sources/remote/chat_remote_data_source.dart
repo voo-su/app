@@ -6,10 +6,10 @@ class ChatRemoteDataSource {
 
   ChatRemoteDataSource(this.client);
 
-  Future<GetChatListResponse> list(String token) async {
-    final request = GetChatListRequest();
+  Future<GetChatsResponse> list(String token) async {
+    final request = GetChatsRequest();
 
-    return await client.list(
+    return await client.chats(
       request,
       options: CallOptions(
         metadata: {"Authorization": token},

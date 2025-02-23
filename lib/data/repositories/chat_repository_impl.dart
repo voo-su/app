@@ -30,7 +30,7 @@ class ChatRepositoryImpl implements ChatRepository {
                 name: item.name,
                 surname: item.surname,
                 msgText: item.msgText,
-                unreadNum: item.unreadNum.toInt(),
+                unreadCount: item.unreadCount.toInt(),
                 updatedAt: item.updatedAt,
                 isOnline: item.isOnline,
                 isDisturb: item.isDisturb,

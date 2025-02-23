@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
-import 'package:voo_su/l10n/generated/app_localizations.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_list_widget.dart';
 
 import 'bloc/chat_bloc.dart';

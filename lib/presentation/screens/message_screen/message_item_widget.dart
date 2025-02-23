@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/message.dart';
 
 class MessageItemWidget extends StatelessWidget {
-  // final Message message;
-  final String text;
+  final Message message;
 
-  const MessageItemWidget(
-      {super.key,
-      // required this.message,
-      required this.text});
+  const MessageItemWidget({
+    super.key,
+    required this.message,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +22,10 @@ class MessageItemWidget extends StatelessWidget {
             child: SizedBox(
               child: Column(
                 children: [
-                  Text(text)
-                  // Text(message.id),
-                  // Text(message.chatType.toString()),
-                  // Text(message.msgType.toString()),
-                  // Text(message.content),
+                  Text(message.id),
+                  Text(message.chatType.toString()),
+                  Text(message.msgType.toString()),
+                  Text(message.content),
                 ],
               ),
             ),

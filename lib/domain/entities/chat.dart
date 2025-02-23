@@ -9,7 +9,7 @@ class Chat extends Equatable {
   final String name;
   final String surname;
   final String msgText;
-  final int unreadNum;
+  final int unreadCount;
   final String updatedAt;
   final bool isOnline;
   final bool isDisturb;
@@ -24,7 +24,7 @@ class Chat extends Equatable {
     required this.name,
     required this.surname,
     required this.msgText,
-    required this.unreadNum,
+    required this.unreadCount,
     required this.updatedAt,
     required this.isOnline,
     required this.isDisturb,
