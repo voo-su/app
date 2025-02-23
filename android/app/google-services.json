@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645948915362",
+    "project_id": "voo-su",
+    "storage_bucket": "voo-su.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645948915362:android:91538a6663e7483137a1fb",
+        "android_client_info": {
+          "package_name": "su.voo.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCblVF7lyVkA-gMYHJQ42OosF5HXuz1AW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

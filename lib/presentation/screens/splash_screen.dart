@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/home_screen.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,10 +15,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
   @override
   void initState() {
     super.initState();
+
+    _firebaseMessaging.requestPermission();
+
     _checkAuthStatus();
+
+    _firebaseMessaging.getToken().then((token) {
+      print("FCM Token: $token");
+    });
   }
 
   void _checkAuthStatus() async {
