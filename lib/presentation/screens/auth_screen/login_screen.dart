@@ -1,8 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
+import 'package:voo_su/presentation/screens/terms_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,101 +23,143 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is SuccessState) {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRouter.verify,
-            ModalRoute.withName(''),
-          );
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil(AppRouter.verify, ModalRoute.withName(''));
         }
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(height: 80),
-            Center(
-              child: Text(
-                AppLocalizations.of(context)!.greeting,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Wrap(
+        backgroundColor: AppColors.lightPrimarySurface,
+
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: Text(
-                    AppLocalizations.of(context)!.loginOrRegister,
+                SvgPicture.asset(
+                  'assets/images/logo.svg',
+                  width: 100,
+                  height: 100,
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  AppLocalizations.of(context)!.greeting,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  AppLocalizations.of(context)!.loginOrRegister,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: const Color(0xFFADB5BD),
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: TextField(
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.done,
+                            enableSuggestions: true,
+                            autocorrect: false,
+                            decoration: const InputDecoration(
+                              hintText: "Email",
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFADB5BD),
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.lightPrimary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    onPressed: () {
+                      context.read<AuthBloc>().add(
+                        LoginEvent(email: emailController.text),
+                      );
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.login,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFFF7F7FC),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: Colors.black54,
                     ),
+                    children: [
+                      const TextSpan(
+                        text: 'Нажимая «Войти», вы соглашаетесь с ',
+                      ),
+                      TextSpan(
+                        text: "условиями использования",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        recognizer:
+                            TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const TermsScreen(),
+                                  ),
+                                );
+                              },
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 48),
-            Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
-              child: Container(
-                width: 343,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: const Color(0xFFADB5BD),
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        controller: emailController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          hintText: "Email",
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFADB5BD),
-                          ),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.amber,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  fixedSize: const Size(327, 52),
-                ),
-                onPressed: () {
-                  context.read<AuthBloc>().add(
-                        LoginEvent(email: emailController.text),
-                      );
-                },
-                child: Text(
-                  AppLocalizations.of(context)!.login,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFFF7F7FC),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

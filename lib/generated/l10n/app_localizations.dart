@@ -172,6 +172,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Поиск'**
   String get search;
+
+  /// No description provided for @termsText1.
+  ///
+  /// In ru, this message translates to:
+  /// **'Настоящее Соглашение регламентирует отношения между Администрацией информационного ресурса «Voo.su» и физическим лицом, которое ищет и распространяет информацию на данном ресурсе.'**
+  String get termsText1;
+
+  /// No description provided for @termsText2.
+  ///
+  /// In ru, this message translates to:
+  /// **'Информационный ресурс «Voo.su» не является средством массовой информации, Администрация ресурса не осуществляет редактирование размещаемой информации и не несет ответственность за ее содержание.'**
+  String get termsText2;
+
+  /// No description provided for @termsText3.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пользователь, разместивший информацию на ресурсе «Voo.su», самостоятельно представляет и защищает свои интересы, возникающие в связи с размещением указанной информации, в отношениях с третьими лицами.'**
+  String get termsText3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
