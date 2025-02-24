@@ -10,42 +10,31 @@ class ChatListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocBuilder<ChatBloc, ChatState>(
-        builder: (context, state) {
-          if (state is LoadingState) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.pleaseWait),
-            );
-          }
+    return BlocBuilder<ChatBloc, ChatState>(
+      builder: (context, state) {
+        if (state is LoadingState) {
+          return Center(child: Text(AppLocalizations.of(context)!.pleaseWait));
+        }
 
-          if (state is SuccessState) {
-            if (state.chats.isEmpty) {
-              return Center(child: Text(AppLocalizations.of(context)!.noChats));
-            }
-            return RefreshIndicator(
-              onRefresh: () async {
-                context.read<ChatBloc>().add(const ChatEvent(ChatParams()));
-              },
-              child: ListView.builder(
-                itemCount: state.chats.length,
-                physics: const BouncingScrollPhysics(),
-                // padding: EdgeInsets.only(
-                //   top: 14,
-                //   bottom: (80 + MediaQuery.of(context).padding.bottom),
-                // ),
-                itemBuilder:
-                    (context, index) =>
-                        ChatItemWidget(chat: state.chats[index]),
-              ),
-            );
-          } else {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.errorOccurred),
-            );
+        if (state is SuccessState) {
+          if (state.chats.isEmpty) {
+            return Center(child: Text(AppLocalizations.of(context)!.noChats));
           }
-        },
-      ),
+          return RefreshIndicator(
+            onRefresh: () async {
+              context.read<ChatBloc>().add(const ChatEvent(ChatParams()));
+            },
+            child: ListView.builder(
+              itemCount: state.chats.length,
+              physics:
+                  const AlwaysScrollableScrollPhysics(),
+              itemBuilder:
+                  (context, index) => ChatItemWidget(chat: state.chats[index]),
+            ),
+          );
+        }
+        return Center(child: Text(AppLocalizations.of(context)!.errorOccurred));
+      },
     );
   }
 }

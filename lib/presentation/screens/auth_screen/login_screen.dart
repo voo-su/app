@@ -146,12 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         recognizer:
                             TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const TermsScreen(),
-                                  ),
-                                );
+                                Navigator.pushNamed(context, AppRouter.terms);
                               },
                       ),
                     ],
