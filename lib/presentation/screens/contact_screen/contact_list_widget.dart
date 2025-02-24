@@ -32,9 +32,9 @@ class ContactListWidget extends StatelessWidget {
               //   top: 14,
               //   bottom: (80 + MediaQuery.of(context).padding.bottom),
               // ),
-              itemBuilder: (context, index) => ContactItemWidget(
-                contact: state.contacts[index],
-              ),
+              itemBuilder:
+                  (context, index) =>
+                      ContactItemWidget(contact: state.contacts[index]),
             );
           } else {
             return Center(

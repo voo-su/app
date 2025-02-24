@@ -36,8 +36,10 @@ class _ChatScreenState extends State<ChatScreen> {
           elevation: 0,
           flexibleSpace: SafeArea(
             child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 10.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -63,9 +65,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         borderSide: BorderSide.none,
                       ),
                       contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 12),
-                      prefixIcon: const Icon(Icons.search,
-                          color: AppColors.lightOnSurface60),
+                        vertical: 10,
+                        horizontal: 12,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: AppColors.lightOnSurface60,
+                      ),
                     ),
                     onChanged: (value) {
                       print(value);
@@ -77,14 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: <Widget>[
-            ChatListWidget(),
-          ],
-        ),
-      ),
+      body: Column(children: <Widget>[ChatListWidget()]),
     );
   }
 }

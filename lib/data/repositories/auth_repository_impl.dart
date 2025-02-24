@@ -10,25 +10,24 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
 
-  AuthRepositoryImpl(
-    this.remoteDataSource,
-    this.localDataSource,
-  );
+  AuthRepositoryImpl(this.remoteDataSource, this.localDataSource);
 
   @override
   Future<Either<Failure, AuthLogin>> login(email) async {
+    print(1);
     try {
       final response = await remoteDataSource.login(email, "android");
 
-      localDataSource.setLogin(AuthLoginModel(
-        expiresIn: response.expiresIn.toInt(),
-        token: response.token,
-      ));
+      localDataSource.setLogin(
+        AuthLoginModel(
+          expiresIn: response.expiresIn.toInt(),
+          token: response.token,
+        ),
+      );
 
-      return Right(AuthLogin(
-        expiresIn: response.expiresIn.toInt(),
-        token: response.token,
-      ));
+      return Right(
+        AuthLogin(expiresIn: response.expiresIn.toInt(), token: response.token),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     }
@@ -40,17 +39,21 @@ class AuthRepositoryImpl implements AuthRepository {
       final result = await localDataSource.getLogin();
       final response = await remoteDataSource.verify(result.token, code);
 
-      localDataSource.setVerify(AuthVerifyModel(
-        accessToken: response.accessToken,
-        expiresIn: response.expiresIn.toInt(),
-        type: response.type,
-      ));
+      localDataSource.setVerify(
+        AuthVerifyModel(
+          accessToken: response.accessToken,
+          expiresIn: response.expiresIn.toInt(),
+          type: response.type,
+        ),
+      );
 
-      return Right(AuthVerify(
-        accessToken: response.accessToken,
-        expiresIn: response.expiresIn.toInt(),
-        type: response.type,
-      ));
+      return Right(
+        AuthVerify(
+          accessToken: response.accessToken,
+          expiresIn: response.expiresIn.toInt(),
+          type: response.type,
+        ),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     }

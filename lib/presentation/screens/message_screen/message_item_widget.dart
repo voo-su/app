@@ -1,37 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/message_bubble_widget.dart';
 
 class MessageItemWidget extends StatelessWidget {
   final Message message;
+  final int receiverId;
 
   const MessageItemWidget({
     super.key,
     required this.message,
+    required this.receiverId,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("message");
-      },
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: SizedBox(
-              child: Column(
-                children: [
-                  Text(message.id),
-                  Text(message.chatType.toString()),
-                  Text(message.msgType.toString()),
-                  Text(message.content),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+    final bool isMine = message.userId != receiverId;
+
+    return MessageBubbleWidget(
+      message: message.content,
+      isMine: isMine,
+      createdAt: message.createdAt,
+      isRead: message.isRead,
     );
   }
 }

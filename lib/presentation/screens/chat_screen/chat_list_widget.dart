@@ -34,9 +34,9 @@ class ChatListWidget extends StatelessWidget {
                 //   top: 14,
                 //   bottom: (80 + MediaQuery.of(context).padding.bottom),
                 // ),
-                itemBuilder: (context, index) => ChatItemWidget(
-                  chat: state.chats[index],
-                ),
+                itemBuilder:
+                    (context, index) =>
+                        ChatItemWidget(chat: state.chats[index]),
               ),
             );
           } else {

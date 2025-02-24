@@ -5,44 +5,40 @@ import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dar
 import 'package:voo_su/presentation/screens/message_screen/message_item_widget.dart';
 
 class MessageListWidget extends StatelessWidget {
-  const MessageListWidget({super.key});
+  final int receiverId;
+
+  const MessageListWidget({super.key, required this.receiverId});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocBuilder<MessageBloc, MessageState>(
-        builder: (context, state) {
-          if (state is LoadingState) {
+    return BlocBuilder<MessageBloc, MessageState>(
+      builder: (context, state) {
+        if (state is LoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is SuccessState) {
+          if (state.messages.isEmpty) {
             return Center(
-              child: Text(AppLocalizations.of(context)!.pleaseWait),
+              child: Text(AppLocalizations.of(context)!.nothingFound),
             );
           }
 
-          if (state is SuccessState) {
-            if (state.messages.isEmpty) {
-              return Center(
-                child: Text(AppLocalizations.of(context)!.nothingFound),
-              );
-            }
+          return ListView.builder(
+            itemCount: state.messages.length,
+            physics: const BouncingScrollPhysics(),
+            reverse: true,
+            padding: EdgeInsets.only(top: 12, bottom: 12),
+            itemBuilder:
+                (context, index) => MessageItemWidget(
+              message: state.messages[index],
+              receiverId: receiverId,
+            ),
+          );
+        }
 
-            return ListView.builder(
-              itemCount: state.messages.length,
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.only(
-                top: 14,
-                bottom: (80 + MediaQuery.of(context).padding.bottom),
-              ),
-              itemBuilder: (context, index) => MessageItemWidget(
-                message: state.messages[index],
-              ),
-            );
-          } else {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.errorOccurred),
-            );
-          }
-        },
-      ),
+        return Center(child: Text(AppLocalizations.of(context)!.errorOccurred));
+      },
     );
   }
 }
