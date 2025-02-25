@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
@@ -44,6 +43,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -51,7 +51,7 @@ class _MessageScreenState extends State<MessageScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: colors.background,
         appBar: CustomAppBar(
           title:
               widget.chat.name.isNotEmpty
@@ -64,7 +64,7 @@ class _MessageScreenState extends State<MessageScreen> {
               child: MessageListWidget(receiverId: widget.chat.receiverId),
             ),
             Container(
-              color: AppColors.lightBackground,
+              color: colors.background,
               child: SafeArea(
                 top: false,
                 child: Padding(
@@ -76,7 +76,7 @@ class _MessageScreenState extends State<MessageScreen> {
                       horizontal: 12,
                       vertical: 8,
                     ),
-                    color: AppColors.lightBackground,
+                    color: colors.background,
                     child: Row(
                       children: [
                         Expanded(
@@ -87,7 +87,7 @@ class _MessageScreenState extends State<MessageScreen> {
                         ),
                         const SizedBox(width: 8),
                         IconButton(
-                          icon: const Icon(Icons.send, color: Colors.blue),
+                          icon: Icon(Icons.send, color: colors.primary),
                           onPressed: () {
                             print("Отправка: ${_messageController.text}");
                             _messageController.clear();

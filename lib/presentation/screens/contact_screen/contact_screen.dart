@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
@@ -17,10 +16,11 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     context.read<ContactBloc>().add(const ContactEvent(ContactParams()));
 
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: colors.background,
       appBar: CustomAppBar(title: AppLocalizations.of(context)!.contacts),
       body: Column(children: <Widget>[ContactListWidget()]),
     );

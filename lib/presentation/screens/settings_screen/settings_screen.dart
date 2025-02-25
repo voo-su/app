@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/router.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
@@ -29,8 +28,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: colors.background,
       appBar: CustomAppBar(title: AppLocalizations.of(context)!.settings),
       body: SafeArea(
         child: BlocListener<SettingsBloc, SettingsState>(
@@ -71,17 +71,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           Text(
                             username,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
-                              color: AppColors.lightOnSurface20,
+                              color: colors.onSurface,
                             ),
                           ),
                           Text(
                             email,
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black.withOpacity(0.6),
+                              color: colors.onSurface,
                             ),
                           ),
                         ],
@@ -93,8 +93,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         print("Открыть экран редактирования профиля");
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: AppColors.lightPrimaryContainer,
-                        foregroundColor: AppColors.lightOnSurface20,
+                        backgroundColor: colors.surface,
+                        foregroundColor: colors.onSurface,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
                           vertical: 10,
@@ -120,7 +120,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.lightPrimary,
+                    color: colors.primary,
                   ),
                 ),
               ),
@@ -136,7 +136,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.palette_outlined,
                 title: "Оформление",
                 onTap: () {
-                  print("Открыть настройки оформления");
+                  Navigator.pushNamed(context, AppRouter.themes);
+                },
+              ),
+              _buildSettingsItem(
+                icon: Icons.logout_outlined,
+                title: "Выйти из профиля",
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouter.themes);
                 },
               ),
             ],
@@ -151,17 +158,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required String title,
     required VoidCallback onTap,
   }) {
+    final colors = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
           children: [
-            Icon(icon, color: AppColors.lightPrimary, size: 24),
+            Icon(icon, color: colors.primary, size: 24),
             const SizedBox(width: 12),
             Text(
               title,
-              style: TextStyle(fontSize: 16, color: AppColors.lightOnSurface20),
+              style: TextStyle(fontSize: 16, color: colors.onSurface),
             ),
           ],
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/core/theme/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -17,63 +16,69 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appBarColors = Theme.of(context).appBarTheme;
+    final colors = Theme.of(context).colorScheme;
+
     return PreferredSize(
-      preferredSize: Size.fromHeight(hasSearch ? 120 : 56),
+      preferredSize: Size.fromHeight(hasSearch ? 120 : kToolbarHeight),
       child: AppBar(
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: appBarColors.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
-        flexibleSpace: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 10.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.lightOnSurface20,
-                  ),
-                ),
-                if (hasSearch) ...[
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: searchController,
-                    onChanged: onSearchChanged,
-                    decoration: InputDecoration(
-                      hintText: "Поиск...",
-                      hintStyle: TextStyle(color: AppColors.lightOnSurface60),
-                      filled: true,
-                      fillColor: AppColors.lightSecondarySurface,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 12,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: AppColors.lightOnSurface60,
+        leading:
+            Navigator.of(context).canPop()
+                ? IconButton(
+                  icon: Icon(Icons.arrow_back, color: colors.onSurface),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+                : null,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            color: colors.onSurface,
+          ),
+        ),
+        centerTitle: false,
+        flexibleSpace:
+            hasSearch
+                ? SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 56,
+                      left: 16,
+                      right: 16,
+                    ),
+                    child: TextField(
+                      controller: searchController,
+                      onChanged: onSearchChanged,
+                      decoration: InputDecoration(
+                        hintText: "Поиск...",
+                        hintStyle: TextStyle(color: colors.inverseSurface),
+                        filled: true,
+                        fillColor: colors.surfaceContainerHighest,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 12,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: colors.inverseSurface,
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ],
-            ),
-          ),
-        ),
+                )
+                : null,
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(hasSearch ? 120 : 56);
+  Size get preferredSize => Size.fromHeight(hasSearch ? 120 : kToolbarHeight);
 }

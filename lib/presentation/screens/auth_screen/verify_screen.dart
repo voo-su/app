@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
@@ -57,6 +56,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is SuccessState) {
@@ -66,7 +66,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: colors.background,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -145,7 +145,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   width: double.infinity,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: AppColors.lightPrimary,
+                      backgroundColor: colors.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

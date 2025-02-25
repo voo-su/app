@@ -9,6 +9,7 @@ class ContactListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Expanded(
       child: BlocBuilder<ContactBloc, ContactState>(
         builder: (context, state) {
@@ -38,7 +39,10 @@ class ContactListWidget extends StatelessWidget {
             );
           } else {
             return Center(
-              child: Text(AppLocalizations.of(context)!.errorOccurred),
+              child: Text(
+                AppLocalizations.of(context)!.errorOccurred,
+                style: TextStyle(color: colors.onSurface),
+              ),
             );
           }
         },

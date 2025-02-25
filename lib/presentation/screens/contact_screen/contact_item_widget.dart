@@ -10,7 +10,8 @@ class ContactItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+    final colors = Theme.of(context).colorScheme;
+    
     // print(
     //     " name - ${contact.name}  surname - ${contact.surname}  username - ${contact.username}");
 
@@ -42,14 +43,20 @@ class ContactItemWidget extends StatelessWidget {
                   children: [
                     Text(
                       contact.name,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colors.onSurface,
+                      ),
                     ),
                     Flexible(
                       child: Text(
                         contact.username,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: colors.onSurface,
+                        ),
                       ),
                     ),
                   ],

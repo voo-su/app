@@ -16,8 +16,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: colors.background,
       appBar: const CustomAppBar(title: "Уведомления"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -49,6 +50,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
+    final colors = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
@@ -65,9 +67,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             value: value,
             onChanged: onChanged,
             activeColor: Colors.white,
-            activeTrackColor: AppColors.lightPrimary,
-            inactiveThumbColor: AppColors.lightOnSurface60,
-            inactiveTrackColor: AppColors.lightSecondarySurface,
+            activeTrackColor: colors.primary,
+            inactiveThumbColor: colors.inverseSurface,
+            inactiveTrackColor: colors.surfaceContainerHighest,
           ),
         ],
       ),

@@ -13,6 +13,8 @@ import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dar
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
+import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_bloc.dart';
+import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_state.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -44,20 +46,28 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<ContactBloc>()),
         BlocProvider(create: (context) => di.sl<MessageBloc>()),
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
+        BlocProvider(create: (context) => di.sl<ThemesBloc>()),
       ],
-      child: MaterialApp(
-        title: 'VooSu',
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('ru')],
-        theme: AppTheme.lightTheme,
+      child: BlocBuilder<ThemesBloc, ThemesState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'VooSu',
+            debugShowCheckedModeBanner: false,
+            home: const SplashScreen(),
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [Locale('ru')],
+            theme:
+                state is ThemesLightState
+                    ? AppTheme.lightTheme
+                    : AppTheme.darkTheme,
+          );
+        },
       ),
     );
   }

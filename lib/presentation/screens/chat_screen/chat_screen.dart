@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_list_widget.dart';
@@ -26,10 +25,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     context.read<ChatBloc>().add(const ChatEvent(ChatParams()));
 
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: colors.background,
       appBar: CustomAppBar(
         title: AppLocalizations.of(context)!.chats,
         hasSearch: true,

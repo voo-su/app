@@ -10,6 +10,7 @@ class ChatListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
         if (state is LoadingState) {
@@ -26,14 +27,18 @@ class ChatListWidget extends StatelessWidget {
             },
             child: ListView.builder(
               itemCount: state.chats.length,
-              physics:
-                  const AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               itemBuilder:
                   (context, index) => ChatItemWidget(chat: state.chats[index]),
             ),
           );
         }
-        return Center(child: Text(AppLocalizations.of(context)!.errorOccurred));
+        return Center(
+          child: Text(
+            AppLocalizations.of(context)!.errorOccurred,
+            style: TextStyle(color: colors.onSurface),
+          ),
+        );
       },
     );
   }

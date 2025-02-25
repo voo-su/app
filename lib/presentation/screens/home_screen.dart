@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
@@ -23,12 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: colors.background,
       body: pages.elementAt(_selectedIndex),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: AppColors.lightPrimarySurface,
-        indicatorColor: AppColors.lightPrimaryContainer,
+        backgroundColor: colors.surface,
+        indicatorColor: colors.surface,
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
           setState(() {
@@ -38,15 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
         destinations: <Widget>[
           NavigationDestination(
             label: AppLocalizations.of(context)!.chats,
-            icon: const Icon(Icons.message),
+            icon: Icon(Icons.message, color: colors.onPrimaryContainer),
           ),
           NavigationDestination(
             label: AppLocalizations.of(context)!.contacts,
-            icon: Icon(Icons.people),
+            icon: Icon(Icons.people, color: colors.onPrimaryContainer),
           ),
           NavigationDestination(
             label: AppLocalizations.of(context)!.settings,
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: colors.onPrimaryContainer),
           ),
         ],
       ),

@@ -11,6 +11,7 @@ class MessageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return BlocBuilder<MessageBloc, MessageState>(
       builder: (context, state) {
         if (state is LoadingState) {
@@ -31,13 +32,18 @@ class MessageListWidget extends StatelessWidget {
             padding: EdgeInsets.only(top: 12, bottom: 12),
             itemBuilder:
                 (context, index) => MessageItemWidget(
-              message: state.messages[index],
-              receiverId: receiverId,
-            ),
+                  message: state.messages[index],
+                  receiverId: receiverId,
+                ),
           );
         }
-
-        return Center(child: Text(AppLocalizations.of(context)!.errorOccurred));
+        
+        return Center(
+          child: Text(
+            AppLocalizations.of(context)!.errorOccurred,
+            style: TextStyle(color: colors.onSurface),
+          ),
+        );
       },
     );
   }

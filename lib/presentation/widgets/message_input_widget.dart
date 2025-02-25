@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/core/theme/colors.dart';
 
 class MessageInputWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -19,6 +18,7 @@ class MessageInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -26,15 +26,17 @@ class MessageInputWidget extends StatelessWidget {
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.lightOnSurface40),
+        hintStyle: TextStyle(color: colors.onSurfaceVariant),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: AppColors.lightSecondarySurface,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        fillColor: colors.surfaceContainerHighest,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 16,
+        ),
       ),
     );
   }

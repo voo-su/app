@@ -25,7 +25,7 @@ class AvatarWidget extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: radius,
-          backgroundColor: Colors.grey[300],
+          backgroundColor: Colors.grey[200],
           backgroundImage:
               avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
           child:

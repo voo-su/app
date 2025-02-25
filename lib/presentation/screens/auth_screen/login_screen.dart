@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
@@ -19,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is SuccessState) {
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: colors.background,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -52,9 +52,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.loginOrRegister,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
+                    color: colors.primary,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -65,10 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: const Color(0xFFADB5BD),
-                        width: 1,
-                      ),
+                      border: Border.all(width: 1),
                     ),
                     child: Row(
                       children: [
@@ -101,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: AppColors.lightPrimary,
+                      backgroundColor: colors.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -126,10 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black54,
+                      color: colors.onSurfaceVariant,
                     ),
                     children: [
                       const TextSpan(
@@ -137,8 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextSpan(
                         text: "условиями использования",
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: TextStyle(
+                          color: colors.onSurface,
                           fontWeight: FontWeight.w400,
                         ),
                         recognizer:

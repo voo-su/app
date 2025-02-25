@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:voo_su/core/theme/colors.dart';
 
 class TimeFormatterWidget extends StatelessWidget {
   final String dateTime;
@@ -10,15 +9,16 @@ class TimeFormatterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Text(
       _formatTime(dateTime),
       style: TextStyle(
         fontSize: 10,
         color:
             isMine == true
-                ? Colors
-                    .white // мои сообщения
-                : Colors.black.withOpacity(0.6), // чужие сообщения
+                ? colors
+                    .surface // мои сообщения
+                : colors.onSurface, // чужие сообщения
       ),
     );
   }
@@ -43,9 +43,10 @@ class ChatTimeFormatterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Text(
       _formatDateOrTime(dateTime),
-      style: const TextStyle(fontSize: 12, color: AppColors.lightOnSurface40),
+      style: TextStyle(fontSize: 12, color: colors.inverseSurface),
     );
   }
 
@@ -60,11 +61,9 @@ class ChatTimeFormatterWidget extends StatelessWidget {
       if (difference.inHours < 24 && parsedDate.day == now.day) {
         return DateFormat("HH:mm").format(parsedDate); // Сегодня
       } else if (difference.inDays < 7) {
-        return _getWeekdayName(
-          parsedDate.weekday,
-        );
+        return _getWeekdayName(parsedDate.weekday);
       } else {
-        return DateFormat("dd.MM.yyyy").format(parsedDate); 
+        return DateFormat("dd.MM.yyyy").format(parsedDate);
       }
     } catch (e) {
       debugPrint("Ошибка форматирования даты: $e");

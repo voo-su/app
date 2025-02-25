@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/core/utils/time_formatter.dart';
 
 class MessageBubbleWidget extends StatelessWidget {
@@ -18,6 +17,7 @@ class MessageBubbleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Align(
       alignment: isMine ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -27,7 +27,7 @@ class MessageBubbleWidget extends StatelessWidget {
           maxWidth: MediaQuery.of(context).size.width * 0.75,
         ),
         decoration: BoxDecoration(
-          color: isMine ? AppColors.lightPrimary : Colors.white,
+          color: isMine ? colors.primary : colors.surface,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(12),
             topRight: const Radius.circular(12),
@@ -45,7 +45,7 @@ class MessageBubbleWidget extends StatelessWidget {
                 message,
                 style: TextStyle(
                   fontSize: 16,
-                  color: isMine ? Colors.white : Colors.black,
+                  color: isMine ? colors.surface : colors.onSurface,
                 ),
               ),
             ),
@@ -60,7 +60,7 @@ class MessageBubbleWidget extends StatelessWidget {
                   Icon(
                     isRead ? Icons.done_all : Icons.check,
                     size: 16,
-                    color: isMine == true ? Colors.white : Colors.black,
+                    color: isMine == true ? colors.surface : colors.onSurface,
                   ),
                 ],
               ),

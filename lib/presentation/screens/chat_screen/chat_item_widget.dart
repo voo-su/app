@@ -12,6 +12,7 @@ class ChatItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     var size = MediaQuery.of(context).size;
     String formattedTime = _formatDateOrTime(chat.updatedAt);
 
@@ -54,7 +55,7 @@ class ChatItemWidget extends StatelessWidget {
                             chat.name,
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.lightOnSurface20,
+                              color: colors.onSurface,
                               fontWeight: FontWeight.w400,
                             ),
                             overflow: TextOverflow.ellipsis,
@@ -64,7 +65,7 @@ class ChatItemWidget extends StatelessWidget {
                           formattedTime,
                           style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.lightOnSurface40,
+                            color: colors.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -78,7 +79,7 @@ class ChatItemWidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 14,
-                              color: AppColors.darkOnSurface60,
+                              color: colors.onSurfaceVariant,
                               fontWeight: FontWeight.w400,
                             ),
                           ),

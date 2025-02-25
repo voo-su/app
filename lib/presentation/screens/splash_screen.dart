@@ -50,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Text(
               "VooSu (voo.su)",
               style: TextStyle(
-                color: const Color(0xFF2a2a2a),
+                color: colors.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
