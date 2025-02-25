@@ -28,7 +28,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 style: TextStyle(
                   color: const Color(0xff070508),
                   fontSize: 25,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
+import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> pages = <Widget>[
     ChatScreen(),
     ContactScreen(),
+    SettingsScreen(),
   ];
 
   @override
@@ -41,6 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             label: AppLocalizations.of(context)!.contacts,
             icon: Icon(Icons.people),
+          ),
+          NavigationDestination(
+            label: AppLocalizations.of(context)!.settings,
+            icon: Icon(Icons.settings),
           ),
         ],
       ),

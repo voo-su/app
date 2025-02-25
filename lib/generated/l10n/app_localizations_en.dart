@@ -42,6 +42,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contacts => 'Контакты';
 
   @override
+  String get settings => 'Настройки';
+
+  @override
   String get nothingFound => 'Ничего не найдено';
 
   @override

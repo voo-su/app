@@ -6,7 +6,6 @@ import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
-import 'package:voo_su/presentation/screens/terms_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

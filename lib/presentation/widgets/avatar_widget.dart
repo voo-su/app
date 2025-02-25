@@ -28,39 +28,31 @@ class AvatarWidget extends StatelessWidget {
           backgroundColor: Colors.grey[300],
           backgroundImage:
               avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
-          child: avatarUrl.isEmpty
-              ? Text(
-                  _getInitials(name, surname),
-                  style: TextStyle(
-                    fontSize: radius / 2,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                )
-              : null,
+          child:
+              avatarUrl.isEmpty
+                  ? Text(
+                    _getInitials(),
+                    style: TextStyle(
+                      fontSize: radius / 2,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  )
+                  : null,
         ),
         if (isOnline)
-          const CircleAvatar(
-            radius: 7,
-            backgroundColor: Colors.red,
-          ),
+          const CircleAvatar(radius: 7, backgroundColor: Colors.red),
       ],
     );
   }
 
-  String _getInitials(String name, String surname) {
-    String initials = "";
-
-    if (name.isNotEmpty) {
-      initials += name[0].toUpperCase();
-    } else {
-      initials += username[0].toUpperCase();
+  String _getInitials() {
+    if (name.isNotEmpty && surname.isNotEmpty) {
+      return "${name[0].toUpperCase()}${surname[0].toUpperCase()}";
     }
-
-    if (surname.isNotEmpty) {
-      initials += surname[0].toUpperCase();
-    }
-
-    return initials.isNotEmpty ? initials : "?";
+    if (name.isNotEmpty) return name[0].toUpperCase();
+    if (surname.isNotEmpty) return surname[0].toUpperCase();
+    if (username.isNotEmpty) return username[0].toUpperCase();
+    return "?";
   }
 }

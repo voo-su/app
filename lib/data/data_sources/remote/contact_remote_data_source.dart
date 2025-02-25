@@ -11,9 +11,7 @@ class ContactRemoteDataSource {
 
     return await client.list(
       request,
-      options: CallOptions(
-        metadata: {"Authorization": token},
-      ),
+      options: CallOptions(metadata: {"Authorization": token}),
     );
   }
 }

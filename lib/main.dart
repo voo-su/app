@@ -11,6 +11,7 @@ import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
 
 @pragma('vm:entry-point')
@@ -42,6 +43,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<ChatBloc>()),
         BlocProvider(create: (context) => di.sl<ContactBloc>()),
         BlocProvider(create: (context) => di.sl<MessageBloc>()),
+        BlocProvider(create: (context) => di.sl<SettingsBloc>()),
       ],
       child: MaterialApp(
         title: 'VooSu',
@@ -54,9 +56,7 @@ class App extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('ru'),
-        ],
+        supportedLocales: const [Locale('ru')],
         theme: AppTheme.lightTheme,
       ),
     );

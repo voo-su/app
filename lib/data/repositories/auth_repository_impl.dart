@@ -14,7 +14,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, AuthLogin>> login(email) async {
-    print(1);
     try {
       final response = await remoteDataSource.login(email, "android");
 

@@ -161,6 +161,12 @@ abstract class AppLocalizations {
   /// **'Контакты'**
   String get contacts;
 
+  /// No description provided for @settings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Настройки'**
+  String get settings;
+
   /// No description provided for @nothingFound.
   ///
   /// In ru, this message translates to:

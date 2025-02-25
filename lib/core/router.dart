@@ -4,6 +4,7 @@ import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/auth_screen/verify_screen.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
+import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:voo_su/presentation/screens/terms_screen.dart';
 
 class AppRouter {
@@ -12,6 +13,7 @@ class AppRouter {
   static const String chats = '/chats';
   static const String contacts = '/contacts';
   static const String terms = '/terms';
+  static const String settings = '/settings';
 
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -25,6 +27,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ContactScreen());
       case terms:
         return MaterialPageRoute(builder: (_) => const TermsScreen());
+      case settings:
+        return MaterialPageRoute(builder: (_) => const SettingsScreen());
       default:
         throw const RouteException('route not found');
     }
