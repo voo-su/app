@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
+import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class TermsScreen extends StatelessWidget {
   const TermsScreen({super.key});
@@ -9,21 +10,8 @@ class TermsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightPrimarySurface,
-      appBar: AppBar(
-        centerTitle: false,
-        elevation: 0,
-        titleSpacing: 0,
-        backgroundColor: AppColors.lightPrimarySurface,
-        title: Text(
-          "Правила",
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-          ),
-        ),
-      ),
+      backgroundColor: AppColors.lightBackground,
+      appBar: const CustomAppBar(title: "Правила"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(

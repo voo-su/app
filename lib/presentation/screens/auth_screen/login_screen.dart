@@ -28,8 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.lightPrimarySurface,
-
+        backgroundColor: AppColors.lightBackground,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),

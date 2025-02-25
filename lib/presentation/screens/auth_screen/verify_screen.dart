@@ -66,7 +66,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.lightPrimarySurface,
+        backgroundColor: AppColors.lightBackground,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),

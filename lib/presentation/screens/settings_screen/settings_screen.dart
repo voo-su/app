@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/core/router.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
+import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -29,18 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.lightBackground,
-        elevation: 0,
-        title: Text(
-          AppLocalizations.of(context)!.settings,
-          style: const TextStyle(
-            color: Color(0xff070508),
-            fontSize: 25,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(title: AppLocalizations.of(context)!.settings),
       body: SafeArea(
         child: BlocListener<SettingsBloc, SettingsState>(
           listener: (context, state) {
@@ -138,7 +129,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.notifications_none_outlined,
                 title: "Уведомления",
                 onTap: () {
-                  print("Открыть настройки уведомлений");
+                  Navigator.pushNamed(context, AppRouter.notifications);
                 },
               ),
               _buildSettingsItem(

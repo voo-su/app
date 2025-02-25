@@ -15,10 +15,10 @@ class ContactItemWidget extends StatelessWidget {
     //     " name - ${contact.name}  surname - ${contact.surname}  username - ${contact.username}");
 
     return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.07,
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.08,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -35,7 +35,7 @@ class ContactItemWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               SizedBox(
-                width: size.width * 0.75,
+                width: size.width * 0.74,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,

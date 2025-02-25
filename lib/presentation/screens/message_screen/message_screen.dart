@@ -5,6 +5,7 @@ import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
+import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -50,23 +51,12 @@ class _MessageScreenState extends State<MessageScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.lightPrimarySurface,
-        appBar: AppBar(
-          backgroundColor: AppColors.lightPrimarySurface,
-          elevation: 0,
-          titleSpacing: 0,
-          centerTitle: false,
-          title: Text(
-            widget.chat.name.isNotEmpty
-                ? widget.chat.name
-                : widget.chat.username,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 22,
-              color: AppColors.lightOnSurface20,
-            ),
-          ),
+        backgroundColor: AppColors.lightBackground,
+        appBar: CustomAppBar(
+          title:
+              widget.chat.name.isNotEmpty
+                  ? widget.chat.name
+                  : widget.chat.username,
         ),
         body: Column(
           children: <Widget>[
