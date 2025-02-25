@@ -26,9 +26,7 @@ class ContactRepositoryImpl implements ContactRepository {
                 username: item.username,
                 name: item.name,
                 surname: item.surname,
-
-                // TODO
-                avatar: "",
+                avatar: item.avatar,
               ))
           .toList();
 

@@ -1,19 +1,19 @@
-import 'package:grpc/grpc.dart';
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pbgrpc.dart';
+import 'package:voo_su/data/data_sources/remote/utils.dart';
 
 class AccountRemoteDataSource {
   final AccountServiceClient client;
 
   AccountRemoteDataSource(this.client);
 
-  Future<GetAccountResponse> get(String token) async {
+  Future<GetProfileResponse> get(String token) async {
     print("Запрос на сервер с токеном: $token");
-    final request = GetAccountRequest();
+    final request = GetProfileRequest();
 
     try {
-      final response = await client.get(
+      final response = await client.getProfile(
         request,
-        options: CallOptions(metadata: {"Authorization": token}),
+        options: createAuthOptions(token),
       );
       print("ответ: $response");
       return response;

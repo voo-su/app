@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/message.dart';
-import 'package:voo_su/domain/usecases/message/get_history_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 
 part 'message_event.dart';
 
