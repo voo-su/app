@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -56,13 +55,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              color: AppColors.lightOnSurface20,
-            ),
-          ),
+          Text(title, style: TextStyle(fontSize: 16, color: colors.onSurface)),
           Switch(
             value: value,
             onChanged: onChanged,

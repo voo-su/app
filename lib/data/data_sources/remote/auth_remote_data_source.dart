@@ -6,25 +6,20 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource(this.client);
 
   Future<AuthLoginResponse> login(String email, String platform) async {
-    final request = AuthLoginRequest(
-      email: email,
-      platform: platform,
-    );
+    final request = AuthLoginRequest(email: email, platform: platform);
 
     return await client.login(request);
   }
 
   Future<AuthVerifyResponse> verify(String token, String code) async {
-    final request = AuthVerifyRequest(
-      code: code,
-      token: token,
-    );
+    final request = AuthVerifyRequest(code: code, token: token);
 
     return await client.verify(request);
   }
 
   Future<AuthLogoutResponse> logout(String token) async {
     final request = AuthLogoutRequest(accessToken: token);
+    print("logout $request");
     return await client.logout(request);
   }
 }

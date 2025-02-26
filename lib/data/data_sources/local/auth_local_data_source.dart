@@ -13,6 +13,8 @@ abstract class AuthLocalDataSource {
   Future<AuthVerifyModel> getAuth();
 
   Future<String> getToken();
+
+  Future<void> clearAuthData();
 }
 
 const authLoginKey = 'VOO_SU_AUTH_LOGIN';
@@ -79,6 +81,15 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       final token = verifyModelFromJson(jsonString);
       return Future.value(token.accessToken);
     } else {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> clearAuthData() async {
+    try {
+      await sharedPreferences.clear();
+    } catch (e) {
       throw CacheException();
     }
   }

@@ -7,5 +7,5 @@ abstract class AuthRepository {
 
   Future<Either<Failure, AuthVerify>> verify(String code);
 
-  Future<Either> logout();
+  Future<Either<Failure, void>> logout();
 }

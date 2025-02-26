@@ -162,7 +162,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               );
                             }
                             : () {
-                              print("Подтверждение кода");
                               context.read<AuthBloc>().add(
                                 VerifyEvent(code: otpController.text),
                               );

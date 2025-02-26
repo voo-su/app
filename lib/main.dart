@@ -48,26 +48,37 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
         BlocProvider(create: (context) => di.sl<ThemesBloc>()),
       ],
-      child: BlocBuilder<ThemesBloc, ThemesState>(
-        builder: (context, state) {
-          return MaterialApp(
-            title: 'VooSu',
-            debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [Locale('ru')],
-            theme:
-                state is ThemesLightState
-                    ? AppTheme.lightTheme
-                    : AppTheme.darkTheme,
-          );
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is LoggedOutState) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRouter.auth,
+              (route) => false,
+            );
+          }
         },
+        child: BlocBuilder<ThemesBloc, ThemesState>(
+          builder: (context, state) {
+            return MaterialApp(
+              title: 'VooSu',
+              debugShowCheckedModeBanner: false,
+              home: const SplashScreen(),
+              onGenerateRoute: AppRouter.onGenerateRoute,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [Locale('ru')],
+              theme:
+                  state is ThemesLightState
+                      ? AppTheme.lightTheme
+                      : AppTheme.darkTheme,
+            );
+          },
+        ),
       ),
     );
   }

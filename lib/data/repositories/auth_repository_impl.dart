@@ -59,16 +59,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either> logout() async {
+  Future<Either<Failure, void>> logout() async {
     try {
-      final result = await localDataSource.getLogin();
-      final response = await remoteDataSource.logout(result.token);
+      final token = await localDataSource.getToken();
+      print("Отправка запроса на logout с токеном: $token");
 
-      // TODO DELETE
+      await remoteDataSource.logout(token);
+      await localDataSource.clearAuthData();
 
-      return Right(nil());
-    } on Failure catch (failure) {
-      return Left(failure);
+      return const Right(null);
+    } catch (failure) {
+      print("Ошибка при logout: $failure");
+      return Left(ExceptionFailure());
     }
   }
 }

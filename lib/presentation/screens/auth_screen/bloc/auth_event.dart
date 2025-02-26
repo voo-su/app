@@ -14,3 +14,5 @@ class VerifyEvent extends AuthEvent {
 
   VerifyEvent({required this.code});
 }
+
+class LogoutEvent extends AuthEvent {}

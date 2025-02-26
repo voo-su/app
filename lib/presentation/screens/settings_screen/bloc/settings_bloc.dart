@@ -21,7 +21,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     try {
       emit(SettingsLoadingState());
       final result = await _getAccountUseCase(AccountParams());
-      print(result);
 
       result.fold(
         (failure) => emit(SettingsErrorState(failure: failure)),

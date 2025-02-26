@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
+import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
@@ -143,7 +144,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.logout_outlined,
                 title: "Выйти из профиля",
                 onTap: () {
-                  Navigator.pushNamed(context, AppRouter.themes);
+                  context.read<AuthBloc>().add(LogoutEvent());
                 },
               ),
             ],

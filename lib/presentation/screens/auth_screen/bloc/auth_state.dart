@@ -14,7 +14,6 @@ class LoadingState extends AuthState {
 }
 
 class SuccessState extends AuthState {
-
   @override
   List<Object> get props => [];
 }
@@ -22,10 +21,13 @@ class SuccessState extends AuthState {
 class ErrorState extends AuthState {
   final Failure failure;
 
-  ErrorState({
-    required this.failure,
-  });
+  ErrorState({required this.failure});
 
+  @override
+  List<Object> get props => [];
+}
+
+class LoggedOutState extends AuthState {
   @override
   List<Object> get props => [];
 }

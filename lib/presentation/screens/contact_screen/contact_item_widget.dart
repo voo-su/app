@@ -11,9 +11,6 @@ class ContactItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final colors = Theme.of(context).colorScheme;
-    
-    // print(
-    //     " name - ${contact.name}  surname - ${contact.surname}  username - ${contact.username}");
 
     return InkWell(
       child: SizedBox(
