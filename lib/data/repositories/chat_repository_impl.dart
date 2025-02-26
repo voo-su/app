@@ -3,6 +3,7 @@ import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/chat_remote_data_source.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/domain/entities/chat_update.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/domain/repositories/chat_repository.dart';
 
@@ -11,6 +12,45 @@ class ChatRepositoryImpl implements ChatRepository {
   final AuthLocalDataSource localDataSource;
 
   ChatRepositoryImpl(this.remoteDataSource, this.localDataSource);
+
+  @override
+  Future<Stream<ChatUpdate>> getUpdates() async {
+    print('<< VLog - ChatRepositoryImpl - getUpdates >>');
+    final String token = await localDataSource.getToken();
+
+    return remoteDataSource.getUpdates(token).map((update) {
+      print('<< VLog - ChatRepositoryImpl - getUpdates $update >>');
+      if (update.hasNewMessage()) {
+        return UpdateNewMessage(
+          message: Message(
+            id: update.newMessage.message.id,
+            chatType: update.newMessage.message.receiver.chatType,
+            msgType: update.newMessage.message.msgType,
+            receiverId: update.newMessage.message.receiver.receiverId.toInt(),
+            userId: update.newMessage.message.userId.toInt(),
+            content: update.newMessage.message.content,
+            isRead: update.newMessage.message.isRead,
+            createdAt: update.newMessage.message.createdAt,
+          ),
+        );
+      } else if (update.hasChatReadInbox()) {
+        return UpdateChatReadInbox(
+          chatType: update.chatReadInbox.receiver.chatType.toInt(),
+          receiverId: update.chatReadInbox.receiver.receiverId.toInt(),
+          lastReadInboxMessageId: update.chatReadInbox.lastReadInboxMessageId,
+          unreadCount: update.chatReadInbox.unreadCount,
+        );
+      } else if (update.hasUserTyping()) {
+        return UpdateUserTyping(
+          chatType: update.userTyping.receiver.chatType.toInt(),
+          receiverId: update.userTyping.receiver.receiverId.toInt(),
+          userId: update.userTyping.userId.toInt(),
+          isTyping: update.userTyping.isTyping,
+        );
+      }
+      throw Exception("Неизвестно");
+    });
+  }
 
   @override
   Future<Either<Failure, ChatResponse>> getChats(params) async {

@@ -8,6 +8,16 @@ class ChatRemoteDataSource {
 
   ChatRemoteDataSource(this.client);
 
+  Stream<Update> getUpdates(String token) async* {
+    try {
+      final request = UpdatesRequest();
+      yield* client.getUpdates(request, options: createAuthOptions(token));
+    } catch (e) {
+      print('<< VLog - Error - ChatRemoteDataSource - getUpdates $e >>');
+      rethrow;
+    }
+  }
+
   Future<GetChatsResponse> getChats(String token) async {
     final request = GetChatsRequest();
 

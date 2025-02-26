@@ -7,6 +7,7 @@ import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/core/theme/app_theme.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
+import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
@@ -47,6 +48,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<MessageBloc>()),
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
         BlocProvider(create: (context) => di.sl<ThemesBloc>()),
+        BlocProvider(create: (context) => di.sl<ChatUpdatesCubit>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {

@@ -28,6 +28,7 @@ import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
+import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
@@ -41,9 +42,10 @@ Future<void> init() async {
   final channel = ClientChannel(
     'grpc.voo.su',
     port: 443,
-    // options: const ChannelOptions(
-    //   credentials: ChannelCredentials.insecure(),
-    // ),
+    options: const ChannelOptions(
+      //credentials: ChannelCredentials.insecure(),
+      credentials: ChannelCredentials.secure(),
+    ),
   );
 
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -105,4 +107,7 @@ Future<void> init() async {
   sl.registerFactory(() => MessageBloc(sl()));
   sl.registerFactory(() => SettingsBloc(sl()));
   sl.registerFactory(() => ThemesBloc());
+
+  // Cubit
+  sl.registerFactory(() => ChatUpdatesCubit(sl()));
 }

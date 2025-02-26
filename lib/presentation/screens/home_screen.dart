@@ -3,6 +3,7 @@ import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
+import 'package:voo_su/presentation/screens/test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ChatScreen(),
     ContactScreen(),
     SettingsScreen(),
+
+    TestScreen(),
   ];
 
   @override
@@ -47,6 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             label: AppLocalizations.of(context)!.settings,
             icon: Icon(Icons.settings, color: colors.onPrimaryContainer),
+          ),
+          NavigationDestination(
+            label: "test",
+            icon: Icon(Icons.u_turn_left_rounded, color: colors.onPrimaryContainer),
           ),
         ],
       ),
