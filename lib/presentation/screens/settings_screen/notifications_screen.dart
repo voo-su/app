@@ -24,7 +24,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         child: Column(
           children: [
             _buildSwitchTile(
-              title: "Приватные чаты",
+              title: "Личные чаты",
               value: privateChats,
               onChanged: (val) => setState(() => privateChats = val),
             ),

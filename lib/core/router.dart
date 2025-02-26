@@ -4,10 +4,10 @@ import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/auth_screen/verify_screen.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
-import 'package:voo_su/presentation/screens/notifications_screen/notifications_screen.dart';
+import 'package:voo_su/presentation/screens/settings_screen/notifications_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:voo_su/presentation/screens/terms_screen.dart';
-import 'package:voo_su/presentation/screens/themes_screen/themes_screen.dart';
+import 'package:voo_su/presentation/screens/settings_screen/themes_screen.dart';
 
 class AppRouter {
   static const String auth = '/';

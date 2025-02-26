@@ -34,7 +34,6 @@ import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -106,7 +105,6 @@ Future<void> init() async {
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl()));
   sl.registerFactory(() => SettingsBloc(sl()));
-  sl.registerFactory(() => ThemesBloc());
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));

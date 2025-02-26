@@ -11,6 +11,7 @@ class MessageInputWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
+    required FocusNode focusNode,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
