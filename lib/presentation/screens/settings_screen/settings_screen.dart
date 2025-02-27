@@ -91,7 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SizedBox(width: 10),
                     TextButton(
                       onPressed: () {
-                        print("Открыть экран редактирования профиля");
+                        Navigator.pushNamed(context, AppRouter.editProfile);
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: colors.surface,
