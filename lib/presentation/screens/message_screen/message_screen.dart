@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
+import 'package:voo_su/presentation/widgets/user_info_dialog_widget.dart';
 
 class MessageScreen extends StatefulWidget {
   final Chat chat;
@@ -228,6 +230,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   PreferredSizeWidget _buildAppBar() {
     final colors = Theme.of(context).colorScheme;
+    
     if (_isSelectionMode) {
       return CustomAppBar(
         title: "Выбрано: ${_selectedMessageIds.length}",
@@ -244,6 +247,21 @@ class _MessageScreenState extends State<MessageScreen> {
             widget.chat.name.isNotEmpty
                 ? widget.chat.name
                 : widget.chat.username,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              final contact = Contact(
+                id: widget.chat.id,
+                avatar: widget.chat.avatar,
+                name: widget.chat.name,
+                surname: widget.chat.surname,
+                username: widget.chat.username,
+              );
+              return UserInfoDialog(contact: contact);
+            },
+          );
+        },
         actions: [
           IconButton(
             icon: Icon(Icons.more_vert, color: colors.onSurface),

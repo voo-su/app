@@ -40,7 +40,7 @@ class MessageBubbleWidget extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 60),
+              padding: EdgeInsets.only(right: isMine ? 60 : 40),
               child: Text(
                 message,
                 style: TextStyle(
@@ -57,11 +57,12 @@ class MessageBubbleWidget extends StatelessWidget {
                 children: [
                   TimeFormatterWidget(dateTime: createdAt, isMine: isMine),
                   const SizedBox(width: 4),
-                  Icon(
-                    isRead ? Icons.done_all : Icons.check,
-                    size: 16,
-                    color: isMine == true ? colors.surface : colors.onSurface,
-                  ),
+                  if (isMine)
+                    Icon(
+                      isRead ? Icons.done_all : Icons.check,
+                      size: 16,
+                      color: colors.surface,
+                    ),
                 ],
               ),
             ),

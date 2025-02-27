@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
+import 'package:voo_su/presentation/widgets/user_info_dialog_widget.dart';
 
 class ContactItemWidget extends StatelessWidget {
   final Contact contact;
@@ -13,6 +14,11 @@ class ContactItemWidget extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
 
     return InkWell(
+      onTap:
+          () => showDialog(
+            context: context,
+            builder: (context) => UserInfoDialog(contact: contact),
+          ),
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.08,
         child: Padding(
@@ -20,16 +26,11 @@ class ContactItemWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  AvatarWidget(
-                    avatarUrl: contact.avatar,
-                    name: contact.name,
-                    surname: contact.surname,
-                    username: contact.username,
-                  ),
-                ],
+              AvatarWidget(
+                avatarUrl: contact.avatar,
+                name: contact.name,
+                surname: contact.surname,
+                username: contact.username,
               ),
               const SizedBox(width: 16),
               SizedBox(
