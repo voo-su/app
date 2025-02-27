@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final List<Widget>? actions;
   final bool hasSearch;
   final TextEditingController? searchController;
   final ValueChanged<String>? onSearchChanged;
@@ -9,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
+    this.actions,
     this.hasSearch = false,
     this.searchController,
     this.onSearchChanged,
@@ -40,6 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: colors.onSurface,
           ),
         ),
+        actions: actions,
         centerTitle: false,
         flexibleSpace:
             hasSearch

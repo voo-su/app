@@ -24,6 +24,7 @@ class _MessageScreenState extends State<MessageScreen> {
   Message? _replyMessage;
   String? _replyUser;
   bool _isSelectionMode = false;
+  bool _areNotifsEnabled = false;
 
   @override
   void initState() {
@@ -228,16 +229,8 @@ class _MessageScreenState extends State<MessageScreen> {
   PreferredSizeWidget _buildAppBar() {
     final colors = Theme.of(context).colorScheme;
     if (_isSelectionMode) {
-      return AppBar(
-        backgroundColor: colors.surface,
-        title: Text(
-          "Выбрано: ${_selectedMessageIds.length}",
-          style: TextStyle(color: colors.onSurface),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.close, color: colors.onSurface),
-          onPressed: cancelSelection,
-        ),
+      return CustomAppBar(
+        title: "Выбрано: ${_selectedMessageIds.length}",
         actions: [
           IconButton(
             icon: Icon(Icons.delete, color: colors.onSurface),
@@ -251,7 +244,55 @@ class _MessageScreenState extends State<MessageScreen> {
             widget.chat.name.isNotEmpty
                 ? widget.chat.name
                 : widget.chat.username,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert, color: colors.onSurface),
+            onPressed: _showChatMenu,
+          ),
+        ],
       );
+    }
+  }
+
+  void _showChatMenu() async {
+    final String menuText =
+        _areNotifsEnabled ? "Выключить уведомления" : "Включить уведомления";
+
+    final IconData menuIcon =
+        _areNotifsEnabled ? Icons.volume_off : Icons.volume_up;
+
+    final String value = _areNotifsEnabled ? "disable" : "enable";
+
+    final result = await showMenu<String>(
+      context: context,
+      position: RelativeRect.fromLTRB(1, 80, 0, 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      items: [
+        PopupMenuItem(
+          value: value,
+          child: Row(
+            children: [
+              Icon(menuIcon, size: 20),
+              const SizedBox(width: 8),
+              Text(menuText),
+            ],
+          ),
+        ),
+      ],
+    );
+
+    if (result == "enable") {
+      setState(() {
+        _areNotifsEnabled = true;
+      });
+      print("Уведомления теперь включены");
+      // event
+    } else if (result == "disable") {
+      setState(() {
+        _areNotifsEnabled = false;
+      });
+      print("Уведомления теперь отключены");
+      // event
     }
   }
 }
