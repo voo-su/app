@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 
 part 'message_event.dart';
@@ -11,12 +12,18 @@ part 'message_state.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final GetHistoryUseCase _getHistoryUseCase;
+  final DeleteMessagesUseCase _deleteMessagesUseCase;
 
-  MessageBloc(this._getHistoryUseCase) : super(InitialState()) {
-    on<MessageEvent>(_onLoadHistory);
+  MessageBloc(this._getHistoryUseCase, this._deleteMessagesUseCase)
+    : super(InitialState()) {
+    on<LoadHistoryEvent>(_onLoadHistory);
+    on<DeleteMessagesEvent>(_onDeleteMessages);
   }
 
-  void _onLoadHistory(MessageEvent event, Emitter<MessageState> emit) async {
+  void _onLoadHistory(
+    LoadHistoryEvent event,
+    Emitter<MessageState> emit,
+  ) async {
     try {
       emit(LoadingState());
       final result = await _getHistoryUseCase(event.params);
@@ -25,6 +32,30 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         (success) => emit(SuccessState(messages: success.messages)),
       );
     } catch (e) {
+      emit(ErrorState(failure: ExceptionFailure()));
+    }
+  }
+
+  void _onDeleteMessages(
+    DeleteMessagesEvent event,
+    Emitter<MessageState> emit,
+  ) async {
+    try {
+      print("1");
+      final result = await _deleteMessagesUseCase(event.params);
+      print("result bloc $result");
+      result.fold((failure) => emit(ErrorState(failure: failure)), (success) {
+        if (state is SuccessState) {
+          final updated =
+              (state as SuccessState).messages
+                  .where((m) => !event.params.messageIds.contains(m.id))
+                  .toList();
+          print("update - $updated");
+          emit(SuccessState(messages: updated));
+        }
+      });
+    } catch (e) {
+      print(e);
       emit(ErrorState(failure: ExceptionFailure()));
     }
   }

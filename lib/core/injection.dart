@@ -25,6 +25,7 @@ import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
@@ -34,6 +35,7 @@ import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -97,14 +99,16 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetContactsUseCase(sl()));
   sl.registerLazySingleton(() => GetHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAccountUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteMessagesUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
   sl.registerFactory(() => ChatBloc(sl()));
   sl.registerFactory(() => ContactBloc(sl()));
-  sl.registerFactory(() => MessageBloc(sl()));
+  sl.registerFactory(() => MessageBloc(sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl()));
+  sl.registerFactory(() => ThemesBloc());
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));

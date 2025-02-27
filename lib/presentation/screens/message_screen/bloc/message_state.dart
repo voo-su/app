@@ -16,9 +16,7 @@ class LoadingState extends MessageState {
 class SuccessState extends MessageState {
   final List<Message> messages;
 
-  SuccessState({
-    required this.messages,
-  });
+  SuccessState({required this.messages});
 
   @override
   List<Object> get props => [messages];
@@ -27,9 +25,7 @@ class SuccessState extends MessageState {
 class ErrorState extends MessageState {
   final Failure failure;
 
-  ErrorState({
-    required this.failure,
-  });
+  ErrorState({required this.failure});
 
   @override
   List<Object> get props => [];

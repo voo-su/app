@@ -124,4 +124,18 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, String>> deleteMessages(
+    DeleteMessagesParams params,
+  ) async {
+    try {
+      final String token = await localDataSource.getToken();
+      final response = await remoteDataSource.deleteMessages(token, params);
+      
+      return Right(response.message);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

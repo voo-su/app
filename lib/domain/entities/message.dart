@@ -58,3 +58,15 @@ class SendMessageParams {
     required this.message,
   });
 }
+
+class DeleteMessagesParams {
+  final int chatType;
+  final int receiverId;
+  final List<String> messageIds;
+
+  const DeleteMessagesParams({
+    required this.chatType,
+    required this.receiverId,
+    required this.messageIds,
+  });
+}

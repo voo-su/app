@@ -54,4 +54,25 @@ class ChatRemoteDataSource {
 
     return await client.sendMessage(request, options: createAuthOptions(token));
   }
+
+  Future<DeleteMessagesResponse> deleteMessages(
+    String token,
+    DeleteMessagesParams params,
+  ) async {
+    final request = DeleteMessagesRequest(
+      receiver: Receiver(
+        chatType: params.chatType,
+        receiverId: Int64(params.receiverId),
+      ),
+      messageIds: params.messageIds,
+      revoke: false,
+    );
+
+    print("request $request");
+
+    return await client.deleteMessages(
+      request,
+      options: createAuthOptions(token),
+    );
+  }
 }

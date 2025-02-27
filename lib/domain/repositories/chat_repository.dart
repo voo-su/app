@@ -12,4 +12,6 @@ abstract class ChatRepository {
   Future<Either<Failure, MessageResponse>> getHistory(MessageParams params);
 
   Future<Either<Failure, String>> sendMessage(SendMessageParams params);
+
+  Future<Either<Failure, String>> deleteMessages(DeleteMessagesParams params);
 }

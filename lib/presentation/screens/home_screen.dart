@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         destinations: <Widget>[
           NavigationDestination(
             label: AppLocalizations.of(context)!.chats,
-            icon: Icon(Icons.message, color: colors.onPrimaryContainer),
+            icon: Icon(Icons.forum, color: colors.onPrimaryContainer),
           ),
           NavigationDestination(
             label: AppLocalizations.of(context)!.contacts,
@@ -53,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           NavigationDestination(
             label: "test",
-            icon: Icon(Icons.u_turn_left_rounded, color: colors.onPrimaryContainer),
+            icon: Icon(
+              Icons.u_turn_left_rounded,
+              color: colors.onPrimaryContainer,
+            ),
           ),
         ],
       ),

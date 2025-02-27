@@ -142,7 +142,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               _buildSettingsItem(
                 icon: Icons.logout_outlined,
-                title: "Выйти из профиля",
+                title: "Выйти",
                 onTap: () {
                   context.read<AuthBloc>().add(LogoutEvent());
                 },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_bloc.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_event.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_state.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_event.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_state.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class ThemesScreen extends StatelessWidget {

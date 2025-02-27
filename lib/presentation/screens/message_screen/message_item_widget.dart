@@ -10,12 +10,21 @@ class MessageItemWidget extends StatefulWidget {
   final String chatName;
   final Function(Message, String) onReply;
 
+  final bool isSelectionMode;
+  final bool isSelected;
+  final ValueChanged<String> onChooseMessage;
+  final ValueChanged<String> onToggleSelection;
+
   const MessageItemWidget({
     super.key,
     required this.message,
     required this.receiverId,
     required this.chatName,
     required this.onReply,
+    required this.isSelectionMode,
+    required this.isSelected,
+    required this.onChooseMessage,
+    required this.onToggleSelection,
   });
 
   @override
@@ -53,17 +62,29 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   @override
   Widget build(BuildContext context) {
     final bool isMine = widget.message.userId != widget.receiverId;
+    final colors = Theme.of(context).colorScheme;
 
     return GestureDetector(
+      onTap: () {
+        if (widget.isSelectionMode) {
+          widget.onToggleSelection(widget.message.id);
+        }
+      },
       onLongPressStart: (details) {
-        _showMessageMenu(context, details.globalPosition);
+        if (!widget.isSelectionMode) {
+          _showMessageMenu(context, details.globalPosition);
+        }
       },
       onHorizontalDragUpdate: (details) {
-        if (details.primaryDelta != null && details.primaryDelta! < -10 && !_isSwiped) {
-          _isSwiped = true;
-          _animationController.forward();
-          final replyUser = isMine ? "Вы" : widget.chatName;
-          widget.onReply(widget.message, replyUser);
+        if (!widget.isSelectionMode) {
+          if (details.primaryDelta != null &&
+              details.primaryDelta! < -10 &&
+              !_isSwiped) {
+            _isSwiped = true;
+            _animationController.forward();
+            final replyUser = isMine ? "Вы" : widget.chatName;
+            widget.onReply(widget.message, replyUser);
+          }
         }
       },
       onHorizontalDragEnd: (_) {
@@ -72,13 +93,19 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
           _animationController.reverse();
         }
       },
-      child: SlideTransition(
-        position: _offsetAnimation,
-        child: MessageBubbleWidget(
-          message: widget.message.content,
-          isMine: isMine,
-          createdAt: widget.message.createdAt,
-          isRead: widget.message.isRead,
+      child: Container(
+        color:
+            widget.isSelected
+                ? colors.surfaceContainerHighest
+                : Colors.transparent,
+        child: SlideTransition(
+          position: _offsetAnimation,
+          child: MessageBubbleWidget(
+            message: widget.message.content,
+            isMine: isMine,
+            createdAt: widget.message.createdAt,
+            isRead: widget.message.isRead,
+          ),
         ),
       ),
     );
@@ -143,7 +170,6 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
     }
   }
 
-  //без анимации
   void _replyMessage() {
     final replyUser =
         widget.message.userId != widget.receiverId ? "Вы" : widget.chatName;
@@ -151,14 +177,14 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   }
 
   void _chooseMessages() {
-    print("Выбрать сообщение");
+    widget.onChooseMessage(widget.message.id);
   }
 
   void _copyMessage(BuildContext context) {
     Clipboard.setData(ClipboardData(text: widget.message.content));
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Сообщение скопировано")),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Сообщение скопировано")));
   }
 
   void _deleteMessage() {

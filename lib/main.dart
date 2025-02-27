@@ -14,8 +14,8 @@ import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dar
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_bloc.dart';
-import 'package:voo_su/presentation/screens/themes_screen/bloc/themes_state.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_state.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

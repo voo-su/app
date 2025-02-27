@@ -10,11 +10,20 @@ class MessageListWidget extends StatelessWidget {
   final String chatName;
   final Function(Message, String) onReply;
 
+  final bool isSelectionMode;
+  final Set<String> selectedMessageIds;
+  final ValueChanged<String> onChooseMessage;
+  final ValueChanged<String> onToggleSelection;
+
   const MessageListWidget({
     super.key,
     required this.receiverId,
     required this.chatName,
     required this.onReply,
+    required this.isSelectionMode,
+    required this.selectedMessageIds,
+    required this.onChooseMessage,
+    required this.onToggleSelection,
   });
 
   @override
@@ -28,6 +37,7 @@ class MessageListWidget extends StatelessWidget {
         }
 
         if (state is SuccessState) {
+          print("Список сообщений после удаления: ${state.messages.length}");
           if (state.messages.isEmpty) {
             return const Center(child: Text("Нет сообщений"));
           }
@@ -37,13 +47,19 @@ class MessageListWidget extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             reverse: true,
             padding: const EdgeInsets.only(top: 12, bottom: 12),
-            itemBuilder:
-                (context, index) => MessageItemWidget(
-                  message: state.messages[index],
-                  receiverId: receiverId,
-                  chatName: chatName,
-                  onReply: onReply,
-                ),
+            itemBuilder: (context, index) {
+              final message = state.messages[index];
+              return MessageItemWidget(
+                message: message,
+                receiverId: receiverId,
+                chatName: chatName,
+                onReply: onReply,
+                isSelectionMode: isSelectionMode,
+                isSelected: selectedMessageIds.contains(message.id),
+                onChooseMessage: onChooseMessage,
+                onToggleSelection: onToggleSelection,
+              );
+            },
           );
         }
 
