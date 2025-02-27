@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MessageInputWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -17,28 +21,105 @@ class MessageInputWidget extends StatelessWidget {
     this.maxLines = 1,
   });
 
+  Future<void> pickImage(BuildContext context) async {
+    PermissionStatus status;
+
+    if (Platform.isIOS) {
+      // iOS
+      status = await Permission.photos.status;
+      if (status.isDenied || status.isRestricted || status.isLimited) {
+        status = await Permission.photos.request();
+      }
+    } else {
+      // Android
+      status = await Permission.storage.status;
+      if (status.isDenied || status.isRestricted) {
+        status = await Permission.storage.request();
+      }
+    }
+
+    if (status.isGranted) {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+      if (image != null) {
+        print("Выбрано изображение: ${image.path}");
+
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              title: const Text("Фото выбрано"),
+              content: const Text(
+                "Ваше фото обязательно отправится, но чуть позже!",
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("ОК"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else {
+      if (status.isPermanentlyDenied) {
+        openAppSettings();
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Разрешите доступ к фото в настройках")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      maxLines: maxLines,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(color: colors.onSurfaceVariant),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide.none,
+
+    return Row(
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.attach_file_outlined,
+            color: colors.onSurfaceVariant,
+          ),
+          onPressed: () => pickImage(context),
         ),
-        filled: true,
-        fillColor: colors.surfaceContainerHighest,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 16,
+        Expanded(
+          child: TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: TextStyle(color: colors.onSurfaceVariant),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: colors.surfaceContainerHighest,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 16,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.emoji_emotions_outlined,
+                  color: colors.onSurfaceVariant,
+                ),
+                onPressed: () {
+                },
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

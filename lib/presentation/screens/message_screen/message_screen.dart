@@ -205,7 +205,7 @@ class _MessageScreenState extends State<MessageScreen> {
                           child: MessageInputWidget(
                             controller: _messageController,
                             focusNode: _focusNode,
-                            hintText: "Сообщение",
+                            hintText: "Написать сообщение",
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -230,7 +230,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   PreferredSizeWidget _buildAppBar() {
     final colors = Theme.of(context).colorScheme;
-    
+
     if (_isSelectionMode) {
       return CustomAppBar(
         title: "Выбрано: ${_selectedMessageIds.length}",
