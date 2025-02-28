@@ -36,4 +36,25 @@ class AccountRepositoryImpl implements AccountRepository {
       return Left(ExceptionFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, String>> getFirebaseToken(String firebaseToken) async {
+    try {
+      final String token = await localDataSource.getToken();
+      final bool success = await remoteDataSource.registerDevice(
+        token,
+        firebaseToken,
+      );
+
+      if (success) {
+        print("FCM-токен зарегистрирован");
+        return Right("FCM-токен зарегистрирован");
+      } else {
+        print("FCM-токен нет");
+        return Left(ExceptionFailure());
+      }
+    } catch (e) {
+      return Left(ExceptionFailure());
+    }
+  }
 }

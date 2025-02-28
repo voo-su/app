@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/home_screen.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
@@ -26,7 +28,22 @@ class _SplashScreenState extends State<SplashScreen> {
     _checkAuthStatus();
 
     _firebaseMessaging.getToken().then((token) {
-      print("FCM Token: $token");
+      if (token != null) {
+        print("FCM Token: $token");
+        _sendFirebaseToken(token);
+      }
+    });
+  }
+
+  void _sendFirebaseToken(String token) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final useCase = context.read<GetFirebaseTokenUseCase>();
+      useCase(token).then((result) {
+        result.fold(
+          (failure) => print("Ошибка при регистрации FCM-токена"),
+          (success) => print(success),
+        );
+      });
     });
   }
 

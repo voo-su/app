@@ -22,4 +22,20 @@ class AccountRemoteDataSource {
       rethrow;
     }
   }
+
+  Future<bool> registerDevice(String token, String firebaseToken) async {
+    final request = RegisterDeviceRequest(tokenType: 1, token: firebaseToken);
+
+    try {
+      final response = await client.registerDevice(
+        request,
+        options: createAuthOptions(token),
+      );
+      print("FCM-токен отправлен, ответ: ${response.success}");
+      return response.success;
+    } catch (e) {
+      print("Ошибка при отправке FCM-токена: $e");
+      rethrow;
+    }
+  }
 }

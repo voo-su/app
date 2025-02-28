@@ -3,9 +3,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/core/theme/app_theme.dart';
+import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
@@ -49,6 +51,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
         BlocProvider(create: (context) => di.sl<ThemesBloc>()),
         BlocProvider(create: (context) => di.sl<ChatUpdatesCubit>()),
+
+        Provider(create: (context) => di.sl<GetFirebaseTokenUseCase>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {

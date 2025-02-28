@@ -22,6 +22,7 @@ import 'package:voo_su/domain/repositories/auth_repository.dart';
 import 'package:voo_su/domain/repositories/chat_repository.dart';
 import 'package:voo_su/domain/repositories/contact_repository.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
+import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
@@ -103,6 +104,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SendMessagesUsecase(sl()));
   sl.registerLazySingleton(() => DeleteMessagesUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
+  sl.registerLazySingleton(() => GetFirebaseTokenUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
