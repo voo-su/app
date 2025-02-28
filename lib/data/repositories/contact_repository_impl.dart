@@ -15,7 +15,7 @@ class ContactRepositoryImpl implements ContactRepository {
   Future<Either<Failure, ContactResponse>> getContacts(params) async {
     try {
       final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.list(token);
+      final response = await remoteDataSource.getContacts(token);
 
       List<Contact> contactList =
           response.items

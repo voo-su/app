@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:voo_su/core/chat_updates_listener.dart';
 import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/core/theme/app_theme.dart';
@@ -15,9 +16,9 @@ import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
-import 'package:voo_su/presentation/screens/splash_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_state.dart';
+import 'package:voo_su/presentation/screens/splash_screen.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -37,8 +38,32 @@ Future<void> main() async {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  late final ChatUpdatesListener chatUpdatesListener;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      chatUpdatesListener = ChatUpdatesListener(
+        chatUpdatesCubit: di.sl<ChatUpdatesCubit>(),
+        messageBloc: di.sl<MessageBloc>(),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    chatUpdatesListener.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

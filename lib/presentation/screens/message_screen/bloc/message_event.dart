@@ -13,6 +13,15 @@ class LoadHistoryEvent extends MessageEvent {
   List<Object> get props => [params];
 }
 
+class NewMessageEvent extends MessageEvent {
+  final Message message;
+
+  const NewMessageEvent(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
 class DeleteMessagesEvent extends MessageEvent {
   final DeleteMessagesParams params;
 
@@ -24,6 +33,7 @@ class DeleteMessagesEvent extends MessageEvent {
 
 class SendMessagesEvent extends MessageEvent {
   final SendMessageParams params;
+
   const SendMessagesEvent(this.params);
 
   @override

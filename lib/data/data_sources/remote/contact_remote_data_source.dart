@@ -6,9 +6,21 @@ class ContactRemoteDataSource {
 
   ContactRemoteDataSource(this.client);
 
-  Future<GetContactListResponse> list(String token) async {
-    final request = GetContactListRequest();
+  Future<GetContactsResponse> getContacts(String token) async {
+    final request = GetContactsRequest();
 
-    return await client.list(request, options: createAuthOptions(token));
+    return await client.getContacts(request, options: createAuthOptions(token));
+  }
+
+  Future<GetUserResponse> getUser(String token, int uid) async {
+    final request = GetUserRequest();
+
+    return await client.getUser(request, options: createAuthOptions(token));
+  }
+
+  Future<SearchResponse> search(String token, int uid) async {
+    final request = SearchRequest();
+
+    return await client.search(request, options: createAuthOptions(token));
   }
 }

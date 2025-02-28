@@ -25,6 +25,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
   ) : super(InitialState()) {
     on<LoadHistoryEvent>(_onLoadHistory);
     on<SendMessagesEvent>(_onSendMessages);
+    on<NewMessageEvent>(_onNewMessage);
     on<DeleteMessagesEvent>(_onDeleteMessages);
   }
 
@@ -56,6 +57,10 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     } catch (e) {
       emit(ErrorState(failure: ExceptionFailure()));
     }
+  }
+
+  void _onNewMessage(NewMessageEvent event, Emitter<MessageState> emit) {
+    print('<< VLog - MessageBloc - _onNewMessage >>');
   }
 
   void _onDeleteMessages(
