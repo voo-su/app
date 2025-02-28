@@ -21,3 +21,11 @@ class DeleteMessagesEvent extends MessageEvent {
   @override
   List<Object> get props => [params];
 }
+
+class SendMessagesEvent extends MessageEvent {
+  final SendMessageParams params;
+  const SendMessagesEvent(this.params);
+
+  @override
+  List<Object> get props => [params];
+}

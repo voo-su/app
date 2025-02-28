@@ -212,6 +212,16 @@ class _MessageScreenState extends State<MessageScreen> {
                         IconButton(
                           icon: Icon(Icons.send, color: colors.primary),
                           onPressed: () {
+                            context.read<MessageBloc>().add(
+                              SendMessagesEvent(
+                                SendMessageParams(
+                                  chatType: widget.chat.chatType,
+                                  receiverId: widget.chat.receiverId,
+                                  recordId: 0,
+                                  message: _messageController.text,
+                                ),
+                              ),
+                            );
                             print("Отправка: ${_messageController.text}");
                             _messageController.clear();
                           },

@@ -118,7 +118,6 @@ class ChatRepositoryImpl implements ChatRepository {
     try {
       final String token = await localDataSource.getToken();
       final response = await remoteDataSource.sendMessage(token, params);
-
       return Right(response.id);
     } on Failure catch (failure) {
       return Left(failure);
@@ -132,7 +131,7 @@ class ChatRepositoryImpl implements ChatRepository {
     try {
       final String token = await localDataSource.getToken();
       final response = await remoteDataSource.deleteMessages(token, params);
-      
+
       return Right(response.message);
     } on Failure catch (failure) {
       return Left(failure);

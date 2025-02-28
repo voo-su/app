@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,6 +7,7 @@ import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/send_messages_usecase.dart';
 
 part 'message_event.dart';
 
@@ -12,11 +15,16 @@ part 'message_state.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final GetHistoryUseCase _getHistoryUseCase;
+  final SendMessagesUsecase _sendMessagesUseCase;
   final DeleteMessagesUseCase _deleteMessagesUseCase;
 
-  MessageBloc(this._getHistoryUseCase, this._deleteMessagesUseCase)
-    : super(InitialState()) {
+  MessageBloc(
+    this._getHistoryUseCase,
+    this._sendMessagesUseCase,
+    this._deleteMessagesUseCase,
+  ) : super(InitialState()) {
     on<LoadHistoryEvent>(_onLoadHistory);
+    on<SendMessagesEvent>(_onSendMessages);
     on<DeleteMessagesEvent>(_onDeleteMessages);
   }
 
@@ -31,6 +39,20 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         (failure) => emit(ErrorState(failure: failure)),
         (success) => emit(SuccessState(messages: success.messages)),
       );
+    } catch (e) {
+      emit(ErrorState(failure: ExceptionFailure()));
+    }
+  }
+
+  void _onSendMessages(
+    SendMessagesEvent event,
+    Emitter<MessageState> emit,
+  ) async {
+    try {
+      final result = await _sendMessagesUseCase(event.params);
+      result.fold((failure) => emit(ErrorState(failure: failure)), (messageId) {
+        log("Отправлено сообщение с id = ${messageId}");
+      });
     } catch (e) {
       emit(ErrorState(failure: ExceptionFailure()));
     }
