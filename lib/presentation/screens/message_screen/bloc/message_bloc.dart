@@ -15,7 +15,7 @@ part 'message_state.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final GetHistoryUseCase _getHistoryUseCase;
-  final SendMessagesUsecase _sendMessagesUseCase;
+  final SendMessagesUseCase _sendMessagesUseCase;
   final DeleteMessagesUseCase _deleteMessagesUseCase;
 
   MessageBloc(

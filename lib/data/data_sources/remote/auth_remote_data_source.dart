@@ -1,4 +1,5 @@
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
+import 'package:voo_su/data/data_sources/remote/utils.dart';
 
 class AuthRemoteDataSource {
   final AuthServiceClient client;
@@ -18,8 +19,7 @@ class AuthRemoteDataSource {
   }
 
   Future<AuthLogoutResponse> logout(String token) async {
-    final request = AuthLogoutRequest(accessToken: token);
-    print("logout $request");
-    return await client.logout(request);
+    final request = AuthLogoutRequest();
+    return await client.logout(request, options: createAuthOptions(token));
   }
 }

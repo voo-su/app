@@ -4,13 +4,13 @@ import 'package:voo_su/core/usecase.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/domain/repositories/chat_repository.dart';
 
-class SendMessagesUsecase implements UseCase<String, SendMessageParams> {
+class SendMessagesUseCase implements UseCase<bool, SendMessageParams> {
   final ChatRepository repository;
 
-  SendMessagesUsecase(this.repository);
+  SendMessagesUseCase(this.repository);
 
   @override
-  Future<Either<Failure, String>> call(SendMessageParams params) async {
+  Future<Either<Failure, bool>> call(SendMessageParams params) async {
     return await repository.sendMessage(params);
   }
 }

@@ -11,9 +11,9 @@ class MessageListWidget extends StatelessWidget {
   final Function(Message, String) onReply;
 
   final bool isSelectionMode;
-  final Set<String> selectedMessageIds;
-  final ValueChanged<String> onChooseMessage;
-  final ValueChanged<String> onToggleSelection;
+  final Set<int> selectedMessageIds;
+  final ValueChanged<int> onChooseMessage;
+  final ValueChanged<int> onToggleSelection;
 
   const MessageListWidget({
     super.key,

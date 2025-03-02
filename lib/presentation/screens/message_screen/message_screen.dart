@@ -21,7 +21,7 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   final TextEditingController _messageController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  final Set<String> _selectedMessageIds = {};
+  final Set<int> _selectedMessageIds = {};
 
   Message? _replyMessage;
   String? _replyUser;
@@ -36,7 +36,7 @@ class _MessageScreenState extends State<MessageScreen> {
         MessageParams(
           chatType: widget.chat.chatType,
           receiverId: widget.chat.receiverId,
-          recordId: 0,
+          messageId: 0,
           limit: 30,
         ),
       ),
@@ -60,14 +60,14 @@ class _MessageScreenState extends State<MessageScreen> {
     super.dispose();
   }
 
-  void onChooseMessage(String messageId) {
+  void onChooseMessage(int messageId) {
     setState(() {
       _isSelectionMode = true;
       _selectedMessageIds.add(messageId);
     });
   }
 
-  void toggleSelection(String messageId) {
+  void toggleSelection(int messageId) {
     setState(() {
       if (_selectedMessageIds.contains(messageId)) {
         _selectedMessageIds.remove(messageId);
@@ -217,7 +217,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                 SendMessageParams(
                                   chatType: widget.chat.chatType,
                                   receiverId: widget.chat.receiverId,
-                                  recordId: 0,
+                                  messageId: 0,
                                   message: _messageController.text,
                                 ),
                               ),

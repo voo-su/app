@@ -33,7 +33,7 @@ class ChatRemoteDataSource {
         chatType: params.chatType,
         receiverId: Int64(params.receiverId),
       ),
-      recordId: Int64(params.recordId),
+      messageId: Int64(params.messageId),
       limit: Int64(params.limit),
     );
 
@@ -64,7 +64,7 @@ class ChatRemoteDataSource {
         chatType: params.chatType,
         receiverId: Int64(params.receiverId),
       ),
-      messageIds: params.messageIds,
+      messageIds: params.messageIds.map((id) => Int64(id)).toList(),
       revoke: false,
     );
 

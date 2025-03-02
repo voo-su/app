@@ -12,8 +12,8 @@ class MessageItemWidget extends StatefulWidget {
 
   final bool isSelectionMode;
   final bool isSelected;
-  final ValueChanged<String> onChooseMessage;
-  final ValueChanged<String> onToggleSelection;
+  final ValueChanged<int> onChooseMessage;
+  final ValueChanged<int> onToggleSelection;
 
   const MessageItemWidget({
     super.key,

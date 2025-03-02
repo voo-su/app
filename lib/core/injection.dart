@@ -101,7 +101,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetContactsUseCase(sl()));
   sl.registerLazySingleton(() => GetHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAccountUsecase(sl()));
-  sl.registerLazySingleton(() => SendMessagesUsecase(sl()));
+  sl.registerLazySingleton(() => SendMessagesUseCase(sl()));
   sl.registerLazySingleton(() => DeleteMessagesUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
   sl.registerLazySingleton(() => GetFirebaseTokenUseCase(sl()));

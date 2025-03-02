@@ -134,16 +134,16 @@ class ChatItemWidget extends StatelessWidget {
             ],
           ),
         ),
-        PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: const [
-              Icon(Icons.delete_outline, size: 20, color: Colors.red),
-              SizedBox(width: 8),
-              Text("Удалить", style: TextStyle(color: Colors.red)),
-            ],
-          ),
-        ),
+        // PopupMenuItem(
+        //   value: 'delete',
+        //   child: Row(
+        //     children: const [
+        //       Icon(Icons.delete_outline, size: 20, color: Colors.red),
+        //       SizedBox(width: 8),
+        //       Text("Удалить", style: TextStyle(color: Colors.red)),
+        //     ],
+        //   ),
+        // ),
       ],
     );
 

@@ -11,7 +11,7 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   bool privateChats = true;
   bool groups = true;
-  bool doNotDisturb = false;
+  //bool doNotDisturb = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               value: groups,
               onChanged: (val) => setState(() => groups = val),
             ),
-            _buildSwitchTile(
-              title: "Не беспокоить",
-              value: doNotDisturb,
-              onChanged: (val) => setState(() => doNotDisturb = val),
-            ),
+            // _buildSwitchTile(
+            //   title: "Не беспокоить",
+            //   value: doNotDisturb,
+            //   onChanged: (val) => setState(() => doNotDisturb = val),
+            // ),
           ],
         ),
       ),

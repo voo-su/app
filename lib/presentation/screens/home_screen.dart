@@ -50,6 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.people, color: colors.onPrimaryContainer),
           ),
           NavigationDestination(
+            label: "Поиск",
+            icon: Icon(Icons.person_search, color: colors.onPrimaryContainer),
+          ),
+          NavigationDestination(
             label: AppLocalizations.of(context)!.settings,
             icon: Icon(Icons.settings, color: colors.onPrimaryContainer),
           ),
@@ -59,10 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.u_turn_left_rounded,
               color: colors.onPrimaryContainer,
             ),
-          ),
-          NavigationDestination(
-            label: "Поиск",
-            icon: Icon(Icons.person_search, color: colors.onPrimaryContainer),
           ),
         ],
       ),

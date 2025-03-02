@@ -23,7 +23,7 @@ class ChatRepositoryImpl implements ChatRepository {
       if (update.hasNewMessage()) {
         return UpdateNewMessage(
           message: Message(
-            id: update.newMessage.message.id,
+            id: update.newMessage.message.id.toInt(),
             chatType: update.newMessage.message.receiver.chatType,
             msgType: update.newMessage.message.msgType,
             receiverId: update.newMessage.message.receiver.receiverId.toInt(),
@@ -38,7 +38,7 @@ class ChatRepositoryImpl implements ChatRepository {
           chatType: update.chatReadInbox.receiver.chatType.toInt(),
           receiverId: update.chatReadInbox.receiver.receiverId.toInt(),
           lastReadInboxMessageId: update.chatReadInbox.lastReadInboxMessageId,
-          unreadCount: update.chatReadInbox.unreadCount,
+          unreadCount: update.chatReadInbox.unreadCount.toInt(),
         );
       } else if (update.hasUserTyping()) {
         return UpdateUserTyping(
@@ -95,7 +95,7 @@ class ChatRepositoryImpl implements ChatRepository {
           response.items
               .map(
                 (item) => Message(
-                  id: item.id,
+                  id: item.id.toInt(),
                   chatType: item.receiver.chatType,
                   receiverId: item.receiver.receiverId.toInt(),
                   userId: item.userId.toInt(),
@@ -114,25 +114,25 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, String>> sendMessage(params) async {
+  Future<Either<Failure, bool>> sendMessage(params) async {
     try {
       final String token = await localDataSource.getToken();
       final response = await remoteDataSource.sendMessage(token, params);
-      return Right(response.id);
+      return Right(response.success);
     } on Failure catch (failure) {
       return Left(failure);
     }
   }
 
   @override
-  Future<Either<Failure, String>> deleteMessages(
+  Future<Either<Failure, bool>> deleteMessages(
     DeleteMessagesParams params,
   ) async {
     try {
       final String token = await localDataSource.getToken();
       final response = await remoteDataSource.deleteMessages(token, params);
 
-      return Right(response.message);
+      return Right(response.success);
     } on Failure catch (failure) {
       return Left(failure);
     }

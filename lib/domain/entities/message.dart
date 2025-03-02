@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Message extends Equatable {
-  final String id;
+  final int id;
   final int chatType;
   final int msgType;
   final int receiverId;
@@ -34,13 +34,13 @@ class MessageResponse {
 class MessageParams {
   final int chatType;
   final int receiverId;
-  final int recordId;
+  final int messageId;
   final int limit;
 
   const MessageParams({
     required this.chatType,
     required this.receiverId,
-    required this.recordId,
+    required this.messageId,
     required this.limit,
   });
 }
@@ -48,13 +48,13 @@ class MessageParams {
 class SendMessageParams {
   final int chatType;
   final int receiverId;
-  final int recordId;
+  final int messageId;
   final String message;
 
   const SendMessageParams({
     required this.chatType,
     required this.receiverId,
-    required this.recordId,
+    required this.messageId,
     required this.message,
   });
 }
@@ -62,7 +62,7 @@ class SendMessageParams {
 class DeleteMessagesParams {
   final int chatType;
   final int receiverId;
-  final List<String> messageIds;
+  final List<int> messageIds;
 
   const DeleteMessagesParams({
     required this.chatType,
