@@ -7,3 +7,5 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class GetAccountEvent extends SettingsEvent {}
+
+class GetNotifySettingsEvent extends SettingsEvent {}

@@ -23,6 +23,31 @@ class AccountRemoteDataSource {
     }
   }
 
+  Future<GetNotifySettingsResponse> getNotifySettings(
+    String token,
+    bool isGroup,
+  ) async {
+    final request = GetNotifySettingsRequest(
+      entity:
+          isGroup
+              ? NotifyEntity(groups: EntityGroups())
+              : NotifyEntity(chats: EntityChats()),
+    );
+
+    try {
+      final response = await client.getNotifySettings(
+        request,
+        options: createAuthOptions(token),
+      );
+      print("Ответ от сервера ${response.settings}");
+
+      return response;
+    } catch (e) {
+      print("Ошибка при получении настроек уведомлений: $e");
+      rethrow;
+    }
+  }
+
   Future<bool> registerDevice(String token, String firebaseToken) async {
     final request = RegisterDeviceRequest(tokenType: 1, token: firebaseToken);
 

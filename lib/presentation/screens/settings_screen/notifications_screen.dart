@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -11,34 +13,57 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   bool privateChats = true;
   bool groups = true;
-  //bool doNotDisturb = false;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<SettingsBloc>().add(GetNotifySettingsEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       backgroundColor: colors.background,
       appBar: const CustomAppBar(title: "Уведомления"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Column(
-          children: [
-            _buildSwitchTile(
-              title: "Личные чаты",
-              value: privateChats,
-              onChanged: (val) => setState(() => privateChats = val),
-            ),
-            _buildSwitchTile(
-              title: "Группы",
-              value: groups,
-              onChanged: (val) => setState(() => groups = val),
-            ),
-            // _buildSwitchTile(
-            //   title: "Не беспокоить",
-            //   value: doNotDisturb,
-            //   onChanged: (val) => setState(() => doNotDisturb = val),
-            // ),
-          ],
+        child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            if (state is SettingsLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is SettingsNotifySettingsState) {
+              privateChats = state.privateChatsSettings.muteUntil == 0;
+              groups = state.groupChatsSettings.muteUntil == 0;
+
+              print("Личные чаты: ${state.privateChatsSettings}");
+              print("Группы: ${state.groupChatsSettings}");
+
+              return Column(
+                children: [
+                  _buildSwitchTile(
+                    title: "Личные чаты",
+                    value: privateChats,
+                    onChanged: (val) {
+                      setState(() => privateChats = val);
+                      print("Изменение уведомлений для чатов: $val");
+                    },
+                  ),
+                  _buildSwitchTile(
+                    title: "Группы",
+                    value: groups,
+                    onChanged: (val) {
+                      setState(() => groups = val);
+                      print("Изменение уведомлений для групп: $val");
+                    },
+                  ),
+                ],
+              );
+            }
+            return const Center(child: Text("Ошибка загрузки данных"));
+          },
         ),
       ),
     );

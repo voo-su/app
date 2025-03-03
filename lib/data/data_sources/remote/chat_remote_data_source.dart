@@ -28,6 +28,23 @@ class ChatRemoteDataSource {
     String token,
     MessageParams params,
   ) async {
+    // вызвать метод прочитано - есть
+
+    final requestViewMsgs = ViewMessagesRequest(
+      receiver: Receiver(
+        chatType: params.chatType,
+        receiverId: Int64(params.receiverId),
+      ),
+      messageIds: [Int64(params.messageId)],
+    );
+
+    print("object - $requestViewMsgs");
+
+    await client.viewMessages(
+      requestViewMsgs,
+      options: createAuthOptions(token),
+    );
+
     final request = GetHistoryRequest(
       receiver: Receiver(
         chatType: params.chatType,
@@ -67,8 +84,6 @@ class ChatRemoteDataSource {
       messageIds: params.messageIds.map((id) => Int64(id)).toList(),
       revoke: false,
     );
-
-    print("request $request");
 
     return await client.deleteMessages(
       request,

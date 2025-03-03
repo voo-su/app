@@ -23,6 +23,7 @@ import 'package:voo_su/domain/repositories/chat_repository.dart';
 import 'package:voo_su/domain/repositories/contact_repository.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
+import 'package:voo_su/domain/usecases/account/get_notify_settings_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
@@ -101,6 +102,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetContactsUseCase(sl()));
   sl.registerLazySingleton(() => GetHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAccountUsecase(sl()));
+  sl.registerLazySingleton(() => GetNotifySettingsUseCase(sl()));
   sl.registerLazySingleton(() => SendMessagesUseCase(sl()));
   sl.registerLazySingleton(() => DeleteMessagesUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
@@ -111,7 +113,7 @@ Future<void> init() async {
   sl.registerFactory(() => ChatBloc(sl()));
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
-  sl.registerFactory(() => SettingsBloc(sl()));
+  sl.registerFactory(() => SettingsBloc(sl(), sl()));
   sl.registerFactory(() => ThemesBloc());
 
   // Cubit

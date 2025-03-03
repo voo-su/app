@@ -130,7 +130,7 @@ class ChatItemWidget extends StatelessWidget {
             children: const [
               Icon(Icons.notifications_off_outlined, size: 20),
               SizedBox(width: 8),
-              Text("Отключить звук"),
+              Text("Отключить уведомления"),
             ],
           ),
         ),

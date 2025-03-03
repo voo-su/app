@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/message_bubble_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
 
@@ -188,6 +190,19 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   }
 
   void _deleteMessage() {
+    context.read<MessageBloc>().add(
+      DeleteMessagesEvent(
+        DeleteMessagesParams(
+          chatType: widget.message.chatType,
+          receiverId: widget.message.receiverId,
+          messageIds: [widget.message.id],
+        ),
+      ),
+    );
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Сообщение удалено")));
     print("Удалено сообщение: ${widget.message.id}");
   }
 }

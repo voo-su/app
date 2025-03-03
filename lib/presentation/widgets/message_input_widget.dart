@@ -82,13 +82,13 @@ class MessageInputWidget extends StatelessWidget {
 
     return Row(
       children: [
-        IconButton(
-          icon: Icon(
-            Icons.attach_file_outlined,
-            color: colors.onSurfaceVariant,
-          ),
-          onPressed: () => pickImage(context),
-        ),
+        // IconButton(
+        //   icon: Icon(
+        //     Icons.attach_file_outlined,
+        //     color: colors.onSurfaceVariant,
+        //   ),
+        //   onPressed: () => pickImage(context),
+        // ),
         Expanded(
           child: TextField(
             controller: controller,
@@ -108,14 +108,14 @@ class MessageInputWidget extends StatelessWidget {
                 vertical: 10,
                 horizontal: 16,
               ),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.emoji_emotions_outlined,
-                  color: colors.onSurfaceVariant,
-                ),
-                onPressed: () {
-                },
-              ),
+              // suffixIcon: IconButton(
+              //   icon: Icon(
+              //     Icons.emoji_emotions_outlined,
+              //     color: colors.onSurfaceVariant,
+              //   ),
+              //   onPressed: () {
+              //   },
+              // ),
             ),
           ),
         ),

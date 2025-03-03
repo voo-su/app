@@ -18,6 +18,19 @@ class SettingsSuccessState extends SettingsState {
   List<Object?> get props => [account];
 }
 
+class SettingsNotifySettingsState extends SettingsState {
+  final NotifySettings privateChatsSettings;
+  final NotifySettings groupChatsSettings;
+
+  SettingsNotifySettingsState({
+    required this.privateChatsSettings,
+    required this.groupChatsSettings,
+  });
+
+  @override
+  List<Object?> get props => [privateChatsSettings, groupChatsSettings];
+}
+
 class SettingsErrorState extends SettingsState {
   final Failure failure;
 
