@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/core/router.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 
@@ -102,14 +104,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _saveProfile() {
-    print("Сохранение профиля:");
-    print("Имя: ${_nameController.text}");
-    print("Фамилия: ${_surnameController.text}");
-    print("Пол: $_selectedGender");
-    print(
-      "День рождения: ${_selectedDate?.toLocal().toString().split(' ')[0]}",
+    final params = UpdateProfileParams(
+      name: _nameController.text.trim(),
+      surname: _surnameController.text.trim(),
+      gender: _selectedGender,
+      birthday:
+          _selectedDate != null
+              ? "${_selectedDate!.year}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.day.toString().padLeft(2, '0')}"
+              : "", // Форматирование в `yyyy-MM-dd`
+      about: _bioController.text.trim(),
     );
-    print("О себе: ${_bioController.text}");
+
+    context.read<SettingsBloc>().add(UpdateProfileEvent(params));
+    Navigator.popAndPushNamed(context, AppRouter.settings);
   }
 
   Future<void> _pickDate() async {

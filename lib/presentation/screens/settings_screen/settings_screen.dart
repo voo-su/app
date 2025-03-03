@@ -145,6 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: "Выйти",
                 onTap: () {
                   context.read<AuthBloc>().add(LogoutEvent());
+                  Navigator.popAndPushNamed(context, AppRouter.auth);
                 },
               ),
             ],

@@ -6,6 +6,7 @@ import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_notify_settings_usecase.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
@@ -13,11 +14,16 @@ part 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetAccountUsecase _getAccountUseCase;
   final GetNotifySettingsUseCase _getNotifySettingsUseCase;
+  final UpdateProfileUseCase _updateProfileUseCase;
 
-  SettingsBloc(this._getAccountUseCase, this._getNotifySettingsUseCase)
-    : super(SettingsInitialState()) {
+  SettingsBloc(
+    this._getAccountUseCase,
+    this._getNotifySettingsUseCase,
+    this._updateProfileUseCase,
+  ) : super(SettingsInitialState()) {
     on<GetAccountEvent>(_onGetAccount);
     on<GetNotifySettingsEvent>(_onGetNotifySettings);
+    on<UpdateProfileEvent>(_onUpdateProfile);
   }
 
   Future<void> _onGetAccount(
@@ -44,8 +50,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     try {
       emit(SettingsLoadingState());
 
-      final chatsResult = await _getNotifySettingsUseCase(NotifyEntity(groups: EntityGroups()));
-      final groupsResult = await _getNotifySettingsUseCase(NotifyEntity(chats: EntityChats()));
+      final chatsResult = await _getNotifySettingsUseCase(
+        NotifyEntity(groups: EntityGroups()),
+      );
+      final groupsResult = await _getNotifySettingsUseCase(
+        NotifyEntity(chats: EntityChats()),
+      );
 
       chatsResult.fold(
         (failure) => emit(SettingsErrorState(failure: failure)),
@@ -53,13 +63,33 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           groupsResult.fold(
             (failure) => emit(SettingsErrorState(failure: failure)),
             (groupsSettings) {
-              emit(SettingsNotifySettingsState(
-                privateChatsSettings: chatsSettings,
-                groupChatsSettings: groupsSettings,
-              ));
+              emit(
+                SettingsNotifySettingsState(
+                  privateChatsSettings: chatsSettings,
+                  groupChatsSettings: groupsSettings,
+                ),
+              );
             },
           );
         },
+      );
+    } catch (e) {
+      emit(SettingsErrorState(failure: ExceptionFailure()));
+    }
+  }
+
+    Future<void> _onUpdateProfile(
+    UpdateProfileEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    try {
+      emit(SettingsLoadingState());
+
+      final result = await _updateProfileUseCase(event.params);
+
+      result.fold(
+        (failure) => emit(SettingsErrorState(failure: failure)),
+        (success) => emit(SettingsProfileUpdatedState(success: success)),
       );
     } catch (e) {
       emit(SettingsErrorState(failure: ExceptionFailure()));

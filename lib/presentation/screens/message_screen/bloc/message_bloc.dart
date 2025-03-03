@@ -52,7 +52,9 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     try {
       final result = await _sendMessagesUseCase(event.params);
       result.fold((failure) => emit(ErrorState(failure: failure)), (messageId) {
-        log("Отправлено сообщение с id = ${messageId}");
+        log(
+          "Отправлено сообщение с id = ${messageId} - ответ на: ${event.params.replyToMsgId}",
+        );
       });
     } catch (e) {
       emit(ErrorState(failure: ExceptionFailure()));

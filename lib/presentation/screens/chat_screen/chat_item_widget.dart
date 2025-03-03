@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
@@ -134,6 +136,7 @@ class ChatItemWidget extends StatelessWidget {
             ],
           ),
         ),
+
         // PopupMenuItem(
         //   value: 'delete',
         //   child: Row(
@@ -149,7 +152,7 @@ class ChatItemWidget extends StatelessWidget {
 
     switch (result) {
       case 'mute':
-        _muteChat();
+        _muteChat(context);
         break;
       case 'delete':
         _deleteChat();
@@ -157,8 +160,16 @@ class ChatItemWidget extends StatelessWidget {
     }
   }
 
-  void _muteChat() {
-    print("Отключен звук для чата: ${chat.id}");
+  void _muteChat(BuildContext context) {
+    context.read<ChatBloc>().add(
+      ChatUpdateNotifySettingsEvent(
+        chat.receiverId,
+        chat.chatType,
+        const ChatParams(),
+      ),
+    );
+
+    print("Отключен звук для чата: ${chat.chatType}");
   }
 
   void _deleteChat() {

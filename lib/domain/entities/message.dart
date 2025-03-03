@@ -50,12 +50,14 @@ class SendMessageParams {
   final int receiverId;
   final int messageId;
   final String message;
+  final int? replyToMsgId;
 
   const SendMessageParams({
     required this.chatType,
     required this.receiverId,
     required this.messageId,
     required this.message,
+    this.replyToMsgId,
   });
 }
 

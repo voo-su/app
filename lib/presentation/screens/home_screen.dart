@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
-import 'package:voo_su/presentation/screens/search_screen/search_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:voo_su/presentation/screens/test_screen.dart';
 
@@ -19,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> pages = <Widget>[
     ChatScreen(),
     ContactScreen(),
-    SearchScreen(),
+    // SearchScreen(),s
     SettingsScreen(),
 
     TestScreen(),
@@ -49,10 +48,10 @@ class _HomeScreenState extends State<HomeScreen> {
             label: AppLocalizations.of(context)!.contacts,
             icon: Icon(Icons.people, color: colors.onPrimaryContainer),
           ),
-          NavigationDestination(
-            label: "Поиск",
-            icon: Icon(Icons.person_search, color: colors.onPrimaryContainer),
-          ),
+          // NavigationDestination(
+          //   label: "Поиск",
+          //   icon: Icon(Icons.person_search, color: colors.onPrimaryContainer),
+          // ),
           NavigationDestination(
             label: AppLocalizations.of(context)!.settings,
             icon: Icon(Icons.settings, color: colors.onPrimaryContainer),

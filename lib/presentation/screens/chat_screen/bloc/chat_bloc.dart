@@ -50,12 +50,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           NotifyEntity(group: EntityGroup(groupId: Int64(event.id)));
           break;
       }
-
       final result = await _updateNotifySettingsUseCase(
         UpdateNotifySettings(
           entity: entity,
           settings: EntityNotifySettings(
-            muteUntil: 0,
+            muteUntil: 2147483647,
             showPreviews: true,
             silent: false,
           ),

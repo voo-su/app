@@ -1,5 +1,6 @@
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pbgrpc.dart';
 import 'package:voo_su/data/data_sources/remote/utils.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 class AccountRemoteDataSource {
   final AccountServiceClient client;
@@ -70,6 +71,29 @@ class AccountRemoteDataSource {
       return response.success;
     } catch (e) {
       print("Ошибка при отправке FCM-токена: $e");
+      rethrow;
+    }
+  }
+
+  Future<bool> updateProfile(String token, UpdateProfileParams params) async {
+    final request = UpdateProfileRequest(
+      name: params.name,
+      surname: params.surname,
+      gender: params.gender,
+      birthday: params.birthday,
+      about: params.about,
+    );
+
+    print("reqiest $request");
+
+    try {
+      final response = await client.updateProfile(
+        request,
+        options: createAuthOptions(token),
+      );
+      return response.success;
+    } catch (e) {
+      print("Ошибка при обновлении профиля: $e");
       rethrow;
     }
   }

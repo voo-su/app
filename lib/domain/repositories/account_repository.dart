@@ -3,6 +3,7 @@ import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 abstract class AccountRepository {
   Future<Either<Failure, AccountResponse>> getAccount(AccountParams params);
@@ -16,4 +17,6 @@ abstract class AccountRepository {
   );
 
   Future<Either<Failure, String>> getFirebaseToken(String token);
+
+  Future<Either<Failure, bool>> updateProfile(UpdateProfileParams params);
 }

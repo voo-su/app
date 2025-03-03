@@ -212,18 +212,26 @@ class _MessageScreenState extends State<MessageScreen> {
                         IconButton(
                           icon: Icon(Icons.send, color: colors.primary),
                           onPressed: () {
+                            if (_messageController.text.trim().isEmpty) return;
+
                             context.read<MessageBloc>().add(
                               SendMessagesEvent(
                                 SendMessageParams(
                                   chatType: widget.chat.chatType,
                                   receiverId: widget.chat.receiverId,
                                   messageId: 0,
-                                  message: _messageController.text,
+                                  message: _messageController.text.trim(),
+                                  replyToMsgId: _replyMessage?.id,
                                 ),
                               ),
                             );
-                            print("Отправка: ${_messageController.text}");
+
+                            print(
+                              "Отправка: ${_messageController.text} | Ответ на: ${_replyMessage?.id}",
+                            );
+
                             _messageController.clear();
+                            _clearReply();
                           },
                         ),
                       ],

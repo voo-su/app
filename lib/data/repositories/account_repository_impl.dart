@@ -6,6 +6,7 @@ import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/repositories/account_repository.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final AccountRemoteDataSource remoteDataSource;
@@ -93,6 +94,19 @@ class AccountRepositoryImpl implements AccountRepository {
         print("FCM-токен нет");
         return Left(ExceptionFailure());
       }
+    } catch (e) {
+      return Left(ExceptionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateProfile(
+    UpdateProfileParams params,
+  ) async {
+    try {
+      final String token = await localDataSource.getToken();
+      final response = await remoteDataSource.updateProfile(token, params);
+      return Right(response);
     } catch (e) {
       return Left(ExceptionFailure());
     }

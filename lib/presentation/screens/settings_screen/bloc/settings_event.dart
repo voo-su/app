@@ -9,3 +9,12 @@ abstract class SettingsEvent extends Equatable {
 class GetAccountEvent extends SettingsEvent {}
 
 class GetNotifySettingsEvent extends SettingsEvent {}
+
+class UpdateProfileEvent extends SettingsEvent {
+  final UpdateProfileParams params;
+
+  UpdateProfileEvent(this.params);
+
+  @override
+  List<Object?> get props => [params];
+}

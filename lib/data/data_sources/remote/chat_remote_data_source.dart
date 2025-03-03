@@ -67,6 +67,8 @@ class ChatRemoteDataSource {
         receiverId: Int64(params.receiverId),
       ),
       message: params.message,
+      replyToMsgId:
+          params.replyToMsgId != null ? Int64(params.replyToMsgId!) : null,
     );
 
     return await client.sendMessage(request, options: createAuthOptions(token));

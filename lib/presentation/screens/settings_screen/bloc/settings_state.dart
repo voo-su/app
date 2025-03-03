@@ -39,3 +39,12 @@ class SettingsErrorState extends SettingsState {
   @override
   List<Object?> get props => [failure];
 }
+
+class SettingsProfileUpdatedState extends SettingsState {
+  final bool success;
+
+  SettingsProfileUpdatedState({required this.success});
+
+  @override
+  List<Object?> get props => [success];
+}
