@@ -16,6 +16,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
 
   @override
   void dispose() {
@@ -35,10 +36,13 @@ class _ChatScreenState extends State<ChatScreen> {
         hasSearch: true,
         searchController: _searchController,
         onSearchChanged: (value) {
+          setState(() {
+            _searchQuery = value.toLowerCase();
+          });
           print("Поиск: $value");
         },
       ),
-      body: ChatListWidget(),
+      body: ChatListWidget(searchQuery: _searchQuery),
     );
   }
 }
