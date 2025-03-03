@@ -147,10 +147,13 @@ class ChatItemWidget extends StatelessWidget {
       ],
     );
 
-    if (result == 'mute') {
-      _muteChat();
-    } else if (result == 'delete') {
-      _deleteChat();
+    switch (result) {
+      case 'mute':
+        _muteChat();
+        break;
+      case 'delete':
+        _deleteChat();
+        break;
     }
   }
 

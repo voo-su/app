@@ -25,16 +25,10 @@ class AccountRemoteDataSource {
 
   Future<GetNotifySettingsResponse> getNotifySettings(
     String token,
-    bool isGroup,
+    NotifyEntity entity,
   ) async {
-    final request = GetNotifySettingsRequest(
-      entity:
-          isGroup
-              ? NotifyEntity(groups: EntityGroups())
-              : NotifyEntity(chats: EntityChats()),
-    );
-
     try {
+      final request = GetNotifySettingsRequest(entity: entity);
       final response = await client.getNotifySettings(
         request,
         options: createAuthOptions(token),
@@ -46,6 +40,22 @@ class AccountRemoteDataSource {
       print("Ошибка при получении настроек уведомлений: $e");
       rethrow;
     }
+  }
+
+  Future<UpdateNotifySettingsResponse> updateNotifySettings(
+    String token,
+    NotifyEntity entity,
+    EntityNotifySettings settings,
+  ) async {
+    final request = UpdateNotifySettingsRequest(
+      entity: entity,
+      settings: settings,
+    );
+    final response = await client.updateNotifySettings(
+      request,
+      options: createAuthOptions(token),
+    );
+    return response;
   }
 
   Future<bool> registerDevice(String token, String firebaseToken) async {

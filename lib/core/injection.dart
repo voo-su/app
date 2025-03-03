@@ -110,7 +110,7 @@ Future<void> init() async {
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
-  sl.registerFactory(() => ChatBloc(sl()));
+  sl.registerFactory(() => ChatBloc(sl(), sl()));
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl()));

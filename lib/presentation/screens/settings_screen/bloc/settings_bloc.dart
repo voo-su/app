@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:voo_su/core/error/failures.dart';
+import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
@@ -36,15 +37,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-    Future<void> _onGetNotifySettings(
+  Future<void> _onGetNotifySettings(
     GetNotifySettingsEvent event,
     Emitter<SettingsState> emit,
   ) async {
     try {
       emit(SettingsLoadingState());
 
-      final chatsResult = await _getNotifySettingsUseCase(false);
-      final groupsResult = await _getNotifySettingsUseCase(true);
+      final chatsResult = await _getNotifySettingsUseCase(NotifyEntity(groups: EntityGroups()));
+      final groupsResult = await _getNotifySettingsUseCase(NotifyEntity(chats: EntityChats()));
 
       chatsResult.fold(
         (failure) => emit(SettingsErrorState(failure: failure)),
