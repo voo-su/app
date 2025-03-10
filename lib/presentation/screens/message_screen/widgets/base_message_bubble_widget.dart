@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/core/utils/time_formatter.dart';
+import 'package:voo_su/domain/entities/message.dart';
 
 class BaseMessageBubble extends StatelessWidget {
+  final Message message;
   final bool isMine;
-  final String createdAt;
-  final bool isRead;
-  final String message;
   final Widget? replyContent;
 
   const BaseMessageBubble({
     super.key,
     required this.isMine,
-    required this.createdAt,
-    required this.isRead,
     required this.message,
     this.replyContent,
   });
@@ -54,7 +51,7 @@ class BaseMessageBubble extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    message,
+                    message.content,
                     style: TextStyle(
                       fontSize: 16,
                       color: isMine ? colors.onPrimary : colors.onSurface,
@@ -66,11 +63,11 @@ class BaseMessageBubble extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    TimeFormatterWidget(dateTime: createdAt, isMine: isMine),
+                    TimeFormatterWidget(dateTime: message.createdAt, isMine: isMine),
                     if (isMine) ...[
                       const SizedBox(width: 4),
                       Icon(
-                        isRead ? Icons.done_all : Icons.done,
+                        message.isRead ? Icons.done_all : Icons.done,
                         size: 16,
                         color: isMine ? colors.onPrimary : colors.onSurface,
                       ),

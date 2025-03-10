@@ -20,9 +20,7 @@ class ReplyMessageBubble extends StatelessWidget {
 
     return BaseMessageBubble(
       isMine: isMine,
-      createdAt: message.createdAt,
-      isRead: message.isRead,
-      message: message.content,
+      message: message,
       replyContent: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
