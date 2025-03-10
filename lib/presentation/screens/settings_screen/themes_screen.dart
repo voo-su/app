@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
-import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_event.dart';
-import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_state.dart';
+import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class ThemesScreen extends StatelessWidget {
@@ -28,9 +26,9 @@ class ThemesScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            BlocBuilder<ThemesBloc, ThemesState>(
+            BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
-                bool isLightTheme = state is ThemesLightState;
+                bool isLightTheme = state is SettingsLightThemeState;
                 return _buildThemeSwitch(context, isLightTheme);
               },
             ),
@@ -44,7 +42,7 @@ class ThemesScreen extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () {
-        context.read<ThemesBloc>().add(ThemesChanged(!isLightTheme));
+        context.read<SettingsBloc>().add(ChangeThemeEvent(!isLightTheme));
       },
       child: Container(
         height: 56,

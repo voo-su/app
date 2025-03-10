@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
 import 'package:voo_su/domain/entities/account.dart';
@@ -16,6 +17,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetNotifySettingsUseCase _getNotifySettingsUseCase;
   final UpdateProfileUseCase _updateProfileUseCase;
 
+  bool _isLightTheme = true; // текущаятема
+
   SettingsBloc(
     this._getAccountUseCase,
     this._getNotifySettingsUseCase,
@@ -24,6 +27,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<GetAccountEvent>(_onGetAccount);
     on<GetNotifySettingsEvent>(_onGetNotifySettings);
     on<UpdateProfileEvent>(_onUpdateProfile);
+    on<ChangeThemeEvent>(_onChangeTheme);
+    _loadTheme();
   }
 
   Future<void> _onGetAccount(
@@ -34,10 +39,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(SettingsLoadingState());
       final result = await _getAccountUseCase(AccountParams());
 
-      result.fold(
-        (failure) => emit(SettingsErrorState(failure: failure)),
-        (success) => emit(SettingsSuccessState(account: success.account)),
-      );
+      result.fold((failure) => emit(SettingsErrorState(failure: failure)), (
+        success,
+      ) {
+        emit(SettingsSuccessState(account: success.account));
+        // получаем сохранненое состояние темы
+        emit(
+          _isLightTheme ? SettingsLightThemeState() : SettingsDarkThemeState(),
+        );
+      });
     } catch (e) {
       emit(SettingsErrorState(failure: ExceptionFailure()));
     }
@@ -78,7 +88,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-    Future<void> _onUpdateProfile(
+  Future<void> _onUpdateProfile(
     UpdateProfileEvent event,
     Emitter<SettingsState> emit,
   ) async {
@@ -94,5 +104,21 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } catch (e) {
       emit(SettingsErrorState(failure: ExceptionFailure()));
     }
+  }
+
+  Future<void> _onChangeTheme(
+    ChangeThemeEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool("isLightTheme", event.isLight);
+    _isLightTheme = event.isLight;
+    emit(event.isLight ? SettingsLightThemeState() : SettingsDarkThemeState());
+  }
+
+  Future<void> _loadTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool isLight = prefs.getBool("isLightTheme") ?? true;
+    add(ChangeThemeEvent(isLight));
   }
 }

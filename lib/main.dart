@@ -17,8 +17,6 @@ import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
-import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_bloc.dart';
-import 'package:voo_su/presentation/screens/settings_screen/bloc/themes_state.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
 
 @pragma('vm:entry-point')
@@ -75,7 +73,6 @@ class _AppState extends State<App> {
         BlocProvider(create: (context) => di.sl<ContactBloc>()),
         BlocProvider(create: (context) => di.sl<MessageBloc>()),
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
-        BlocProvider(create: (context) => di.sl<ThemesBloc>()),
         BlocProvider(create: (context) => di.sl<ChatUpdatesCubit>()),
 
         Provider(create: (context) => di.sl<GetFirebaseTokenUseCase>()),
@@ -90,8 +87,10 @@ class _AppState extends State<App> {
             );
           }
         },
-        child: BlocBuilder<ThemesBloc, ThemesState>(
+        child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
+            bool isLightTheme = state is SettingsLightThemeState;
+
             return MaterialApp(
               title: 'VooSu',
               debugShowCheckedModeBanner: false,
@@ -104,10 +103,7 @@ class _AppState extends State<App> {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: const [Locale('ru')],
-              theme:
-                  state is ThemesLightState
-                      ? AppTheme.lightTheme
-                      : AppTheme.darkTheme,
+              theme: isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme,
             );
           },
         ),

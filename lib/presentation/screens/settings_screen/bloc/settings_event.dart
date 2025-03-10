@@ -18,3 +18,11 @@ class UpdateProfileEvent extends SettingsEvent {
   @override
   List<Object?> get props => [params];
 }
+
+class ChangeThemeEvent extends SettingsEvent {
+  final bool isLight;
+  ChangeThemeEvent(this.isLight);
+
+  @override
+  List<Object?> get props => [isLight];
+}
