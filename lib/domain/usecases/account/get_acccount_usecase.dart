@@ -4,10 +4,10 @@ import 'package:voo_su/core/usecase.dart';
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/repositories/account_repository.dart';
 
-class GetAccountUsecase implements UseCase<AccountResponse, AccountParams> {
+class GetAccountUseCase implements UseCase<AccountResponse, AccountParams> {
   final AccountRepository repository;
 
-  GetAccountUsecase(this.repository);
+  GetAccountUseCase(this.repository);
 
   @override
   Future<Either<Failure, AccountResponse>> call(AccountParams params) async {

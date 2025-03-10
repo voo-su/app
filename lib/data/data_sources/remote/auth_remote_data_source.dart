@@ -1,5 +1,4 @@
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/utils.dart';
 
 class AuthRemoteDataSource {
   final AuthServiceClient client;
@@ -7,19 +6,16 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource(this.client);
 
   Future<AuthLoginResponse> login(String email, String platform) async {
-    final request = AuthLoginRequest(email: email, platform: platform);
-
-    return await client.login(request);
+    return await client.login(
+      AuthLoginRequest(email: email, platform: platform),
+    );
   }
 
   Future<AuthVerifyResponse> verify(String token, String code) async {
-    final request = AuthVerifyRequest(code: code, token: token);
-
-    return await client.verify(request);
+    return await client.verify(AuthVerifyRequest(code: code, token: token));
   }
 
-  Future<AuthLogoutResponse> logout(String token) async {
-    final request = AuthLogoutRequest();
-    return await client.logout(request, options: createAuthOptions(token));
+  Future<AuthLogoutResponse> logout() async {
+    return await client.logout(AuthLogoutRequest());
   }
 }

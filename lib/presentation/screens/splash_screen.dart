@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _checkAuthStatus() async {
     final prefs = await SharedPreferences.getInstance();
     Timer(const Duration(seconds: 3), () {
-      String? token = prefs.getString(authKey);
+      String? token = prefs.getString(userToken);
       if (token != null) {
         Navigator.pushReplacement(
           context,

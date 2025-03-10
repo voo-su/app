@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/auth_remote_data_source.dart';
-import 'package:voo_su/data/models/auth_model.dart';
 import 'package:voo_su/domain/entities/auth.dart';
 import 'package:voo_su/domain/repositories/auth_repository.dart';
 
@@ -18,10 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await remoteDataSource.login(email, "android");
 
       localDataSource.setLogin(
-        AuthLoginModel(
-          expiresIn: response.expiresIn.toInt(),
-          token: response.token,
-        ),
+        AuthLogin(expiresIn: response.expiresIn.toInt(), token: response.token),
       );
 
       return Right(
@@ -39,7 +35,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await remoteDataSource.verify(result.token, code);
 
       localDataSource.setVerify(
-        AuthVerifyModel(
+        AuthVerify(
           accessToken: response.accessToken,
           expiresIn: response.expiresIn.toInt(),
           type: response.type,
@@ -61,10 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> logout() async {
     try {
-      final token = await localDataSource.getToken();
-      print("Отправка запроса на logout с токеном: $token");
-
-      await remoteDataSource.logout(token);
+      await remoteDataSource.logout();
       await localDataSource.clearAuthData();
 
       return const Right(null);

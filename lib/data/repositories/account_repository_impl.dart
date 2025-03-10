@@ -19,22 +19,23 @@ class AccountRepositoryImpl implements AccountRepository {
     AccountParams params,
   ) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.get(token);
+      final response = await remoteDataSource.get();
 
-      final account = Account(
-        id: response.id.toInt(),
-        avatar: response.avatar,
-        username: response.username,
-        email: response.email,
-        name: response.name,
-        surname: response.surname,
-        gender: response.gender,
-        birthday: response.birthday,
-        about: response.about,
+      return Right(
+        AccountResponse(
+          account: Account(
+            id: response.id.toInt(),
+            avatar: response.avatar,
+            username: response.username,
+            email: response.email,
+            name: response.name,
+            surname: response.surname,
+            gender: response.gender,
+            birthday: response.birthday,
+            about: response.about,
+          ),
+        ),
       );
-
-      return Right(AccountResponse(account: account));
     } catch (e) {
       return Left(ExceptionFailure());
     }
@@ -45,8 +46,7 @@ class AccountRepositoryImpl implements AccountRepository {
     NotifyEntity entity,
   ) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.getNotifySettings(token, entity);
+      final response = await remoteDataSource.getNotifySettings(entity);
 
       final settings = NotifySettings(
         muteUntil: response.settings.muteUntil,
@@ -65,9 +65,7 @@ class AccountRepositoryImpl implements AccountRepository {
     UpdateNotifySettings notifySettings,
   ) async {
     try {
-      final String token = await localDataSource.getToken();
       final response = await remoteDataSource.updateNotifySettings(
-        token,
         notifySettings.entity,
         notifySettings.settings,
       );
@@ -81,11 +79,7 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   Future<Either<Failure, String>> getFirebaseToken(String firebaseToken) async {
     try {
-      final String token = await localDataSource.getToken();
-      final bool success = await remoteDataSource.registerDevice(
-        token,
-        firebaseToken,
-      );
+      final bool success = await remoteDataSource.registerDevice(firebaseToken);
 
       if (success) {
         print("FCM-токен зарегистрирован");
@@ -104,8 +98,7 @@ class AccountRepositoryImpl implements AccountRepository {
     UpdateProfileParams params,
   ) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.updateProfile(token, params);
+      final response = await remoteDataSource.updateProfile(params);
       return Right(response);
     } catch (e) {
       return Left(ExceptionFailure());

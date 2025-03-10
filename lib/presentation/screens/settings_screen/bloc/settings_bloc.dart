@@ -12,7 +12,7 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final GetAccountUsecase _getAccountUseCase;
+  final GetAccountUseCase _getAccountUseCase;
   final GetNotifySettingsUseCase _getNotifySettingsUseCase;
   final UpdateProfileUseCase _updateProfileUseCase;
 

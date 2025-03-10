@@ -14,23 +14,23 @@ class ContactRepositoryImpl implements ContactRepository {
   @override
   Future<Either<Failure, ContactResponse>> getContacts(params) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.getContacts(token);
+      final response = await remoteDataSource.getContacts();
 
-      List<Contact> contactList =
-          response.items
-              .map(
-                (item) => Contact(
-                  id: item.id.toInt(),
-                  username: item.username,
-                  name: item.name,
-                  surname: item.surname,
-                  avatar: item.avatar,
-                ),
-              )
-              .toList();
-
-      return Right(ContactResponse(contacts: contactList));
+      return Right(
+        ContactResponse(
+          contacts: List.of(
+            response.items.map(
+              (item) => Contact(
+                id: item.id.toInt(),
+                username: item.username,
+                name: item.name,
+                surname: item.surname,
+                avatar: item.avatar,
+              ),
+            ),
+          ),
+        ),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     }

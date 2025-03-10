@@ -1,5 +1,4 @@
 import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/utils.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 class AccountRemoteDataSource {
@@ -7,17 +6,9 @@ class AccountRemoteDataSource {
 
   AccountRemoteDataSource(this.client);
 
-  Future<GetProfileResponse> get(String token) async {
-    print("Запрос на сервер с токеном: $token");
-    final request = GetProfileRequest();
-
+  Future<GetProfileResponse> get() async {
     try {
-      final response = await client.getProfile(
-        request,
-        options: createAuthOptions(token),
-      );
-      print("ответ: $response");
-      return response;
+      return await client.getProfile(GetProfileRequest());
     } catch (e) {
       print("Ошибка при получении аккаунта: $e");
       rethrow;
@@ -25,18 +16,12 @@ class AccountRemoteDataSource {
   }
 
   Future<GetNotifySettingsResponse> getNotifySettings(
-    String token,
     NotifyEntity entity,
   ) async {
     try {
-      final request = GetNotifySettingsRequest(entity: entity);
-      final response = await client.getNotifySettings(
-        request,
-        options: createAuthOptions(token),
+      return await client.getNotifySettings(
+        GetNotifySettingsRequest(entity: entity),
       );
-      print("Ответ от сервера ${response.settings}");
-
-      return response;
     } catch (e) {
       print("Ошибка при получении настроек уведомлений: $e");
       rethrow;
@@ -44,28 +29,19 @@ class AccountRemoteDataSource {
   }
 
   Future<UpdateNotifySettingsResponse> updateNotifySettings(
-    String token,
     NotifyEntity entity,
     EntityNotifySettings settings,
   ) async {
-    final request = UpdateNotifySettingsRequest(
-      entity: entity,
-      settings: settings,
-    );
     final response = await client.updateNotifySettings(
-      request,
-      options: createAuthOptions(token),
+      UpdateNotifySettingsRequest(entity: entity, settings: settings),
     );
     return response;
   }
 
-  Future<bool> registerDevice(String token, String firebaseToken) async {
-    final request = RegisterDeviceRequest(tokenType: 1, token: firebaseToken);
-
+  Future<bool> registerDevice(String firebaseToken) async {
     try {
       final response = await client.registerDevice(
-        request,
-        options: createAuthOptions(token),
+        RegisterDeviceRequest(tokenType: 1, token: firebaseToken),
       );
       print("FCM-токен отправлен, ответ: ${response.success}");
       return response.success;
@@ -75,21 +51,16 @@ class AccountRemoteDataSource {
     }
   }
 
-  Future<bool> updateProfile(String token, UpdateProfileParams params) async {
-    final request = UpdateProfileRequest(
-      name: params.name,
-      surname: params.surname,
-      gender: params.gender,
-      birthday: params.birthday,
-      about: params.about,
-    );
-
-    print("reqiest $request");
-
+  Future<bool> updateProfile(UpdateProfileParams params) async {
     try {
       final response = await client.updateProfile(
-        request,
-        options: createAuthOptions(token),
+        UpdateProfileRequest(
+          name: params.name,
+          surname: params.surname,
+          gender: params.gender,
+          birthday: params.birthday,
+          about: params.about,
+        ),
       );
       return response.success;
     } catch (e) {

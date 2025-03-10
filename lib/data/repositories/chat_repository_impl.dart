@@ -16,9 +16,8 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Stream<ChatUpdate>> getUpdates() async {
     print('<< VLog - ChatRepositoryImpl - getUpdates >>');
-    final String token = await localDataSource.getToken();
 
-    return remoteDataSource.getUpdates(token).map((update) {
+    return remoteDataSource.getUpdates().map((update) {
       print('<< VLog - ChatRepositoryImpl - getUpdates $update >>');
       if (update.hasNewMessage()) {
         return UpdateNewMessage(
@@ -55,31 +54,31 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, ChatResponse>> getChats(params) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.getChats(token);
+      final response = await remoteDataSource.getChats();
 
-      List<Chat> chatList =
-          response.items
-              .map(
-                (item) => Chat(
-                  id: item.id.toInt(),
-                  chatType: item.receiver.chatType,
-                  receiverId: item.receiver.receiverId.toInt(),
-                  username: item.username,
-                  avatar: item.avatar,
-                  name: item.name,
-                  surname: item.surname,
-                  msgText: item.msgText,
-                  unreadCount: item.unreadCount.toInt(),
-                  updatedAt: item.updatedAt,
-                  isOnline: item.isOnline,
-                  isDisturb: item.isDisturb,
-                  isBot: item.isBot,
-                ),
-              )
-              .toList();
-
-      return Right(ChatResponse(chats: chatList));
+      return Right(
+        ChatResponse(
+          chats: List.of(
+            response.items.map(
+              (item) => Chat(
+                id: item.id.toInt(),
+                chatType: item.receiver.chatType,
+                receiverId: item.receiver.receiverId.toInt(),
+                username: item.username,
+                avatar: item.avatar,
+                name: item.name,
+                surname: item.surname,
+                msgText: item.msgText,
+                unreadCount: item.unreadCount.toInt(),
+                updatedAt: item.updatedAt,
+                isOnline: item.isOnline,
+                isDisturb: item.isDisturb,
+                isBot: item.isBot,
+              ),
+            ),
+          ),
+        ),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     }
@@ -88,26 +87,26 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, MessageResponse>> getHistory(params) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.getHistory(token, params);
+      final response = await remoteDataSource.getHistory(params);
 
-      List<Message> message =
-          response.items
-              .map(
-                (item) => Message(
-                  id: item.id.toInt(),
-                  chatType: item.receiver.chatType,
-                  receiverId: item.receiver.receiverId.toInt(),
-                  userId: item.userId.toInt(),
-                  msgType: item.msgType,
-                  content: item.content,
-                  isRead: item.isRead,
-                  createdAt: item.createdAt,
-                ),
-              )
-              .toList();
-
-      return Right(MessageResponse(messages: message));
+      return Right(
+        MessageResponse(
+          messages: List.of(
+            response.items.map(
+              (item) => Message(
+                id: item.id.toInt(),
+                chatType: item.receiver.chatType,
+                receiverId: item.receiver.receiverId.toInt(),
+                userId: item.userId.toInt(),
+                msgType: item.msgType,
+                content: item.content,
+                isRead: item.isRead,
+                createdAt: item.createdAt,
+              ),
+            ),
+          ),
+        ),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     }
@@ -116,8 +115,7 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, bool>> sendMessage(params) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.sendMessage(token, params);
+      final response = await remoteDataSource.sendMessage(params);
       return Right(response.success);
     } on Failure catch (failure) {
       return Left(failure);
@@ -129,8 +127,7 @@ class ChatRepositoryImpl implements ChatRepository {
     DeleteMessagesParams params,
   ) async {
     try {
-      final String token = await localDataSource.getToken();
-      final response = await remoteDataSource.deleteMessages(token, params);
+      final response = await remoteDataSource.deleteMessages(params);
 
       return Right(response.success);
     } on Failure catch (failure) {

@@ -1,24 +1,25 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voo_su/core/error/exceptions.dart';
-import 'package:voo_su/data/models/auth_model.dart';
+import 'package:voo_su/domain/entities/auth.dart';
 
 abstract class AuthLocalDataSource {
-  Future<void> setLogin(AuthLoginModel login);
+  Future<void> setLogin(AuthLogin login);
 
-  Future<AuthLoginModel> getLogin();
+  Future<AuthLogin> getLogin();
 
-  Future<void> setVerify(AuthVerifyModel verify);
-
-  Future<AuthVerifyModel> getAuth();
+  Future<void> setVerify(AuthVerify verify);
 
   Future<String> getToken();
 
   Future<void> clearAuthData();
 }
 
-const authLoginKey = 'VOO_SU_AUTH_LOGIN';
-const authKey = 'VOO_SU_AUTH';
+const authToken = 'VOO_SU_AUTH_TOKEN';
+const authExpires = 'VOO_SU_AUTH_EXPIRES';
+
+const userToken = 'VOO_SU_TOKEN';
+const userExpires = 'VOO_SU_EXPIRES';
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final FlutterSecureStorage secureStorage;
@@ -30,57 +31,53 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   });
 
   @override
-  Future<void> setLogin(AuthLoginModel login) async {
+  Future<void> setLogin(AuthLogin login) async {
     try {
-      sharedPreferences.setString(authLoginKey, loginModelToJson(login));
-      //await secureStorage.write(key: authLoginKey, value: loginModelToJson(login));
+      await sharedPreferences.setString(authToken, login.token);
+      await sharedPreferences.setInt(authExpires, login.expiresIn);
+      // await secureStorage.write(key: authToken, value: login.token);
+      // await secureStorage.write(key: authExpires, value: login.expiresIn);
     } catch (e) {
       throw CacheException();
     }
   }
 
   @override
-  Future<AuthLoginModel> getLogin() async {
-    final jsonString = sharedPreferences.getString(authLoginKey);
-    //final jsonString = await secureStorage.read(key: authLoginKey);
-    if (jsonString != null) {
-      return Future.value(loginModelFromJson(jsonString));
+  Future<AuthLogin> getLogin() async {
+    final token = sharedPreferences.getString(authToken);
+    final expires = sharedPreferences.getInt(authExpires);
+    //final token = await secureStorage.read(key: authToken);
+    //final expires = await secureStorage.read(key: authExpires);
+    if (token != null && expires != null) {
+      return AuthLogin(token: token, expiresIn: expires);
     } else {
       throw CacheException();
     }
   }
 
   @override
-  Future<void> setVerify(AuthVerifyModel verify) async {
+  Future<void> setVerify(AuthVerify verify) async {
     try {
-      sharedPreferences.setString(authKey, verifyModelToJson(verify));
-      sharedPreferences.remove(authLoginKey);
-      //await secureStorage.write(key: authKey, value: verifyModelToJson(verify));
-      //await secureStorage.write(key: authLoginKey, value: verifyModelToJson(verify));
+      sharedPreferences.setString(userToken, verify.accessToken);
+      sharedPreferences.setInt(userExpires, verify.expiresIn);
+      sharedPreferences.remove(authToken);
+      sharedPreferences.remove(userExpires);
+      //await secureStorage.write(key: userToken, value: verify.accessToken);
+      //await secureStorage.write(key: userExpires, value: verify.expiresIn);
     } catch (e) {
-      throw CacheException();
-    }
-  }
-
-  @override
-  Future<AuthVerifyModel> getAuth() async {
-    final jsonString = sharedPreferences.getString(authKey);
-    //final jsonString = await secureStorage.read(key: authKey);
-    if (jsonString != null) {
-      return Future.value(verifyModelFromJson(jsonString));
-    } else {
       throw CacheException();
     }
   }
 
   @override
   Future<String> getToken() async {
-    String? jsonString = sharedPreferences.getString(authKey);
-    //String? jsonString = await secureStorage.read(key: authKey);
-    if (jsonString != null) {
-      final token = verifyModelFromJson(jsonString);
-      return Future.value(token.accessToken);
-    } else {
+    try {
+      final token = sharedPreferences.getString(userToken);
+      if (token == null) {
+        throw CacheException();
+      }
+      return token;
+    } catch (e) {
       throw CacheException();
     }
   }
@@ -89,6 +86,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> clearAuthData() async {
     try {
       await sharedPreferences.clear();
+      await secureStorage.deleteAll();
     } catch (e) {
       throw CacheException();
     }

@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:grpc/grpc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:voo_su/core/grpc_interceptor.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/acccount_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/auth_remote_data_source.dart';
@@ -63,19 +64,44 @@ Future<void> init() async {
 
   // Data sources - remote
   sl.registerLazySingleton(
-    () => AuthRemoteDataSource(AuthServiceClient(channel)),
+    () => AuthRemoteDataSource(
+      AuthServiceClient(
+        channel,
+       // interceptors: [GrpcInterceptor(sl())],
+      ),
+    ),
   );
   sl.registerLazySingleton(
-    () => ChatRemoteDataSource(ChatServiceClient(channel)),
+    () => ChatRemoteDataSource(
+      ChatServiceClient(
+        channel,
+        interceptors: [GrpcInterceptor(sl())],
+      ),
+    ),
   );
   sl.registerLazySingleton(
-    () => ContactRemoteDataSource(ContactServiceClient(channel)),
+    () => ContactRemoteDataSource(
+      ContactServiceClient(
+        channel,
+        interceptors: [GrpcInterceptor(sl())],
+      ),
+    ),
   );
   sl.registerLazySingleton(
-    () => GroupChatRemoteDataSource(GroupChatServiceClient(channel)),
+    () => GroupChatRemoteDataSource(
+      GroupChatServiceClient(
+        channel,
+        interceptors: [GrpcInterceptor(sl())],
+      ),
+    ),
   );
   sl.registerLazySingleton(
-    () => AccountRemoteDataSource(AccountServiceClient(channel)),
+    () => AccountRemoteDataSource(
+      AccountServiceClient(
+        channel,
+        interceptors: [GrpcInterceptor(sl())],
+      ),
+    ),
   );
 
   // Data sources - local
@@ -103,7 +129,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetChatsUseCase(sl()));
   sl.registerLazySingleton(() => GetContactsUseCase(sl()));
   sl.registerLazySingleton(() => GetHistoryUseCase(sl()));
-  sl.registerLazySingleton(() => GetAccountUsecase(sl()));
+  sl.registerLazySingleton(() => GetAccountUseCase(sl()));
   sl.registerLazySingleton(() => GetNotifySettingsUseCase(sl()));
   sl.registerLazySingleton(() => UpdateNotifySettingsUseCase(sl()));
   sl.registerLazySingleton(() => SendMessagesUseCase(sl()));
