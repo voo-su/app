@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:voo_su/core/theme/colors.dart';
+import 'package:voo_su/core/utils/time_formatter.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
@@ -17,7 +17,6 @@ class ChatItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
-    String formattedTime = _formatDateOrTime(chat.updatedAt);
 
     return GestureDetector(
       onLongPressStart: (details) {
@@ -63,13 +62,7 @@ class ChatItemWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Text(
-                            formattedTime,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: colors.onSurfaceVariant,
-                            ),
-                          ),
+                          ChatTimeFormatterWidget(dateTime: chat.updatedAt),
                         ],
                       ),
                       Row(
@@ -174,31 +167,5 @@ class ChatItemWidget extends StatelessWidget {
 
   void _deleteChat() {
     print("Удален чат: ${chat.id}");
-  }
-
-  String _formatDateOrTime(String dateTime) {
-    try {
-      final DateFormat format = DateFormat("yyyy-MM-dd HH:mm:ss");
-      final DateTime parsedDate = format.parse(dateTime);
-      final DateTime now = DateTime.now();
-
-      final Duration difference = now.difference(parsedDate);
-
-      if (difference.inHours < 24 && parsedDate.day == now.day) {
-        return DateFormat("HH:mm").format(parsedDate);
-      } else if (difference.inDays < 7) {
-        return _getWeekdayName(parsedDate.weekday);
-      } else {
-        return DateFormat("dd.MM.yyyy").format(parsedDate);
-      }
-    } catch (e) {
-      debugPrint("Ошибка форматирования даты: $e");
-      return "";
-    }
-  }
-
-  String _getWeekdayName(int weekday) {
-    const List<String> weekdays = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
-    return weekdays[weekday - 1];
   }
 }

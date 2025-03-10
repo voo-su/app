@@ -34,7 +34,7 @@ class ContactItemWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               SizedBox(
-                width: size.width * 0.74,
+                width: size.width * 0.70,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,

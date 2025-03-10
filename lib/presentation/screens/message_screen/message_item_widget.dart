@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/reply_message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/text_message_bubble_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
 
 class MessageItemWidget extends StatefulWidget {
@@ -102,12 +104,23 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
                 : Colors.transparent,
         child: SlideTransition(
           position: _offsetAnimation,
-          child: MessageBubbleWidget(
-            message: widget.message.content,
+          // child: MessageBubbleWidget(
+          //   message: widget.message.content,
+          //   isMine: isMine,
+          //   createdAt: widget.message.createdAt,
+          //   isRead: widget.message.isRead,
+          // ),
+          child: ReplyMessageBubble(
+            message: widget.message,
             isMine: isMine,
-            createdAt: widget.message.createdAt,
-            isRead: widget.message.isRead,
+            replyUser: widget.chatName,
           ),
+          // child: TextMessageBubble(
+          //   message: widget.message.content,
+          //   isMine: isMine,
+          //   createdAt: widget.message.createdAt,
+          //   isRead: widget.message.isRead,
+          // ),
         ),
       ),
     );

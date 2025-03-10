@@ -55,6 +55,17 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         log(
           "Отправлено сообщение с id = ${messageId} - ответ на: ${event.params.replyToMsgId}",
         );
+
+        add(
+          LoadHistoryEvent(
+            MessageParams(
+              chatType: event.params.chatType,
+              receiverId: event.params.receiverId,
+              messageId: 0,
+              limit: 30,
+            ),
+          ),
+        );
       });
     } catch (e) {
       emit(ErrorState(failure: ExceptionFailure()));

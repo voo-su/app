@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> pages = <Widget>[
     ChatScreen(),
     ContactScreen(),
-    // SearchScreen(),s
+    // SearchScreen(),
     SettingsScreen(),
 
     TestScreen(),

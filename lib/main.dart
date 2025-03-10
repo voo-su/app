@@ -9,6 +9,7 @@ import 'package:voo_su/core/injection.dart' as di;
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/core/theme/app_theme.dart';
 import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
+import 'package:voo_su/generated/firebase_options.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
@@ -30,7 +31,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // https://firebase.google.com/docs/cloud-messaging/flutter/receive?hl=ru
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
