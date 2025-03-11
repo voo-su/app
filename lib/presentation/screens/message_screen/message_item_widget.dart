@@ -41,8 +41,6 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
   bool _isSwiped = false;
-  final String audioUrl =
-      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
   @override
   void initState() {
@@ -114,17 +112,17 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   }
 
   Widget _buildMessageContent(Message message, bool isMine) {
+    if (message.reply is MessageReply) {
+      print("VLog - MessageReply - ${(message.reply as MessageReply).content}");
+    }
+
     switch (message.msgType) {
       case 1:
         return TextMessageBubble(message: message, isMine: isMine);
       case 3:
         return PhotoMessageBubble(message: message, isMine: isMine);
       case 4:
-        return AudioMessageBubble(
-          message: message,
-          isMine: isMine,
-          audioUrl: audioUrl,
-        );
+        return AudioMessageBubble(message: message, isMine: isMine);
       case 9:
         return ReplyMessageBubble(
           message: message,

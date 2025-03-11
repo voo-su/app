@@ -15,8 +15,15 @@ class PhotoMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final String photoUrl =
-        "https://file.voo.su/media/images/2025/03/03/de0275e9-e221-4a79-b889-711d9fbe3f75_450x458.png";
+
+    final String? photoUrl =
+        (message.media is MessageMediaPhoto)
+            ? (message.media as MessageMediaPhoto).file
+            : null;
+
+    if (photoUrl == null) {
+      return const SizedBox.shrink();
+    }
 
     return BaseMessageBubble(
       isMine: isMine,

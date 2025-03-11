@@ -92,19 +92,44 @@ class ChatRepositoryImpl implements ChatRepository {
       return Right(
         MessageResponse(
           messages: List.of(
-            response.items.map(
-              (item) =>  Message(
+            response.items.map((item) {
+              MessageMedia? media;
+              MessageReply? reply;
+
+              if (item.hasMedia()) {
+                if (item.media.hasMessageMediaPhoto()) {
+                  media = MessageMediaPhoto(item.media.messageMediaPhoto.file);
+                } else if (item.media.hasMessageMediaDocument()) {
+                  media = MessageMediaDocument(
+                    item.media.messageMediaDocument.file,
+                    item.media.messageMediaDocument.mimeType,
+                  );
+                }
+              }
+
+              if (item.hasReply()) {
+                reply = MessageReply(
+                  id: item.reply.id.toInt(),
+                  msgType: item.reply.msgType,
+                  userId: item.reply.userId.toInt(),
+                  username: item.reply.username,
+                  content: item.reply.content,
+                );
+              }
+
+              return Message(
                 id: item.id.toInt(),
                 chatType: item.receiver.chatType,
                 receiverId: item.receiver.receiverId.toInt(),
                 userId: item.userId.toInt(),
                 msgType: item.msgType,
                 content: item.content,
+                media: media,
+                reply: reply,
                 isRead: item.isRead,
                 createdAt: item.createdAt,
-                // mediaPhoto: item.media.messageMediaPhoto.file,
-              ),
-            ),
+              );
+            }),
           ),
         ),
       );
@@ -112,43 +137,6 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(failure);
     }
   }
-
-  //   @override
-  // Future<Either<Failure, MessageResponse>> getHistory(params) async {
-  //   try {
-  //     final response = await remoteDataSource.getHistory(params);
-
-  //     return Right(
-  //       MessageResponse(
-  //         messages: List.of(
-  //           response.items.map((item) {
-  //             if (item.media.messageMediaPhoto != null) {
-  //               print("media photo ${item.media.messageMediaPhoto}");
-  //             }
-
-  //             if (item.media is MessageMediaDocument) {
-  //               print("media document ${item.media.messageMediaDocument}");
-  //             }
-
-  //             return Message(
-  //               id: item.id.toInt(),
-  //               chatType: item.receiver.chatType,
-  //               receiverId: item.receiver.receiverId.toInt(),
-  //               userId: item.userId.toInt(),
-  //               msgType: item.msgType,
-  //               content: item.content,
-  //               isRead: item.isRead,
-  //               createdAt: item.createdAt,
-  //               // mediaPhoto: item.media.messageMediaPhoto.file,
-  //             );
-  //           }),
-  //         ),
-  //       ),
-  //     );
-  //   } on Failure catch (failure) {
-  //     return Left(failure);
-  //   }
-  // }
 
   @override
   Future<Either<Failure, bool>> sendMessage(params) async {

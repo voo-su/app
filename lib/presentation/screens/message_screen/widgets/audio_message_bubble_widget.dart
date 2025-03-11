@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/domain/entities/message.dart';
 import 'package:voice_message_package/voice_message_package.dart';
+import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/message_status_widget.dart';
 
 class AudioMessageBubble extends StatelessWidget {
   final bool isMine;
   final Message message;
-  final String audioUrl;
 
   const AudioMessageBubble({
     super.key,
     required this.isMine,
     required this.message,
-    required this.audioUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+
+    final String? audioUrl =
+        (message.media is MessageMediaDocument)
+            ? (message.media as MessageMediaDocument).file
+            : null;
+
+    if (audioUrl == null) {
+      return const SizedBox.shrink();
+    }
 
     return Align(
       alignment: isMine ? Alignment.centerRight : Alignment.centerLeft,

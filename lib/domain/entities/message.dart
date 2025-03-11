@@ -7,10 +7,10 @@ class Message extends Equatable {
   final int receiverId;
   final int userId;
   final String content;
+  final MessageReply? reply;
+  final MessageMedia? media;
   final bool isRead;
   final String createdAt;
-  final MessageMediaPhoto? mediaPhoto;
-  final MessageMediaDocument? mediaDocument;
 
   const Message({
     required this.id,
@@ -19,14 +19,45 @@ class Message extends Equatable {
     required this.receiverId,
     required this.userId,
     required this.content,
+    this.media,
+    this.reply,
     required this.isRead,
     required this.createdAt,
-    this.mediaPhoto,
-    this.mediaDocument,
   });
 
   @override
   List<Object?> get props => [id];
+}
+
+class MessageReply {
+  final int id;
+  final int msgType;
+  final int userId;
+  final String username;
+  final String content;
+
+  MessageReply({
+    required this.id,
+    required this.msgType,
+    required this.userId,
+    required this.username,
+    required this.content,
+  });
+}
+
+abstract class MessageMedia {}
+
+class MessageMediaPhoto extends MessageMedia {
+  final String file;
+
+  MessageMediaPhoto(this.file);
+}
+
+class MessageMediaDocument extends MessageMedia {
+  final String file;
+  final String mime;
+
+  MessageMediaDocument(this.file, this.mime);
 }
 
 class MessageResponse {
@@ -63,19 +94,6 @@ class SendMessageParams {
     required this.message,
     this.replyToMsgId,
   });
-}
-
-class MessageMediaPhoto {
-  final String file;
-
-  const MessageMediaPhoto({required this.file});
-}
-
-class MessageMediaDocument {
-  final String file;
-  final String mime;
-
-  const MessageMediaDocument({required this.file, required this.mime});
 }
 
 class DeleteMessagesParams {
