@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/base_message_bubble_widget.dart';
 
-//"https://file.voo.su/media/images/2025/03/03/de0275e9-e221-4a79-b889-711d9fbe3f75_450x458.png"
-
 class PhotoMessageBubble extends StatelessWidget {
   final Message message;
   final bool isMine;

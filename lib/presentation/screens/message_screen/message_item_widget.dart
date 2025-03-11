@@ -41,6 +41,8 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
   bool _isSwiped = false;
+  final String audioUrl =
+      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
   @override
   void initState() {
@@ -121,8 +123,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
         return AudioMessageBubble(
           message: message,
           isMine: isMine,
-          audioUrl:
-              "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+          audioUrl: audioUrl,
         );
       case 9:
         return ReplyMessageBubble(
