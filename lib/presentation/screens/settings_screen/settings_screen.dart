@@ -32,7 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: CustomAppBar(title: AppLocalizations.of(context)!.settings),
+      appBar: CustomAppBar(titleText: AppLocalizations.of(context)!.settings),
       body: SafeArea(
         child: BlocListener<SettingsBloc, SettingsState>(
           listener: (context, state) {

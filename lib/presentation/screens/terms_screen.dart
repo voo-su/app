@@ -11,7 +11,7 @@ class TermsScreen extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const CustomAppBar(title: "Правила"),
+      appBar: const CustomAppBar(titleText: "Правила"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(

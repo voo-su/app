@@ -24,7 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: CustomAppBar(
-        title: "Поиск",
+        titleText: "Поиск",
         hasSearch: true,
         searchController: _searchController,
         onSearchChanged: (value) {

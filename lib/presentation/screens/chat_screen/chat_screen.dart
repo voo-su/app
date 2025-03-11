@@ -32,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: CustomAppBar(
-        title: AppLocalizations.of(context)!.chats,
+        titleText: AppLocalizations.of(context)!.chats,
         hasSearch: true,
         searchController: _searchController,
         onSearchChanged: (value) {

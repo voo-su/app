@@ -5,6 +5,7 @@ import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
+import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
 import 'package:voo_su/presentation/widgets/user_info_dialog_widget.dart';
@@ -251,7 +252,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
     if (_isSelectionMode) {
       return CustomAppBar(
-        title: "Выбрано: ${_selectedMessageIds.length}",
+        titleText: "Выбрано: ${_selectedMessageIds.length}",
         actions: [
           IconButton(
             icon: Icon(Icons.delete, color: colors.onSurface),
@@ -261,10 +262,25 @@ class _MessageScreenState extends State<MessageScreen> {
       );
     } else {
       return CustomAppBar(
-        title:
-            widget.chat.name.isNotEmpty
-                ? widget.chat.name
-                : widget.chat.username,
+        titleWidget: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AvatarWidget(
+              avatarUrl: widget.chat.avatar,
+              name: widget.chat.name,
+              surname: widget.chat.surname,
+              username: widget.chat.username,
+              radius: 16, 
+            ),
+            const SizedBox(width: 10),
+            Text(
+              widget.chat.name.isNotEmpty
+                  ? widget.chat.name
+                  : widget.chat.username,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
         onTap: () {
           showDialog(
             context: context,

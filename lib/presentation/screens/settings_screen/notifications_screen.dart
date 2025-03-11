@@ -26,7 +26,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const CustomAppBar(title: "Уведомления"),
+      appBar: const CustomAppBar(titleText: "Уведомления"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: BlocBuilder<SettingsBloc, SettingsState>(

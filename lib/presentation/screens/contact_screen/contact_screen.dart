@@ -21,7 +21,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: CustomAppBar(title: AppLocalizations.of(context)!.contacts),
+      appBar: CustomAppBar(titleText: AppLocalizations.of(context)!.contacts),
       body: Column(children: <Widget>[ContactListWidget()]),
     );
   }

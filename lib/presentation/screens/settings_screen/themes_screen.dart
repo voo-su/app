@@ -11,7 +11,7 @@ class ThemesScreen extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const CustomAppBar(title: "Оформление"),
+      appBar: const CustomAppBar(titleText: "Оформление"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
