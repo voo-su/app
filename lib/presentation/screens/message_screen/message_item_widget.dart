@@ -117,8 +117,13 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
         return TextMessageBubble(message: message, isMine: isMine);
       case 3:
         return PhotoMessageBubble(message: message, isMine: isMine);
-      // case 4:
-      // return AudioMessageBubble(isMine: isMine);
+      case 4:
+        return AudioMessageBubble(
+          message: message,
+          isMine: isMine,
+          audioUrl:
+              "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        );
       case 9:
         return ReplyMessageBubble(
           message: message,
