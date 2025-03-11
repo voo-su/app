@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
-import 'package:voo_su/presentation/screens/message_screen/widgets/message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/audio_message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/photo_message_bubble_widget.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/reply_message_bubble_widget.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/text_message_bubble_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
@@ -104,26 +105,29 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
                 : Colors.transparent,
         child: SlideTransition(
           position: _offsetAnimation,
-          // child: MessageBubbleWidget(
-          //   message: widget.message.content,
-          //   isMine: isMine,
-          //   createdAt: widget.message.createdAt,
-          //   isRead: widget.message.isRead,
-          // ),
-          child: ReplyMessageBubble(
-            message: widget.message,
-            isMine: isMine,
-            replyUser: widget.chatName,
-          ),
-          // child: TextMessageBubble(
-          //   message: widget.message.content,
-          //   isMine: isMine,
-          //   createdAt: widget.message.createdAt,
-          //   isRead: widget.message.isRead,
-          // ),
+          child: _buildMessageContent(widget.message, isMine),
         ),
       ),
     );
+  }
+
+  Widget _buildMessageContent(Message message, bool isMine) {
+    switch (message.msgType) {
+      case 1:
+        return TextMessageBubble(message: message, isMine: isMine);
+      case 3:
+        return PhotoMessageBubble(message: message, isMine: isMine);
+      // case 4:
+      // return AudioMessageBubble(isMine: isMine);
+      case 9:
+        return ReplyMessageBubble(
+          message: message,
+          isMine: isMine,
+          replyUser: widget.chatName,
+        );
+      default:
+        return Text("Неизвестный тип сообщения: ${message.msgType}");
+    }
   }
 
   void _showMessageMenu(BuildContext context, Offset position) async {

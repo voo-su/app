@@ -9,6 +9,8 @@ class Message extends Equatable {
   final String content;
   final bool isRead;
   final String createdAt;
+  final MessageMediaPhoto? mediaPhoto;
+  final MessageMediaDocument? mediaDocument;
 
   const Message({
     required this.id,
@@ -19,6 +21,8 @@ class Message extends Equatable {
     required this.content,
     required this.isRead,
     required this.createdAt,
+    this.mediaPhoto,
+    this.mediaDocument,
   });
 
   @override
@@ -59,6 +63,19 @@ class SendMessageParams {
     required this.message,
     this.replyToMsgId,
   });
+}
+
+class MessageMediaPhoto {
+  final String file;
+
+  const MessageMediaPhoto({required this.file});
+}
+
+class MessageMediaDocument {
+  final String file;
+  final String mime;
+
+  const MessageMediaDocument({required this.file, required this.mime});
 }
 
 class DeleteMessagesParams {

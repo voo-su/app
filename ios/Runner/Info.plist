@@ -30,6 +30,8 @@
 	<string>Main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Разрешите доступ к галерее для выбора изображений</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Приложение использует микрофон для записи аудио</string>
     <key>UISupportedInterfaceOrientations</key>
     <array>
          <string>UIInterfaceOrientationPortrait</string>

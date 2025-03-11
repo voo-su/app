@@ -24,7 +24,7 @@ class ReplyMessageBubble extends StatelessWidget {
       replyContent: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: colors.surfaceVariant.withOpacity(0.5),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -47,6 +47,7 @@ class ReplyMessageBubble extends StatelessWidget {
           ],
         ),
       ),
+      messageContent: Text(message.content),
     );
   }
 }

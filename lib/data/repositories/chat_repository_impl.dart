@@ -93,7 +93,7 @@ class ChatRepositoryImpl implements ChatRepository {
         MessageResponse(
           messages: List.of(
             response.items.map(
-              (item) => Message(
+              (item) =>  Message(
                 id: item.id.toInt(),
                 chatType: item.receiver.chatType,
                 receiverId: item.receiver.receiverId.toInt(),
@@ -102,6 +102,7 @@ class ChatRepositoryImpl implements ChatRepository {
                 content: item.content,
                 isRead: item.isRead,
                 createdAt: item.createdAt,
+                // mediaPhoto: item.media.messageMediaPhoto.file,
               ),
             ),
           ),
@@ -111,6 +112,43 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(failure);
     }
   }
+
+  //   @override
+  // Future<Either<Failure, MessageResponse>> getHistory(params) async {
+  //   try {
+  //     final response = await remoteDataSource.getHistory(params);
+
+  //     return Right(
+  //       MessageResponse(
+  //         messages: List.of(
+  //           response.items.map((item) {
+  //             if (item.media.messageMediaPhoto != null) {
+  //               print("media photo ${item.media.messageMediaPhoto}");
+  //             }
+
+  //             if (item.media is MessageMediaDocument) {
+  //               print("media document ${item.media.messageMediaDocument}");
+  //             }
+
+  //             return Message(
+  //               id: item.id.toInt(),
+  //               chatType: item.receiver.chatType,
+  //               receiverId: item.receiver.receiverId.toInt(),
+  //               userId: item.userId.toInt(),
+  //               msgType: item.msgType,
+  //               content: item.content,
+  //               isRead: item.isRead,
+  //               createdAt: item.createdAt,
+  //               // mediaPhoto: item.media.messageMediaPhoto.file,
+  //             );
+  //           }),
+  //         ),
+  //       ),
+  //     );
+  //   } on Failure catch (failure) {
+  //     return Left(failure);
+  //   }
+  // }
 
   @override
   Future<Either<Failure, bool>> sendMessage(params) async {
