@@ -114,6 +114,11 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   Widget _buildMessageContent(Message message, bool isMine) {
     if (message.reply is MessageReply) {
       print("VLog - MessageReply - ${(message.reply as MessageReply).content}");
+      return ReplyMessageBubble(
+        message: message,
+        isMine: isMine,
+        replyUser: message.reply!.username,
+      );
     }
 
     switch (message.msgType) {
@@ -123,12 +128,6 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
         return PhotoMessageBubble(message: message, isMine: isMine);
       case 4:
         return AudioMessageBubble(message: message, isMine: isMine);
-      case 9:
-        return ReplyMessageBubble(
-          message: message,
-          isMine: isMine,
-          replyUser: widget.chatName,
-        );
       default:
         return Text("Неизвестный тип сообщения: ${message.msgType}");
     }

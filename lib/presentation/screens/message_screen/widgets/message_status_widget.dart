@@ -24,9 +24,9 @@ class MessageStatusWidget extends StatelessWidget {
         if (isMine) ...[
           const SizedBox(width: 4),
           Icon(
-            message.isRead ? Icons.done_all : Icons.done,
+            Icons.done_all,
             size: 16,
-            color: isMine ? colors.onPrimary : colors.onSurface,
+            color: message.isRead ? Colors.blue[700] : colors.surface,
           ),
         ],
       ],

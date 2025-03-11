@@ -76,7 +76,7 @@ class ChatRepositoryImpl implements ChatRepository {
                 isBot: item.isBot,
               ),
             ),
-          ),
+          )..sort((a, b) => b.updatedAt.compareTo(a.updatedAt)),
         ),
       );
     } on Failure catch (failure) {
