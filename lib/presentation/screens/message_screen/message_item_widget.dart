@@ -7,6 +7,7 @@ import 'package:voo_su/presentation/screens/message_screen/widgets/audio_message
 import 'package:voo_su/presentation/screens/message_screen/widgets/photo_message_bubble_widget.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/reply_message_bubble_widget.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/text_message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/video_message_bubble_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
 
 class MessageItemWidget extends StatefulWidget {
@@ -128,6 +129,8 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
         return PhotoMessageBubble(message: message, isMine: isMine);
       case 4:
         return AudioMessageBubble(message: message, isMine: isMine);
+      case 5:
+        return VideoMessageBubble(message: message, isMine: isMine);
       default:
         return Text("Неизвестный тип сообщения: ${message.msgType}");
     }
