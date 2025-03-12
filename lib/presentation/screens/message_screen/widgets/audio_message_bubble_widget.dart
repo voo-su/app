@@ -17,10 +17,7 @@ class AudioMessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    final String? audioUrl =
-        (message.media is MessageMediaDocument)
-            ? (message.media as MessageMediaDocument).file
-            : null;
+    final String? audioUrl = _getMediaUrl(message);
 
     if (audioUrl == null) {
       return const SizedBox.shrink();
@@ -73,4 +70,11 @@ class AudioMessageBubble extends StatelessWidget {
       ),
     );
   }
+}
+
+String? _getMediaUrl(Message message) {
+  if (message.media is MessageMediaDocument) {
+    return (message.media as MessageMediaDocument).file;
+  }
+  return null;
 }

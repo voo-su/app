@@ -50,53 +50,101 @@ class _FullVideoPageState extends State<FullVideoPage> {
     }
   }
 
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return '$minutes:$seconds';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final videoValue = _controller.value;
+
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Center(
-            child:
-                _initialized
-                    ? AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: Stack(
-                        children: [
-                          VideoPlayer(_controller),
-                          Positioned.fill(
-                            child: GestureDetector(
-                              onTap: _togglePlayPause,
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 200),
-                                child:
-                                    _controller.value.isPlaying
-                                        ? const SizedBox.shrink()
-                                        : Container(
-                                          color: Colors.black54,
-                                          child: const Icon(
-                                            Icons.play_arrow,
-                                            size: 64,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    : const Center(child: CircularProgressIndicator()),
-          ),
-          Positioned(
-            top: 40,
-            left: 5,
-            child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.white, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              child:
+                  _initialized
+                      ? AspectRatio(
+                        aspectRatio: videoValue.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      )
+                      : const CircularProgressIndicator(),
             ),
-          ),
-        ],
+            Positioned(
+              top: 8,
+              left: 8,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+            if (_initialized)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: Colors.black54,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          videoValue.isPlaying ? Icons.pause : Icons.play_arrow,
+                          color: Colors.white,
+                        ),
+                        onPressed: _togglePlayPause,
+                      ),
+                      Text(
+                        _formatDuration(videoValue.position),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Slider(
+                          activeColor: Colors.red,
+                          inactiveColor: Colors.white60,
+                          min: 0,
+                          max: videoValue.duration.inSeconds.toDouble(),
+                          value:
+                              videoValue.position.inSeconds
+                                  .clamp(0, videoValue.duration.inSeconds)
+                                  .toDouble(),
+                          onChanged: (value) {
+                            final position = Duration(seconds: value.toInt());
+                            _controller.seekTo(position);
+                          },
+                        ),
+                      ),
+                      Text(
+                        _formatDuration(videoValue.duration),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

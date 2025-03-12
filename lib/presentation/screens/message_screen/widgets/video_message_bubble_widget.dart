@@ -19,30 +19,30 @@ class VideoMessageBubble extends StatefulWidget {
 }
 
 class _VideoMessageBubbleState extends State<VideoMessageBubble> {
-  late VideoPlayerController? _controller;
+  VideoPlayerController? _controller;
   bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
 
-    const videoUrl =
-        'https://file.voo.su/media/files/2025/03/12/0905dd6d-41c9-49cb-a733-6e5299e1d211.MOV';
+    final String? videoUrl = _getMediaUrl(widget.message);
 
-    _controller =
-        VideoPlayerController.network(videoUrl)
-          ..addListener(() {
-            setState(() {});
-          })
-          ..initialize()
-              .then((_) {
-                setState(() {
-                  _initialized = true;
+    if (videoUrl != null) {
+      _controller =
+          VideoPlayerController.network(videoUrl)
+            ..addListener(() {
+              setState(() {});
+            })
+            ..initialize()
+                .then((_) {
+                  _controller?.setVolume(0.0);
+                  setState(() => _initialized = true);
+                })
+                .catchError((error) {
+                  debugPrint('Ошибка инициализации видео: $error');
                 });
-              })
-              .catchError((error) {
-                debugPrint('Ошибка инициализации видео: $error');
-              });
+    }
   }
 
   @override
@@ -71,6 +71,7 @@ class _VideoMessageBubbleState extends State<VideoMessageBubble> {
         width: 200,
         height: 200,
         color: colors.surfaceVariant,
+        alignment: Alignment.center,
         child: const Icon(Icons.broken_image, size: 40),
       );
     } else if (!_initialized) {
@@ -86,11 +87,7 @@ class _VideoMessageBubbleState extends State<VideoMessageBubble> {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder:
-                  (_) => const FullVideoPage(
-                    videoUrl:
-                        'https://file.voo.su/media/files/2025/03/12/0905dd6d-41c9-49cb-a733-6e5299e1d211.MOV',
-                  ),
+              builder: (_) => FullVideoPage(videoUrl: _controller!.dataSource),
             ),
           );
         },
@@ -130,4 +127,11 @@ class _VideoMessageBubbleState extends State<VideoMessageBubble> {
       messageContent: content,
     );
   }
+}
+
+String? _getMediaUrl(Message message) {
+  if (message.media is MessageMediaDocument) {
+    return (message.media as MessageMediaDocument).file;
+  }
+  return null;
 }
