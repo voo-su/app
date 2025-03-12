@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/base_message_bubble_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/full_video_page.dart';
 
 class VideoMessageBubble extends StatefulWidget {
   final Message message;
@@ -81,31 +82,44 @@ class _VideoMessageBubbleState extends State<VideoMessageBubble> {
         child: CircularProgressIndicator(color: colors.primary),
       );
     } else {
-      content = AspectRatio(
-        aspectRatio: _controller!.value.aspectRatio,
-        child: Stack(
-          children: [
-            VideoPlayer(_controller!),
-            Positioned.fill(
-              child: GestureDetector(
-                onTap: _togglePlayPause,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  child:
-                      _controller!.value.isPlaying
-                          ? const SizedBox.shrink()
-                          : Container(
-                            color: Colors.black54,
-                            child: const Icon(
-                              Icons.play_arrow,
-                              size: 44,
-                              color: Colors.white,
+      content = GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder:
+                  (_) => const FullVideoPage(
+                    videoUrl:
+                        'https://file.voo.su/media/files/2025/03/12/0905dd6d-41c9-49cb-a733-6e5299e1d211.MOV',
+                  ),
+            ),
+          );
+        },
+        child: AspectRatio(
+          aspectRatio: _controller!.value.aspectRatio,
+          child: Stack(
+            children: [
+              VideoPlayer(_controller!),
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: _togglePlayPause,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child:
+                        _controller!.value.isPlaying
+                            ? const SizedBox.shrink()
+                            : Container(
+                              color: Colors.black54,
+                              child: const Icon(
+                                Icons.play_arrow,
+                                size: 48,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
