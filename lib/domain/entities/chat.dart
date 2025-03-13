@@ -44,3 +44,20 @@ class ChatResponse {
 class ChatParams {
   const ChatParams();
 }
+
+class GroupChat extends Equatable {
+  final int id;
+  final String name;
+  final String avatar;
+  final int membersCount;
+
+  const GroupChat({
+    required this.id,
+    required this.name,
+    required this.avatar,
+    required this.membersCount,
+  });
+
+  @override
+  List<Object?> get props => [id, name, avatar, membersCount];
+}

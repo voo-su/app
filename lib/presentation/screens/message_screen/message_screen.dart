@@ -5,6 +5,7 @@ import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
+import 'package:voo_su/presentation/screens/message_screen/widgets/group_info_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
@@ -270,7 +271,7 @@ class _MessageScreenState extends State<MessageScreen> {
               name: widget.chat.name,
               surname: widget.chat.surname,
               username: widget.chat.username,
-              radius: 16, 
+              radius: 16,
             ),
             const SizedBox(width: 10),
             Text(
@@ -282,19 +283,35 @@ class _MessageScreenState extends State<MessageScreen> {
           ],
         ),
         onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              final contact = Contact(
-                id: widget.chat.id,
-                avatar: widget.chat.avatar,
-                name: widget.chat.name,
-                surname: widget.chat.surname,
-                username: widget.chat.username,
-              );
-              return UserInfoDialog(contact: contact);
-            },
-          );
+          if (widget.chat.chatType == 1) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                final contact = Contact(
+                  id: widget.chat.id,
+                  avatar: widget.chat.avatar,
+                  name: widget.chat.name,
+                  surname: widget.chat.surname,
+                  username: widget.chat.username,
+                );
+                return UserInfoDialog(contact: contact);
+              },
+            );
+          } else if (widget.chat.chatType == 2) {
+            print(widget.chat.receiverId);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) => GroupInfoScreen(
+                      groupId: widget.chat.receiverId.toString(),
+                      groupName: widget.chat.name,
+                      groupAvatar: widget.chat.avatar,
+                      members: ["111", "222", "333"],
+                    ),
+              ),
+            );
+          }
         },
         actions: [
           IconButton(
