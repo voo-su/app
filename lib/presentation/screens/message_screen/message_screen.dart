@@ -298,14 +298,12 @@ class _MessageScreenState extends State<MessageScreen> {
               },
             );
           } else if (widget.chat.chatType == 2) {
-            print(widget.chat.receiverId);
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder:
-                    (context) => GroupInfoScreen(
-                      groupId: widget.chat.receiverId,
-                    ),
+                    (context) =>
+                        GroupInfoScreen(groupId: widget.chat.receiverId),
               ),
             );
           }

@@ -37,7 +37,6 @@ class MessageListWidget extends StatelessWidget {
         }
 
         if (state is SuccessState) {
-          print("Список сообщений после удаления: ${state.messages.length}");
           if (state.messages.isEmpty) {
             return const Center(child: Text("Нет сообщений"));
           }

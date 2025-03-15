@@ -43,6 +43,7 @@ import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
+import 'package:voo_su/presentation/screens/message_screen/bloc/group_info_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 
@@ -138,8 +139,9 @@ Future<void> init() async {
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
   sl.registerFactory(() => ChatBloc(sl(), sl()));
   sl.registerFactory(() => ContactBloc(sl()));
-  sl.registerFactory(() => MessageBloc(sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => GroupInfoBloc(sl(), sl()));
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));

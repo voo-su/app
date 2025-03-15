@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
+import 'package:voo_su/presentation/screens/message_screen/add_members_screen.dart';
+import 'package:voo_su/presentation/screens/message_screen/bloc/group_info_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 
 class GroupInfoScreen extends StatefulWidget {
@@ -18,18 +19,18 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<MessageBloc>().add(LoadGroupInfoEvent(widget.groupId));
+    context.read<GroupInfoBloc>().add(LoadGroupInfoEvent(widget.groupId));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Информация о группе")),
-      body: BlocBuilder<MessageBloc, MessageState>(
+      body: BlocBuilder<GroupInfoBloc, GroupInfoState>(
         builder: (context, state) {
-          if (state is LoadingState) {
+          if (state is GroupInfoLoadingState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is GroupInfoState) {
+          } else if (state is GroupInfoLoadedState) {
             return Column(
               children: [
                 Container(
@@ -79,7 +80,12 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                   leading: const Icon(Icons.person_add),
                   title: const Text("Добавить участников"),
                   onTap: () {
-                    print("Добавить участников");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddMembersScreen(),
+                      ),
+                    );
                   },
                 ),
                 Expanded(
@@ -102,7 +108,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                 ),
               ],
             );
-          } else if (state is ErrorState) {
+          } else if (state is GroupInfoErrorState) {
             return Center(child: Text("Ошибка: ${state.failure}"));
           }
           return const Center(child: Text("Нет данных"));
