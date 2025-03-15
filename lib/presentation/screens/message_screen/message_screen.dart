@@ -5,7 +5,7 @@ import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
-import 'package:voo_su/presentation/screens/message_screen/widgets/group_info_screen.dart';
+import 'package:voo_su/presentation/screens/message_screen/group_info_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
@@ -304,10 +304,7 @@ class _MessageScreenState extends State<MessageScreen> {
               MaterialPageRoute(
                 builder:
                     (context) => GroupInfoScreen(
-                      groupId: widget.chat.receiverId.toString(),
-                      groupName: widget.chat.name,
-                      groupAvatar: widget.chat.avatar,
-                      members: ["111", "222", "333"],
+                      groupId: widget.chat.receiverId,
                     ),
               ),
             );

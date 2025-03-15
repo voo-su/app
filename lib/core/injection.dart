@@ -18,10 +18,12 @@ import 'package:voo_su/data/repositories/account_repository_impl.dart';
 import 'package:voo_su/data/repositories/auth_repository_impl.dart';
 import 'package:voo_su/data/repositories/chat_repository_impl.dart';
 import 'package:voo_su/data/repositories/contact_repository_impl.dart';
+import 'package:voo_su/data/repositories/group_chat_repository_impl.dart';
 import 'package:voo_su/domain/repositories/account_repository.dart';
 import 'package:voo_su/domain/repositories/auth_repository.dart';
 import 'package:voo_su/domain/repositories/chat_repository.dart';
 import 'package:voo_su/domain/repositories/contact_repository.dart';
+import 'package:voo_su/domain/repositories/group_chat_repository.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_notify_settings_usecase.dart';
@@ -32,7 +34,9 @@ import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/send_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
@@ -66,40 +70,28 @@ Future<void> init() async {
     () => AuthRemoteDataSource(
       AuthServiceClient(
         channel,
-       // interceptors: [GrpcInterceptor(sl())],
+        // interceptors: [GrpcInterceptor(sl())],
       ),
     ),
   );
   sl.registerLazySingleton(
     () => ChatRemoteDataSource(
-      ChatServiceClient(
-        channel,
-        interceptors: [GrpcInterceptor(sl())],
-      ),
+      ChatServiceClient(channel, interceptors: [GrpcInterceptor(sl())]),
     ),
   );
   sl.registerLazySingleton(
     () => ContactRemoteDataSource(
-      ContactServiceClient(
-        channel,
-        interceptors: [GrpcInterceptor(sl())],
-      ),
+      ContactServiceClient(channel, interceptors: [GrpcInterceptor(sl())]),
     ),
   );
   sl.registerLazySingleton(
     () => GroupChatRemoteDataSource(
-      GroupChatServiceClient(
-        channel,
-        interceptors: [GrpcInterceptor(sl())],
-      ),
+      GroupChatServiceClient(channel, interceptors: [GrpcInterceptor(sl())]),
     ),
   );
   sl.registerLazySingleton(
     () => AccountRemoteDataSource(
-      AccountServiceClient(
-        channel,
-        interceptors: [GrpcInterceptor(sl())],
-      ),
+      AccountServiceClient(channel, interceptors: [GrpcInterceptor(sl())]),
     ),
   );
 
@@ -121,6 +113,9 @@ Future<void> init() async {
   sl.registerLazySingleton<AccountRepository>(
     () => AccountRepositoryImpl(sl(), sl()),
   );
+  sl.registerLazySingleton<GroupChatRepository>(
+    () => GroupChatRepositoryImpl(sl(), sl()),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
@@ -136,12 +131,14 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
   sl.registerLazySingleton(() => GetFirebaseTokenUseCase(sl()));
   sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
+  sl.registerLazySingleton(() => GetGroupChatUseCase(sl()));
+  sl.registerLazySingleton(() => GetMembersUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
   sl.registerFactory(() => ChatBloc(sl(), sl()));
   sl.registerFactory(() => ContactBloc(sl()));
-  sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => MessageBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
 
   // Cubit

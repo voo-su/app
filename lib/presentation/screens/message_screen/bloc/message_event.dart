@@ -39,3 +39,12 @@ class SendMessagesEvent extends MessageEvent {
   @override
   List<Object> get props => [params];
 }
+
+class LoadGroupInfoEvent extends MessageEvent {
+  final int groupId;
+
+  const LoadGroupInfoEvent(this.groupId);
+
+  @override
+  List<Object> get props => [groupId];
+}

@@ -30,3 +30,18 @@ class ErrorState extends MessageState {
   @override
   List<Object> get props => [];
 }
+
+class GroupInfoState extends MessageState {
+  final String name;
+  final String avatar;
+  final List<Contact> members;
+
+  GroupInfoState({
+    required this.name,
+    required this.avatar,
+    this.members = const [],
+  });
+
+  @override
+  List<Object?> get props => [name, avatar, members];
+}
