@@ -3,8 +3,8 @@ import 'package:voo_su/core/error/exceptions.dart';
 import 'package:voo_su/presentation/screens/auth_screen/login_screen.dart';
 import 'package:voo_su/presentation/screens/auth_screen/verify_screen.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
+import 'package:voo_su/presentation/screens/chat_screen/create_new_chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
-import 'package:voo_su/presentation/screens/message_screen/group_info_screen.dart';
 import 'package:voo_su/presentation/screens/search_screen/search_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/edit_profile_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/notifications_screen.dart';
@@ -22,8 +22,9 @@ class AppRouter {
   static const String notifications = '/notifications';
   static const String themes = '/themes';
   static const String search = '/search';
-  static const String editProfile = 'editProfile';
-  static const String groupInfo = 'groupInfo';
+  static const String editProfile = '/editProfile';
+  static const String groupInfo = '/groupInfo';
+  static const String newChat = '/newChat';
 
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -47,8 +48,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case editProfile:
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
-      // case groupInfo:
-      //   return MaterialPageRoute(builder: (_) => const GroupInfoScreen());
+      case newChat:
+        return MaterialPageRoute(builder: (_) => const CreateNewChatScreen());
       default:
         throw const RouteException('route not found');
     }

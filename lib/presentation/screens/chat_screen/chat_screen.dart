@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_list_widget.dart';
@@ -24,6 +25,10 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  void _openNewChatScreen() {
+    Navigator.pushNamed(context, AppRouter.newChat);
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -39,8 +44,13 @@ class _ChatScreenState extends State<ChatScreen> {
           setState(() {
             _searchQuery = value.toLowerCase();
           });
-          print("Поиск: $value");
         },
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add, size: 26),
+            onPressed: _openNewChatScreen,
+          ),
+        ],
       ),
       body: ChatListWidget(searchQuery: _searchQuery),
     );
