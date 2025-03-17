@@ -15,7 +15,7 @@ import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
-import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_info_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
@@ -74,7 +74,7 @@ class _AppState extends State<App> {
         BlocProvider(create: (context) => di.sl<ContactBloc>()),
         BlocProvider(create: (context) => di.sl<MessageBloc>()),
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
-        BlocProvider(create: (context) => di.sl<GroupInfoBloc>()),
+        BlocProvider(create: (context) => di.sl<GroupBloc>()),
         BlocProvider(create: (context) => di.sl<ChatUpdatesCubit>()),
 
         Provider(create: (context) => di.sl<GetFirebaseTokenUseCase>()),

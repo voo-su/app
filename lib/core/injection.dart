@@ -35,6 +35,7 @@ import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/group/add_user_group_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/create_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
@@ -46,7 +47,7 @@ import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
-import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_info_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 
@@ -137,6 +138,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
   sl.registerLazySingleton(() => GetGroupChatUseCase(sl()));
   sl.registerLazySingleton(() => GetMembersUseCase(sl()));
+  sl.registerLazySingleton(() => CreateGroupChatUseCase(sl()));
   sl.registerLazySingleton(() => AddUserGroupUsecase(sl()));
   sl.registerLazySingleton(() => RemoveUserGroupUsecase(sl()));
   sl.registerLazySingleton(() => LeaveGroupUsecase(sl()));
@@ -147,7 +149,7 @@ Future<void> init() async {
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
-  sl.registerFactory(() => GroupInfoBloc(sl(), sl()));
+  sl.registerFactory(() => GroupBloc(sl(), sl(), sl(), sl()));
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));
