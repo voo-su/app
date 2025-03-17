@@ -5,14 +5,14 @@ import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 
-class AddMembersScreen extends StatefulWidget {
-  const AddMembersScreen({super.key});
+class AddGroupMembersScreen extends StatefulWidget {
+  const AddGroupMembersScreen({super.key});
 
   @override
-  State<AddMembersScreen> createState() => _AddMembersScreenState();
+  State<AddGroupMembersScreen> createState() => _AddGroupMembersScreenState();
 }
 
-class _AddMembersScreenState extends State<AddMembersScreen> {
+class _AddGroupMembersScreenState extends State<AddGroupMembersScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Contact> _filteredContacts = [];
   final Set<int> _selectedContacts = {};

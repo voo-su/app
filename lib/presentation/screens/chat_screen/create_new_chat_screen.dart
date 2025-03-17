@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/contact.dart';
-import 'package:voo_su/presentation/screens/chat_screen/choose_name_group_screen.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/choose_name_group_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';

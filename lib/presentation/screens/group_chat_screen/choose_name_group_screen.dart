@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voo_su/presentation/screens/chat_screen/create_new_group_screen.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/create_new_group_screen.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class ChooseNameGroupScreen extends StatefulWidget {

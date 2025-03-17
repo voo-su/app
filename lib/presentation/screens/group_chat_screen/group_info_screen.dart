@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/presentation/screens/message_screen/add_members_screen.dart';
-import 'package:voo_su/presentation/screens/message_screen/bloc/group/group_info_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/add_group_members_screen.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_info_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 
 class GroupInfoScreen extends StatefulWidget {
@@ -83,7 +83,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AddMembersScreen(),
+                        builder: (context) => const AddGroupMembersScreen(),
                       ),
                     );
                   },
