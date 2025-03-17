@@ -45,12 +45,16 @@ class ChatParams {
   const ChatParams();
 }
 
-class GroupChatParams extends Equatable {
+class AddUserParams {
   final int id;
+  final List<int> userIds;
 
-  const GroupChatParams({required this.id});
-
-  @override
-  List<Object?> get props => [id];
+  const AddUserParams({required this.id, required this.userIds});
 }
 
+class RemoveUserParams {
+  final int id;
+  final int userId;
+
+  const RemoveUserParams({required this.id, required this.userId});
+}

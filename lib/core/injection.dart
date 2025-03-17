@@ -34,9 +34,12 @@ import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/get_group_chat_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/add_user_group_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/leave_group_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/remove_user_group_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/send_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
@@ -134,6 +137,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
   sl.registerLazySingleton(() => GetGroupChatUseCase(sl()));
   sl.registerLazySingleton(() => GetMembersUseCase(sl()));
+  sl.registerLazySingleton(() => AddUserGroupUsecase(sl()));
+  sl.registerLazySingleton(() => RemoveUserGroupUsecase(sl()));
+  sl.registerLazySingleton(() => LeaveGroupUsecase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/contact.dart';
-import 'package:voo_su/domain/usecases/chat/get_group_chat_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
 
 part 'group_info_event.dart';
