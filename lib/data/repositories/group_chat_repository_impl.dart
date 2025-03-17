@@ -13,6 +13,19 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
   GroupChatRepositoryImpl(this.remoteDataSource, this.localDataSource);
 
   @override
+  Future<Either<Failure, CreateGroupChatResponse>> createGroupChat(
+    CreateGroupChatParams params,
+  ) async {
+    try {
+      final token = await localDataSource.getToken();
+      final response = await remoteDataSource.createGroupChat(token, params);
+      return Right(response);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
   Future<Either<Failure, GetGroupChatResponse>> getGroupChat(int id) async {
     try {
       final token = await localDataSource.getToken();

@@ -45,6 +45,12 @@ class ChatParams {
   const ChatParams();
 }
 
+class CreateGroupChatParams {
+  final String name;
+
+  const CreateGroupChatParams({required this.name});
+}
+
 class AddUserParams {
   final int id;
   final List<int> userIds;

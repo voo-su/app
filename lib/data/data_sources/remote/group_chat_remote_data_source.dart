@@ -7,6 +7,15 @@ class GroupChatRemoteDataSource {
 
   GroupChatRemoteDataSource(this.client);
 
+  Future<CreateGroupChatResponse> createGroupChat(
+    String token,
+    CreateGroupChatParams params,
+  ) async {
+    return await client.createGroupChat(
+      CreateGroupChatRequest(name: params.name),
+    );
+  }
+
   Future<GetGroupChatResponse> getGroupChat(String token, int id) async {
     return await client.getGroupChat(GetGroupChatRequest(id: Int64(id)));
   }
