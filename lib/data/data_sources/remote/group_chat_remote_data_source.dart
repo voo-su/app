@@ -8,7 +8,6 @@ class GroupChatRemoteDataSource {
   GroupChatRemoteDataSource(this.client);
 
   Future<CreateGroupChatResponse> createGroupChat(
-    String token,
     CreateGroupChatParams params,
   ) async {
     return await client.createGroupChat(
@@ -16,7 +15,7 @@ class GroupChatRemoteDataSource {
     );
   }
 
-  Future<GetGroupChatResponse> getGroupChat(String token, int id) async {
+  Future<GetGroupChatResponse> getGroupChat(int id) async {
     return await client.getGroupChat(GetGroupChatRequest(id: Int64(id)));
   }
 
@@ -25,7 +24,6 @@ class GroupChatRemoteDataSource {
   }
 
   Future<AddUserToGroupChatResponse> addUserToGroupChat(
-    String token,
     AddUserParams params,
   ) async {
     return await client.addUserToGroupChat(
@@ -37,7 +35,6 @@ class GroupChatRemoteDataSource {
   }
 
   Future<RemoveUserFromGroupChatResponse> removeUserFromGroupChat(
-    String token,
     RemoveUserParams params,
   ) async {
     return await client.removeUserFromGroupChat(
@@ -48,7 +45,7 @@ class GroupChatRemoteDataSource {
     );
   }
 
-  Future<LeaveGroupChatResponse> leaveGroupChat(String token, int id) async {
+  Future<LeaveGroupChatResponse> leaveGroupChat(int id) async {
     return await client.leaveGroupChat(LeaveGroupChatRequest(id: Int64(id)));
   }
 }

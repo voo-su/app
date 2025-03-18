@@ -17,8 +17,7 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
     CreateGroupChatParams params,
   ) async {
     try {
-      final token = await localDataSource.getToken();
-      final response = await remoteDataSource.createGroupChat(token, params);
+      final response = await remoteDataSource.createGroupChat(params);
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);
@@ -28,8 +27,7 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
   @override
   Future<Either<Failure, GetGroupChatResponse>> getGroupChat(int id) async {
     try {
-      final token = await localDataSource.getToken();
-      final response = await remoteDataSource.getGroupChat(token, id);
+      final response = await remoteDataSource.getGroupChat(id);
 
       return Right(response);
     } on Failure catch (failure) {
@@ -53,8 +51,7 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
     AddUserParams params,
   ) async {
     try {
-      final token = await localDataSource.getToken();
-      final response = await remoteDataSource.addUserToGroupChat(token, params);
+      final response = await remoteDataSource.addUserToGroupChat(params);
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);
@@ -65,11 +62,7 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
   Future<Either<Failure, RemoveUserFromGroupChatResponse>>
   removeUserFromGroupChat(RemoveUserParams params) async {
     try {
-      final token = await localDataSource.getToken();
-      final response = await remoteDataSource.removeUserFromGroupChat(
-        token,
-        params,
-      );
+      final response = await remoteDataSource.removeUserFromGroupChat(params);
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);
@@ -79,8 +72,7 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
   @override
   Future<Either<Failure, LeaveGroupChatResponse>> leaveGroupChat(int id) async {
     try {
-      final token = await localDataSource.getToken();
-      final response = await remoteDataSource.leaveGroupChat(token, id);
+      final response = await remoteDataSource.leaveGroupChat(id);
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);
