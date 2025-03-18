@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voo_su/core/error/failures.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
+import 'package:voo_su/generated/grpc_pb/account.pb.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/usecases/account/update_notify_settings_usecase.dart';

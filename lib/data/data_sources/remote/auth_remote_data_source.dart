@@ -1,4 +1,4 @@
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/auth.pbgrpc.dart';
 
 class AuthRemoteDataSource {
   final AuthServiceClient client;

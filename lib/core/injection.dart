@@ -9,11 +9,11 @@ import 'package:voo_su/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/chat_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/contact_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/group_chat_remote_data_source.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/auth.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/chat.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/contact.pbgrpc.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/group_chat.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/account.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/auth.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/contact.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/group_chat.pbgrpc.dart';
 import 'package:voo_su/data/repositories/account_repository_impl.dart';
 import 'package:voo_su/data/repositories/auth_repository_impl.dart';
 import 'package:voo_su/data/repositories/chat_repository_impl.dart';
@@ -75,7 +75,7 @@ Future<void> init() async {
     () => AuthRemoteDataSource(
       AuthServiceClient(
         channel,
-        // interceptors: [GrpcInterceptor(sl())],
+        interceptors: [GrpcInterceptor(sl())],
       ),
     ),
   );
