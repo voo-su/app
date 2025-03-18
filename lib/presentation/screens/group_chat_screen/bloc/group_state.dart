@@ -70,3 +70,18 @@ class GroupMembersAddedState extends GroupState {
   @override
   List<Object> get props => [];
 }
+
+class GroupLeavingState extends GroupState {
+  @override
+  List<Object> get props => [];
+}
+
+class GroupLeftState extends GroupState {
+  @override
+  List<Object> get props => [];
+}
+
+class GroupMembersRemovedState extends GroupState {
+  @override
+  List<Object> get props => [];
+}

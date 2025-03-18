@@ -27,8 +27,38 @@ class AddUserToGroupChatEvent extends GroupEvent {
   final int groupId;
   final List<int> memberIds;
 
-  const AddUserToGroupChatEvent({required this.groupId, required this.memberIds});
+  const AddUserToGroupChatEvent({
+    required this.groupId,
+    required this.memberIds,
+  });
 
   @override
   List<Object> get props => [groupId, memberIds];
+}
+
+class LeaveGroupChatEvent extends GroupEvent {
+  final int groupId;
+
+  const LeaveGroupChatEvent(this.groupId);
+
+  @override
+  List<Object> get props => [groupId];
+}
+
+class RemoveUserFromGroupChatEvent extends GroupEvent {
+  final int groupId;
+  final int memberId;
+
+  const RemoveUserFromGroupChatEvent({
+    required this.groupId,
+    required this.memberId,
+  });
+
+  @override
+  List<Object> get props => [groupId, memberId];
+}
+
+class GroupRemovingMemberState extends GroupState {
+  @override
+  List<Object> get props => [];
 }

@@ -34,13 +34,13 @@ import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/verify_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/group/add_user_group_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/group/create_group_chat_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/group/get_group_chat_usecase.dart';
+import 'package:voo_su/domain/usecases/group/add_user_group_usecase.dart';
+import 'package:voo_su/domain/usecases/group/create_group_chat_usecase.dart';
+import 'package:voo_su/domain/usecases/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/group/leave_group_usecase.dart';
-import 'package:voo_su/domain/usecases/chat/group/remove_user_group_usecase.dart';
+import 'package:voo_su/domain/usecases/group/leave_group_usecase.dart';
+import 'package:voo_su/domain/usecases/group/remove_user_group_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/send_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
@@ -149,7 +149,7 @@ Future<void> init() async {
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
-  sl.registerFactory(() => GroupBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl()));
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));

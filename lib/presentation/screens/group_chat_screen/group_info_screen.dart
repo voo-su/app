@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/add_group_members_screen.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/remove_group_members_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
+import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class GroupInfoScreen extends StatefulWidget {
   final int groupId;
@@ -26,6 +28,35 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
     context.read<GroupBloc>().add(LoadGroupInfoEvent(widget.groupId));
   }
 
+  void _leaveGroup() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Покинуть группу"),
+            content: const Text("Вы уверены, что хотите покинуть группу?"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Отмена"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<GroupBloc>().add(
+                    LeaveGroupChatEvent(widget.groupId),
+                  );
+                },
+                child: const Text(
+                  "Покинуть",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<GroupBloc, GroupState>(
@@ -35,10 +66,23 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
             context,
           ).showSnackBar(const SnackBar(content: Text("Участники добавлены")));
           _loadGroupInfo();
+        } else if (state is GroupLeftState) {
+          Navigator.popUntil(context, (route) => route.isFirst);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text("Вы покинули группу")));
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Информация о группе")),
+        appBar: CustomAppBar(
+          titleText: "Информация о группе",
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.exit_to_app),
+              onPressed: _leaveGroup,
+            ),
+          ],
+        ),
         body: BlocBuilder<GroupBloc, GroupState>(
           builder: (context, state) {
             if (state is GroupInfoLoadingState) {
@@ -103,6 +147,27 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                       );
                       _loadGroupInfo();
                     },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.person_remove),
+                    title: const Text("Удалить участников"),
+                    enabled: state.members.isNotEmpty,
+                    onTap:
+                        state.members.isEmpty
+                            ? null
+                            : () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => RemoveGroupMembersScreen(
+                                        groupId: widget.groupId,
+                                        members: state.members,
+                                      ),
+                                ),
+                              );
+                              _loadGroupInfo();
+                            },
                   ),
                   Expanded(
                     child:
