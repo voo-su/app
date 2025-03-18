@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/acccount_remote_data_source.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
+import 'package:voo_su/generated/grpc_pb/account.pb.dart';
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/repositories/account_repository.dart';

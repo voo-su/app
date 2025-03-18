@@ -1,4 +1,4 @@
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/account.pbgrpc.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 
 class AccountRemoteDataSource {

@@ -1,5 +1,5 @@
 import 'package:fixnum/fixnum.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/chat.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
 import 'package:voo_su/domain/entities/message.dart';
 
 class ChatRemoteDataSource {

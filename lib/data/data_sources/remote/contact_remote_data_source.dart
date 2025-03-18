@@ -1,4 +1,4 @@
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/contact.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/contact.pbgrpc.dart';
 
 class ContactRemoteDataSource {
   final ContactServiceClient client;

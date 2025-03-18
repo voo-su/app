@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:voo_su/data/data_sources/remote/grpc/gen/dart/pb/account.pb.dart';
+import 'package:voo_su/generated/grpc_pb/account.pb.dart';
 
 class NotifySettings extends Equatable {
   final int muteUntil;
