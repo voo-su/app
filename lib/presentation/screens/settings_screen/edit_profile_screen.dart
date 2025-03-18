@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/router.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 
@@ -31,7 +32,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Личные данные")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalData)),
       body: BlocListener<SettingsBloc, SettingsState>(
         listener: (context, state) {
           if (state is SettingsSuccessState) {
@@ -64,19 +65,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildLabel("Имя", isRequired: true),
+              _buildLabel(AppLocalizations.of(context)!.firstName, isRequired: true),
               _buildTextField(_nameController),
               const SizedBox(height: 16),
-              _buildLabel("Фамилия", isRequired: true),
+              _buildLabel(AppLocalizations.of(context)!.lastName, isRequired: true),
               _buildTextField(_surnameController),
               const SizedBox(height: 16),
-              _buildLabel("Пол"),
+              _buildLabel(AppLocalizations.of(context)!.gender),
               _buildGenderPicker(),
               const SizedBox(height: 16),
-              _buildLabel("Дата рождения"),
+              _buildLabel(AppLocalizations.of(context)!.dateOfBirth),
               _buildDatePicker(context),
               const SizedBox(height: 16),
-              _buildLabel("О себе"),
+              _buildLabel(AppLocalizations.of(context)!.aboutMe),
               _buildTextField(_bioController, maxLines: 3),
               const SizedBox(height: 24),
               SizedBox(
@@ -89,8 +90,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
-                    "Сохранить",
+                  child: Text(
+                    AppLocalizations.of(context)!.save,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -184,7 +185,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildGenderPicker() {
     final colors = Theme.of(context).colorScheme;
-    final genderMap = {1: "Мужской", 2: "Женский"};
+    final genderMap = {1: AppLocalizations.of(context)!.male, 2: AppLocalizations.of(context)!.female};
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -232,7 +233,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: Text(
           _selectedDate != null
               ? _selectedDate!.toLocal().toString().split(' ')[0]
-              : "Выбрать дату рождения",
+              : AppLocalizations.of(context)!.selectBirthDate,
           style: TextStyle(fontSize: 16, color: colors.onSurface),
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/theme/colors.dart';
 import 'package:voo_su/core/utils/time_formatter.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
@@ -122,10 +123,10 @@ class ChatItemWidget extends StatelessWidget {
         PopupMenuItem(
           value: 'mute',
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.notifications_off_outlined, size: 20),
               SizedBox(width: 8),
-              Text("Отключить уведомления"),
+              Text(AppLocalizations.of(context)!.disableNotifications),
             ],
           ),
         ),

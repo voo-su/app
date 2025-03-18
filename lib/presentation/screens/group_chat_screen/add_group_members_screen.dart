@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/domain/entities/contact.dart';
@@ -70,14 +71,14 @@ class _AddGroupMembersScreenState extends State<AddGroupMembersScreen> {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          titleText: "Добавить участников",
+          titleText: AppLocalizations.of(context)!.addMembers,
           hasSearch: true,
           searchController: _searchController,
           onSearchChanged: _onSearchChanged,
           actions: [
             TextButton(
               onPressed: _addMembersToGroup,
-              child: const Text("Готово"),
+              child: Text(AppLocalizations.of(context)!.done),
             ),
           ],
         ),
@@ -94,7 +95,9 @@ class _AddGroupMembersScreenState extends State<AddGroupMembersScreen> {
                       : _filteredContacts;
 
               if (contacts.isEmpty) {
-                return const Center(child: Text("Ничего не найдено"));
+                return Center(
+                  child: Text(AppLocalizations.of(context)!.nothingFound),
+                );
               }
 
               return ListView.builder(
@@ -146,7 +149,9 @@ class _AddGroupMembersScreenState extends State<AddGroupMembersScreen> {
               );
             }
 
-            return const Center(child: Text("Ошибка загрузки контактов"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.contactsLoadError),
+            );
           },
         ),
       ),

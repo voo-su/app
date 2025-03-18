@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 
 class TimeFormatterWidget extends StatelessWidget {
   final String dateTime;
@@ -45,12 +46,12 @@ class ChatTimeFormatterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Text(
-      _formatDateOrTime(dateTime),
+      _formatDateOrTime(context, dateTime),
       style: TextStyle(fontSize: 12, color: colors.inverseSurface),
     );
   }
 
-  String _formatDateOrTime(String dateTime) {
+  String _formatDateOrTime(BuildContext context, String dateTime) {
     try {
       final DateTime parsedDate = DateFormat(
         "yyyy-MM-dd HH:mm:ss",
@@ -61,7 +62,7 @@ class ChatTimeFormatterWidget extends StatelessWidget {
       if (difference.inHours < 24 && parsedDate.day == now.day) {
         return DateFormat("HH:mm").format(parsedDate); // Сегодня
       } else if (difference.inDays < 7) {
-        return _getWeekdayName(parsedDate.weekday);
+        return _getWeekdayName(context, parsedDate.weekday);
       } else {
         return DateFormat("dd.MM.yyyy").format(parsedDate);
       }
@@ -71,8 +72,16 @@ class ChatTimeFormatterWidget extends StatelessWidget {
     }
   }
 
-  String _getWeekdayName(int weekday) {
-    const List<String> weekdays = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+  String _getWeekdayName(BuildContext context, int weekday) {
+    final weekdays = [
+      AppLocalizations.of(context)!.monday,
+      AppLocalizations.of(context)!.tuesday,
+      AppLocalizations.of(context)!.wednesday,
+      AppLocalizations.of(context)!.thursday,
+      AppLocalizations.of(context)!.friday,
+      AppLocalizations.of(context)!.saturday,
+      AppLocalizations.of(context)!.sunday,
+    ];
     return weekdays[weekday - 1];
   }
 }

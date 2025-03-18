@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/add_group_members_screen.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/remove_group_members_screen.dart';
@@ -33,12 +34,12 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text("Покинуть группу"),
-            content: const Text("Вы уверены, что хотите покинуть группу?"),
+            title: Text(AppLocalizations.of(context)!.leaveGroup),
+            content: Text(AppLocalizations.of(context)!.confirmLeaveGroup),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text("Отмена"),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               TextButton(
                 onPressed: () {
@@ -47,8 +48,8 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                     LeaveGroupChatEvent(widget.groupId),
                   );
                 },
-                child: const Text(
-                  "Покинуть",
+                child: Text(
+                  AppLocalizations.of(context)!.leave,
                   style: TextStyle(color: Colors.red),
                 ),
               ),
@@ -62,20 +63,20 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
     return BlocListener<GroupBloc, GroupState>(
       listener: (context, state) {
         if (state is GroupMembersAddedState) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text("Участники добавлены")));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.membersAdded)),
+          );
           _loadGroupInfo();
         } else if (state is GroupLeftState) {
           Navigator.popUntil(context, (route) => route.isFirst);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text("Вы покинули группу")));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.leftGroup)),
+          );
         }
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          titleText: "Информация о группе",
+          titleText: AppLocalizations.of(context)!.groupInfo,
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app),
@@ -114,14 +115,16 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Text("${state.members.length} участников"),
+                        Text(
+                          "${state.members.length} ${AppLocalizations.of(context)!.members}",
+                        ),
                       ],
                     ),
                   ),
                   const Divider(),
                   ListTile(
                     leading: const Icon(Icons.notifications),
-                    title: const Text("Уведомления"),
+                    title: Text(AppLocalizations.of(context)!.notifications),
                     trailing: Switch(
                       value: _notificationsEnabled,
                       onChanged: (bool value) {
@@ -134,7 +137,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                   const Divider(),
                   ListTile(
                     leading: const Icon(Icons.person_add),
-                    title: const Text("Добавить участников"),
+                    title: Text(AppLocalizations.of(context)!.addMembers),
                     onTap: () async {
                       await Navigator.push(
                         context,
@@ -150,7 +153,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                   ),
                   ListTile(
                     leading: const Icon(Icons.person_remove),
-                    title: const Text("Удалить участников"),
+                    title: Text(AppLocalizations.of(context)!.removeMembers),
                     enabled: state.members.isNotEmpty,
                     onTap:
                         state.members.isEmpty
@@ -188,14 +191,14 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                                 );
                               },
                             )
-                            : const Center(child: Text("Нет участников")),
+                            : Center(child: Text(AppLocalizations.of(context)!.noMembers)),
                   ),
                 ],
               );
             } else if (state is GroupInfoErrorState) {
-              return Center(child: Text("Ошибка: ${state.failure}"));
+              return Center(child: Text("${AppLocalizations.of(context)!.error} ${state.failure}"));
             }
-            return const Center(child: Text("Нет данных"));
+            return Center(child: Text(AppLocalizations.of(context)!.noData));
           },
         ),
       ),

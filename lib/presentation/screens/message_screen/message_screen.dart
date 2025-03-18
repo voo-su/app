@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/group_info_screen.dart';
@@ -207,7 +208,8 @@ class _MessageScreenState extends State<MessageScreen> {
                           child: MessageInputWidget(
                             controller: _messageController,
                             focusNode: _focusNode,
-                            hintText: "Написать сообщение",
+                            hintText:
+                                AppLocalizations.of(context)!.writeMessage,
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -253,7 +255,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
     if (_isSelectionMode) {
       return CustomAppBar(
-        titleText: "Выбрано: ${_selectedMessageIds.length}",
+        titleText: "${AppLocalizations.of(context)!.selected} ${_selectedMessageIds.length}",
         actions: [
           IconButton(
             icon: Icon(Icons.delete, color: colors.onSurface),
@@ -320,7 +322,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   void _showChatMenu() async {
     final String menuText =
-        _areNotifsEnabled ? "Выключить уведомления" : "Включить уведомления";
+        _areNotifsEnabled ? AppLocalizations.of(context)!.disableNotifications : AppLocalizations.of(context)!.enableNotifications;
 
     final IconData menuIcon =
         _areNotifsEnabled ? Icons.volume_off : Icons.volume_up;

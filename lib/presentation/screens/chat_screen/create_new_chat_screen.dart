@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/choose_name_group_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
@@ -53,7 +54,7 @@ class _CreateNewChatScreenState extends State<CreateNewChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        titleText: "Выберите контакт",
+        titleText: AppLocalizations.of(context)!.selectContact,
         hasSearch: true,
         searchController: _searchController,
         onSearchChanged: _onSearchChanged,
@@ -62,7 +63,7 @@ class _CreateNewChatScreenState extends State<CreateNewChatScreen> {
         children: [
           ListTile(
             leading: const Icon(Icons.group_add),
-            title: const Text("Создать группу"),
+            title: Text(AppLocalizations.of(context)!.createGroup),
             onTap: _navigateToCreateGroup,
           ),
           Expanded(
@@ -79,7 +80,9 @@ class _CreateNewChatScreenState extends State<CreateNewChatScreen> {
                           : _filteredContacts;
 
                   if (contacts.isEmpty) {
-                    return const Center(child: Text("Ничего не найдено"));
+                    return Center(
+                      child: Text(AppLocalizations.of(context)!.nothingFound),
+                    );
                   }
 
                   return ListView.builder(
@@ -103,7 +106,9 @@ class _CreateNewChatScreenState extends State<CreateNewChatScreen> {
                   );
                 }
 
-                return const Center(child: Text("Ошибка загрузки контактов"));
+                return Center(
+                  child: Text(AppLocalizations.of(context)!.contactsLoadError),
+                );
               },
             ),
           ),

@@ -131,8 +131,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 const SizedBox(height: 12),
                 Text(
                   _isExpired
-                      ? "Истекло время для подтверждения"
-                      : "Вы сможете отправить код повторно через $_secondsRemaining сек.",
+                      ? AppLocalizations.of(context)!.expiredConfirmationTime
+                      : AppLocalizations.of(context)!.resendCodeAfter(_secondsRemaining),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -168,7 +168,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             },
                     child: Text(
                       _isExpired
-                          ? "Повторить"
+                          ? AppLocalizations.of(context)!.resend
                           : AppLocalizations.of(context)!.confirm,
                       style: const TextStyle(
                         fontSize: 18,

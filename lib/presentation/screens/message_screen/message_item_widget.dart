@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/audio_message_bubble_widget.dart';
 import 'package:voo_su/presentation/screens/message_screen/widgets/photo_message_bubble_widget.dart';
@@ -88,7 +89,8 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
               !_isSwiped) {
             _isSwiped = true;
             _animationController.forward();
-            final replyUser = isMine ? "Вы" : widget.chatName;
+            final replyUser =
+                isMine ? AppLocalizations.of(context)!.you : widget.chatName;
             widget.onReply(widget.message, replyUser);
           }
         }
@@ -132,7 +134,9 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
       case 5:
         return VideoMessageBubble(message: message, isMine: isMine);
       default:
-        return Text("Неизвестный тип сообщения: ${message.msgType}");
+        return Text(
+          "${AppLocalizations.of(context)!.unknownMessageType} ${message.msgType}",
+        );
     }
   }
 
@@ -144,40 +148,43 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
         PopupMenuItem(
           value: 'reply',
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.reply_outlined, size: 20),
               SizedBox(width: 8),
-              Text("Ответить"),
+              Text(AppLocalizations.of(context)!.reply),
             ],
           ),
         ),
         PopupMenuItem(
           value: 'choose',
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.check_circle_outline_outlined, size: 20),
               SizedBox(width: 8),
-              Text("Выбрать"),
+              Text(AppLocalizations.of(context)!.select),
             ],
           ),
         ),
         PopupMenuItem(
           value: 'copy',
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.copy_outlined, size: 20),
               SizedBox(width: 8),
-              Text("Скопировать"),
+              Text(AppLocalizations.of(context)!.copy),
             ],
           ),
         ),
         PopupMenuItem(
           value: 'delete',
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.delete_outline, size: 20, color: Colors.red),
               SizedBox(width: 8),
-              Text("Удалить", style: TextStyle(color: Colors.red)),
+              Text(
+                AppLocalizations.of(context)!.delete,
+                style: TextStyle(color: Colors.red),
+              ),
             ],
           ),
         ),
@@ -197,7 +204,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
 
   void _replyMessage() {
     final replyUser =
-        widget.message.userId != widget.receiverId ? "Вы" : widget.chatName;
+        widget.message.userId != widget.receiverId ? AppLocalizations.of(context)!.you : widget.chatName;
     widget.onReply(widget.message, replyUser);
   }
 
@@ -209,7 +216,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
     Clipboard.setData(ClipboardData(text: widget.message.content));
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text("Сообщение скопировано")));
+    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.messageCopied)));
   }
 
   void _deleteMessage() {
@@ -225,7 +232,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
 
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text("Сообщение удалено")));
+    ).showSnackBar( SnackBar(content: Text((AppLocalizations.of(context)!.messageDeleted))));
     print("Удалено сообщение: ${widget.message.id}");
   }
 }

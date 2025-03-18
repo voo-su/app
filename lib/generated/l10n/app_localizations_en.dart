@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Войти';
 
   @override
-  String get enterCode => 'Войти';
+  String get enterCode => 'Введите код';
 
   @override
   String get enterCodeBelow => 'Пожалуйста, введите в форму ниже код, который мы отправили вам.';
@@ -58,4 +58,237 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsText3 => 'Пользователь, разместивший информацию на ресурсе «Voo.su», самостоятельно представляет и защищает свои интересы, возникающие в связи с размещением указанной информации, в отношениях с третьими лицами.';
+
+  @override
+  String get writeMessage => 'Написать сообщение';
+
+  @override
+  String get selectContact => 'Выберите контакт';
+
+  @override
+  String get createGroup => 'Создать группу';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get acceptTerms => 'Нажимая «Войти», вы соглашаетесь с';
+
+  @override
+  String get termsOfUse => 'условиями использования';
+
+  @override
+  String get expiredConfirmationTime => 'Истекло время для подтверждения';
+
+  @override
+  String resendCodeAfter(Object seconds) {
+    return 'Вы сможете отправить код повторно через $seconds сек.';
+  }
+
+  @override
+  String get resend => 'Повторить';
+
+  @override
+  String get addMembers => 'Добавить участников';
+
+  @override
+  String get done => 'Готово';
+
+  @override
+  String get contactsLoadError => 'Ошибка загрузки контактов';
+
+  @override
+  String get groupName => 'Назовите группу';
+
+  @override
+  String get next => 'Далее';
+
+  @override
+  String get enterGroupName => 'Введите название группы';
+
+  @override
+  String get groupCreated => 'Группа успешно создана';
+
+  @override
+  String get add => 'Добавить';
+
+  @override
+  String get leaveGroup => 'Покинуть группу';
+
+  @override
+  String get leave => 'Покинуть';
+
+  @override
+  String get confirmLeaveGroup => 'Вы уверены, что хотите покинуть группу?';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get membersAdded => 'Участники добавлены';
+
+  @override
+  String get leftGroup => 'Вы покинули группу';
+
+  @override
+  String get groupInfo => 'Информация о группе';
+
+  @override
+  String get members => 'участников';
+
+  @override
+  String get notifications => 'Уведомления';
+
+  @override
+  String get removeMembers => 'Удалить участников';
+
+  @override
+  String get noMembers => 'Нет участников';
+
+  @override
+  String get error => 'Ошибка:';
+
+  @override
+  String get noData => 'Нет данных';
+
+  @override
+  String get removeMember => 'Удалить участника';
+
+  @override
+  String get unknownMessageType => 'Неизвестный тип сообщения:';
+
+  @override
+  String get reply => 'Ответить';
+
+  @override
+  String get select => 'Выбрать';
+
+  @override
+  String get copy => 'Скопировать';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get you => 'Вы';
+
+  @override
+  String get messageCopied => 'Сообщение скопировано';
+
+  @override
+  String get messageDeleted => 'Сообщение удалено';
+
+  @override
+  String get noMessages => 'Нет сообщений';
+
+  @override
+  String get selected => 'Выбрано:';
+
+  @override
+  String get disableNotifications => 'Выключить уведомления';
+
+  @override
+  String get enableNotifications => 'Включить уведомления';
+
+  @override
+  String get searchByUsername => 'Поиск по имени пользователя';
+
+  @override
+  String get personalData => 'Личные данные';
+
+  @override
+  String get firstName => 'Имя';
+
+  @override
+  String get lastName => 'Фамилия';
+
+  @override
+  String get gender => 'Пол';
+
+  @override
+  String get dateOfBirth => 'Дата рождения';
+
+  @override
+  String get aboutMe => 'О себе';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get male => 'Мужской';
+
+  @override
+  String get female => 'Женский';
+
+  @override
+  String get selectBirthDate => 'Выбрать дату рождения';
+
+  @override
+  String get personalChats => 'Личные чаты';
+
+  @override
+  String get groups => 'Группы';
+
+  @override
+  String get dataLoadError => 'Ошибка загрузки данных';
+
+  @override
+  String get edit => 'Изменить';
+
+  @override
+  String get important => 'Важное';
+
+  @override
+  String get appearance => 'Оформление';
+
+  @override
+  String get logout => 'Выйти';
+
+  @override
+  String get chooseTheme => 'Выберите тему';
+
+  @override
+  String get lightTheme => 'Светлая';
+
+  @override
+  String get darkTheme => 'Темная';
+
+  @override
+  String get rules => 'Правила';
+
+  @override
+  String get photoSelected => 'Фото выбрано';
+
+  @override
+  String get ok => 'ОК';
+
+  @override
+  String get allowPhotoAccess => 'Разрешите доступ к фото в настройках';
+
+  @override
+  String get sendMessage => 'Отправить сообщение';
+
+  @override
+  String get deleteContact => 'Удалить контакт';
+
+  @override
+  String get sunday => 'Вс';
+
+  @override
+  String get monday => 'Пн';
+
+  @override
+  String get tuesday => 'Вт';
+
+  @override
+  String get wednesday => 'Ср';
+
+  @override
+  String get thursday => 'Чт';
+
+  @override
+  String get friday => 'Пт';
+
+  @override
+  String get saturday => 'Сб';
 }

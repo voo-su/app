@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
@@ -11,14 +12,14 @@ class ThemesScreen extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const CustomAppBar(titleText: "Оформление"),
+      appBar: CustomAppBar(titleText: AppLocalizations.of(context)!.appearance),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Выберите тему",
+              AppLocalizations.of(context)!.chooseTheme,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -77,8 +78,8 @@ class ThemesScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildThemeText("Светлая", isLightTheme, colors.onSurface),
-                _buildThemeText("Темная", !isLightTheme, colors.onSurface),
+                _buildThemeText( AppLocalizations.of(context)!.lightTheme, isLightTheme, colors.onSurface),
+                _buildThemeText( AppLocalizations.of(context)!.darkTheme, !isLightTheme, colors.onSurface),
               ],
             ),
           ],

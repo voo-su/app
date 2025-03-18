@@ -78,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             textInputAction: TextInputAction.done,
                             enableSuggestions: true,
                             autocorrect: false,
-                            decoration: const InputDecoration(
-                              hintText: "Email",
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.email,
                               hintStyle: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -130,11 +130,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: colors.onSurfaceVariant,
                     ),
                     children: [
-                      const TextSpan(
-                        text: 'Нажимая «Войти», вы соглашаетесь с ',
-                      ),
+                      TextSpan(text: AppLocalizations.of(context)!.acceptTerms),
                       TextSpan(
-                        text: "условиями использования",
+                        text: AppLocalizations.of(context)!.termsOfUse,
                         style: TextStyle(
                           color: colors.onSurface,
                           fontWeight: FontWeight.w400,

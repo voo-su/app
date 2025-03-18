@@ -31,8 +31,6 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
       final token = await localDataSource.getToken();
       final response = await remoteDataSource.getGroupChat(token, id);
 
-      print("response - $response");
-
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);

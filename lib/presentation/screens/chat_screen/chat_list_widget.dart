@@ -31,7 +31,7 @@ class ChatListWidget extends StatelessWidget {
                   .toList();
 
           if (filteredChats.isEmpty) {
-            return Center(child: Text("Ничего не найдено"));
+            return Center(child: Text(AppLocalizations.of(context)!.nothingFound));
           }
 
           return RefreshIndicator(

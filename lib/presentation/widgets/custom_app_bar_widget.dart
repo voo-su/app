@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? titleText;
@@ -68,7 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         controller: searchController,
                         onChanged: onSearchChanged,
                         decoration: InputDecoration(
-                          hintText: "Поиск...",
+                          hintText: "${AppLocalizations.of(context)!.search}...",
                           hintStyle: TextStyle(color: colors.inverseSurface),
                           filled: true,
                           fillColor: colors.surfaceContainerHighest,

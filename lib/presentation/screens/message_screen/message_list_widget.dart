@@ -38,7 +38,9 @@ class MessageListWidget extends StatelessWidget {
 
         if (state is SuccessState) {
           if (state.messages.isEmpty) {
-            return const Center(child: Text("Нет сообщений"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.noMessages),
+            );
           }
 
           return ListView.builder(

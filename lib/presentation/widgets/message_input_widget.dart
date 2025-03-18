@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 
 class MessageInputWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -52,14 +53,12 @@ class MessageInputWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              title: const Text("Фото выбрано"),
-              content: const Text(
-                "Ваше фото обязательно отправится, но чуть позже!",
-              ),
+              title: Text(AppLocalizations.of(context)!.photoSelected),
+              content: Text("Ваше фото обязательно отправится, но чуть позже!"),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text("ОК"),
+                  child: Text(AppLocalizations.of(context)!.ok),
                 ),
               ],
             );
@@ -71,7 +70,7 @@ class MessageInputWidget extends StatelessWidget {
         openAppSettings();
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Разрешите доступ к фото в настройках")),
+        SnackBar(content: Text(AppLocalizations.of(context)!.allowPhotoAccess)),
       );
     }
   }

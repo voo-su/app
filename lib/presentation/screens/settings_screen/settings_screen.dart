@@ -101,8 +101,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           vertical: 10,
                         ),
                       ),
-                      child: const Text(
-                        "Изменить",
+                      child: Text(
+                        AppLocalizations.of(context)!.edit,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -117,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  "Важное",
+                  AppLocalizations.of(context)!.important,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -128,21 +128,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 12),
               _buildSettingsItem(
                 icon: Icons.notifications_none_outlined,
-                title: "Уведомления",
+                title: AppLocalizations.of(context)!.notifications,
                 onTap: () {
                   Navigator.pushNamed(context, AppRouter.notifications);
                 },
               ),
               _buildSettingsItem(
                 icon: Icons.palette_outlined,
-                title: "Оформление",
+                title:AppLocalizations.of(context)!.appearance,
                 onTap: () {
                   Navigator.pushNamed(context, AppRouter.themes);
                 },
               ),
               _buildSettingsItem(
                 icon: Icons.logout_outlined,
-                title: "Выйти",
+                title:AppLocalizations.of(context)!.logout,
                 onTap: () {
                   context.read<AuthBloc>().add(LogoutEvent());
                   Navigator.popAndPushNamed(context, AppRouter.auth);

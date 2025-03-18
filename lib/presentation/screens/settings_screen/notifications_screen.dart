@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
@@ -26,7 +27,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const CustomAppBar(titleText: "Уведомления"),
+      appBar: CustomAppBar(
+        titleText: AppLocalizations.of(context)!.notifications,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: BlocBuilder<SettingsBloc, SettingsState>(
@@ -44,7 +47,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               return Column(
                 children: [
                   _buildSwitchTile(
-                    title: "Личные чаты",
+                    title:  AppLocalizations.of(context)!.personalChats,
                     value: privateChats,
                     onChanged: (val) {
                       setState(() => privateChats = val);
@@ -52,7 +55,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     },
                   ),
                   _buildSwitchTile(
-                    title: "Группы",
+                    title: AppLocalizations.of(context)!.groups,
                     value: groups,
                     onChanged: (val) {
                       setState(() => groups = val);
@@ -62,7 +65,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 ],
               );
             }
-            return const Center(child: Text("Ошибка загрузки данных"));
+            return Center(child: Text(AppLocalizations.of(context)!.dataLoadError));
           },
         ),
       ),

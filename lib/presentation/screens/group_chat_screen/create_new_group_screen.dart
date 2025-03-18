@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
@@ -73,18 +74,18 @@ class _CreateNewGroupScreenState extends State<CreateNewGroupScreen> {
         if (state is GroupCreatedState) {
           Navigator.popUntil(context, (route) => route.isFirst);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Группа успешно создана")),
+           SnackBar(content: Text(AppLocalizations.of(context)!.groupCreated)),
           );
         }
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          titleText: "Добавить",
+          titleText: AppLocalizations.of(context)!.add,
           hasSearch: true,
           searchController: _searchController,
           onSearchChanged: _onSearchChanged,
           actions: [
-            TextButton(onPressed: _createGroup, child: const Text("Готово")),
+            TextButton(onPressed: _createGroup, child: Text(AppLocalizations.of(context)!.done)),
           ],
         ),
         body: BlocBuilder<ContactBloc, ContactState>(
@@ -100,7 +101,9 @@ class _CreateNewGroupScreenState extends State<CreateNewGroupScreen> {
                       : _filteredContacts;
 
               if (contacts.isEmpty) {
-                return const Center(child: Text("Ничего не найдено"));
+                return Center(
+                  child: Text(AppLocalizations.of(context)!.nothingFound),
+                );
               }
 
               return ListView.builder(
@@ -152,7 +155,9 @@ class _CreateNewGroupScreenState extends State<CreateNewGroupScreen> {
               );
             }
 
-            return const Center(child: Text("Ошибка загрузки контактов"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.contactsLoadError),
+            );
           },
         ),
       ),

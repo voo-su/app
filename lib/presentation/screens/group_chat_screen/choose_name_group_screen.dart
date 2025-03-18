@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/create_new_group_screen.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
@@ -32,12 +33,12 @@ class _ChooseNameGroupScreenState extends State<ChooseNameGroupScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        titleText: "Назовите группу",
+        titleText: AppLocalizations.of(context)!.groupName,
         actions: [
           TextButton(
             onPressed: _proceedToSelectContacts,
             child: Text(
-              "Далее",
+              AppLocalizations.of(context)!.next,
               style: TextStyle(
                 color:
                     _groupNameController.text.trim().isNotEmpty
@@ -64,7 +65,7 @@ class _ChooseNameGroupScreenState extends State<ChooseNameGroupScreen> {
                     autofocus: true,
                     style: TextStyle(fontSize: 14, color: colors.onSurface),
                     decoration: InputDecoration(
-                      hintText: "Введите название группы",
+                      hintText: AppLocalizations.of(context)!.enterGroupName,
                       hintStyle: TextStyle(color: colors.onSurfaceVariant),
                       border: InputBorder.none,
                     ),

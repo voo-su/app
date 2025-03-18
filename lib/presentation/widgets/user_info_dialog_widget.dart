@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 
 class UserInfoDialog extends StatelessWidget {
@@ -66,7 +67,7 @@ class UserInfoDialog extends StatelessWidget {
                         backgroundColor: colors.primary.withOpacity(0.1),
                       ),
                       child: Text(
-                        "Отправить сообщение",
+                        AppLocalizations.of(context)!.sendMessage,
                         style: TextStyle(color: colors.primary),
                       ),
                     ),
@@ -83,8 +84,8 @@ class UserInfoDialog extends StatelessWidget {
                         ),
                         backgroundColor: Colors.red.withOpacity(0.1),
                       ),
-                      child: const Text(
-                        "Удалить контакт",
+                      child: Text(
+                       AppLocalizations.of(context)!.deleteContact,
                         style: TextStyle(color: Colors.red),
                       ),
                     ),

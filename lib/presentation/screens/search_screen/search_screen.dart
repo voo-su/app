@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: CustomAppBar(
-        titleText: "Поиск",
+        titleText: AppLocalizations.of(context)!.search,
         hasSearch: true,
         searchController: _searchController,
         onSearchChanged: (value) {
@@ -33,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Center(
         child: Text(
-          "Поиск по имени пользователя",
+          AppLocalizations.of(context)!.searchByUsername,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
