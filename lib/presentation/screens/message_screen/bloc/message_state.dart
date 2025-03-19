@@ -45,3 +45,8 @@ class GroupInfoState extends MessageState {
   @override
   List<Object?> get props => [name, avatar, members];
 }
+
+class ResetToMessagesEvent extends MessageEvent {
+  @override
+  List<Object> get props => [];
+}

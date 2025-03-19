@@ -92,5 +92,9 @@
   "wednesday": "Ср",
   "thursday": "Чт",
   "friday": "Пт",
-  "saturday": "Сб"
+  "saturday": "Сб",
+  "deleteGroup": "Удалить группу",
+  "confirmDeleteGroup": "Вы точно хотите удалить группу?",
+  "groupDeleted": "Группа успешно удалена"
+
 }

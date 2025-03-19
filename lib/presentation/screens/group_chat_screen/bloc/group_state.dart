@@ -85,3 +85,13 @@ class GroupMembersRemovedState extends GroupState {
   @override
   List<Object> get props => [];
 }
+
+class GroupDeletingState extends GroupState {
+  @override
+  List<Object> get props => [];
+}
+
+class GroupDeletedState extends GroupState {
+  @override
+  List<Object> get props => [];
+}

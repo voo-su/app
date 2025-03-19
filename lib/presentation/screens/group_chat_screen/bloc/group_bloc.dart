@@ -5,6 +5,7 @@ import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/usecases/group/add_user_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/create_group_chat_usecase.dart';
+import 'package:voo_su/domain/usecases/group/delete_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
 import 'package:voo_su/domain/usecases/group/leave_group_usecase.dart';
@@ -20,6 +21,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final GetMembersUseCase _getMembersUseCase;
   final LeaveGroupUseCase _leaveGroupUseCase;
   final RemoveUserGroupUseCase _removeUserGroupUseCase;
+  final DeleteGroupUsecase _deleteGroupUsecase;
 
   GroupBloc(
     this._createGroupChatUseCase,
@@ -28,12 +30,14 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     this._getMembersUseCase,
     this._leaveGroupUseCase,
     this._removeUserGroupUseCase,
+    this._deleteGroupUsecase,
   ) : super(GroupInitialState()) {
     on<CreateGroupEvent>(_onCreateGroup);
     on<AddUserToGroupChatEvent>(_onAddUserToGroupChat);
     on<LoadGroupInfoEvent>(_onLoadGroupInfo);
     on<LeaveGroupChatEvent>(_onLeaveGroupChat);
     on<RemoveUserFromGroupChatEvent>(_onRemoveUserFromGroupChat);
+    on<DeleteGroupEvent>(_onDeleteGroup);
   }
 
   Future<void> _onCreateGroup(
@@ -157,6 +161,24 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
       result.fold(
         (failure) => emit(GroupErrorState(failure)),
         (_) => emit(GroupMembersRemovedState()),
+      );
+    } catch (e) {
+      emit(GroupErrorState(ExceptionFailure()));
+    }
+  }
+
+  Future<void> _onDeleteGroup(
+    DeleteGroupEvent event,
+    Emitter<GroupState> emit,
+  ) async {
+    try {
+      emit(GroupDeletingState());
+
+      final result = await _deleteGroupUsecase(event.groupId);
+
+      result.fold(
+        (failure) => emit(GroupErrorState(failure)),
+        (_) => emit(GroupDeletedState()),
       );
     } catch (e) {
       emit(GroupErrorState(ExceptionFailure()));

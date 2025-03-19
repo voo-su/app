@@ -291,4 +291,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saturday => 'Сб';
+
+  @override
+  String get deleteGroup => 'Удалить группу';
+
+  @override
+  String get confirmDeleteGroup => 'Вы точно хотите удалить группу?';
+
+  @override
+  String get groupDeleted => 'Группа успешно удалена';
 }

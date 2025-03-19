@@ -9,6 +9,7 @@ import 'package:voo_su/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/chat_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/contact_remote_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/group_chat_remote_data_source.dart';
+import 'package:voo_su/domain/usecases/group/delete_group_usecase.dart';
 import 'package:voo_su/generated/grpc_pb/account.pbgrpc.dart';
 import 'package:voo_su/generated/grpc_pb/auth.pbgrpc.dart';
 import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
@@ -73,10 +74,7 @@ Future<void> init() async {
   // Data sources - remote
   sl.registerLazySingleton(
     () => AuthRemoteDataSource(
-      AuthServiceClient(
-        channel,
-        interceptors: [GrpcInterceptor(sl())],
-      ),
+      AuthServiceClient(channel, interceptors: [GrpcInterceptor(sl())]),
     ),
   );
   sl.registerLazySingleton(
@@ -142,6 +140,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddUserGroupUseCase(sl()));
   sl.registerLazySingleton(() => RemoveUserGroupUseCase(sl()));
   sl.registerLazySingleton(() => LeaveGroupUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteGroupUsecase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
@@ -149,7 +148,7 @@ Future<void> init() async {
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
-  sl.registerFactory(() => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
 
   // Cubit
   sl.registerFactory(() => ChatUpdatesCubit(sl()));

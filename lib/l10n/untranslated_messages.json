@@ -93,6 +93,9 @@
     "wednesday",
     "thursday",
     "friday",
-    "saturday"
+    "saturday",
+    "deleteGroup",
+    "confirmDeleteGroup",
+    "groupDeleted"
   ]
 }

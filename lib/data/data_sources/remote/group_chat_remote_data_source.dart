@@ -48,4 +48,8 @@ class GroupChatRemoteDataSource {
   Future<LeaveGroupChatResponse> leaveGroupChat(int id) async {
     return await client.leaveGroupChat(LeaveGroupChatRequest(id: Int64(id)));
   }
+
+  Future<DeleteGroupChatResponse> deleteGroupChat(int id) async {
+    return await client.deleteGroupChat(DeleteGroupChatRequest(id: Int64(id)));
+  }
 }

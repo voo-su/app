@@ -78,4 +78,16 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, DeleteGroupChatResponse>> deleteGroupChat(
+    int id,
+  ) async {
+    try {
+      final response = await remoteDataSource.deleteGroupChat(id);
+      return Right(response);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

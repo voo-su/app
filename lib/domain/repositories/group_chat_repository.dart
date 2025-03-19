@@ -15,4 +15,5 @@ abstract class GroupChatRepository {
   Future<Either<Failure, RemoveUserFromGroupChatResponse>>
   removeUserFromGroupChat(RemoveUserParams params);
   Future<Either<Failure, LeaveGroupChatResponse>> leaveGroupChat(int id);
+  Future<Either<Failure, DeleteGroupChatResponse>> deleteGroupChat(int id);
 }

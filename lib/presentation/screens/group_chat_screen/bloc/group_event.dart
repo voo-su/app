@@ -62,3 +62,12 @@ class GroupRemovingMemberState extends GroupState {
   @override
   List<Object> get props => [];
 }
+
+class DeleteGroupEvent extends GroupEvent {
+  final int groupId;
+
+  const DeleteGroupEvent(this.groupId);
+
+  @override
+  List<Object> get props => [groupId];
+}

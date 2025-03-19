@@ -658,6 +658,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Сб'**
   String get saturday;
+
+  /// No description provided for @deleteGroup.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить группу'**
+  String get deleteGroup;
+
+  /// No description provided for @confirmDeleteGroup.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы точно хотите удалить группу?'**
+  String get confirmDeleteGroup;
+
+  /// No description provided for @groupDeleted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Группа успешно удалена'**
+  String get groupDeleted;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
