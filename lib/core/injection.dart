@@ -139,9 +139,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetGroupChatUseCase(sl()));
   sl.registerLazySingleton(() => GetMembersUseCase(sl()));
   sl.registerLazySingleton(() => CreateGroupChatUseCase(sl()));
-  sl.registerLazySingleton(() => AddUserGroupUsecase(sl()));
-  sl.registerLazySingleton(() => RemoveUserGroupUsecase(sl()));
-  sl.registerLazySingleton(() => LeaveGroupUsecase(sl()));
+  sl.registerLazySingleton(() => AddUserGroupUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveUserGroupUseCase(sl()));
+  sl.registerLazySingleton(() => LeaveGroupUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));

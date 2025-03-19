@@ -5,11 +5,11 @@ import 'package:voo_su/generated/grpc_pb/group_chat.pb.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/repositories/group_chat_repository.dart';
 
-class AddUserGroupUsecase
+class AddUserGroupUseCase
     implements UseCase<AddUserToGroupChatResponse, AddUserParams> {
   final GroupChatRepository repository;
 
-  AddUserGroupUsecase(this.repository);
+  AddUserGroupUseCase(this.repository);
 
   @override
   Future<Either<Failure, AddUserToGroupChatResponse>> call(

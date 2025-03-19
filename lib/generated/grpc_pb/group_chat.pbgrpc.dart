@@ -45,6 +45,18 @@ class GroupChatServiceClient extends $grpc.Client {
       '/group_chat.GroupChatService/LeaveGroupChat',
       ($4.LeaveGroupChatRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.LeaveGroupChatResponse.fromBuffer(value));
+  static final _$deleteGroupChat = $grpc.ClientMethod<$4.DeleteGroupChatRequest, $4.DeleteGroupChatResponse>(
+      '/group_chat.GroupChatService/DeleteGroupChat',
+      ($4.DeleteGroupChatRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.DeleteGroupChatResponse.fromBuffer(value));
+  static final _$editNameGroupChat = $grpc.ClientMethod<$4.EditNameGroupChatRequest, $4.EditNameGroupChatResponse>(
+      '/group_chat.GroupChatService/EditNameGroupChat',
+      ($4.EditNameGroupChatRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.EditNameGroupChatResponse.fromBuffer(value));
+  static final _$editAboutGroupChat = $grpc.ClientMethod<$4.EditAboutGroupChatRequest, $4.EditAboutGroupChatResponse>(
+      '/group_chat.GroupChatService/EditAboutGroupChat',
+      ($4.EditAboutGroupChatRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.EditAboutGroupChatResponse.fromBuffer(value));
 
   GroupChatServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -74,6 +86,18 @@ class GroupChatServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$4.LeaveGroupChatResponse> leaveGroupChat($4.LeaveGroupChatRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$leaveGroupChat, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.DeleteGroupChatResponse> deleteGroupChat($4.DeleteGroupChatRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteGroupChat, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.EditNameGroupChatResponse> editNameGroupChat($4.EditNameGroupChatRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$editNameGroupChat, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.EditAboutGroupChatResponse> editAboutGroupChat($4.EditAboutGroupChatRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$editAboutGroupChat, request, options: options);
   }
 }
 
@@ -124,6 +148,27 @@ abstract class GroupChatServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $4.LeaveGroupChatRequest.fromBuffer(value),
         ($4.LeaveGroupChatResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$4.DeleteGroupChatRequest, $4.DeleteGroupChatResponse>(
+        'DeleteGroupChat',
+        deleteGroupChat_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $4.DeleteGroupChatRequest.fromBuffer(value),
+        ($4.DeleteGroupChatResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$4.EditNameGroupChatRequest, $4.EditNameGroupChatResponse>(
+        'EditNameGroupChat',
+        editNameGroupChat_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $4.EditNameGroupChatRequest.fromBuffer(value),
+        ($4.EditNameGroupChatResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$4.EditAboutGroupChatRequest, $4.EditAboutGroupChatResponse>(
+        'EditAboutGroupChat',
+        editAboutGroupChat_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $4.EditAboutGroupChatRequest.fromBuffer(value),
+        ($4.EditAboutGroupChatResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$4.CreateGroupChatResponse> createGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.CreateGroupChatRequest> request) async {
@@ -150,10 +195,25 @@ abstract class GroupChatServiceBase extends $grpc.Service {
     return leaveGroupChat(call, await request);
   }
 
+  $async.Future<$4.DeleteGroupChatResponse> deleteGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.DeleteGroupChatRequest> request) async {
+    return deleteGroupChat(call, await request);
+  }
+
+  $async.Future<$4.EditNameGroupChatResponse> editNameGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.EditNameGroupChatRequest> request) async {
+    return editNameGroupChat(call, await request);
+  }
+
+  $async.Future<$4.EditAboutGroupChatResponse> editAboutGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.EditAboutGroupChatRequest> request) async {
+    return editAboutGroupChat(call, await request);
+  }
+
   $async.Future<$4.CreateGroupChatResponse> createGroupChat($grpc.ServiceCall call, $4.CreateGroupChatRequest request);
   $async.Future<$4.GetGroupChatResponse> getGroupChat($grpc.ServiceCall call, $4.GetGroupChatRequest request);
   $async.Future<$4.GetMembersResponse> getMembers($grpc.ServiceCall call, $4.GetMembersRequest request);
   $async.Future<$4.AddUserToGroupChatResponse> addUserToGroupChat($grpc.ServiceCall call, $4.AddUserToGroupChatRequest request);
   $async.Future<$4.RemoveUserFromGroupChatResponse> removeUserFromGroupChat($grpc.ServiceCall call, $4.RemoveUserFromGroupChatRequest request);
   $async.Future<$4.LeaveGroupChatResponse> leaveGroupChat($grpc.ServiceCall call, $4.LeaveGroupChatRequest request);
+  $async.Future<$4.DeleteGroupChatResponse> deleteGroupChat($grpc.ServiceCall call, $4.DeleteGroupChatRequest request);
+  $async.Future<$4.EditNameGroupChatResponse> editNameGroupChat($grpc.ServiceCall call, $4.EditNameGroupChatRequest request);
+  $async.Future<$4.EditAboutGroupChatResponse> editAboutGroupChat($grpc.ServiceCall call, $4.EditAboutGroupChatRequest request);
 }

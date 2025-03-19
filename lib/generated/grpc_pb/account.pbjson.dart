@@ -80,13 +80,14 @@ final $typed_data.Uint8List updateProfileResponseDescriptor = $convert.base64Dec
 const UpdateProfilePhotoRequest$json = {
   '1': 'UpdateProfilePhotoRequest',
   '2': [
-    {'1': 'photo', '3': 1, '4': 1, '5': 12, '10': 'photo'},
+    {'1': 'file', '3': 1, '4': 1, '5': 11, '6': '.common.InputFile', '10': 'file'},
   ],
 };
 
 /// Descriptor for `UpdateProfilePhotoRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateProfilePhotoRequestDescriptor = $convert.base64Decode(
-    'ChlVcGRhdGVQcm9maWxlUGhvdG9SZXF1ZXN0EhQKBXBob3RvGAEgASgMUgVwaG90bw==');
+    'ChlVcGRhdGVQcm9maWxlUGhvdG9SZXF1ZXN0EiUKBGZpbGUYASABKAsyES5jb21tb24uSW5wdX'
+    'RGaWxlUgRmaWxl');
 
 @$core.Deprecated('Use updateProfilePhotoResponseDescriptor instead')
 const UpdateProfilePhotoResponse$json = {
@@ -99,22 +100,6 @@ const UpdateProfilePhotoResponse$json = {
 /// Descriptor for `UpdateProfilePhotoResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateProfilePhotoResponseDescriptor = $convert.base64Decode(
     'ChpVcGRhdGVQcm9maWxlUGhvdG9SZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
-
-@$core.Deprecated('Use entityNotifySettingsDescriptor instead')
-const EntityNotifySettings$json = {
-  '1': 'EntityNotifySettings',
-  '2': [
-    {'1': 'mute_until', '3': 1, '4': 1, '5': 5, '10': 'muteUntil'},
-    {'1': 'silent', '3': 2, '4': 1, '5': 8, '10': 'silent'},
-    {'1': 'show_previews', '3': 3, '4': 1, '5': 8, '10': 'showPreviews'},
-  ],
-};
-
-/// Descriptor for `EntityNotifySettings`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entityNotifySettingsDescriptor = $convert.base64Decode(
-    'ChRFbnRpdHlOb3RpZnlTZXR0aW5ncxIdCgptdXRlX3VudGlsGAEgASgFUgltdXRlVW50aWwSFg'
-    'oGc2lsZW50GAIgASgIUgZzaWxlbnQSIwoNc2hvd19wcmV2aWV3cxgDIAEoCFIMc2hvd1ByZXZp'
-    'ZXdz');
 
 @$core.Deprecated('Use notifyEntityDescriptor instead')
 const NotifyEntity$json = {
@@ -196,29 +181,29 @@ final $typed_data.Uint8List getNotifySettingsRequestDescriptor = $convert.base64
 const GetNotifySettingsResponse$json = {
   '1': 'GetNotifySettingsResponse',
   '2': [
-    {'1': 'settings', '3': 1, '4': 1, '5': 11, '6': '.account.EntityNotifySettings', '10': 'settings'},
+    {'1': 'settings', '3': 1, '4': 1, '5': 11, '6': '.common.EntityNotifySettings', '10': 'settings'},
   ],
 };
 
 /// Descriptor for `GetNotifySettingsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getNotifySettingsResponseDescriptor = $convert.base64Decode(
-    'ChlHZXROb3RpZnlTZXR0aW5nc1Jlc3BvbnNlEjkKCHNldHRpbmdzGAEgASgLMh0uYWNjb3VudC'
-    '5FbnRpdHlOb3RpZnlTZXR0aW5nc1IIc2V0dGluZ3M=');
+    'ChlHZXROb3RpZnlTZXR0aW5nc1Jlc3BvbnNlEjgKCHNldHRpbmdzGAEgASgLMhwuY29tbW9uLk'
+    'VudGl0eU5vdGlmeVNldHRpbmdzUghzZXR0aW5ncw==');
 
 @$core.Deprecated('Use updateNotifySettingsRequestDescriptor instead')
 const UpdateNotifySettingsRequest$json = {
   '1': 'UpdateNotifySettingsRequest',
   '2': [
     {'1': 'entity', '3': 1, '4': 1, '5': 11, '6': '.account.NotifyEntity', '10': 'entity'},
-    {'1': 'settings', '3': 2, '4': 1, '5': 11, '6': '.account.EntityNotifySettings', '10': 'settings'},
+    {'1': 'settings', '3': 2, '4': 1, '5': 11, '6': '.common.EntityNotifySettings', '10': 'settings'},
   ],
 };
 
 /// Descriptor for `UpdateNotifySettingsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateNotifySettingsRequestDescriptor = $convert.base64Decode(
     'ChtVcGRhdGVOb3RpZnlTZXR0aW5nc1JlcXVlc3QSLQoGZW50aXR5GAEgASgLMhUuYWNjb3VudC'
-    '5Ob3RpZnlFbnRpdHlSBmVudGl0eRI5CghzZXR0aW5ncxgCIAEoCzIdLmFjY291bnQuRW50aXR5'
-    'Tm90aWZ5U2V0dGluZ3NSCHNldHRpbmdz');
+    '5Ob3RpZnlFbnRpdHlSBmVudGl0eRI4CghzZXR0aW5ncxgCIAEoCzIcLmNvbW1vbi5FbnRpdHlO'
+    'b3RpZnlTZXR0aW5nc1IIc2V0dGluZ3M=');
 
 @$core.Deprecated('Use updateNotifySettingsResponseDescriptor instead')
 const UpdateNotifySettingsResponse$json = {

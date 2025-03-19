@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common/common.pb.dart' as $6;
+
 class GetProfileRequest extends $pb.GeneratedMessage {
   factory GetProfileRequest() => create();
   GetProfileRequest._() : super();
@@ -366,11 +368,11 @@ class UpdateProfileResponse extends $pb.GeneratedMessage {
 
 class UpdateProfilePhotoRequest extends $pb.GeneratedMessage {
   factory UpdateProfilePhotoRequest({
-    $core.List<$core.int>? photo,
+    $6.InputFile? file,
   }) {
     final $result = create();
-    if (photo != null) {
-      $result.photo = photo;
+    if (file != null) {
+      $result.file = file;
     }
     return $result;
   }
@@ -379,7 +381,7 @@ class UpdateProfilePhotoRequest extends $pb.GeneratedMessage {
   factory UpdateProfilePhotoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateProfilePhotoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'account'), createEmptyInstance: create)
-    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'photo', $pb.PbFieldType.OY)
+    ..aOM<$6.InputFile>(1, _omitFieldNames ? '' : 'file', subBuilder: $6.InputFile.create)
     ..hasRequiredFields = false
   ;
 
@@ -405,13 +407,15 @@ class UpdateProfilePhotoRequest extends $pb.GeneratedMessage {
   static UpdateProfilePhotoRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$core.int> get photo => $_getN(0);
+  $6.InputFile get file => $_getN(0);
   @$pb.TagNumber(1)
-  set photo($core.List<$core.int> v) { $_setBytes(0, v); }
+  set file($6.InputFile v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPhoto() => $_has(0);
+  $core.bool hasFile() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPhoto() => clearField(1);
+  void clearFile() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.InputFile ensureFile() => $_ensure(0);
 }
 
 class UpdateProfilePhotoResponse extends $pb.GeneratedMessage {
@@ -462,94 +466,6 @@ class UpdateProfilePhotoResponse extends $pb.GeneratedMessage {
   $core.bool hasSuccess() => $_has(0);
   @$pb.TagNumber(1)
   void clearSuccess() => clearField(1);
-}
-
-class EntityNotifySettings extends $pb.GeneratedMessage {
-  factory EntityNotifySettings({
-    $core.int? muteUntil,
-    $core.bool? silent,
-    $core.bool? showPreviews,
-  }) {
-    final $result = create();
-    if (muteUntil != null) {
-      $result.muteUntil = muteUntil;
-    }
-    if (silent != null) {
-      $result.silent = silent;
-    }
-    if (showPreviews != null) {
-      $result.showPreviews = showPreviews;
-    }
-    return $result;
-  }
-  EntityNotifySettings._() : super();
-  factory EntityNotifySettings.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EntityNotifySettings.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EntityNotifySettings', package: const $pb.PackageName(_omitMessageNames ? '' : 'account'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'muteUntil', $pb.PbFieldType.O3)
-    ..aOB(2, _omitFieldNames ? '' : 'silent')
-    ..aOB(3, _omitFieldNames ? '' : 'showPreviews')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  EntityNotifySettings clone() => EntityNotifySettings()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  EntityNotifySettings copyWith(void Function(EntityNotifySettings) updates) => super.copyWith((message) => updates(message as EntityNotifySettings)) as EntityNotifySettings;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static EntityNotifySettings create() => EntityNotifySettings._();
-  EntityNotifySettings createEmptyInstance() => create();
-  static $pb.PbList<EntityNotifySettings> createRepeated() => $pb.PbList<EntityNotifySettings>();
-  @$core.pragma('dart2js:noInline')
-  static EntityNotifySettings getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EntityNotifySettings>(create);
-  static EntityNotifySettings? _defaultInstance;
-
-  /// Time until notifications are disabled (Unix timestamp)
-  /// If mute_until = 0, notifications are enabled
-  /// If mute_until > current time, notifications are disabled until the specified time
-  /// If mute_until = 2147483647, notifications are disabled permanently
-  @$pb.TagNumber(1)
-  $core.int get muteUntil => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set muteUntil($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasMuteUntil() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMuteUntil() => clearField(1);
-
-  /// Mute notifications sound flag
-  /// If silent = true, notifications arrive without sound
-  /// If silent = false, notifications arrive with sound
-  @$pb.TagNumber(2)
-  $core.bool get silent => $_getBF(1);
-  @$pb.TagNumber(2)
-  set silent($core.bool v) { $_setBool(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSilent() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSilent() => clearField(2);
-
-  /// Message preview display flag
-  /// If show_previews = true, the message text is displayed in the notification
-  /// If show_previews = false, only the sender's name is shown in the notification
-  @$pb.TagNumber(3)
-  $core.bool get showPreviews => $_getBF(2);
-  @$pb.TagNumber(3)
-  set showPreviews($core.bool v) { $_setBool(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasShowPreviews() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearShowPreviews() => clearField(3);
 }
 
 enum NotifyEntity_Entity {
@@ -889,7 +805,7 @@ class GetNotifySettingsRequest extends $pb.GeneratedMessage {
 
 class GetNotifySettingsResponse extends $pb.GeneratedMessage {
   factory GetNotifySettingsResponse({
-    EntityNotifySettings? settings,
+    $6.EntityNotifySettings? settings,
   }) {
     final $result = create();
     if (settings != null) {
@@ -902,7 +818,7 @@ class GetNotifySettingsResponse extends $pb.GeneratedMessage {
   factory GetNotifySettingsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetNotifySettingsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'account'), createEmptyInstance: create)
-    ..aOM<EntityNotifySettings>(1, _omitFieldNames ? '' : 'settings', subBuilder: EntityNotifySettings.create)
+    ..aOM<$6.EntityNotifySettings>(1, _omitFieldNames ? '' : 'settings', subBuilder: $6.EntityNotifySettings.create)
     ..hasRequiredFields = false
   ;
 
@@ -928,21 +844,21 @@ class GetNotifySettingsResponse extends $pb.GeneratedMessage {
   static GetNotifySettingsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  EntityNotifySettings get settings => $_getN(0);
+  $6.EntityNotifySettings get settings => $_getN(0);
   @$pb.TagNumber(1)
-  set settings(EntityNotifySettings v) { setField(1, v); }
+  set settings($6.EntityNotifySettings v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSettings() => $_has(0);
   @$pb.TagNumber(1)
   void clearSettings() => clearField(1);
   @$pb.TagNumber(1)
-  EntityNotifySettings ensureSettings() => $_ensure(0);
+  $6.EntityNotifySettings ensureSettings() => $_ensure(0);
 }
 
 class UpdateNotifySettingsRequest extends $pb.GeneratedMessage {
   factory UpdateNotifySettingsRequest({
     NotifyEntity? entity,
-    EntityNotifySettings? settings,
+    $6.EntityNotifySettings? settings,
   }) {
     final $result = create();
     if (entity != null) {
@@ -959,7 +875,7 @@ class UpdateNotifySettingsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateNotifySettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'account'), createEmptyInstance: create)
     ..aOM<NotifyEntity>(1, _omitFieldNames ? '' : 'entity', subBuilder: NotifyEntity.create)
-    ..aOM<EntityNotifySettings>(2, _omitFieldNames ? '' : 'settings', subBuilder: EntityNotifySettings.create)
+    ..aOM<$6.EntityNotifySettings>(2, _omitFieldNames ? '' : 'settings', subBuilder: $6.EntityNotifySettings.create)
     ..hasRequiredFields = false
   ;
 
@@ -996,15 +912,15 @@ class UpdateNotifySettingsRequest extends $pb.GeneratedMessage {
   NotifyEntity ensureEntity() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  EntityNotifySettings get settings => $_getN(1);
+  $6.EntityNotifySettings get settings => $_getN(1);
   @$pb.TagNumber(2)
-  set settings(EntityNotifySettings v) { setField(2, v); }
+  set settings($6.EntityNotifySettings v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSettings() => $_has(1);
   @$pb.TagNumber(2)
   void clearSettings() => clearField(2);
   @$pb.TagNumber(2)
-  EntityNotifySettings ensureSettings() => $_ensure(1);
+  $6.EntityNotifySettings ensureSettings() => $_ensure(1);
 }
 
 class UpdateNotifySettingsResponse extends $pb.GeneratedMessage {

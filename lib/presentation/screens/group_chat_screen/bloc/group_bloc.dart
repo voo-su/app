@@ -15,11 +15,11 @@ part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final CreateGroupChatUseCase _createGroupChatUseCase;
-  final AddUserGroupUsecase _addUserGroupChatUseCase;
+  final AddUserGroupUseCase _addUserGroupChatUseCase;
   final GetGroupChatUseCase _getGroupChatUseCase;
   final GetMembersUseCase _getMembersUseCase;
-  final LeaveGroupUsecase _leaveGroupUseCase;
-  final RemoveUserGroupUsecase _removeUserGroupUsecase;
+  final LeaveGroupUseCase _leaveGroupUseCase;
+  final RemoveUserGroupUseCase _removeUserGroupUseCase;
 
   GroupBloc(
     this._createGroupChatUseCase,
@@ -27,7 +27,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     this._getGroupChatUseCase,
     this._getMembersUseCase,
     this._leaveGroupUseCase,
-    this._removeUserGroupUsecase,
+    this._removeUserGroupUseCase,
   ) : super(GroupInitialState()) {
     on<CreateGroupEvent>(_onCreateGroup);
     on<AddUserToGroupChatEvent>(_onAddUserToGroupChat);
@@ -150,7 +150,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     try {
       emit(GroupRemovingMemberState());
 
-      final result = await _removeUserGroupUsecase(
+      final result = await _removeUserGroupUseCase(
         RemoveUserParams(id: event.groupId, userId: event.memberId),
       );
 

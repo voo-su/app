@@ -185,3 +185,79 @@ const LeaveGroupChatResponse$json = {
 final $typed_data.Uint8List leaveGroupChatResponseDescriptor = $convert.base64Decode(
     'ChZMZWF2ZUdyb3VwQ2hhdFJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
 
+@$core.Deprecated('Use deleteGroupChatRequestDescriptor instead')
+const DeleteGroupChatRequest$json = {
+  '1': 'DeleteGroupChatRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `DeleteGroupChatRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteGroupChatRequestDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVHcm91cENoYXRSZXF1ZXN0Eg4KAmlkGAEgASgDUgJpZA==');
+
+@$core.Deprecated('Use deleteGroupChatResponseDescriptor instead')
+const DeleteGroupChatResponse$json = {
+  '1': 'DeleteGroupChatResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `DeleteGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteGroupChatResponseDescriptor = $convert.base64Decode(
+    'ChdEZWxldGVHcm91cENoYXRSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
+
+@$core.Deprecated('Use editNameGroupChatRequestDescriptor instead')
+const EditNameGroupChatRequest$json = {
+  '1': 'EditNameGroupChatRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `EditNameGroupChatRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editNameGroupChatRequestDescriptor = $convert.base64Decode(
+    'ChhFZGl0TmFtZUdyb3VwQ2hhdFJlcXVlc3QSDgoCaWQYASABKANSAmlkEhIKBG5hbWUYAiABKA'
+    'lSBG5hbWU=');
+
+@$core.Deprecated('Use editNameGroupChatResponseDescriptor instead')
+const EditNameGroupChatResponse$json = {
+  '1': 'EditNameGroupChatResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `EditNameGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editNameGroupChatResponseDescriptor = $convert.base64Decode(
+    'ChlFZGl0TmFtZUdyb3VwQ2hhdFJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
+
+@$core.Deprecated('Use editAboutGroupChatRequestDescriptor instead')
+const EditAboutGroupChatRequest$json = {
+  '1': 'EditAboutGroupChatRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'about', '3': 2, '4': 1, '5': 9, '10': 'about'},
+  ],
+};
+
+/// Descriptor for `EditAboutGroupChatRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editAboutGroupChatRequestDescriptor = $convert.base64Decode(
+    'ChlFZGl0QWJvdXRHcm91cENoYXRSZXF1ZXN0Eg4KAmlkGAEgASgDUgJpZBIUCgVhYm91dBgCIA'
+    'EoCVIFYWJvdXQ=');
+
+@$core.Deprecated('Use editAboutGroupChatResponseDescriptor instead')
+const EditAboutGroupChatResponse$json = {
+  '1': 'EditAboutGroupChatResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `EditAboutGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editAboutGroupChatResponseDescriptor = $convert.base64Decode(
+    'ChpFZGl0QWJvdXRHcm91cENoYXRSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
+

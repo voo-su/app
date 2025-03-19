@@ -139,22 +139,6 @@ final $typed_data.Uint8List getChatsResponseDescriptor = $convert.base64Decode(
     'ChBHZXRDaGF0c1Jlc3BvbnNlEiQKBWl0ZW1zGAEgAygLMg4uY2hhdC5DaGF0SXRlbVIFaXRlbX'
     'M=');
 
-@$core.Deprecated('Use chatNotifySettingsDescriptor instead')
-const ChatNotifySettings$json = {
-  '1': 'ChatNotifySettings',
-  '2': [
-    {'1': 'mute_until', '3': 1, '4': 1, '5': 5, '10': 'muteUntil'},
-    {'1': 'silent', '3': 2, '4': 1, '5': 8, '10': 'silent'},
-    {'1': 'show_previews', '3': 3, '4': 1, '5': 8, '10': 'showPreviews'},
-  ],
-};
-
-/// Descriptor for `ChatNotifySettings`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List chatNotifySettingsDescriptor = $convert.base64Decode(
-    'ChJDaGF0Tm90aWZ5U2V0dGluZ3MSHQoKbXV0ZV91bnRpbBgBIAEoBVIJbXV0ZVVudGlsEhYKBn'
-    'NpbGVudBgCIAEoCFIGc2lsZW50EiMKDXNob3dfcHJldmlld3MYAyABKAhSDHNob3dQcmV2aWV3'
-    'cw==');
-
 @$core.Deprecated('Use chatItemDescriptor instead')
 const ChatItem$json = {
   '1': 'ChatItem',
@@ -166,7 +150,7 @@ const ChatItem$json = {
     {'1': 'name', '3': 5, '4': 1, '5': 9, '10': 'name'},
     {'1': 'surname', '3': 6, '4': 1, '5': 9, '10': 'surname'},
     {'1': 'msg_text', '3': 7, '4': 1, '5': 9, '10': 'msgText'},
-    {'1': 'notify_settings', '3': 8, '4': 1, '5': 11, '6': '.chat.ChatNotifySettings', '10': 'notifySettings'},
+    {'1': 'notify_settings', '3': 8, '4': 1, '5': 11, '6': '.common.EntityNotifySettings', '10': 'notifySettings'},
     {'1': 'unread_count', '3': 9, '4': 1, '5': 3, '10': 'unreadCount'},
     {'1': 'updated_at', '3': 10, '4': 1, '5': 9, '10': 'updatedAt'},
     {'1': 'is_online', '3': 11, '4': 1, '5': 8, '10': 'isOnline'},
@@ -180,11 +164,11 @@ final $typed_data.Uint8List chatItemDescriptor = $convert.base64Decode(
     'CghDaGF0SXRlbRIOCgJpZBgBIAEoA1ICaWQSKgoIcmVjZWl2ZXIYAiABKAsyDi5jaGF0LlJlY2'
     'VpdmVyUghyZWNlaXZlchIaCgh1c2VybmFtZRgDIAEoCVIIdXNlcm5hbWUSFgoGYXZhdGFyGAQg'
     'ASgJUgZhdmF0YXISEgoEbmFtZRgFIAEoCVIEbmFtZRIYCgdzdXJuYW1lGAYgASgJUgdzdXJuYW'
-    '1lEhkKCG1zZ190ZXh0GAcgASgJUgdtc2dUZXh0EkEKD25vdGlmeV9zZXR0aW5ncxgIIAEoCzIY'
-    'LmNoYXQuQ2hhdE5vdGlmeVNldHRpbmdzUg5ub3RpZnlTZXR0aW5ncxIhCgx1bnJlYWRfY291bn'
-    'QYCSABKANSC3VucmVhZENvdW50Eh0KCnVwZGF0ZWRfYXQYCiABKAlSCXVwZGF0ZWRBdBIbCglp'
-    'c19vbmxpbmUYCyABKAhSCGlzT25saW5lEh0KCmlzX2Rpc3R1cmIYDCABKAhSCWlzRGlzdHVyYh'
-    'IVCgZpc19ib3QYDSABKAhSBWlzQm90');
+    '1lEhkKCG1zZ190ZXh0GAcgASgJUgdtc2dUZXh0EkUKD25vdGlmeV9zZXR0aW5ncxgIIAEoCzIc'
+    'LmNvbW1vbi5FbnRpdHlOb3RpZnlTZXR0aW5nc1IObm90aWZ5U2V0dGluZ3MSIQoMdW5yZWFkX2'
+    'NvdW50GAkgASgDUgt1bnJlYWRDb3VudBIdCgp1cGRhdGVkX2F0GAogASgJUgl1cGRhdGVkQXQS'
+    'GwoJaXNfb25saW5lGAsgASgIUghpc09ubGluZRIdCgppc19kaXN0dXJiGAwgASgIUglpc0Rpc3'
+    'R1cmISFQoGaXNfYm90GA0gASgIUgVpc0JvdA==');
 
 @$core.Deprecated('Use getHistoryRequestDescriptor instead')
 const GetHistoryRequest$json = {

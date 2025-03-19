@@ -778,6 +778,334 @@ class LeaveGroupChatResponse extends $pb.GeneratedMessage {
   void clearSuccess() => clearField(1);
 }
 
+class DeleteGroupChatRequest extends $pb.GeneratedMessage {
+  factory DeleteGroupChatRequest({
+    $fixnum.Int64? id,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    return $result;
+  }
+  DeleteGroupChatRequest._() : super();
+  factory DeleteGroupChatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteGroupChatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteGroupChatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteGroupChatRequest clone() => DeleteGroupChatRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteGroupChatRequest copyWith(void Function(DeleteGroupChatRequest) updates) => super.copyWith((message) => updates(message as DeleteGroupChatRequest)) as DeleteGroupChatRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteGroupChatRequest create() => DeleteGroupChatRequest._();
+  DeleteGroupChatRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteGroupChatRequest> createRepeated() => $pb.PbList<DeleteGroupChatRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteGroupChatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteGroupChatRequest>(create);
+  static DeleteGroupChatRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class DeleteGroupChatResponse extends $pb.GeneratedMessage {
+  factory DeleteGroupChatResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  DeleteGroupChatResponse._() : super();
+  factory DeleteGroupChatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteGroupChatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteGroupChatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteGroupChatResponse clone() => DeleteGroupChatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteGroupChatResponse copyWith(void Function(DeleteGroupChatResponse) updates) => super.copyWith((message) => updates(message as DeleteGroupChatResponse)) as DeleteGroupChatResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteGroupChatResponse create() => DeleteGroupChatResponse._();
+  DeleteGroupChatResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteGroupChatResponse> createRepeated() => $pb.PbList<DeleteGroupChatResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteGroupChatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteGroupChatResponse>(create);
+  static DeleteGroupChatResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+}
+
+class EditNameGroupChatRequest extends $pb.GeneratedMessage {
+  factory EditNameGroupChatRequest({
+    $fixnum.Int64? id,
+    $core.String? name,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
+    return $result;
+  }
+  EditNameGroupChatRequest._() : super();
+  factory EditNameGroupChatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditNameGroupChatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditNameGroupChatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditNameGroupChatRequest clone() => EditNameGroupChatRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditNameGroupChatRequest copyWith(void Function(EditNameGroupChatRequest) updates) => super.copyWith((message) => updates(message as EditNameGroupChatRequest)) as EditNameGroupChatRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditNameGroupChatRequest create() => EditNameGroupChatRequest._();
+  EditNameGroupChatRequest createEmptyInstance() => create();
+  static $pb.PbList<EditNameGroupChatRequest> createRepeated() => $pb.PbList<EditNameGroupChatRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EditNameGroupChatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditNameGroupChatRequest>(create);
+  static EditNameGroupChatRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class EditNameGroupChatResponse extends $pb.GeneratedMessage {
+  factory EditNameGroupChatResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  EditNameGroupChatResponse._() : super();
+  factory EditNameGroupChatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditNameGroupChatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditNameGroupChatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditNameGroupChatResponse clone() => EditNameGroupChatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditNameGroupChatResponse copyWith(void Function(EditNameGroupChatResponse) updates) => super.copyWith((message) => updates(message as EditNameGroupChatResponse)) as EditNameGroupChatResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditNameGroupChatResponse create() => EditNameGroupChatResponse._();
+  EditNameGroupChatResponse createEmptyInstance() => create();
+  static $pb.PbList<EditNameGroupChatResponse> createRepeated() => $pb.PbList<EditNameGroupChatResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditNameGroupChatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditNameGroupChatResponse>(create);
+  static EditNameGroupChatResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+}
+
+class EditAboutGroupChatRequest extends $pb.GeneratedMessage {
+  factory EditAboutGroupChatRequest({
+    $fixnum.Int64? id,
+    $core.String? about,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (about != null) {
+      $result.about = about;
+    }
+    return $result;
+  }
+  EditAboutGroupChatRequest._() : super();
+  factory EditAboutGroupChatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditAboutGroupChatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditAboutGroupChatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'about')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditAboutGroupChatRequest clone() => EditAboutGroupChatRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditAboutGroupChatRequest copyWith(void Function(EditAboutGroupChatRequest) updates) => super.copyWith((message) => updates(message as EditAboutGroupChatRequest)) as EditAboutGroupChatRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditAboutGroupChatRequest create() => EditAboutGroupChatRequest._();
+  EditAboutGroupChatRequest createEmptyInstance() => create();
+  static $pb.PbList<EditAboutGroupChatRequest> createRepeated() => $pb.PbList<EditAboutGroupChatRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EditAboutGroupChatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditAboutGroupChatRequest>(create);
+  static EditAboutGroupChatRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get about => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set about($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAbout() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAbout() => clearField(2);
+}
+
+class EditAboutGroupChatResponse extends $pb.GeneratedMessage {
+  factory EditAboutGroupChatResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  EditAboutGroupChatResponse._() : super();
+  factory EditAboutGroupChatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditAboutGroupChatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditAboutGroupChatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditAboutGroupChatResponse clone() => EditAboutGroupChatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditAboutGroupChatResponse copyWith(void Function(EditAboutGroupChatResponse) updates) => super.copyWith((message) => updates(message as EditAboutGroupChatResponse)) as EditAboutGroupChatResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditAboutGroupChatResponse create() => EditAboutGroupChatResponse._();
+  EditAboutGroupChatResponse createEmptyInstance() => create();
+  static $pb.PbList<EditAboutGroupChatResponse> createRepeated() => $pb.PbList<EditAboutGroupChatResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditAboutGroupChatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditAboutGroupChatResponse>(create);
+  static EditAboutGroupChatResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

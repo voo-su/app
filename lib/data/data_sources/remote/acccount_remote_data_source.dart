@@ -1,5 +1,6 @@
-import 'package:voo_su/generated/grpc_pb/account.pbgrpc.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
+import 'package:voo_su/generated/grpc_pb/account.pbgrpc.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 
 class AccountRemoteDataSource {
   final AccountServiceClient client;
