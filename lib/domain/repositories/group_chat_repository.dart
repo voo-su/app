@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:voo_su/core/error/failures.dart';
+import 'package:voo_su/domain/entities/group.dart';
 import 'package:voo_su/generated/grpc_pb/group_chat.pb.dart';
-import 'package:voo_su/domain/entities/chat.dart';
 
 abstract class GroupChatRepository {
   Future<Either<Failure, CreateGroupChatResponse>> createGroupChat(
@@ -16,4 +16,10 @@ abstract class GroupChatRepository {
   removeUserFromGroupChat(RemoveUserParams params);
   Future<Either<Failure, LeaveGroupChatResponse>> leaveGroupChat(int id);
   Future<Either<Failure, DeleteGroupChatResponse>> deleteGroupChat(int id);
+  Future<Either<Failure, EditNameGroupChatResponse>> editGroupName(
+    EditGroupNameParams params,
+  );
+  Future<Either<Failure, EditAboutGroupChatResponse>> editGroupDescription(
+    EditGroupDescriptionParams params,
+  );
 }

@@ -96,6 +96,8 @@
     "saturday",
     "deleteGroup",
     "confirmDeleteGroup",
-    "groupDeleted"
+    "groupDeleted",
+    "editGroup",
+    "groupDescription"
   ]
 }

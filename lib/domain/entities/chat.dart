@@ -44,23 +44,3 @@ class ChatResponse {
 class ChatParams {
   const ChatParams();
 }
-
-class CreateGroupChatParams {
-  final String name;
-
-  const CreateGroupChatParams({required this.name});
-}
-
-class AddUserParams {
-  final int id;
-  final List<int> userIds;
-
-  const AddUserParams({required this.id, required this.userIds});
-}
-
-class RemoveUserParams {
-  final int id;
-  final int userId;
-
-  const RemoveUserParams({required this.id, required this.userId});
-}

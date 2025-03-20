@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/add_group_members_screen.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/edit_group_screen.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/remove_group_members_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
@@ -50,7 +51,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                 },
                 child: Text(
                   AppLocalizations.of(context)!.leave,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
             ],
@@ -58,10 +59,32 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
     );
   }
 
+  void _editGroup(String name, String description, String avatar) async {
+    final result = await Navigator.push<GroupInfoLoadedState>(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => EditGroupScreen(
+              groupId: widget.groupId,
+              currentName: name,
+              currentDescription: description,
+              avatarUrl: avatar,
+            ),
+      ),
+    );
+
+    if (result != null) {
+      Navigator.pop(context, result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<GroupBloc, GroupState>(
       listener: (context, state) {
+        if (state is GroupUpdatedState) {
+          _loadGroupInfo();
+        }
         if (state is GroupMembersAddedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(AppLocalizations.of(context)!.membersAdded)),
@@ -78,9 +101,33 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
         appBar: CustomAppBar(
           titleText: AppLocalizations.of(context)!.groupInfo,
           actions: [
-            IconButton(
-              icon: const Icon(Icons.exit_to_app),
-              onPressed: _leaveGroup,
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'edit') {
+                  final groupState = context.read<GroupBloc>().state;
+                  if (groupState is GroupInfoLoadedState) {
+                    _editGroup(
+                      groupState.name,
+                      groupState.name, // desc
+                      groupState.avatar,
+                    );
+                  }
+                } else if (value == 'leave') {
+                  _leaveGroup();
+                }
+              },
+              itemBuilder:
+                  (context) => [
+                    PopupMenuItem(
+                      value: 'edit',
+                      child: Text(AppLocalizations.of(context)!.editGroup),
+                    ),
+                    PopupMenuItem(
+                      value: 'leave',
+                      child: Text(AppLocalizations.of(context)!.leaveGroup),
+                    ),
+                  ],
+              icon: const Icon(Icons.more_vert),
             ),
           ],
         ),
@@ -191,12 +238,20 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
                                 );
                               },
                             )
-                            : Center(child: Text(AppLocalizations.of(context)!.noMembers)),
+                            : Center(
+                              child: Text(
+                                AppLocalizations.of(context)!.noMembers,
+                              ),
+                            ),
                   ),
                 ],
               );
             } else if (state is GroupInfoErrorState) {
-              return Center(child: Text("${AppLocalizations.of(context)!.error} ${state.failure}"));
+              return Center(
+                child: Text(
+                  "${AppLocalizations.of(context)!.error} ${state.failure}",
+                ),
+              );
             }
             return Center(child: Text(AppLocalizations.of(context)!.noData));
           },

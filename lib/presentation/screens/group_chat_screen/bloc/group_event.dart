@@ -71,3 +71,26 @@ class DeleteGroupEvent extends GroupEvent {
   @override
   List<Object> get props => [groupId];
 }
+
+class EditGroupNameEvent extends GroupEvent {
+  final int groupId;
+  final String newName;
+
+  const EditGroupNameEvent({required this.groupId, required this.newName});
+
+  @override
+  List<Object> get props => [groupId, newName];
+}
+
+class EditGroupDescriptionEvent extends GroupEvent {
+  final int groupId;
+  final String newDescription;
+
+  const EditGroupDescriptionEvent({
+    required this.groupId,
+    required this.newDescription,
+  });
+
+  @override
+  List<Object> get props => [groupId, newDescription];
+}

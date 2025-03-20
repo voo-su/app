@@ -1,6 +1,6 @@
 import 'package:fixnum/fixnum.dart';
+import 'package:voo_su/domain/entities/group.dart';
 import 'package:voo_su/generated/grpc_pb/group_chat.pbgrpc.dart';
-import 'package:voo_su/domain/entities/chat.dart';
 
 class GroupChatRemoteDataSource {
   final GroupChatServiceClient client;
@@ -51,5 +51,24 @@ class GroupChatRemoteDataSource {
 
   Future<DeleteGroupChatResponse> deleteGroupChat(int id) async {
     return await client.deleteGroupChat(DeleteGroupChatRequest(id: Int64(id)));
+  }
+
+  Future<EditNameGroupChatResponse> editGroupName(
+    EditGroupNameParams params,
+  ) async {
+    return await client.editNameGroupChat(
+      EditNameGroupChatRequest(id: Int64(params.groupId), name: params.newName),
+    );
+  }
+
+  Future<EditAboutGroupChatResponse> editGroupDescription(
+    EditGroupDescriptionParams params,
+  ) async {
+    return await client.editAboutGroupChat(
+      EditAboutGroupChatRequest(
+        id: Int64(params.groupId),
+        about: params.newDescription,
+      ),
+    );
   }
 }

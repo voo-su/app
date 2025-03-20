@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:voo_su/core/error/failures.dart';
-import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/contact.dart';
+import 'package:voo_su/domain/entities/group.dart';
 import 'package:voo_su/domain/usecases/group/add_user_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/create_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/group/delete_group_usecase.dart';
+import 'package:voo_su/domain/usecases/group/edit_group_description_usecase.dart';
+import 'package:voo_su/domain/usecases/group/edit_group_name_usecase.dart';
 import 'package:voo_su/domain/usecases/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
 import 'package:voo_su/domain/usecases/group/leave_group_usecase.dart';
@@ -22,6 +24,8 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final LeaveGroupUseCase _leaveGroupUseCase;
   final RemoveUserGroupUseCase _removeUserGroupUseCase;
   final DeleteGroupUsecase _deleteGroupUsecase;
+  final EditGroupNameUseCase _editGroupNameUseCase;
+  final EditGroupDescriptionUseCase _editGroupDescriptionUseCase;
 
   GroupBloc(
     this._createGroupChatUseCase,
@@ -31,6 +35,8 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     this._leaveGroupUseCase,
     this._removeUserGroupUseCase,
     this._deleteGroupUsecase,
+    this._editGroupDescriptionUseCase,
+    this._editGroupNameUseCase,
   ) : super(GroupInitialState()) {
     on<CreateGroupEvent>(_onCreateGroup);
     on<AddUserToGroupChatEvent>(_onAddUserToGroupChat);
@@ -38,6 +44,8 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     on<LeaveGroupChatEvent>(_onLeaveGroupChat);
     on<RemoveUserFromGroupChatEvent>(_onRemoveUserFromGroupChat);
     on<DeleteGroupEvent>(_onDeleteGroup);
+    on<EditGroupNameEvent>(_onEditGroupName);
+    on<EditGroupDescriptionEvent>(_onEditGroupDescription);
   }
 
   Future<void> _onCreateGroup(
@@ -183,5 +191,40 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     } catch (e) {
       emit(GroupErrorState(ExceptionFailure()));
     }
+  }
+
+  Future<void> _onEditGroupName(
+    EditGroupNameEvent event,
+    Emitter<GroupState> emit,
+  ) async {
+    emit(GroupUpdatingState());
+
+    final result = await _editGroupNameUseCase(
+      EditGroupNameParams(groupId: event.groupId, newName: event.newName),
+    );
+
+    result.fold(
+      (failure) => emit(GroupErrorState(failure)),
+      (_) => emit(GroupUpdatedState()),
+    );
+  }
+
+  Future<void> _onEditGroupDescription(
+    EditGroupDescriptionEvent event,
+    Emitter<GroupState> emit,
+  ) async {
+    emit(GroupUpdatingState());
+
+    final result = await _editGroupDescriptionUseCase(
+      EditGroupDescriptionParams(
+        groupId: event.groupId,
+        newDescription: event.newDescription,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(GroupErrorState(failure)),
+      (_) => emit(GroupUpdatedState()),
+    );
   }
 }

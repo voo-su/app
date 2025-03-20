@@ -28,7 +28,7 @@
   "addMembers": "Добавить участников",
   "done": "Готово",
   "contactsLoadError": "Ошибка загрузки контактов",
-  "groupName": "Назовите группу",
+  "groupName": "Название группы",
   "next": "Далее",
   "enterGroupName": "Введите название группы",
   "groupCreated": "Группа успешно создана",
@@ -95,6 +95,7 @@
   "saturday": "Сб",
   "deleteGroup": "Удалить группу",
   "confirmDeleteGroup": "Вы точно хотите удалить группу?",
-  "groupDeleted": "Группа успешно удалена"
-
+  "groupDeleted": "Группа успешно удалена",
+  "editGroup": "Редактировать",
+  "groupDescription": "Описание группы"
 }

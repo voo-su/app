@@ -98,7 +98,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactsLoadError => 'Ошибка загрузки контактов';
 
   @override
-  String get groupName => 'Назовите группу';
+  String get groupName => 'Название группы';
 
   @override
   String get next => 'Далее';
@@ -300,4 +300,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupDeleted => 'Группа успешно удалена';
+
+  @override
+  String get editGroup => 'Редактировать';
+
+  @override
+  String get groupDescription => 'Описание группы';
 }

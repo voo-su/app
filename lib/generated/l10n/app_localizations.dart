@@ -272,7 +272,7 @@ abstract class AppLocalizations {
   /// No description provided for @groupName.
   ///
   /// In ru, this message translates to:
-  /// **'Назовите группу'**
+  /// **'Название группы'**
   String get groupName;
 
   /// No description provided for @next.
@@ -676,6 +676,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Группа успешно удалена'**
   String get groupDeleted;
+
+  /// No description provided for @editGroup.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактировать'**
+  String get editGroup;
+
+  /// No description provided for @groupDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Описание группы'**
+  String get groupDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

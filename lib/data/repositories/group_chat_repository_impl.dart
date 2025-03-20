@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/group_chat_remote_data_source.dart';
+import 'package:voo_su/domain/entities/group.dart';
 import 'package:voo_su/generated/grpc_pb/group_chat.pb.dart';
-import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/repositories/group_chat_repository.dart';
 
 class GroupChatRepositoryImpl implements GroupChatRepository {
@@ -85,6 +85,30 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
   ) async {
     try {
       final response = await remoteDataSource.deleteGroupChat(id);
+      return Right(response);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, EditNameGroupChatResponse>> editGroupName(
+    EditGroupNameParams params,
+  ) async {
+    try {
+      final response = await remoteDataSource.editGroupName(params);
+      return Right(response);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, EditAboutGroupChatResponse>> editGroupDescription(
+    EditGroupDescriptionParams params,
+  ) async {
+    try {
+      final response = await remoteDataSource.editGroupDescription(params);
       return Right(response);
     } on Failure catch (failure) {
       return Left(failure);
