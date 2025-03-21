@@ -318,36 +318,47 @@ const SendMessageResponse$json = {
 final $typed_data.Uint8List sendMessageResponseDescriptor = $convert.base64Decode(
     'ChNTZW5kTWVzc2FnZVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
 
-@$core.Deprecated('Use sendPhotoRequestDescriptor instead')
-const SendPhotoRequest$json = {
-  '1': 'SendPhotoRequest',
+@$core.Deprecated('Use inputMediaDescriptor instead')
+const InputMedia$json = {
+  '1': 'InputMedia',
   '2': [
-    {'1': 'receiver', '3': 1, '4': 1, '5': 11, '6': '.chat.Receiver', '10': 'receiver'},
-    {'1': 'photo', '3': 2, '4': 1, '5': 12, '10': 'photo'},
-    {'1': 'caption', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'caption', '17': true},
-  ],
-  '8': [
-    {'1': '_caption'},
+    {'1': 'file', '3': 1, '4': 1, '5': 11, '6': '.common.InputFile', '10': 'file'},
   ],
 };
 
-/// Descriptor for `SendPhotoRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sendPhotoRequestDescriptor = $convert.base64Decode(
-    'ChBTZW5kUGhvdG9SZXF1ZXN0EioKCHJlY2VpdmVyGAEgASgLMg4uY2hhdC5SZWNlaXZlclIIcm'
-    'VjZWl2ZXISFAoFcGhvdG8YAiABKAxSBXBob3RvEh0KB2NhcHRpb24YAyABKAlIAFIHY2FwdGlv'
-    'bogBAUIKCghfY2FwdGlvbg==');
+/// Descriptor for `InputMedia`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List inputMediaDescriptor = $convert.base64Decode(
+    'CgpJbnB1dE1lZGlhEiUKBGZpbGUYASABKAsyES5jb21tb24uSW5wdXRGaWxlUgRmaWxl');
 
-@$core.Deprecated('Use sendPhotoResponseDescriptor instead')
-const SendPhotoResponse$json = {
-  '1': 'SendPhotoResponse',
+@$core.Deprecated('Use sendMediaRequestDescriptor instead')
+const SendMediaRequest$json = {
+  '1': 'SendMediaRequest',
+  '2': [
+    {'1': 'receiver', '3': 1, '4': 1, '5': 11, '6': '.chat.Receiver', '10': 'receiver'},
+    {'1': 'media', '3': 2, '4': 1, '5': 11, '6': '.chat.InputMedia', '10': 'media'},
+    {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'reply_to_msg_id', '3': 4, '4': 1, '5': 3, '10': 'replyToMsgId'},
+  ],
+};
+
+/// Descriptor for `SendMediaRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendMediaRequestDescriptor = $convert.base64Decode(
+    'ChBTZW5kTWVkaWFSZXF1ZXN0EioKCHJlY2VpdmVyGAEgASgLMg4uY2hhdC5SZWNlaXZlclIIcm'
+    'VjZWl2ZXISJgoFbWVkaWEYAiABKAsyEC5jaGF0LklucHV0TWVkaWFSBW1lZGlhEhgKB21lc3Nh'
+    'Z2UYAyABKAlSB21lc3NhZ2USJQoPcmVwbHlfdG9fbXNnX2lkGAQgASgDUgxyZXBseVRvTXNnSW'
+    'Q=');
+
+@$core.Deprecated('Use sendMediaResponseDescriptor instead')
+const SendMediaResponse$json = {
+  '1': 'SendMediaResponse',
   '2': [
     {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
   ],
 };
 
-/// Descriptor for `SendPhotoResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sendPhotoResponseDescriptor = $convert.base64Decode(
-    'ChFTZW5kUGhvdG9SZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
+/// Descriptor for `SendMediaResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendMediaResponseDescriptor = $convert.base64Decode(
+    'ChFTZW5kTWVkaWFSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
 
 @$core.Deprecated('Use viewMessagesRequestDescriptor instead')
 const ViewMessagesRequest$json = {

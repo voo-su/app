@@ -25,6 +25,10 @@ class UploadServiceClient extends $grpc.Client {
       '/upload.UploadService/SaveFilePart',
       ($5.SaveFilePartRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.SaveFilePartResponse.fromBuffer(value));
+  static final _$getFile = $grpc.ClientMethod<$5.GetFileRequest, $5.GetFileResponse>(
+      '/upload.UploadService/GetFile',
+      ($5.GetFileRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $5.GetFileResponse.fromBuffer(value));
 
   UploadServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -34,6 +38,10 @@ class UploadServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$5.SaveFilePartResponse> saveFilePart($5.SaveFilePartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$saveFilePart, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$5.GetFileResponse> getFile($5.GetFileRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getFile, request, options: options);
   }
 }
 
@@ -49,11 +57,23 @@ abstract class UploadServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $5.SaveFilePartRequest.fromBuffer(value),
         ($5.SaveFilePartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$5.GetFileRequest, $5.GetFileResponse>(
+        'GetFile',
+        getFile_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $5.GetFileRequest.fromBuffer(value),
+        ($5.GetFileResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$5.SaveFilePartResponse> saveFilePart_Pre($grpc.ServiceCall call, $async.Future<$5.SaveFilePartRequest> request) async {
     return saveFilePart(call, await request);
   }
 
+  $async.Future<$5.GetFileResponse> getFile_Pre($grpc.ServiceCall call, $async.Future<$5.GetFileRequest> request) async {
+    return getFile(call, await request);
+  }
+
   $async.Future<$5.SaveFilePartResponse> saveFilePart($grpc.ServiceCall call, $5.SaveFilePartRequest request);
+  $async.Future<$5.GetFileResponse> getFile($grpc.ServiceCall call, $5.GetFileRequest request);
 }

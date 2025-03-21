@@ -55,15 +55,17 @@ const GetGroupChatResponse$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'avatar', '3': 3, '4': 1, '5': 9, '10': 'avatar'},
-    {'1': 'members', '3': 4, '4': 1, '5': 3, '10': 'members'},
+    {'1': 'about', '3': 3, '4': 1, '5': 9, '10': 'about'},
+    {'1': 'avatar', '3': 4, '4': 1, '5': 9, '10': 'avatar'},
+    {'1': 'members', '3': 5, '4': 1, '5': 3, '10': 'members'},
   ],
 };
 
 /// Descriptor for `GetGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getGroupChatResponseDescriptor = $convert.base64Decode(
     'ChRHZXRHcm91cENoYXRSZXNwb25zZRIOCgJpZBgBIAEoA1ICaWQSEgoEbmFtZRgCIAEoCVIEbm'
-    'FtZRIWCgZhdmF0YXIYAyABKAlSBmF2YXRhchIYCgdtZW1iZXJzGAQgASgDUgdtZW1iZXJz');
+    'FtZRIUCgVhYm91dBgDIAEoCVIFYWJvdXQSFgoGYXZhdGFyGAQgASgJUgZhdmF0YXISGAoHbWVt'
+    'YmVycxgFIAEoA1IHbWVtYmVycw==');
 
 @$core.Deprecated('Use getMembersRequestDescriptor instead')
 const GetMembersRequest$json = {
@@ -260,4 +262,30 @@ const EditAboutGroupChatResponse$json = {
 /// Descriptor for `EditAboutGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List editAboutGroupChatResponseDescriptor = $convert.base64Decode(
     'ChpFZGl0QWJvdXRHcm91cENoYXRSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
+
+@$core.Deprecated('Use editPhotoGroupChatRequestDescriptor instead')
+const EditPhotoGroupChatRequest$json = {
+  '1': 'EditPhotoGroupChatRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'photo', '3': 2, '4': 1, '5': 11, '6': '.common.InputPhoto', '10': 'photo'},
+  ],
+};
+
+/// Descriptor for `EditPhotoGroupChatRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editPhotoGroupChatRequestDescriptor = $convert.base64Decode(
+    'ChlFZGl0UGhvdG9Hcm91cENoYXRSZXF1ZXN0Eg4KAmlkGAEgASgDUgJpZBIoCgVwaG90bxgCIA'
+    'EoCzISLmNvbW1vbi5JbnB1dFBob3RvUgVwaG90bw==');
+
+@$core.Deprecated('Use editPhotoGroupChatResponseDescriptor instead')
+const EditPhotoGroupChatResponse$json = {
+  '1': 'EditPhotoGroupChatResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `EditPhotoGroupChatResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editPhotoGroupChatResponseDescriptor = $convert.base64Decode(
+    'ChpFZGl0UGhvdG9Hcm91cENoYXRSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
 

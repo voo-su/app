@@ -12,6 +12,7 @@ import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/generated/firebase_options.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
+import 'package:voo_su/presentation/cubit/upload_cubit.dart';
 import 'package:voo_su/presentation/screens/auth_screen/bloc/auth_bloc.dart';
 import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/contact_screen/bloc/contact_bloc.dart';
@@ -76,6 +77,7 @@ class _AppState extends State<App> {
         BlocProvider(create: (context) => di.sl<SettingsBloc>()),
         BlocProvider(create: (context) => di.sl<GroupBloc>()),
         BlocProvider(create: (context) => di.sl<ChatUpdatesCubit>()),
+        BlocProvider(create: (context) => di.sl<UploadCubit>()),
 
         Provider(create: (context) => di.sl<GetFirebaseTokenUseCase>()),
       ],

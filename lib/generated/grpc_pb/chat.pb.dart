@@ -1583,32 +1583,22 @@ class SendMessageResponse extends $pb.GeneratedMessage {
   void clearSuccess() => clearField(1);
 }
 
-class SendPhotoRequest extends $pb.GeneratedMessage {
-  factory SendPhotoRequest({
-    Receiver? receiver,
-    $core.List<$core.int>? photo,
-    $core.String? caption,
+class InputMedia extends $pb.GeneratedMessage {
+  factory InputMedia({
+    $6.InputFile? file,
   }) {
     final $result = create();
-    if (receiver != null) {
-      $result.receiver = receiver;
-    }
-    if (photo != null) {
-      $result.photo = photo;
-    }
-    if (caption != null) {
-      $result.caption = caption;
+    if (file != null) {
+      $result.file = file;
     }
     return $result;
   }
-  SendPhotoRequest._() : super();
-  factory SendPhotoRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SendPhotoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  InputMedia._() : super();
+  factory InputMedia.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory InputMedia.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendPhotoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
-    ..aOM<Receiver>(1, _omitFieldNames ? '' : 'receiver', subBuilder: Receiver.create)
-    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'photo', $pb.PbFieldType.OY)
-    ..aOS(3, _omitFieldNames ? '' : 'caption')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InputMedia', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+    ..aOM<$6.InputFile>(1, _omitFieldNames ? '' : 'file', subBuilder: $6.InputFile.create)
     ..hasRequiredFields = false
   ;
 
@@ -1616,22 +1606,89 @@ class SendPhotoRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SendPhotoRequest clone() => SendPhotoRequest()..mergeFromMessage(this);
+  InputMedia clone() => InputMedia()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SendPhotoRequest copyWith(void Function(SendPhotoRequest) updates) => super.copyWith((message) => updates(message as SendPhotoRequest)) as SendPhotoRequest;
+  InputMedia copyWith(void Function(InputMedia) updates) => super.copyWith((message) => updates(message as InputMedia)) as InputMedia;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SendPhotoRequest create() => SendPhotoRequest._();
-  SendPhotoRequest createEmptyInstance() => create();
-  static $pb.PbList<SendPhotoRequest> createRepeated() => $pb.PbList<SendPhotoRequest>();
+  static InputMedia create() => InputMedia._();
+  InputMedia createEmptyInstance() => create();
+  static $pb.PbList<InputMedia> createRepeated() => $pb.PbList<InputMedia>();
   @$core.pragma('dart2js:noInline')
-  static SendPhotoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendPhotoRequest>(create);
-  static SendPhotoRequest? _defaultInstance;
+  static InputMedia getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputMedia>(create);
+  static InputMedia? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.InputFile get file => $_getN(0);
+  @$pb.TagNumber(1)
+  set file($6.InputFile v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFile() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.InputFile ensureFile() => $_ensure(0);
+}
+
+class SendMediaRequest extends $pb.GeneratedMessage {
+  factory SendMediaRequest({
+    Receiver? receiver,
+    InputMedia? media,
+    $core.String? message,
+    $fixnum.Int64? replyToMsgId,
+  }) {
+    final $result = create();
+    if (receiver != null) {
+      $result.receiver = receiver;
+    }
+    if (media != null) {
+      $result.media = media;
+    }
+    if (message != null) {
+      $result.message = message;
+    }
+    if (replyToMsgId != null) {
+      $result.replyToMsgId = replyToMsgId;
+    }
+    return $result;
+  }
+  SendMediaRequest._() : super();
+  factory SendMediaRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendMediaRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendMediaRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+    ..aOM<Receiver>(1, _omitFieldNames ? '' : 'receiver', subBuilder: Receiver.create)
+    ..aOM<InputMedia>(2, _omitFieldNames ? '' : 'media', subBuilder: InputMedia.create)
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..aInt64(4, _omitFieldNames ? '' : 'replyToMsgId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendMediaRequest clone() => SendMediaRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendMediaRequest copyWith(void Function(SendMediaRequest) updates) => super.copyWith((message) => updates(message as SendMediaRequest)) as SendMediaRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SendMediaRequest create() => SendMediaRequest._();
+  SendMediaRequest createEmptyInstance() => create();
+  static $pb.PbList<SendMediaRequest> createRepeated() => $pb.PbList<SendMediaRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SendMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendMediaRequest>(create);
+  static SendMediaRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   Receiver get receiver => $_getN(0);
@@ -1645,26 +1702,37 @@ class SendPhotoRequest extends $pb.GeneratedMessage {
   Receiver ensureReceiver() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$core.int> get photo => $_getN(1);
+  InputMedia get media => $_getN(1);
   @$pb.TagNumber(2)
-  set photo($core.List<$core.int> v) { $_setBytes(1, v); }
+  set media(InputMedia v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasPhoto() => $_has(1);
+  $core.bool hasMedia() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPhoto() => clearField(2);
+  void clearMedia() => clearField(2);
+  @$pb.TagNumber(2)
+  InputMedia ensureMedia() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.String get caption => $_getSZ(2);
+  $core.String get message => $_getSZ(2);
   @$pb.TagNumber(3)
-  set caption($core.String v) { $_setString(2, v); }
+  set message($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCaption() => $_has(2);
+  $core.bool hasMessage() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCaption() => clearField(3);
+  void clearMessage() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get replyToMsgId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set replyToMsgId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasReplyToMsgId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReplyToMsgId() => clearField(4);
 }
 
-class SendPhotoResponse extends $pb.GeneratedMessage {
-  factory SendPhotoResponse({
+class SendMediaResponse extends $pb.GeneratedMessage {
+  factory SendMediaResponse({
     $core.bool? success,
   }) {
     final $result = create();
@@ -1673,11 +1741,11 @@ class SendPhotoResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  SendPhotoResponse._() : super();
-  factory SendPhotoResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SendPhotoResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SendMediaResponse._() : super();
+  factory SendMediaResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendMediaResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendPhotoResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendMediaResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'success')
     ..hasRequiredFields = false
   ;
@@ -1686,22 +1754,22 @@ class SendPhotoResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SendPhotoResponse clone() => SendPhotoResponse()..mergeFromMessage(this);
+  SendMediaResponse clone() => SendMediaResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SendPhotoResponse copyWith(void Function(SendPhotoResponse) updates) => super.copyWith((message) => updates(message as SendPhotoResponse)) as SendPhotoResponse;
+  SendMediaResponse copyWith(void Function(SendMediaResponse) updates) => super.copyWith((message) => updates(message as SendMediaResponse)) as SendMediaResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SendPhotoResponse create() => SendPhotoResponse._();
-  SendPhotoResponse createEmptyInstance() => create();
-  static $pb.PbList<SendPhotoResponse> createRepeated() => $pb.PbList<SendPhotoResponse>();
+  static SendMediaResponse create() => SendMediaResponse._();
+  SendMediaResponse createEmptyInstance() => create();
+  static $pb.PbList<SendMediaResponse> createRepeated() => $pb.PbList<SendMediaResponse>();
   @$core.pragma('dart2js:noInline')
-  static SendPhotoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendPhotoResponse>(create);
-  static SendPhotoResponse? _defaultInstance;
+  static SendMediaResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendMediaResponse>(create);
+  static SendMediaResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.bool get success => $_getBF(0);

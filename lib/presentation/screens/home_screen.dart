@@ -3,7 +3,8 @@ import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/chat_screen/chat_screen.dart';
 import 'package:voo_su/presentation/screens/contact_screen/contact_screen.dart';
 import 'package:voo_su/presentation/screens/settings_screen/settings_screen.dart';
-import 'package:voo_su/presentation/screens/test_screen.dart';
+import 'package:voo_su/presentation/screens/test_screen/test_update_screen.dart';
+import 'package:voo_su/presentation/screens/test_screen/test_upload_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // SearchScreen(),
     SettingsScreen(),
 
-    TestScreen(),
+    //TestUpdateScreen(),
+    TestUploadScreen(),
   ];
 
   @override

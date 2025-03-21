@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/domain/entities/chat_update.dart';
 import 'package:voo_su/presentation/cubit/chat_updates_cubit.dart';
 
-class TestScreen extends StatefulWidget {
-  const TestScreen({super.key});
+class TestUpdateScreen extends StatefulWidget {
+  const TestUpdateScreen({super.key});
 
   @override
-  State<TestScreen> createState() => _TestScreenState();
+  State<TestUpdateScreen> createState() => _TestUpdateScreenState();
 }
 
-class _TestScreenState extends State<TestScreen> {
+class _TestUpdateScreenState extends State<TestUpdateScreen> {
   @override
   Widget build(BuildContext context) {
 

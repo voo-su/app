@@ -57,6 +57,10 @@ class GroupChatServiceClient extends $grpc.Client {
       '/group_chat.GroupChatService/EditAboutGroupChat',
       ($4.EditAboutGroupChatRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.EditAboutGroupChatResponse.fromBuffer(value));
+  static final _$editPhotoGroupChat = $grpc.ClientMethod<$4.EditPhotoGroupChatRequest, $4.EditPhotoGroupChatResponse>(
+      '/group_chat.GroupChatService/EditPhotoGroupChat',
+      ($4.EditPhotoGroupChatRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.EditPhotoGroupChatResponse.fromBuffer(value));
 
   GroupChatServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -98,6 +102,10 @@ class GroupChatServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$4.EditAboutGroupChatResponse> editAboutGroupChat($4.EditAboutGroupChatRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$editAboutGroupChat, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.EditPhotoGroupChatResponse> editPhotoGroupChat($4.EditPhotoGroupChatRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$editPhotoGroupChat, request, options: options);
   }
 }
 
@@ -169,6 +177,13 @@ abstract class GroupChatServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $4.EditAboutGroupChatRequest.fromBuffer(value),
         ($4.EditAboutGroupChatResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$4.EditPhotoGroupChatRequest, $4.EditPhotoGroupChatResponse>(
+        'EditPhotoGroupChat',
+        editPhotoGroupChat_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $4.EditPhotoGroupChatRequest.fromBuffer(value),
+        ($4.EditPhotoGroupChatResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$4.CreateGroupChatResponse> createGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.CreateGroupChatRequest> request) async {
@@ -207,6 +222,10 @@ abstract class GroupChatServiceBase extends $grpc.Service {
     return editAboutGroupChat(call, await request);
   }
 
+  $async.Future<$4.EditPhotoGroupChatResponse> editPhotoGroupChat_Pre($grpc.ServiceCall call, $async.Future<$4.EditPhotoGroupChatRequest> request) async {
+    return editPhotoGroupChat(call, await request);
+  }
+
   $async.Future<$4.CreateGroupChatResponse> createGroupChat($grpc.ServiceCall call, $4.CreateGroupChatRequest request);
   $async.Future<$4.GetGroupChatResponse> getGroupChat($grpc.ServiceCall call, $4.GetGroupChatRequest request);
   $async.Future<$4.GetMembersResponse> getMembers($grpc.ServiceCall call, $4.GetMembersRequest request);
@@ -216,4 +235,5 @@ abstract class GroupChatServiceBase extends $grpc.Service {
   $async.Future<$4.DeleteGroupChatResponse> deleteGroupChat($grpc.ServiceCall call, $4.DeleteGroupChatRequest request);
   $async.Future<$4.EditNameGroupChatResponse> editNameGroupChat($grpc.ServiceCall call, $4.EditNameGroupChatRequest request);
   $async.Future<$4.EditAboutGroupChatResponse> editAboutGroupChat($grpc.ServiceCall call, $4.EditAboutGroupChatRequest request);
+  $async.Future<$4.EditPhotoGroupChatResponse> editPhotoGroupChat($grpc.ServiceCall call, $4.EditPhotoGroupChatRequest request);
 }

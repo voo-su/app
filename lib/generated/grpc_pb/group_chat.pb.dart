@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common/common.pb.dart' as $6;
+
 class CreateGroupChatRequest extends $pb.GeneratedMessage {
   factory CreateGroupChatRequest({
     $core.String? name,
@@ -168,6 +170,7 @@ class GetGroupChatResponse extends $pb.GeneratedMessage {
   factory GetGroupChatResponse({
     $fixnum.Int64? id,
     $core.String? name,
+    $core.String? about,
     $core.String? avatar,
     $fixnum.Int64? members,
   }) {
@@ -177,6 +180,9 @@ class GetGroupChatResponse extends $pb.GeneratedMessage {
     }
     if (name != null) {
       $result.name = name;
+    }
+    if (about != null) {
+      $result.about = about;
     }
     if (avatar != null) {
       $result.avatar = avatar;
@@ -193,8 +199,9 @@ class GetGroupChatResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetGroupChatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'avatar')
-    ..aInt64(4, _omitFieldNames ? '' : 'members')
+    ..aOS(3, _omitFieldNames ? '' : 'about')
+    ..aOS(4, _omitFieldNames ? '' : 'avatar')
+    ..aInt64(5, _omitFieldNames ? '' : 'members')
     ..hasRequiredFields = false
   ;
 
@@ -238,22 +245,31 @@ class GetGroupChatResponse extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get avatar => $_getSZ(2);
+  $core.String get about => $_getSZ(2);
   @$pb.TagNumber(3)
-  set avatar($core.String v) { $_setString(2, v); }
+  set about($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasAvatar() => $_has(2);
+  $core.bool hasAbout() => $_has(2);
   @$pb.TagNumber(3)
-  void clearAvatar() => clearField(3);
+  void clearAbout() => clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get members => $_getI64(3);
+  $core.String get avatar => $_getSZ(3);
   @$pb.TagNumber(4)
-  set members($fixnum.Int64 v) { $_setInt64(3, v); }
+  set avatar($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasMembers() => $_has(3);
+  $core.bool hasAvatar() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMembers() => clearField(4);
+  void clearAvatar() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get members => $_getI64(4);
+  @$pb.TagNumber(5)
+  set members($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasMembers() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMembers() => clearField(5);
 }
 
 class GetMembersRequest extends $pb.GeneratedMessage {
@@ -1095,6 +1111,122 @@ class EditAboutGroupChatResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static EditAboutGroupChatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditAboutGroupChatResponse>(create);
   static EditAboutGroupChatResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+}
+
+class EditPhotoGroupChatRequest extends $pb.GeneratedMessage {
+  factory EditPhotoGroupChatRequest({
+    $fixnum.Int64? id,
+    $6.InputPhoto? photo,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (photo != null) {
+      $result.photo = photo;
+    }
+    return $result;
+  }
+  EditPhotoGroupChatRequest._() : super();
+  factory EditPhotoGroupChatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPhotoGroupChatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditPhotoGroupChatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOM<$6.InputPhoto>(2, _omitFieldNames ? '' : 'photo', subBuilder: $6.InputPhoto.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditPhotoGroupChatRequest clone() => EditPhotoGroupChatRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditPhotoGroupChatRequest copyWith(void Function(EditPhotoGroupChatRequest) updates) => super.copyWith((message) => updates(message as EditPhotoGroupChatRequest)) as EditPhotoGroupChatRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditPhotoGroupChatRequest create() => EditPhotoGroupChatRequest._();
+  EditPhotoGroupChatRequest createEmptyInstance() => create();
+  static $pb.PbList<EditPhotoGroupChatRequest> createRepeated() => $pb.PbList<EditPhotoGroupChatRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EditPhotoGroupChatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPhotoGroupChatRequest>(create);
+  static EditPhotoGroupChatRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $6.InputPhoto get photo => $_getN(1);
+  @$pb.TagNumber(2)
+  set photo($6.InputPhoto v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPhoto() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPhoto() => clearField(2);
+  @$pb.TagNumber(2)
+  $6.InputPhoto ensurePhoto() => $_ensure(1);
+}
+
+class EditPhotoGroupChatResponse extends $pb.GeneratedMessage {
+  factory EditPhotoGroupChatResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  EditPhotoGroupChatResponse._() : super();
+  factory EditPhotoGroupChatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPhotoGroupChatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditPhotoGroupChatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'group_chat'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditPhotoGroupChatResponse clone() => EditPhotoGroupChatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditPhotoGroupChatResponse copyWith(void Function(EditPhotoGroupChatResponse) updates) => super.copyWith((message) => updates(message as EditPhotoGroupChatResponse)) as EditPhotoGroupChatResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditPhotoGroupChatResponse create() => EditPhotoGroupChatResponse._();
+  EditPhotoGroupChatResponse createEmptyInstance() => create();
+  static $pb.PbList<EditPhotoGroupChatResponse> createRepeated() => $pb.PbList<EditPhotoGroupChatResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditPhotoGroupChatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPhotoGroupChatResponse>(create);
+  static EditPhotoGroupChatResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.bool get success => $_getBF(0);
