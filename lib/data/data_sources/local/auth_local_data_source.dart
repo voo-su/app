@@ -33,10 +33,13 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> setLogin(AuthLogin login) async {
     try {
-      await sharedPreferences.setString(authToken, login.token);
-      await sharedPreferences.setInt(authExpires, login.expiresIn);
-      // await secureStorage.write(key: authToken, value: login.token);
-      // await secureStorage.write(key: authExpires, value: login.expiresIn);
+      // await sharedPreferences.setString(authToken, login.token);
+      // await sharedPreferences.setInt(authExpires, login.expiresIn);
+      await secureStorage.write(key: authToken, value: login.token);
+      await secureStorage.write(
+        key: authExpires,
+        value: login.expiresIn.toString(),
+      );
     } catch (e) {
       throw CacheException();
     }
@@ -44,13 +47,20 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<AuthLogin> getLogin() async {
-    final token = sharedPreferences.getString(authToken);
-    final expires = sharedPreferences.getInt(authExpires);
-    //final token = await secureStorage.read(key: authToken);
-    //final expires = await secureStorage.read(key: authExpires);
-    if (token != null && expires != null) {
-      return AuthLogin(token: token, expiresIn: expires);
-    } else {
+    try {
+      // String? token = sharedPreferences.getString(authToken);
+      // int? expires = sharedPreferences.getInt(authExpires);
+      String? token = await secureStorage.read(key: authToken);
+      int? expires = int.tryParse(
+        await secureStorage.read(key: authExpires) ?? '',
+      );
+
+      if (token != null && expires != null) {
+        return AuthLogin(token: token, expiresIn: expires);
+      } else {
+        throw CacheException();
+      }
+    } catch (e) {
       throw CacheException();
     }
   }
@@ -58,12 +68,15 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> setVerify(AuthVerify verify) async {
     try {
-      sharedPreferences.setString(userToken, verify.accessToken);
-      sharedPreferences.setInt(userExpires, verify.expiresIn);
+      // await sharedPreferences.setString(userToken, verify.accessToken);
+      // await sharedPreferences.setInt(userExpires, verify.expiresIn);
+      await secureStorage.write(key: userToken, value: verify.accessToken);
+      await secureStorage.write(
+        key: userExpires,
+        value: verify.expiresIn.toString(),
+      );
       sharedPreferences.remove(authToken);
       sharedPreferences.remove(userExpires);
-      //await secureStorage.write(key: userToken, value: verify.accessToken);
-      //await secureStorage.write(key: userExpires, value: verify.expiresIn);
     } catch (e) {
       throw CacheException();
     }
@@ -72,8 +85,9 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<String> getToken() async {
     try {
-      final token = sharedPreferences.getString(userToken);
-      if (token == null) {
+      //String? token = sharedPreferences.getString(userToken);
+      String? token = await secureStorage.read(key: userToken);
+      if (token == null || token.isEmpty) {
         throw CacheException();
       }
       return token;
@@ -85,7 +99,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> clearAuthData() async {
     try {
-      await sharedPreferences.clear();
+      //await sharedPreferences.clear();
       await secureStorage.deleteAll();
     } catch (e) {
       throw CacheException();

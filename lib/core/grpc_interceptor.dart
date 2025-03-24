@@ -10,8 +10,14 @@ class GrpcInterceptor extends ClientInterceptor {
 
   // https://github.com/grpc/grpc-dart/issues/544
   FutureOr<void> _tokenProvider(Map<String, String> metadata, String _) async {
-    final token = await localDataSource.getToken();
-    metadata['Authorization'] = token;
+    try {
+      final token = await localDataSource.getToken();
+      if (token.isNotEmpty) {
+        metadata['Authorization'] = 'Bearer $token';
+      }
+    } catch (e) {
+      print('<< VLog - GrpcInterceptor - _tokenProvider err: $e >>');
+    }
   }
 
   @override
