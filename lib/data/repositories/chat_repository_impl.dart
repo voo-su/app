@@ -160,4 +160,14 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> sendMedia(SendMediaParams params) async {
+    try {
+      final response = await remoteDataSource.sendMedia(params);
+      return Right(response.success);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

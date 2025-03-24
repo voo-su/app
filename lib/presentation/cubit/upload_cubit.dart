@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/utils/extension.dart';
+import 'package:voo_su/domain/entities/chat_update.dart';
 import 'package:voo_su/domain/usecases/upload/upload_file_usecase.dart';
 
 abstract class UploadState {}
@@ -10,7 +11,11 @@ class FileUploadInitial extends UploadState {}
 
 class FileUploadInProgress extends UploadState {}
 
-class FileUploadSuccess extends UploadState {}
+class FileUploadSuccess extends UploadState {
+  final UploadedFile uploadedFile;
+
+  FileUploadSuccess(this.uploadedFile);
+}
 
 class FileUploadFailure extends UploadState {
   final String error;
@@ -64,7 +69,7 @@ class UploadCubit extends Cubit<UploadState> {
         },
         (success) {
           print('<< VLog - uploadFile - success $success (fileId) >>');
-          emit(FileUploadSuccess());
+          emit(FileUploadSuccess(success));
         },
       );
     } catch (e) {

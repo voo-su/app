@@ -107,3 +107,24 @@ class DeleteMessagesParams {
     required this.messageIds,
   });
 }
+
+class SendMediaParams {
+  final int chatType;
+  final int receiverId;
+  final int fileId;
+  final int parts;
+  final String fileName;
+  final String? message;
+  final int? replyToMsgId;
+
+  SendMediaParams({
+    required this.chatType,
+    required this.receiverId,
+    required this.fileId,
+    required this.parts,
+    required this.fileName,
+    this.message,
+    this.replyToMsgId,
+  });
+}
+

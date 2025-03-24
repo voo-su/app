@@ -11,6 +11,7 @@ class MessageInputWidget extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
+  final void Function(String path) onFilePicked;
   final int maxLines;
 
   const MessageInputWidget({
@@ -18,6 +19,7 @@ class MessageInputWidget extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required FocusNode focusNode,
+    required this.onFilePicked,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
@@ -95,6 +97,7 @@ class MessageInputWidget extends StatelessWidget {
         final filePath = result.files.single.path;
         if (filePath != null) {
           print("Выбран файл: $filePath");
+          onFilePicked(filePath);
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -125,26 +128,28 @@ class MessageInputWidget extends StatelessWidget {
     }
   }
 
-  Future<void> _showAttachmentOptions(BuildContext context) async {
+  void _showAttachmentOptions(BuildContext context) async {
+    final rootContext = context;
+
     showModalBottomSheet(
-      context: context,
-      builder: (context) {
+      context: rootContext,
+      builder: (sheetContext) {
         return Wrap(
           children: [
             ListTile(
               leading: const Icon(Icons.photo),
-              title: Text(AppLocalizations.of(context)!.uploadPhoto),
+              title: Text(AppLocalizations.of(rootContext)!.uploadPhoto),
               onTap: () {
-                Navigator.pop(context);
-                pickImage(context);
+                Navigator.pop(sheetContext);
+                pickImage(rootContext);
               },
             ),
             ListTile(
               leading: const Icon(Icons.insert_drive_file),
-              title: Text(AppLocalizations.of(context)!.uploadFile),
+              title: Text(AppLocalizations.of(rootContext)!.uploadFile),
               onTap: () {
-                Navigator.pop(context);
-                pickFile(context);
+                Navigator.pop(sheetContext);
+                pickFile(rootContext);
               },
             ),
           ],

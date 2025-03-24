@@ -14,4 +14,6 @@ abstract class ChatRepository {
   Future<Either<Failure, bool>> sendMessage(SendMessageParams params);
 
   Future<Either<Failure, bool>> deleteMessages(DeleteMessagesParams params);
+
+  Future<Either<Failure, bool>> sendMedia(SendMediaParams params);
 }

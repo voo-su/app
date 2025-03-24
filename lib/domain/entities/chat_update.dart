@@ -55,3 +55,11 @@ class UpdateUserTyping extends ChatUpdate {
   @override
   List<Object?> get props => [chatType, receiverId, userId, isTyping];
 }
+
+class UploadedFile {
+  final int id;
+  final int parts;
+  final String name;
+
+  UploadedFile({required this.id, required this.parts, required this.name});
+}

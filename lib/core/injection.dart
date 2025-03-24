@@ -35,6 +35,7 @@ import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_history_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
+import 'package:voo_su/domain/usecases/chat/send_media_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/send_messages_usecase.dart';
 import 'package:voo_su/domain/usecases/contact/get_contacts_usecase.dart';
 import 'package:voo_su/domain/usecases/group/add_user_group_usecase.dart';
@@ -165,12 +166,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EditGroupNameUseCase(sl()));
   sl.registerLazySingleton(() => EditGroupDescriptionUseCase(sl()));
   sl.registerLazySingleton(() => UploadFileUseCase(sl()));
+  sl.registerLazySingleton(() => SendMediaUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
   sl.registerFactory(() => ChatBloc(sl(), sl()));
   sl.registerFactory(() => ContactBloc(sl()));
-  sl.registerFactory(() => MessageBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => MessageBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
   sl.registerFactory(
     () => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),

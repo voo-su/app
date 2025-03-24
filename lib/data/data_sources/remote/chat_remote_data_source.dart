@@ -1,6 +1,7 @@
 import 'package:fixnum/fixnum.dart';
 import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart' as common;
 
 class ChatRemoteDataSource {
   final ChatServiceClient client;
@@ -76,4 +77,26 @@ class ChatRemoteDataSource {
       ),
     );
   }
+
+  Future<SendMediaResponse> sendMedia(SendMediaParams params) async {
+  return await client.sendMedia(
+    SendMediaRequest(
+      receiver: Receiver(
+        chatType: params.chatType,
+        receiverId: Int64(params.receiverId),
+      ),
+      media: InputMedia(
+        file: common.InputFile(
+          id: Int64(params.fileId),
+          parts: params.parts,
+          name: params.fileName,
+        ),
+      ),
+      message: params.message ?? '',
+      replyToMsgId:
+          params.replyToMsgId != null ? Int64(params.replyToMsgId!) : null,
+    ),
+  );
+}
+
 }

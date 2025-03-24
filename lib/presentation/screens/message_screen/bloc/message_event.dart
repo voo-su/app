@@ -48,3 +48,12 @@ class LoadGroupInfoEvent extends MessageEvent {
   @override
   List<Object> get props => [groupId];
 }
+
+class SendMediaEvent extends MessageEvent {
+  final SendMediaParams params;
+
+  const SendMediaEvent(this.params);
+
+  @override
+  List<Object> get props => [params];
+}

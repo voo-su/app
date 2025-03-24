@@ -4,6 +4,7 @@ import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
+import 'package:voo_su/presentation/cubit/upload_cubit.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
@@ -131,28 +132,60 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return BlocListener<GroupBloc, GroupState>(
-      listener: (context, state) {
-        if (state is GroupDeletedState) {
-          Navigator.popUntil(context, (route) => route.isFirst);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context)!.groupDeleted)),
-          );
-        }
-        if (state is GroupUpdatedState) {
-          print("чат обновление");
-          context.read<MessageBloc>().add(
-            LoadHistoryEvent(
-              MessageParams(
-                chatType: widget.chat.chatType,
-                receiverId: widget.chat.receiverId,
-                messageId: 0,
-                limit: 30,
-              ),
-            ),
-          );
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<GroupBloc, GroupState>(
+          listener: (context, state) {
+            if (state is GroupDeletedState) {
+              Navigator.popUntil(context, (route) => route.isFirst);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(AppLocalizations.of(context)!.groupDeleted),
+                ),
+              );
+            }
+            if (state is GroupUpdatedState) {
+              print("чат обновление");
+              context.read<MessageBloc>().add(
+                LoadHistoryEvent(
+                  MessageParams(
+                    chatType: widget.chat.chatType,
+                    receiverId: widget.chat.receiverId,
+                    messageId: 0,
+                    limit: 30,
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<UploadCubit, UploadState>(
+          listener: (context, state) {
+            if (state is FileUploadSuccess) {
+              final file = state.uploadedFile;
+
+              print("file file - ${file.name} and ${file.parts}");
+
+              context.read<MessageBloc>().add(
+                SendMediaEvent(
+                  SendMediaParams(
+                    chatType: widget.chat.chatType,
+                    receiverId: widget.chat.receiverId,
+                    fileId: file.id,
+                    parts: file.parts,
+                    fileName: file.name,
+                    message: '', // или текст, если есть
+                    replyToMsgId: _replyMessage?.id,
+                  ),
+                ),
+              );
+
+              print("end");
+              _clearReply(); // если хочешь сбросить reply
+            }
+          },
+        ),
+      ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         behavior: HitTestBehavior.translucent,
@@ -238,6 +271,10 @@ class _MessageScreenState extends State<MessageScreen> {
                               focusNode: _focusNode,
                               hintText:
                                   AppLocalizations.of(context)!.writeMessage,
+                              onFilePicked: (path) {
+                                context.read<UploadCubit>().selectFile(path);
+                                context.read<UploadCubit>().uploadFile();
+                              },
                             ),
                           ),
                           const SizedBox(width: 8),

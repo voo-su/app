@@ -115,6 +115,8 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
   }
 
   Widget _buildMessageContent(Message message, bool isMine) {
+    print("Message type: ${message.msgType}");
+
     if (message.reply is MessageReply) {
       print("VLog - MessageReply - ${(message.reply as MessageReply).content}");
       return ReplyMessageBubble(
@@ -204,7 +206,9 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
 
   void _replyMessage() {
     final replyUser =
-        widget.message.userId != widget.receiverId ? AppLocalizations.of(context)!.you : widget.chatName;
+        widget.message.userId != widget.receiverId
+            ? AppLocalizations.of(context)!.you
+            : widget.chatName;
     widget.onReply(widget.message, replyUser);
   }
 
@@ -214,9 +218,9 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
 
   void _copyMessage(BuildContext context) {
     Clipboard.setData(ClipboardData(text: widget.message.content));
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.messageCopied)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppLocalizations.of(context)!.messageCopied)),
+    );
   }
 
   void _deleteMessage() {
@@ -230,9 +234,9 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
       ),
     );
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar( SnackBar(content: Text((AppLocalizations.of(context)!.messageDeleted))));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text((AppLocalizations.of(context)!.messageDeleted))),
+    );
     print("Удалено сообщение: ${widget.message.id}");
   }
 }
