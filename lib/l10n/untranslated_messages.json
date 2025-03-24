@@ -98,6 +98,13 @@
     "confirmDeleteGroup",
     "groupDeleted",
     "editGroup",
-    "groupDescription"
+    "groupDescription",
+    "uploadPhoto",
+    "uploadFile",
+    "fileSelected",
+    "fileWillBeSent",
+    "allowFileAccess",
+    "fileUploadError",
+    "fileUploadSuccess"
   ]
 }

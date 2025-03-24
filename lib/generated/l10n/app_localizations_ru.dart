@@ -306,4 +306,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get groupDescription => 'Описание группы';
+
+  @override
+  String get uploadPhoto => 'Загрузить фото';
+
+  @override
+  String get uploadFile => 'Загрузить файл';
+
+  @override
+  String get fileSelected => 'Файл выбран';
+
+  @override
+  String get fileWillBeSent => 'Ваш файл будет отправлен';
+
+  @override
+  String get allowFileAccess => 'Разрешите доступ к файлам в настройках';
+
+  @override
+  String get fileUploadError => 'Ошибка загрузки файла';
+
+  @override
+  String get fileUploadSuccess => 'Файл успешно загружен';
 }

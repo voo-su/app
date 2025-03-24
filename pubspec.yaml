@@ -64,6 +64,9 @@ dependencies:
   # Icons
   flutter_svg: ^2.0.17
 
+  # file
+  file_picker: ^9.2.1
+
   # audio
   voice_message_package: ^2.2.1
 

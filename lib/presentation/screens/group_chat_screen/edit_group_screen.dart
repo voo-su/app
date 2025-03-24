@@ -43,29 +43,18 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
     super.dispose();
   }
 
-  void _saveChanges() {
-    if (_nameController.text.trim().isNotEmpty &&
-        _nameController.text.trim() != widget.currentName) {
-      context.read<GroupBloc>().add(
-        EditGroupNameEvent(
-          groupId: widget.groupId,
-          newName: _nameController.text.trim(),
-        ),
-      );
-    }
-
-    if (_descriptionController.text.trim().isNotEmpty &&
-        _descriptionController.text.trim() != widget.currentDescription) {
-      context.read<GroupBloc>().add(
-        EditGroupDescriptionEvent(
-          groupId: widget.groupId,
-          newDescription: _descriptionController.text.trim(),
-        ),
-      );
-    }
-
+ void _saveChanges() {
+  final trimmedName = _nameController.text.trim();
+  
+  if (trimmedName.isNotEmpty && trimmedName != widget.currentName) {
+    context.read<GroupBloc>().add(
+      UpdateGroupNameEvent(widget.groupId, trimmedName),
+    );
+    Navigator.pop(context, trimmedName);
+  } else {
     Navigator.pop(context);
   }
+}
 
   @override
   Widget build(BuildContext context) {

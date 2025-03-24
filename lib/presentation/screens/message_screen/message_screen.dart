@@ -26,6 +26,7 @@ class _MessageScreenState extends State<MessageScreen> {
   final TextEditingController _messageController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final Set<int> _selectedMessageIds = {};
+  late Chat _chat;
 
   Message? _replyMessage;
   String? _replyUser;
@@ -35,6 +36,7 @@ class _MessageScreenState extends State<MessageScreen> {
   @override
   void initState() {
     super.initState();
+    _chat = widget.chat;
     context.read<MessageBloc>().add(
       LoadHistoryEvent(
         MessageParams(
@@ -135,6 +137,19 @@ class _MessageScreenState extends State<MessageScreen> {
           Navigator.popUntil(context, (route) => route.isFirst);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(AppLocalizations.of(context)!.groupDeleted)),
+          );
+        }
+        if (state is GroupUpdatedState) {
+          print("чат обновление");
+          context.read<MessageBloc>().add(
+            LoadHistoryEvent(
+              MessageParams(
+                chatType: widget.chat.chatType,
+                receiverId: widget.chat.receiverId,
+                messageId: 0,
+                limit: 30,
+              ),
+            ),
           );
         }
       },
@@ -285,22 +300,20 @@ class _MessageScreenState extends State<MessageScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             AvatarWidget(
-              avatarUrl: widget.chat.avatar,
-              name: widget.chat.name,
-              surname: widget.chat.surname,
-              username: widget.chat.username,
+              avatarUrl: _chat.avatar,
+              name: _chat.name,
+              surname: _chat.surname,
+              username: _chat.username,
               radius: 16,
             ),
             const SizedBox(width: 10),
             Text(
-              widget.chat.name.isNotEmpty
-                  ? widget.chat.name
-                  : widget.chat.username,
+              _chat.name.isNotEmpty ? _chat.name : _chat.username,
               overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
-        onTap: () {
+        onTap: () async {
           if (widget.chat.chatType == 1) {
             showDialog(
               context: context,
@@ -315,8 +328,9 @@ class _MessageScreenState extends State<MessageScreen> {
                 return UserInfoDialog(contact: contact);
               },
             );
-          } else if (widget.chat.chatType == 2) {
-            Navigator.push(
+          }
+          if (_chat.chatType == 2) {
+            final updatedName = await Navigator.push<String>(
               context,
               MaterialPageRoute(
                 builder:
@@ -324,6 +338,12 @@ class _MessageScreenState extends State<MessageScreen> {
                         GroupInfoScreen(groupId: widget.chat.receiverId),
               ),
             );
+
+            if (updatedName != null && updatedName.isNotEmpty) {
+              setState(() {
+                _chat = _chat.copyWith(name: updatedName);
+              });
+            }
           }
         },
         actions: [

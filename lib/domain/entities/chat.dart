@@ -31,6 +31,38 @@ class Chat extends Equatable {
     required this.isBot,
   });
 
+  Chat copyWith({
+    int? id,
+    int? chatType,
+    int? receiverId,
+    String? username,
+    String? avatar,
+    String? name,
+    String? surname,
+    String? msgText,
+    int? unreadCount,
+    String? updatedAt,
+    bool? isOnline,
+    bool? isDisturb,
+    bool? isBot,
+  }) {
+    return Chat(
+      id: id ?? this.id,
+      chatType: chatType ?? this.chatType,
+      receiverId: receiverId ?? this.receiverId,
+      username: username ?? this.username,
+      avatar: avatar ?? this.avatar,
+      name: name ?? this.name,
+      surname: surname ?? this.surname,
+      msgText: msgText ?? this.msgText,
+      unreadCount: unreadCount ?? this.unreadCount,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isOnline: isOnline ?? this.isOnline,
+      isDisturb: isDisturb ?? this.isDisturb,
+      isBot: isBot ?? this.isBot,
+    );
+  }
+
   @override
   List<Object?> get props => [id];
 }

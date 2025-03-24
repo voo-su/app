@@ -97,5 +97,12 @@
   "confirmDeleteGroup": "Вы точно хотите удалить группу?",
   "groupDeleted": "Группа успешно удалена",
   "editGroup": "Редактировать",
-  "groupDescription": "Описание группы"
+  "groupDescription": "Описание группы",
+  "uploadPhoto": "Загрузить фото",
+  "uploadFile": "Загрузить файл",
+  "fileSelected": "Файл выбран",
+  "fileWillBeSent": "Ваш файл будет отправлен",
+  "allowFileAccess": "Разрешите доступ к файлам в настройках",
+  "fileUploadError": "Ошибка загрузки файла",
+  "fileUploadSuccess": "Файл успешно загружен"
 }

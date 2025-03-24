@@ -60,7 +60,7 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
   }
 
   void _editGroup(String name, String description, String avatar) async {
-    final result = await Navigator.push<GroupInfoLoadedState>(
+    final newName = await Navigator.push<String>(
       context,
       MaterialPageRoute(
         builder:
@@ -73,8 +73,8 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
       ),
     );
 
-    if (result != null) {
-      Navigator.pop(context, result);
+    if (newName != null && newName.isNotEmpty) {
+      Navigator.pop(context, newName);
     }
   }
 

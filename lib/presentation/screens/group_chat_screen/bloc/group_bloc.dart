@@ -44,7 +44,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     on<LeaveGroupChatEvent>(_onLeaveGroupChat);
     on<RemoveUserFromGroupChatEvent>(_onRemoveUserFromGroupChat);
     on<DeleteGroupEvent>(_onDeleteGroup);
-    on<EditGroupNameEvent>(_onEditGroupName);
+    on<UpdateGroupNameEvent>(_onEditGroupName);
     on<EditGroupDescriptionEvent>(_onEditGroupDescription);
   }
 
@@ -194,13 +194,13 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   }
 
   Future<void> _onEditGroupName(
-    EditGroupNameEvent event,
+    UpdateGroupNameEvent event,
     Emitter<GroupState> emit,
   ) async {
     emit(GroupUpdatingState());
 
     final result = await _editGroupNameUseCase(
-      EditGroupNameParams(groupId: event.groupId, newName: event.newName),
+      EditGroupNameParams(groupId: event.groupId, newName: event.updatedName),
     );
 
     result.fold(

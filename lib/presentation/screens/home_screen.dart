@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // SearchScreen(),
     SettingsScreen(),
 
-    //TestUpdateScreen(),
-    TestUploadScreen(),
+    TestUpdateScreen(),
+    // TestUploadScreen(),
   ];
 
   @override

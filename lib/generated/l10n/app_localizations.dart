@@ -688,6 +688,48 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Описание группы'**
   String get groupDescription;
+
+  /// No description provided for @uploadPhoto.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузить фото'**
+  String get uploadPhoto;
+
+  /// No description provided for @uploadFile.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузить файл'**
+  String get uploadFile;
+
+  /// No description provided for @fileSelected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Файл выбран'**
+  String get fileSelected;
+
+  /// No description provided for @fileWillBeSent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваш файл будет отправлен'**
+  String get fileWillBeSent;
+
+  /// No description provided for @allowFileAccess.
+  ///
+  /// In ru, this message translates to:
+  /// **'Разрешите доступ к файлам в настройках'**
+  String get allowFileAccess;
+
+  /// No description provided for @fileUploadError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка загрузки файла'**
+  String get fileUploadError;
+
+  /// No description provided for @fileUploadSuccess.
+  ///
+  /// In ru, this message translates to:
+  /// **'Файл успешно загружен'**
+  String get fileUploadSuccess;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
