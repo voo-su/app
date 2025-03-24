@@ -5,6 +5,8 @@ import 'package:voo_su/core/utils/extension.dart';
 import 'package:voo_su/domain/entities/chat_update.dart';
 import 'package:voo_su/domain/usecases/upload/upload_file_usecase.dart';
 
+enum UploadPurpose { chatMedia, groupPhoto, userAvatar }
+
 abstract class UploadState {}
 
 class FileUploadInitial extends UploadState {}
@@ -13,19 +15,23 @@ class FileUploadInProgress extends UploadState {}
 
 class FileUploadSuccess extends UploadState {
   final UploadedFile uploadedFile;
+  final UploadPurpose purpose;
 
-  FileUploadSuccess(this.uploadedFile);
+  FileUploadSuccess(this.uploadedFile, this.purpose);
 }
 
 class FileUploadFailure extends UploadState {
   final String error;
+  final UploadPurpose purpose;
 
-  FileUploadFailure(this.error);
+  FileUploadFailure(this.error, this.purpose);
 }
 
 class UploadCubit extends Cubit<UploadState> {
   final UploadFileUseCase _uploadFileUseCase;
-  String? selectedPath;
+
+  String? _selectedPath;
+  UploadPurpose? _purpose;
 
   UploadCubit(this._uploadFileUseCase) : super(FileUploadInitial());
 
@@ -44,7 +50,7 @@ class UploadCubit extends Cubit<UploadState> {
           }
         }
       } catch (e) {
-        print('<< VLog - TestUploadScreen - err $e >>');
+        print('<< VLog - UploadCubit - getImageFiles error: $e >>');
       }
     }
 
@@ -52,28 +58,35 @@ class UploadCubit extends Cubit<UploadState> {
     return imageFiles;
   }
 
-  void selectFile(String path) {
-    selectedPath = path;
+  void selectFile(String path, UploadPurpose purpose) {
+    _selectedPath = path;
+    _purpose = purpose;
     emit(FileUploadInitial());
   }
 
   Future<void> uploadFile() async {
-    if (selectedPath == null) return;
+    if (_selectedPath == null || _purpose == null) return;
+
     emit(FileUploadInProgress());
+
     try {
-      final result = await _uploadFileUseCase(selectedPath!);
+      final result = await _uploadFileUseCase(_selectedPath!);
+
       result.fold(
         (failure) {
-          print('<< VLog - UploadCubit - uploadFile - failure $failure >>');
-          emit(FileUploadFailure(failure.toString()));
+          print('<< VLog - UploadCubit - uploadFile - failure: $failure >>');
+          emit(FileUploadFailure(failure.toString(), _purpose!));
         },
-        (success) {
-          print('<< VLog - uploadFile - success $success (fileId) >>');
-          emit(FileUploadSuccess(success));
+        (uploadedFile) {
+          print(
+            '<< VLog - UploadCubit - uploadFile - success: $uploadedFile >>',
+          );
+          emit(FileUploadSuccess(uploadedFile, _purpose!));
         },
       );
     } catch (e) {
-      emit(FileUploadFailure(e.toString()));
+      print('<< VLog - UploadCubit - uploadFile - exception: $e >>');
+      emit(FileUploadFailure(e.toString(), _purpose!));
     }
   }
 }

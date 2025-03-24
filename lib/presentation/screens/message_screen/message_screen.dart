@@ -161,7 +161,8 @@ class _MessageScreenState extends State<MessageScreen> {
         ),
         BlocListener<UploadCubit, UploadState>(
           listener: (context, state) {
-            if (state is FileUploadSuccess) {
+            if (state is FileUploadSuccess &&
+                state.purpose == UploadPurpose.chatMedia) {
               final file = state.uploadedFile;
 
               print("file file - ${file.name} and ${file.parts}");
@@ -174,14 +175,14 @@ class _MessageScreenState extends State<MessageScreen> {
                     fileId: file.id,
                     parts: file.parts,
                     fileName: file.name,
-                    message: '', // или текст, если есть
+                    message: '',
                     replyToMsgId: _replyMessage?.id,
                   ),
                 ),
               );
 
               print("end");
-              _clearReply(); // если хочешь сбросить reply
+              _clearReply();
             }
           },
         ),
@@ -272,7 +273,10 @@ class _MessageScreenState extends State<MessageScreen> {
                               hintText:
                                   AppLocalizations.of(context)!.writeMessage,
                               onFilePicked: (path) {
-                                context.read<UploadCubit>().selectFile(path);
+                                context.read<UploadCubit>().selectFile(
+                                  path,
+                                  UploadPurpose.chatMedia,
+                                );
                                 context.read<UploadCubit>().uploadFile();
                               },
                             ),
@@ -367,7 +371,7 @@ class _MessageScreenState extends State<MessageScreen> {
             );
           }
           if (_chat.chatType == 2) {
-            final updatedName = await Navigator.push<String>(
+            final result = await Navigator.push<Map<String, String>>(
               context,
               MaterialPageRoute(
                 builder:
@@ -376,9 +380,14 @@ class _MessageScreenState extends State<MessageScreen> {
               ),
             );
 
-            if (updatedName != null && updatedName.isNotEmpty) {
+            if (result != null) {
               setState(() {
-                _chat = _chat.copyWith(name: updatedName);
+                if (result['name'] != null) {
+                  _chat = _chat.copyWith(name: result['name']);
+                }
+                if (result['avatar'] != null) {
+                  _chat = _chat.copyWith(avatar: result['avatar']);
+                }
               });
             }
           }

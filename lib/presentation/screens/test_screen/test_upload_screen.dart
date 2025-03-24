@@ -36,10 +36,9 @@ class _TestUploadScreenState extends State<TestUploadScreen> {
                 CircularProgressIndicator()
               else
                 ElevatedButton(
-                  onPressed:
-                      cubit.selectedPath != null
-                          ? () => cubit.uploadFile()
-                          : null,
+                  onPressed: () {
+                    cubit.uploadFile();
+                  },
                   child: Text("Загрузить"),
                 ),
             ],
@@ -67,7 +66,10 @@ class _TestUploadScreenState extends State<TestUploadScreen> {
                   ),
                   title: Text(file.path.split('/').last),
                   onTap: () {
-                    context.read<UploadCubit>().selectFile(file.path);
+                    context.read<UploadCubit>().selectFile(
+                      file.path,
+                      UploadPurpose.chatMedia,
+                    );
                     Navigator.pop(context);
                   },
                 );

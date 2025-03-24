@@ -22,4 +22,5 @@ abstract class GroupChatRepository {
   Future<Either<Failure, EditAboutGroupChatResponse>> editGroupDescription(
     EditGroupDescriptionParams params,
   );
+  Future<Either<Failure, bool>> editGroupPhoto(EditGroupPhotoParams params);
 }

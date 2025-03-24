@@ -114,4 +114,20 @@ class GroupChatRepositoryImpl implements GroupChatRepository {
       return Left(failure);
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> editGroupPhoto(
+    EditGroupPhotoParams params,
+  ) async {
+    try {
+      final response = await remoteDataSource.editGroupPhoto(
+        groupId: params.groupId,
+        photo: params.photo, 
+      );
+
+      return Right(response.success);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

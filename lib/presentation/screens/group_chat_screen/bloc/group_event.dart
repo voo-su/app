@@ -72,8 +72,6 @@ class DeleteGroupEvent extends GroupEvent {
   List<Object> get props => [groupId];
 }
 
-
-
 class EditGroupDescriptionEvent extends GroupEvent {
   final int groupId;
   final String newDescription;
@@ -95,4 +93,14 @@ class UpdateGroupNameEvent extends GroupEvent {
 
   @override
   List<Object> get props => [groupId, updatedName];
+}
+
+class UpdateGroupPhotoEvent extends GroupEvent {
+  final int groupId;
+  final InputPhoto photo;
+
+  const UpdateGroupPhotoEvent(this.groupId, this.photo);
+
+  @override
+  List<Object> get props => [groupId, photo];
 }

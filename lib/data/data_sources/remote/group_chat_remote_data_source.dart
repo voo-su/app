@@ -1,5 +1,6 @@
 import 'package:fixnum/fixnum.dart';
 import 'package:voo_su/domain/entities/group.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 import 'package:voo_su/generated/grpc_pb/group_chat.pbgrpc.dart';
 
 class GroupChatRemoteDataSource {
@@ -69,6 +70,15 @@ class GroupChatRemoteDataSource {
         id: Int64(params.groupId),
         about: params.newDescription,
       ),
+    );
+  }
+
+  Future<EditPhotoGroupChatResponse> editGroupPhoto({
+    required int groupId,
+    required InputPhoto photo,
+  }) async {
+    return await client.editPhotoGroupChat(
+      EditPhotoGroupChatRequest(id: Int64(groupId), photo: photo),
     );
   }
 }

@@ -29,13 +29,11 @@ class MessageInputWidget extends StatelessWidget {
     PermissionStatus status;
 
     if (Platform.isIOS) {
-      // iOS
       status = await Permission.photos.status;
       if (status.isDenied || status.isRestricted || status.isLimited) {
         status = await Permission.photos.request();
       }
     } else {
-      // Android
       status = await Permission.storage.status;
       if (status.isDenied || status.isRestricted) {
         status = await Permission.storage.request();
@@ -49,6 +47,8 @@ class MessageInputWidget extends StatelessWidget {
       if (image != null) {
         print("Выбрано изображение: ${image.path}");
 
+        onFilePicked(image.path);
+
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -57,6 +57,7 @@ class MessageInputWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               title: Text(AppLocalizations.of(context)!.photoSelected),
+              content: Text(AppLocalizations.of(context)!.fileWillBeSent),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),

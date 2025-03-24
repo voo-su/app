@@ -1,3 +1,5 @@
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
+
 class CreateGroupChatParams {
   final String name;
 
@@ -33,4 +35,11 @@ class EditGroupDescriptionParams {
     required this.groupId,
     required this.newDescription,
   });
+}
+
+class EditGroupPhotoParams {
+  final int groupId;
+  final InputPhoto photo;
+
+  EditGroupPhotoParams({required this.groupId, required this.photo});
 }

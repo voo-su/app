@@ -43,6 +43,7 @@ import 'package:voo_su/domain/usecases/group/create_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/group/delete_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/edit_group_description_usecase.dart';
 import 'package:voo_su/domain/usecases/group/edit_group_name_usecase.dart';
+import 'package:voo_su/domain/usecases/group/edit_group_photo_usecase.dart';
 import 'package:voo_su/domain/usecases/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/group/leave_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/remove_user_group_usecase.dart';
@@ -167,6 +168,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EditGroupDescriptionUseCase(sl()));
   sl.registerLazySingleton(() => UploadFileUseCase(sl()));
   sl.registerLazySingleton(() => SendMediaUseCase(sl()));
+  sl.registerLazySingleton(() => EditGroupPhotoUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
@@ -175,7 +177,7 @@ Future<void> init() async {
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
   sl.registerFactory(
-    () => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
+    () => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
   );
 
   // Cubit

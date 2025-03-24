@@ -8,10 +8,12 @@ import 'package:voo_su/domain/usecases/group/create_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/group/delete_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/edit_group_description_usecase.dart';
 import 'package:voo_su/domain/usecases/group/edit_group_name_usecase.dart';
+import 'package:voo_su/domain/usecases/group/edit_group_photo_usecase.dart';
 import 'package:voo_su/domain/usecases/group/get_group_chat_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_members_usecase.dart';
 import 'package:voo_su/domain/usecases/group/leave_group_usecase.dart';
 import 'package:voo_su/domain/usecases/group/remove_user_group_usecase.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 
 part 'group_event.dart';
 part 'group_state.dart';
@@ -26,6 +28,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final DeleteGroupUsecase _deleteGroupUsecase;
   final EditGroupNameUseCase _editGroupNameUseCase;
   final EditGroupDescriptionUseCase _editGroupDescriptionUseCase;
+  final EditGroupPhotoUseCase _editGroupPhotoUseCase;
 
   GroupBloc(
     this._createGroupChatUseCase,
@@ -37,6 +40,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     this._deleteGroupUsecase,
     this._editGroupDescriptionUseCase,
     this._editGroupNameUseCase,
+    this._editGroupPhotoUseCase,
   ) : super(GroupInitialState()) {
     on<CreateGroupEvent>(_onCreateGroup);
     on<AddUserToGroupChatEvent>(_onAddUserToGroupChat);
@@ -46,6 +50,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     on<DeleteGroupEvent>(_onDeleteGroup);
     on<UpdateGroupNameEvent>(_onEditGroupName);
     on<EditGroupDescriptionEvent>(_onEditGroupDescription);
+    on<UpdateGroupPhotoEvent>(_onUpdateGroupPhoto);
   }
 
   Future<void> _onCreateGroup(
@@ -220,6 +225,22 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
         groupId: event.groupId,
         newDescription: event.newDescription,
       ),
+    );
+
+    result.fold(
+      (failure) => emit(GroupErrorState(failure)),
+      (_) => emit(GroupUpdatedState()),
+    );
+  }
+
+  Future<void> _onUpdateGroupPhoto(
+    UpdateGroupPhotoEvent event,
+    Emitter<GroupState> emit,
+  ) async {
+    emit(GroupUpdatingState());
+
+    final result = await _editGroupPhotoUseCase(
+      EditGroupPhotoParams(groupId: event.groupId, photo: event.photo),
     );
 
     result.fold(
