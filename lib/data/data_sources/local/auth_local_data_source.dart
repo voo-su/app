@@ -99,7 +99,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> clearAuthData() async {
     try {
-      //await sharedPreferences.clear();
+      await sharedPreferences.clear();
       await secureStorage.deleteAll();
     } catch (e) {
       throw CacheException();
