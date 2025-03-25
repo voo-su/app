@@ -31,6 +31,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   Message? _replyMessage;
   String? _replyUser;
+  String? _lastPickedFilePath;
   bool _isSelectionMode = false;
   bool _areNotifsEnabled = false;
 
@@ -166,6 +167,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   file: file,
                   message: '',
                   replyToMsgId: _replyMessage?.id,
+                  path: _lastPickedFilePath!,
                 ),
               );
 
@@ -261,6 +263,8 @@ class _MessageScreenState extends State<MessageScreen> {
                               hintText:
                                   AppLocalizations.of(context)!.writeMessage,
                               onFilePicked: (path) {
+                                _lastPickedFilePath = path; // сохраняем путь
+
                                 context.read<UploadCubit>().selectFile(
                                   path,
                                   UploadPurpose.chatMedia,

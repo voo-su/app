@@ -52,12 +52,15 @@ class LoadGroupInfoEvent extends MessageEvent {
 class SendMediaEvent extends MessageEvent {
   final Receiver receiver;
   final InputFile file;
+  final String path;
   final String? message;
   final int? replyToMsgId;
 
   const SendMediaEvent({
     required this.receiver,
     required this.file,
+    required this.path,
+
     this.message,
     this.replyToMsgId,
   });

@@ -66,6 +66,7 @@ dependencies:
 
   # file
   file_picker: ^9.2.1
+  mime: ^2.0.0
 
   # audio
   voice_message_package: ^2.2.1

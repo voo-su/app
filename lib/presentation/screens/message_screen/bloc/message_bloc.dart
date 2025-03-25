@@ -1,9 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
+import 'package:video_player/video_player.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/contact.dart';
@@ -105,30 +108,51 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
   void _onSendMedia(SendMediaEvent event, Emitter<MessageState> emit) async {
     print('<< VLog - MessageBloc - _onSendMedia START >>');
-    print(
-      'Параметры: fileId=${event.file.id}, parts=${event.file.parts}, name=${event.file.name}',
-    );
 
     try {
+      final file = File(event.path);
+      final mimeType = lookupMimeType(event.path) ?? 'application/octet-stream';
+      final fileName = file.uri.pathSegments.last;
+
+      String fileType = 'file';
+      int duration = 0;
+      int width = 0;
+      int height = 0;
+
+      if (mimeType.startsWith('image/')) {
+        fileType = 'photo';
+      } else if (mimeType.startsWith('video/')) {
+        final controller = VideoPlayerController.file(file);
+        await controller.initialize();
+        duration = controller.value.duration.inSeconds;
+        width = controller.value.size.width.toInt();
+        height = controller.value.size.height.toInt();
+        await controller.dispose();
+
+        fileType = 'video';
+      } else if (mimeType.startsWith('audio/')) {
+        fileType = 'audio';
+      }
+
+      final media = Media(
+        fileType: fileType,
+        mimeType: mimeType,
+        fileName: fileName,
+        duration: duration,
+        width: width,
+        height: height,
+      );
+
       final result = await _sendMediaUseCase(
         SendMediaParams(
           receiver: event.receiver,
           file: event.file,
-
-          // TODO
-          media: Media(
-            fileType: "photo",
-            mimeType: "",
-            fileName: event.file.name,
-            duration: 0,
-            width: 0,
-            height: 0,
-          ),
-
+          media: media,
           message: event.message,
           replyToMsgId: event.replyToMsgId,
         ),
       );
+
       result.fold(
         (failure) {
           print('<< VLog - Ошибка при отправке медиа: $failure >>');

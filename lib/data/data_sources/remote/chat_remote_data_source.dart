@@ -79,7 +79,7 @@ class ChatRemoteDataSource {
   }
 
   Future<SendMediaResponse> sendMedia(SendMediaParams params) async {
-    dynamic attribute;
+    DocumentAttribute attribute;
     InputMedia media;
     if (params.media.fileType == 'photo') {
       media = InputMedia(
@@ -93,18 +93,26 @@ class ChatRemoteDataSource {
       );
     } else {
       if (params.media.fileType == 'video') {
-        attribute = common.DocumentAttributeVideo(
-          duration: params.media.duration ?? 0,
-          width: params.media.width ?? 0,
-          height: params.media.height ?? 0,
+        attribute = DocumentAttribute(
+          video: common.DocumentAttributeVideo(
+            duration: params.media.duration ?? 0,
+            width: params.media.width ?? 0,
+            height: params.media.height ?? 0,
+          ),
         );
       } else if (params.media.fileType == 'audio') {
-        attribute = common.DocumentAttributeAudio(
-          duration: params.media.duration ?? 0,
-          name: params.media.fileName,
+        attribute = DocumentAttribute(
+          audio: common.DocumentAttributeAudio(
+            duration: params.media.duration ?? 0,
+            name: params.media.fileName,
+          ),
         );
       } else {
-        attribute = common.DocumentAttributeFilename(fileName: params.media.fileName);
+        attribute = DocumentAttribute(
+          filename: common.DocumentAttributeFilename(
+            fileName: params.media.fileName,
+          ),
+        );
       }
 
       media = InputMedia(
