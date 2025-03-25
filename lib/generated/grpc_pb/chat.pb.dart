@@ -1235,9 +1235,13 @@ class MessageMedia extends $pb.GeneratedMessage {
 
 class MessageMediaPhoto extends $pb.GeneratedMessage {
   factory MessageMediaPhoto({
+    $core.String? id,
     $core.String? file,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (file != null) {
       $result.file = file;
     }
@@ -1248,7 +1252,8 @@ class MessageMediaPhoto extends $pb.GeneratedMessage {
   factory MessageMediaPhoto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MessageMediaPhoto', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'file')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'file')
     ..hasRequiredFields = false
   ;
 
@@ -1274,26 +1279,43 @@ class MessageMediaPhoto extends $pb.GeneratedMessage {
   static MessageMediaPhoto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get file => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set file($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFile() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFile() => clearField(1);
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get file => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set file($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFile() => clearField(2);
 }
 
 class MessageMediaDocument extends $pb.GeneratedMessage {
   factory MessageMediaDocument({
-    $core.String? file,
+    $core.String? id,
     $core.String? mimeType,
+    $core.int? size,
+    $core.String? file,
   }) {
     final $result = create();
-    if (file != null) {
-      $result.file = file;
+    if (id != null) {
+      $result.id = id;
     }
     if (mimeType != null) {
       $result.mimeType = mimeType;
+    }
+    if (size != null) {
+      $result.size = size;
+    }
+    if (file != null) {
+      $result.file = file;
     }
     return $result;
   }
@@ -1302,8 +1324,10 @@ class MessageMediaDocument extends $pb.GeneratedMessage {
   factory MessageMediaDocument.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MessageMediaDocument', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'file')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'mimeType')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.O3)
+    ..aOS(4, _omitFieldNames ? '' : 'file')
     ..hasRequiredFields = false
   ;
 
@@ -1329,13 +1353,13 @@ class MessageMediaDocument extends $pb.GeneratedMessage {
   static MessageMediaDocument? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get file => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set file($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFile() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFile() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get mimeType => $_getSZ(1);
@@ -1345,6 +1369,24 @@ class MessageMediaDocument extends $pb.GeneratedMessage {
   $core.bool hasMimeType() => $_has(1);
   @$pb.TagNumber(2)
   void clearMimeType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get size => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set size($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSize() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get file => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set file($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFile() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFile() => clearField(4);
 }
 
 class MessageReply extends $pb.GeneratedMessage {
@@ -1583,8 +1625,8 @@ class SendMessageResponse extends $pb.GeneratedMessage {
   void clearSuccess() => clearField(1);
 }
 
-class InputMedia extends $pb.GeneratedMessage {
-  factory InputMedia({
+class InputMediaUploadedPhoto extends $pb.GeneratedMessage {
+  factory InputMediaUploadedPhoto({
     $6.InputFile? file,
   }) {
     final $result = create();
@@ -1593,12 +1635,264 @@ class InputMedia extends $pb.GeneratedMessage {
     }
     return $result;
   }
+  InputMediaUploadedPhoto._() : super();
+  factory InputMediaUploadedPhoto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory InputMediaUploadedPhoto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InputMediaUploadedPhoto', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+    ..aOM<$6.InputFile>(1, _omitFieldNames ? '' : 'file', subBuilder: $6.InputFile.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  InputMediaUploadedPhoto clone() => InputMediaUploadedPhoto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  InputMediaUploadedPhoto copyWith(void Function(InputMediaUploadedPhoto) updates) => super.copyWith((message) => updates(message as InputMediaUploadedPhoto)) as InputMediaUploadedPhoto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static InputMediaUploadedPhoto create() => InputMediaUploadedPhoto._();
+  InputMediaUploadedPhoto createEmptyInstance() => create();
+  static $pb.PbList<InputMediaUploadedPhoto> createRepeated() => $pb.PbList<InputMediaUploadedPhoto>();
+  @$core.pragma('dart2js:noInline')
+  static InputMediaUploadedPhoto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputMediaUploadedPhoto>(create);
+  static InputMediaUploadedPhoto? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.InputFile get file => $_getN(0);
+  @$pb.TagNumber(1)
+  set file($6.InputFile v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFile() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.InputFile ensureFile() => $_ensure(0);
+}
+
+enum DocumentAttribute_Attributes {
+  video, 
+  audio, 
+  filename, 
+  notSet
+}
+
+class DocumentAttribute extends $pb.GeneratedMessage {
+  factory DocumentAttribute({
+    $6.DocumentAttributeVideo? video,
+    $6.DocumentAttributeAudio? audio,
+    $6.DocumentAttributeFilename? filename,
+  }) {
+    final $result = create();
+    if (video != null) {
+      $result.video = video;
+    }
+    if (audio != null) {
+      $result.audio = audio;
+    }
+    if (filename != null) {
+      $result.filename = filename;
+    }
+    return $result;
+  }
+  DocumentAttribute._() : super();
+  factory DocumentAttribute.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentAttribute.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, DocumentAttribute_Attributes> _DocumentAttribute_AttributesByTag = {
+    1 : DocumentAttribute_Attributes.video,
+    2 : DocumentAttribute_Attributes.audio,
+    3 : DocumentAttribute_Attributes.filename,
+    0 : DocumentAttribute_Attributes.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentAttribute', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3])
+    ..aOM<$6.DocumentAttributeVideo>(1, _omitFieldNames ? '' : 'video', subBuilder: $6.DocumentAttributeVideo.create)
+    ..aOM<$6.DocumentAttributeAudio>(2, _omitFieldNames ? '' : 'audio', subBuilder: $6.DocumentAttributeAudio.create)
+    ..aOM<$6.DocumentAttributeFilename>(3, _omitFieldNames ? '' : 'filename', subBuilder: $6.DocumentAttributeFilename.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentAttribute clone() => DocumentAttribute()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentAttribute copyWith(void Function(DocumentAttribute) updates) => super.copyWith((message) => updates(message as DocumentAttribute)) as DocumentAttribute;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttribute create() => DocumentAttribute._();
+  DocumentAttribute createEmptyInstance() => create();
+  static $pb.PbList<DocumentAttribute> createRepeated() => $pb.PbList<DocumentAttribute>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttribute getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentAttribute>(create);
+  static DocumentAttribute? _defaultInstance;
+
+  DocumentAttribute_Attributes whichAttributes() => _DocumentAttribute_AttributesByTag[$_whichOneof(0)]!;
+  void clearAttributes() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $6.DocumentAttributeVideo get video => $_getN(0);
+  @$pb.TagNumber(1)
+  set video($6.DocumentAttributeVideo v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasVideo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearVideo() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.DocumentAttributeVideo ensureVideo() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $6.DocumentAttributeAudio get audio => $_getN(1);
+  @$pb.TagNumber(2)
+  set audio($6.DocumentAttributeAudio v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAudio() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAudio() => clearField(2);
+  @$pb.TagNumber(2)
+  $6.DocumentAttributeAudio ensureAudio() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $6.DocumentAttributeFilename get filename => $_getN(2);
+  @$pb.TagNumber(3)
+  set filename($6.DocumentAttributeFilename v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasFilename() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilename() => clearField(3);
+  @$pb.TagNumber(3)
+  $6.DocumentAttributeFilename ensureFilename() => $_ensure(2);
+}
+
+class InputMediaUploadedDocument extends $pb.GeneratedMessage {
+  factory InputMediaUploadedDocument({
+    $6.InputFile? file,
+    $core.String? mimeType,
+    DocumentAttribute? attributes,
+  }) {
+    final $result = create();
+    if (file != null) {
+      $result.file = file;
+    }
+    if (mimeType != null) {
+      $result.mimeType = mimeType;
+    }
+    if (attributes != null) {
+      $result.attributes = attributes;
+    }
+    return $result;
+  }
+  InputMediaUploadedDocument._() : super();
+  factory InputMediaUploadedDocument.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory InputMediaUploadedDocument.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InputMediaUploadedDocument', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
+    ..aOM<$6.InputFile>(1, _omitFieldNames ? '' : 'file', subBuilder: $6.InputFile.create)
+    ..aOS(2, _omitFieldNames ? '' : 'mimeType')
+    ..aOM<DocumentAttribute>(3, _omitFieldNames ? '' : 'attributes', subBuilder: DocumentAttribute.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  InputMediaUploadedDocument clone() => InputMediaUploadedDocument()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  InputMediaUploadedDocument copyWith(void Function(InputMediaUploadedDocument) updates) => super.copyWith((message) => updates(message as InputMediaUploadedDocument)) as InputMediaUploadedDocument;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static InputMediaUploadedDocument create() => InputMediaUploadedDocument._();
+  InputMediaUploadedDocument createEmptyInstance() => create();
+  static $pb.PbList<InputMediaUploadedDocument> createRepeated() => $pb.PbList<InputMediaUploadedDocument>();
+  @$core.pragma('dart2js:noInline')
+  static InputMediaUploadedDocument getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputMediaUploadedDocument>(create);
+  static InputMediaUploadedDocument? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.InputFile get file => $_getN(0);
+  @$pb.TagNumber(1)
+  set file($6.InputFile v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFile() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.InputFile ensureFile() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get mimeType => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set mimeType($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMimeType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMimeType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  DocumentAttribute get attributes => $_getN(2);
+  @$pb.TagNumber(3)
+  set attributes(DocumentAttribute v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAttributes() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAttributes() => clearField(3);
+  @$pb.TagNumber(3)
+  DocumentAttribute ensureAttributes() => $_ensure(2);
+}
+
+enum InputMedia_Media {
+  photo, 
+  document, 
+  notSet
+}
+
+class InputMedia extends $pb.GeneratedMessage {
+  factory InputMedia({
+    InputMediaUploadedPhoto? photo,
+    InputMediaUploadedDocument? document,
+  }) {
+    final $result = create();
+    if (photo != null) {
+      $result.photo = photo;
+    }
+    if (document != null) {
+      $result.document = document;
+    }
+    return $result;
+  }
   InputMedia._() : super();
   factory InputMedia.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory InputMedia.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
+  static const $core.Map<$core.int, InputMedia_Media> _InputMedia_MediaByTag = {
+    1 : InputMedia_Media.photo,
+    2 : InputMedia_Media.document,
+    0 : InputMedia_Media.notSet
+  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InputMedia', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat'), createEmptyInstance: create)
-    ..aOM<$6.InputFile>(1, _omitFieldNames ? '' : 'file', subBuilder: $6.InputFile.create)
+    ..oo(0, [1, 2])
+    ..aOM<InputMediaUploadedPhoto>(1, _omitFieldNames ? '' : 'photo', subBuilder: InputMediaUploadedPhoto.create)
+    ..aOM<InputMediaUploadedDocument>(2, _omitFieldNames ? '' : 'document', subBuilder: InputMediaUploadedDocument.create)
     ..hasRequiredFields = false
   ;
 
@@ -1623,16 +1917,30 @@ class InputMedia extends $pb.GeneratedMessage {
   static InputMedia getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputMedia>(create);
   static InputMedia? _defaultInstance;
 
+  InputMedia_Media whichMedia() => _InputMedia_MediaByTag[$_whichOneof(0)]!;
+  void clearMedia() => clearField($_whichOneof(0));
+
   @$pb.TagNumber(1)
-  $6.InputFile get file => $_getN(0);
+  InputMediaUploadedPhoto get photo => $_getN(0);
   @$pb.TagNumber(1)
-  set file($6.InputFile v) { setField(1, v); }
+  set photo(InputMediaUploadedPhoto v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFile() => $_has(0);
+  $core.bool hasPhoto() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFile() => clearField(1);
+  void clearPhoto() => clearField(1);
   @$pb.TagNumber(1)
-  $6.InputFile ensureFile() => $_ensure(0);
+  InputMediaUploadedPhoto ensurePhoto() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  InputMediaUploadedDocument get document => $_getN(1);
+  @$pb.TagNumber(2)
+  set document(InputMediaUploadedDocument v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDocument() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDocument() => clearField(2);
+  @$pb.TagNumber(2)
+  InputMediaUploadedDocument ensureDocument() => $_ensure(1);
 }
 
 class SendMediaRequest extends $pb.GeneratedMessage {

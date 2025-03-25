@@ -227,8 +227,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget>
     context.read<MessageBloc>().add(
       DeleteMessagesEvent(
         DeleteMessagesParams(
-          chatType: widget.message.chatType,
-          receiverId: widget.message.receiverId,
+          receiver: widget.message.receiver,
           messageIds: [widget.message.id],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:voo_su/core/error/failures.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/contact.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/domain/usecases/chat/delete_messages_usecase.dart';
@@ -65,8 +66,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         add(
           LoadHistoryEvent(
             MessageParams(
-              chatType: event.params.chatType,
-              receiverId: event.params.receiverId,
+              receiver: event.params.receiver,
               messageId: 0,
               limit: 30,
             ),
@@ -106,11 +106,29 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
   void _onSendMedia(SendMediaEvent event, Emitter<MessageState> emit) async {
     print('<< VLog - MessageBloc - _onSendMedia START >>');
     print(
-      'Параметры: fileId=${event.params.fileId}, parts=${event.params.parts}, name=${event.params.fileName}',
+      'Параметры: fileId=${event.file.id}, parts=${event.file.parts}, name=${event.file.name}',
     );
 
     try {
-      final result = await _sendMediaUseCase(event.params);
+      final result = await _sendMediaUseCase(
+        SendMediaParams(
+          receiver: event.receiver,
+          file: event.file,
+
+          // TODO
+          media: Media(
+            fileType: "photo",
+            mimeType: "",
+            fileName: event.file.name,
+            duration: 0,
+            width: 0,
+            height: 0,
+          ),
+
+          message: event.message,
+          replyToMsgId: event.replyToMsgId,
+        ),
+      );
       result.fold(
         (failure) {
           print('<< VLog - Ошибка при отправке медиа: $failure >>');
@@ -120,12 +138,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
           print('<< VLog - Медиа успешно отправлено! >>');
           add(
             LoadHistoryEvent(
-              MessageParams(
-                chatType: event.params.chatType,
-                receiverId: event.params.receiverId,
-                messageId: 0,
-                limit: 30,
-              ),
+              MessageParams(receiver: event.receiver, messageId: 0, limit: 30),
             ),
           );
         },

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voo_su/core/utils/extension.dart';
-import 'package:voo_su/domain/entities/chat_update.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/usecases/upload/upload_file_usecase.dart';
 
 enum UploadPurpose { chatMedia, groupPhoto, userAvatar }
@@ -14,7 +14,7 @@ class FileUploadInitial extends UploadState {}
 class FileUploadInProgress extends UploadState {}
 
 class FileUploadSuccess extends UploadState {
-  final UploadedFile uploadedFile;
+  final InputFile uploadedFile;
   final UploadPurpose purpose;
 
   FileUploadSuccess(this.uploadedFile, this.purpose);
@@ -77,11 +77,9 @@ class UploadCubit extends Cubit<UploadState> {
           print('<< VLog - UploadCubit - uploadFile - failure: $failure >>');
           emit(FileUploadFailure(failure.toString(), _purpose!));
         },
-        (uploadedFile) {
-          print(
-            '<< VLog - UploadCubit - uploadFile - success: $uploadedFile >>',
-          );
-          emit(FileUploadSuccess(uploadedFile, _purpose!));
+        (success) {
+          print('<< VLog - UploadCubit - uploadFile - success: $success >>');
+          emit(FileUploadSuccess(success, _purpose!));
         },
       );
     } catch (e) {

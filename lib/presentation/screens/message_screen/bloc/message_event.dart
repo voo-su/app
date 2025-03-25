@@ -50,10 +50,18 @@ class LoadGroupInfoEvent extends MessageEvent {
 }
 
 class SendMediaEvent extends MessageEvent {
-  final SendMediaParams params;
+  final Receiver receiver;
+  final InputFile file;
+  final String? message;
+  final int? replyToMsgId;
 
-  const SendMediaEvent(this.params);
+  const SendMediaEvent({
+    required this.receiver,
+    required this.file,
+    this.message,
+    this.replyToMsgId,
+  });
 
   @override
-  List<Object> get props => [params];
+  List<Object> get props => [receiver, file];
 }

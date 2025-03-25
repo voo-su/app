@@ -10,12 +10,11 @@ class ChatEvent extends Equatable {
 }
 
 class ChatUpdateNotifySettingsEvent extends ChatEvent {
-  final int id;
-  final int chatType;
+  final Receiver receiver;
 
-  const ChatUpdateNotifySettingsEvent(this.id, this.chatType, ChatParams params)
+  const ChatUpdateNotifySettingsEvent(this.receiver, ChatParams params)
     : super(params);
 
   @override
-  List<Object> get props => [id, params];
+  List<Object> get props => [receiver, params];
 }

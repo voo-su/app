@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_item_widget.dart';
 
 class MessageListWidget extends StatelessWidget {
-  final int receiverId;
+  final Receiver receiver;
   final String chatName;
   final Function(Message, String) onReply;
 
@@ -17,7 +18,7 @@ class MessageListWidget extends StatelessWidget {
 
   const MessageListWidget({
     super.key,
-    required this.receiverId,
+    required this.receiver,
     required this.chatName,
     required this.onReply,
     required this.isSelectionMode,
@@ -52,7 +53,7 @@ class MessageListWidget extends StatelessWidget {
               final message = state.messages[index];
               return MessageItemWidget(
                 message: message,
-                receiverId: receiverId,
+                receiverId: receiver.receiverId,
                 chatName: chatName,
                 onReply: onReply,
                 isSelectionMode: isSelectionMode,

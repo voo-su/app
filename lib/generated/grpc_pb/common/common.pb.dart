@@ -345,6 +345,198 @@ class InputPhotoEmpty extends $pb.GeneratedMessage {
   static InputPhotoEmpty? _defaultInstance;
 }
 
+class DocumentAttributeVideo extends $pb.GeneratedMessage {
+  factory DocumentAttributeVideo({
+    $core.int? duration,
+    $core.int? width,
+    $core.int? height,
+  }) {
+    final $result = create();
+    if (duration != null) {
+      $result.duration = duration;
+    }
+    if (width != null) {
+      $result.width = width;
+    }
+    if (height != null) {
+      $result.height = height;
+    }
+    return $result;
+  }
+  DocumentAttributeVideo._() : super();
+  factory DocumentAttributeVideo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentAttributeVideo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentAttributeVideo', package: const $pb.PackageName(_omitMessageNames ? '' : 'common'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'duration', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'width', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'height', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeVideo clone() => DocumentAttributeVideo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeVideo copyWith(void Function(DocumentAttributeVideo) updates) => super.copyWith((message) => updates(message as DocumentAttributeVideo)) as DocumentAttributeVideo;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeVideo create() => DocumentAttributeVideo._();
+  DocumentAttributeVideo createEmptyInstance() => create();
+  static $pb.PbList<DocumentAttributeVideo> createRepeated() => $pb.PbList<DocumentAttributeVideo>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeVideo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentAttributeVideo>(create);
+  static DocumentAttributeVideo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get duration => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set duration($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDuration() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDuration() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get width => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set width($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasWidth() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearWidth() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get height => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set height($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasHeight() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHeight() => clearField(3);
+}
+
+class DocumentAttributeAudio extends $pb.GeneratedMessage {
+  factory DocumentAttributeAudio({
+    $core.int? duration,
+    $core.String? name,
+  }) {
+    final $result = create();
+    if (duration != null) {
+      $result.duration = duration;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
+    return $result;
+  }
+  DocumentAttributeAudio._() : super();
+  factory DocumentAttributeAudio.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentAttributeAudio.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentAttributeAudio', package: const $pb.PackageName(_omitMessageNames ? '' : 'common'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'duration', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeAudio clone() => DocumentAttributeAudio()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeAudio copyWith(void Function(DocumentAttributeAudio) updates) => super.copyWith((message) => updates(message as DocumentAttributeAudio)) as DocumentAttributeAudio;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeAudio create() => DocumentAttributeAudio._();
+  DocumentAttributeAudio createEmptyInstance() => create();
+  static $pb.PbList<DocumentAttributeAudio> createRepeated() => $pb.PbList<DocumentAttributeAudio>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeAudio getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentAttributeAudio>(create);
+  static DocumentAttributeAudio? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get duration => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set duration($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDuration() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDuration() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class DocumentAttributeFilename extends $pb.GeneratedMessage {
+  factory DocumentAttributeFilename({
+    $core.String? fileName,
+  }) {
+    final $result = create();
+    if (fileName != null) {
+      $result.fileName = fileName;
+    }
+    return $result;
+  }
+  DocumentAttributeFilename._() : super();
+  factory DocumentAttributeFilename.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentAttributeFilename.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentAttributeFilename', package: const $pb.PackageName(_omitMessageNames ? '' : 'common'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fileName')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeFilename clone() => DocumentAttributeFilename()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentAttributeFilename copyWith(void Function(DocumentAttributeFilename) updates) => super.copyWith((message) => updates(message as DocumentAttributeFilename)) as DocumentAttributeFilename;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeFilename create() => DocumentAttributeFilename._();
+  DocumentAttributeFilename createEmptyInstance() => create();
+  static $pb.PbList<DocumentAttributeFilename> createRepeated() => $pb.PbList<DocumentAttributeFilename>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentAttributeFilename getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentAttributeFilename>(create);
+  static DocumentAttributeFilename? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get fileName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fileName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFileName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFileName() => clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

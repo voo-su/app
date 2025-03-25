@@ -82,3 +82,45 @@ const InputPhotoEmpty$json = {
 final $typed_data.Uint8List inputPhotoEmptyDescriptor = $convert.base64Decode(
     'Cg9JbnB1dFBob3RvRW1wdHk=');
 
+@$core.Deprecated('Use documentAttributeVideoDescriptor instead')
+const DocumentAttributeVideo$json = {
+  '1': 'DocumentAttributeVideo',
+  '2': [
+    {'1': 'duration', '3': 1, '4': 1, '5': 5, '10': 'duration'},
+    {'1': 'width', '3': 2, '4': 1, '5': 5, '10': 'width'},
+    {'1': 'height', '3': 3, '4': 1, '5': 5, '10': 'height'},
+  ],
+};
+
+/// Descriptor for `DocumentAttributeVideo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List documentAttributeVideoDescriptor = $convert.base64Decode(
+    'ChZEb2N1bWVudEF0dHJpYnV0ZVZpZGVvEhoKCGR1cmF0aW9uGAEgASgFUghkdXJhdGlvbhIUCg'
+    'V3aWR0aBgCIAEoBVIFd2lkdGgSFgoGaGVpZ2h0GAMgASgFUgZoZWlnaHQ=');
+
+@$core.Deprecated('Use documentAttributeAudioDescriptor instead')
+const DocumentAttributeAudio$json = {
+  '1': 'DocumentAttributeAudio',
+  '2': [
+    {'1': 'duration', '3': 1, '4': 1, '5': 5, '10': 'duration'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `DocumentAttributeAudio`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List documentAttributeAudioDescriptor = $convert.base64Decode(
+    'ChZEb2N1bWVudEF0dHJpYnV0ZUF1ZGlvEhoKCGR1cmF0aW9uGAEgASgFUghkdXJhdGlvbhISCg'
+    'RuYW1lGAIgASgJUgRuYW1l');
+
+@$core.Deprecated('Use documentAttributeFilenameDescriptor instead')
+const DocumentAttributeFilename$json = {
+  '1': 'DocumentAttributeFilename',
+  '2': [
+    {'1': 'file_name', '3': 1, '4': 1, '5': 9, '10': 'fileName'},
+  ],
+};
+
+/// Descriptor for `DocumentAttributeFilename`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List documentAttributeFilenameDescriptor = $convert.base64Decode(
+    'ChlEb2N1bWVudEF0dHJpYnV0ZUZpbGVuYW1lEhsKCWZpbGVfbmFtZRgBIAEoCVIIZmlsZU5hbW'
+    'U=');
+

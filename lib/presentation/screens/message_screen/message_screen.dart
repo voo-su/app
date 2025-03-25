@@ -6,9 +6,9 @@ import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
 import 'package:voo_su/presentation/cubit/upload_cubit.dart';
 import 'package:voo_su/presentation/screens/group_chat_screen/bloc/group_bloc.dart';
+import 'package:voo_su/presentation/screens/group_chat_screen/group_info_screen.dart';
 import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_list_widget.dart';
-import 'package:voo_su/presentation/screens/group_chat_screen/group_info_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:voo_su/presentation/widgets/message_input_widget.dart';
@@ -40,12 +40,7 @@ class _MessageScreenState extends State<MessageScreen> {
     _chat = widget.chat;
     context.read<MessageBloc>().add(
       LoadHistoryEvent(
-        MessageParams(
-          chatType: widget.chat.chatType,
-          receiverId: widget.chat.receiverId,
-          messageId: 0,
-          limit: 30,
-        ),
+        MessageParams(receiver: widget.chat.receiver, messageId: 0, limit: 30),
       ),
     );
 
@@ -100,8 +95,7 @@ class _MessageScreenState extends State<MessageScreen> {
     context.read<MessageBloc>().add(
       DeleteMessagesEvent(
         DeleteMessagesParams(
-          chatType: widget.chat.chatType,
-          receiverId: widget.chat.receiverId,
+          receiver: widget.chat.receiver,
           messageIds: _selectedMessageIds.toList(),
         ),
       ),
@@ -149,8 +143,7 @@ class _MessageScreenState extends State<MessageScreen> {
               context.read<MessageBloc>().add(
                 LoadHistoryEvent(
                   MessageParams(
-                    chatType: widget.chat.chatType,
-                    receiverId: widget.chat.receiverId,
+                    receiver: widget.chat.receiver,
                     messageId: 0,
                     limit: 30,
                   ),
@@ -169,15 +162,10 @@ class _MessageScreenState extends State<MessageScreen> {
 
               context.read<MessageBloc>().add(
                 SendMediaEvent(
-                  SendMediaParams(
-                    chatType: widget.chat.chatType,
-                    receiverId: widget.chat.receiverId,
-                    fileId: file.id,
-                    parts: file.parts,
-                    fileName: file.name,
-                    message: '',
-                    replyToMsgId: _replyMessage?.id,
-                  ),
+                  receiver: widget.chat.receiver,
+                  file: file,
+                  message: '',
+                  replyToMsgId: _replyMessage?.id,
                 ),
               );
 
@@ -198,7 +186,7 @@ class _MessageScreenState extends State<MessageScreen> {
             children: <Widget>[
               Expanded(
                 child: MessageListWidget(
-                  receiverId: widget.chat.receiverId,
+                  receiver: widget.chat.receiver,
                   chatName:
                       widget.chat.name.isNotEmpty
                           ? widget.chat.name
@@ -291,8 +279,7 @@ class _MessageScreenState extends State<MessageScreen> {
                               context.read<MessageBloc>().add(
                                 SendMessagesEvent(
                                   SendMessageParams(
-                                    chatType: widget.chat.chatType,
-                                    receiverId: widget.chat.receiverId,
+                                    receiver: widget.chat.receiver,
                                     messageId: 0,
                                     message: _messageController.text.trim(),
                                     replyToMsgId: _replyMessage?.id,
@@ -355,7 +342,7 @@ class _MessageScreenState extends State<MessageScreen> {
           ],
         ),
         onTap: () async {
-          if (widget.chat.chatType == 1) {
+          if (widget.chat.receiver.chatType == 1) {
             showDialog(
               context: context,
               builder: (context) {
@@ -370,13 +357,14 @@ class _MessageScreenState extends State<MessageScreen> {
               },
             );
           }
-          if (_chat.chatType == 2) {
+          if (_chat.receiver.chatType == 2) {
             final result = await Navigator.push<Map<String, String>>(
               context,
               MaterialPageRoute(
                 builder:
-                    (context) =>
-                        GroupInfoScreen(groupId: widget.chat.receiverId),
+                    (context) => GroupInfoScreen(
+                      groupId: widget.chat.receiver.receiverId,
+                    ),
               ),
             );
 
@@ -427,7 +415,7 @@ class _MessageScreenState extends State<MessageScreen> {
             ],
           ),
         ),
-        if (widget.chat.chatType == 2)
+        if (widget.chat.receiver.chatType == 2)
           PopupMenuItem(
             value: "delete",
             child: Row(
@@ -472,7 +460,7 @@ class _MessageScreenState extends State<MessageScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                   context.read<GroupBloc>().add(
-                    DeleteGroupEvent(widget.chat.receiverId),
+                    DeleteGroupEvent(widget.chat.receiver.receiverId),
                   );
                 },
                 child: Text(

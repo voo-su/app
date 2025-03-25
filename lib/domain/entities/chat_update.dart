@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/message.dart';
 
 abstract class ChatUpdate extends Equatable {
@@ -18,48 +19,31 @@ class UpdateNewMessage extends ChatUpdate {
 }
 
 class UpdateChatReadInbox extends ChatUpdate {
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final String lastReadInboxMessageId;
   final int unreadCount;
 
   const UpdateChatReadInbox({
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.lastReadInboxMessageId,
     required this.unreadCount,
   });
 
   @override
-  List<Object?> get props => [
-    chatType,
-    receiverId,
-    lastReadInboxMessageId,
-    unreadCount,
-  ];
+  List<Object?> get props => [receiver, lastReadInboxMessageId, unreadCount];
 }
 
 class UpdateUserTyping extends ChatUpdate {
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final int userId;
   final bool isTyping;
 
   const UpdateUserTyping({
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.userId,
     required this.isTyping,
   });
 
   @override
-  List<Object?> get props => [chatType, receiverId, userId, isTyping];
-}
-
-class UploadedFile {
-  final int id;
-  final int parts;
-  final String name;
-
-  UploadedFile({required this.id, required this.parts, required this.name});
+  List<Object?> get props => [receiver, userId, isTyping];
 }

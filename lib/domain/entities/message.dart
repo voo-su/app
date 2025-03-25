@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:voo_su/domain/entities/common.dart';
 
 class Message extends Equatable {
   final int id;
-  final int chatType;
+  final Receiver receiver;
   final int msgType;
-  final int receiverId;
   final int userId;
   final String content;
   final MessageReply? reply;
@@ -14,9 +14,8 @@ class Message extends Equatable {
 
   const Message({
     required this.id,
-    required this.chatType,
+    required this.receiver,
     required this.msgType,
-    required this.receiverId,
     required this.userId,
     required this.content,
     this.media,
@@ -67,29 +66,25 @@ class MessageResponse {
 }
 
 class MessageParams {
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final int messageId;
   final int limit;
 
   const MessageParams({
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.messageId,
     required this.limit,
   });
 }
 
 class SendMessageParams {
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final int messageId;
   final String message;
   final int? replyToMsgId;
 
   const SendMessageParams({
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.messageId,
     required this.message,
     this.replyToMsgId,
@@ -97,34 +92,45 @@ class SendMessageParams {
 }
 
 class DeleteMessagesParams {
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final List<int> messageIds;
 
   const DeleteMessagesParams({
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.messageIds,
   });
 }
 
+class Media {
+  final String fileType;
+  final String? mimeType;
+  final String? fileName;
+  final int? duration;
+  final int? width;
+  final int? height;
+
+  Media({
+    required this.fileType,
+    this.mimeType,
+    this.fileName,
+    this.duration,
+    this.width,
+    this.height,
+  });
+}
+
 class SendMediaParams {
-  final int chatType;
-  final int receiverId;
-  final int fileId;
-  final int parts;
-  final String fileName;
+  final Receiver receiver;
+  final InputFile file;
+  final Media media;
   final String? message;
   final int? replyToMsgId;
 
   SendMediaParams({
-    required this.chatType,
-    required this.receiverId,
-    required this.fileId,
-    required this.parts,
-    required this.fileName,
+    required this.receiver,
+    required this.file,
+    required this.media,
     this.message,
     this.replyToMsgId,
   });
 }
-

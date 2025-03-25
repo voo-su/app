@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:voo_su/domain/entities/common.dart';
 
 class Chat extends Equatable {
   final int id;
-  final int chatType;
-  final int receiverId;
+  final Receiver receiver;
   final String username;
   final String avatar;
   final String name;
@@ -17,8 +17,7 @@ class Chat extends Equatable {
 
   const Chat({
     required this.id,
-    required this.chatType,
-    required this.receiverId,
+    required this.receiver,
     required this.username,
     required this.avatar,
     required this.name,
@@ -33,8 +32,7 @@ class Chat extends Equatable {
 
   Chat copyWith({
     int? id,
-    int? chatType,
-    int? receiverId,
+    Receiver? receiver,
     String? username,
     String? avatar,
     String? name,
@@ -48,8 +46,7 @@ class Chat extends Equatable {
   }) {
     return Chat(
       id: id ?? this.id,
-      chatType: chatType ?? this.chatType,
-      receiverId: receiverId ?? this.receiverId,
+      receiver: receiver ?? this.receiver,
       username: username ?? this.username,
       avatar: avatar ?? this.avatar,
       name: name ?? this.name,

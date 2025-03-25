@@ -4,6 +4,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/chat.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/usecases/account/update_notify_settings_usecase.dart';
 import 'package:voo_su/domain/usecases/chat/get_chats_usecase.dart';
@@ -43,12 +44,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ) async {
     try {
       final entity = NotifyEntity();
-      switch (event.chatType) {
+      switch (event.receiver.chatType) {
         case 1:
-          NotifyEntity(chat: EntityChat(chatId: Int64(event.id)));
+          NotifyEntity(chat: EntityChat(chatId: Int64(event.receiver.receiverId)));
           break;
         case 2:
-          NotifyEntity(group: EntityGroup(groupId: Int64(event.id)));
+          NotifyEntity(group: EntityGroup(groupId: Int64(event.receiver.receiverId)));
           break;
       }
       final result = await _updateNotifySettingsUseCase(

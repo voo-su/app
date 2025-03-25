@@ -250,27 +250,31 @@ final $typed_data.Uint8List messageMediaDescriptor = $convert.base64Decode(
 const MessageMediaPhoto$json = {
   '1': 'MessageMediaPhoto',
   '2': [
-    {'1': 'file', '3': 1, '4': 1, '5': 9, '10': 'file'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'file', '3': 2, '4': 1, '5': 9, '10': 'file'},
   ],
 };
 
 /// Descriptor for `MessageMediaPhoto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List messageMediaPhotoDescriptor = $convert.base64Decode(
-    'ChFNZXNzYWdlTWVkaWFQaG90bxISCgRmaWxlGAEgASgJUgRmaWxl');
+    'ChFNZXNzYWdlTWVkaWFQaG90bxIOCgJpZBgBIAEoCVICaWQSEgoEZmlsZRgCIAEoCVIEZmlsZQ'
+    '==');
 
 @$core.Deprecated('Use messageMediaDocumentDescriptor instead')
 const MessageMediaDocument$json = {
   '1': 'MessageMediaDocument',
   '2': [
-    {'1': 'file', '3': 1, '4': 1, '5': 9, '10': 'file'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'mime_type', '3': 2, '4': 1, '5': 9, '10': 'mimeType'},
+    {'1': 'size', '3': 3, '4': 1, '5': 5, '10': 'size'},
+    {'1': 'file', '3': 4, '4': 1, '5': 9, '10': 'file'},
   ],
 };
 
 /// Descriptor for `MessageMediaDocument`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List messageMediaDocumentDescriptor = $convert.base64Decode(
-    'ChRNZXNzYWdlTWVkaWFEb2N1bWVudBISCgRmaWxlGAEgASgJUgRmaWxlEhsKCW1pbWVfdHlwZR'
-    'gCIAEoCVIIbWltZVR5cGU=');
+    'ChRNZXNzYWdlTWVkaWFEb2N1bWVudBIOCgJpZBgBIAEoCVICaWQSGwoJbWltZV90eXBlGAIgAS'
+    'gJUghtaW1lVHlwZRISCgRzaXplGAMgASgFUgRzaXplEhIKBGZpbGUYBCABKAlSBGZpbGU=');
 
 @$core.Deprecated('Use messageReplyDescriptor instead')
 const MessageReply$json = {
@@ -318,17 +322,72 @@ const SendMessageResponse$json = {
 final $typed_data.Uint8List sendMessageResponseDescriptor = $convert.base64Decode(
     'ChNTZW5kTWVzc2FnZVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
 
-@$core.Deprecated('Use inputMediaDescriptor instead')
-const InputMedia$json = {
-  '1': 'InputMedia',
+@$core.Deprecated('Use inputMediaUploadedPhotoDescriptor instead')
+const InputMediaUploadedPhoto$json = {
+  '1': 'InputMediaUploadedPhoto',
   '2': [
     {'1': 'file', '3': 1, '4': 1, '5': 11, '6': '.common.InputFile', '10': 'file'},
   ],
 };
 
+/// Descriptor for `InputMediaUploadedPhoto`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List inputMediaUploadedPhotoDescriptor = $convert.base64Decode(
+    'ChdJbnB1dE1lZGlhVXBsb2FkZWRQaG90bxIlCgRmaWxlGAEgASgLMhEuY29tbW9uLklucHV0Rm'
+    'lsZVIEZmlsZQ==');
+
+@$core.Deprecated('Use documentAttributeDescriptor instead')
+const DocumentAttribute$json = {
+  '1': 'DocumentAttribute',
+  '2': [
+    {'1': 'video', '3': 1, '4': 1, '5': 11, '6': '.common.DocumentAttributeVideo', '9': 0, '10': 'video'},
+    {'1': 'audio', '3': 2, '4': 1, '5': 11, '6': '.common.DocumentAttributeAudio', '9': 0, '10': 'audio'},
+    {'1': 'filename', '3': 3, '4': 1, '5': 11, '6': '.common.DocumentAttributeFilename', '9': 0, '10': 'filename'},
+  ],
+  '8': [
+    {'1': 'attributes'},
+  ],
+};
+
+/// Descriptor for `DocumentAttribute`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List documentAttributeDescriptor = $convert.base64Decode(
+    'ChFEb2N1bWVudEF0dHJpYnV0ZRI2CgV2aWRlbxgBIAEoCzIeLmNvbW1vbi5Eb2N1bWVudEF0dH'
+    'JpYnV0ZVZpZGVvSABSBXZpZGVvEjYKBWF1ZGlvGAIgASgLMh4uY29tbW9uLkRvY3VtZW50QXR0'
+    'cmlidXRlQXVkaW9IAFIFYXVkaW8SPwoIZmlsZW5hbWUYAyABKAsyIS5jb21tb24uRG9jdW1lbn'
+    'RBdHRyaWJ1dGVGaWxlbmFtZUgAUghmaWxlbmFtZUIMCgphdHRyaWJ1dGVz');
+
+@$core.Deprecated('Use inputMediaUploadedDocumentDescriptor instead')
+const InputMediaUploadedDocument$json = {
+  '1': 'InputMediaUploadedDocument',
+  '2': [
+    {'1': 'file', '3': 1, '4': 1, '5': 11, '6': '.common.InputFile', '10': 'file'},
+    {'1': 'mime_type', '3': 2, '4': 1, '5': 9, '10': 'mimeType'},
+    {'1': 'attributes', '3': 3, '4': 1, '5': 11, '6': '.chat.DocumentAttribute', '10': 'attributes'},
+  ],
+};
+
+/// Descriptor for `InputMediaUploadedDocument`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List inputMediaUploadedDocumentDescriptor = $convert.base64Decode(
+    'ChpJbnB1dE1lZGlhVXBsb2FkZWREb2N1bWVudBIlCgRmaWxlGAEgASgLMhEuY29tbW9uLklucH'
+    'V0RmlsZVIEZmlsZRIbCgltaW1lX3R5cGUYAiABKAlSCG1pbWVUeXBlEjcKCmF0dHJpYnV0ZXMY'
+    'AyABKAsyFy5jaGF0LkRvY3VtZW50QXR0cmlidXRlUgphdHRyaWJ1dGVz');
+
+@$core.Deprecated('Use inputMediaDescriptor instead')
+const InputMedia$json = {
+  '1': 'InputMedia',
+  '2': [
+    {'1': 'photo', '3': 1, '4': 1, '5': 11, '6': '.chat.InputMediaUploadedPhoto', '9': 0, '10': 'photo'},
+    {'1': 'document', '3': 2, '4': 1, '5': 11, '6': '.chat.InputMediaUploadedDocument', '9': 0, '10': 'document'},
+  ],
+  '8': [
+    {'1': 'media'},
+  ],
+};
+
 /// Descriptor for `InputMedia`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List inputMediaDescriptor = $convert.base64Decode(
-    'CgpJbnB1dE1lZGlhEiUKBGZpbGUYASABKAsyES5jb21tb24uSW5wdXRGaWxlUgRmaWxl');
+    'CgpJbnB1dE1lZGlhEjUKBXBob3RvGAEgASgLMh0uY2hhdC5JbnB1dE1lZGlhVXBsb2FkZWRQaG'
+    '90b0gAUgVwaG90bxI+Cghkb2N1bWVudBgCIAEoCzIgLmNoYXQuSW5wdXRNZWRpYVVwbG9hZGVk'
+    'RG9jdW1lbnRIAFIIZG9jdW1lbnRCBwoFbWVkaWE=');
 
 @$core.Deprecated('Use sendMediaRequestDescriptor instead')
 const SendMediaRequest$json = {

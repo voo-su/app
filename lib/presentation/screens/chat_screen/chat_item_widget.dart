@@ -8,6 +8,7 @@ import 'package:voo_su/presentation/screens/chat_screen/bloc/chat_bloc.dart';
 import 'package:voo_su/presentation/screens/message_screen/message_screen.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/widgets/popup_menu_widget.dart';
+import 'package:voo_su/domain/entities/common.dart';
 
 class ChatItemWidget extends StatelessWidget {
   final Chat chat;
@@ -157,13 +158,12 @@ class ChatItemWidget extends StatelessWidget {
   void _muteChat(BuildContext context) {
     context.read<ChatBloc>().add(
       ChatUpdateNotifySettingsEvent(
-        chat.receiverId,
-        chat.chatType,
+        chat.receiver,
         const ChatParams(),
       ),
     );
 
-    print("Отключен звук для чата: ${chat.chatType}");
+    print("Отключен звук для чата: ${chat.receiver.chatType}");
   }
 
   void _deleteChat() {

@@ -4,6 +4,7 @@ import 'package:voo_su/data/data_sources/local/auth_local_data_source.dart';
 import 'package:voo_su/data/data_sources/remote/chat_remote_data_source.dart';
 import 'package:voo_su/domain/entities/chat.dart';
 import 'package:voo_su/domain/entities/chat_update.dart';
+import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/message.dart';
 import 'package:voo_su/domain/repositories/chat_repository.dart';
 
@@ -23,9 +24,11 @@ class ChatRepositoryImpl implements ChatRepository {
         return UpdateNewMessage(
           message: Message(
             id: update.newMessage.message.id.toInt(),
-            chatType: update.newMessage.message.receiver.chatType,
+            receiver: Receiver(
+              chatType: update.newMessage.message.receiver.chatType,
+              receiverId: update.newMessage.message.receiver.receiverId.toInt(),
+            ),
             msgType: update.newMessage.message.msgType,
-            receiverId: update.newMessage.message.receiver.receiverId.toInt(),
             userId: update.newMessage.message.userId.toInt(),
             content: update.newMessage.message.content,
             isRead: update.newMessage.message.isRead,
@@ -34,15 +37,19 @@ class ChatRepositoryImpl implements ChatRepository {
         );
       } else if (update.hasChatReadInbox()) {
         return UpdateChatReadInbox(
-          chatType: update.chatReadInbox.receiver.chatType.toInt(),
-          receiverId: update.chatReadInbox.receiver.receiverId.toInt(),
+          receiver: Receiver(
+            chatType: update.newMessage.message.receiver.chatType,
+            receiverId: update.newMessage.message.receiver.receiverId.toInt(),
+          ),
           lastReadInboxMessageId: update.chatReadInbox.lastReadInboxMessageId,
           unreadCount: update.chatReadInbox.unreadCount.toInt(),
         );
       } else if (update.hasUserTyping()) {
         return UpdateUserTyping(
-          chatType: update.userTyping.receiver.chatType.toInt(),
-          receiverId: update.userTyping.receiver.receiverId.toInt(),
+          receiver: Receiver(
+            chatType: update.newMessage.message.receiver.chatType,
+            receiverId: update.newMessage.message.receiver.receiverId.toInt(),
+          ),
           userId: update.userTyping.userId.toInt(),
           isTyping: update.userTyping.isTyping,
         );
@@ -62,8 +69,10 @@ class ChatRepositoryImpl implements ChatRepository {
             response.items.map(
               (item) => Chat(
                 id: item.id.toInt(),
-                chatType: item.receiver.chatType,
-                receiverId: item.receiver.receiverId.toInt(),
+                receiver: Receiver(
+                  chatType: item.receiver.chatType,
+                  receiverId: item.receiver.receiverId.toInt(),
+                ),
                 username: item.username,
                 avatar: item.avatar,
                 name: item.name,
@@ -119,8 +128,10 @@ class ChatRepositoryImpl implements ChatRepository {
 
               return Message(
                 id: item.id.toInt(),
-                chatType: item.receiver.chatType,
-                receiverId: item.receiver.receiverId.toInt(),
+                receiver: Receiver(
+                  chatType: item.receiver.chatType,
+                  receiverId: item.receiver.receiverId.toInt(),
+                ),
                 userId: item.userId.toInt(),
                 msgType: item.msgType,
                 content: item.content,

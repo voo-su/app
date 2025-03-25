@@ -1,6 +1,6 @@
 import 'package:fixnum/fixnum.dart';
-import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
 import 'package:voo_su/domain/entities/message.dart';
+import 'package:voo_su/generated/grpc_pb/chat.pbgrpc.dart';
 import 'package:voo_su/generated/grpc_pb/common/common.pb.dart' as common;
 
 class ChatRemoteDataSource {
@@ -30,8 +30,8 @@ class ChatRemoteDataSource {
     await client.viewMessages(
       ViewMessagesRequest(
         receiver: Receiver(
-          chatType: params.chatType,
-          receiverId: Int64(params.receiverId),
+          chatType: params.receiver.chatType,
+          receiverId: Int64(params.receiver.receiverId),
         ),
         messageIds: [Int64(params.messageId)],
       ),
@@ -40,8 +40,8 @@ class ChatRemoteDataSource {
     return await client.getHistory(
       GetHistoryRequest(
         receiver: Receiver(
-          chatType: params.chatType,
-          receiverId: Int64(params.receiverId),
+          chatType: params.receiver.chatType,
+          receiverId: Int64(params.receiver.receiverId),
         ),
         messageId: Int64(params.messageId),
         limit: Int64(params.limit),
@@ -53,8 +53,8 @@ class ChatRemoteDataSource {
     return await client.sendMessage(
       SendMessageRequest(
         receiver: Receiver(
-          chatType: params.chatType,
-          receiverId: Int64(params.receiverId),
+          chatType: params.receiver.chatType,
+          receiverId: Int64(params.receiver.receiverId),
         ),
         message: params.message,
         replyToMsgId:
@@ -69,8 +69,8 @@ class ChatRemoteDataSource {
     return await client.deleteMessages(
       DeleteMessagesRequest(
         receiver: Receiver(
-          chatType: params.chatType,
-          receiverId: Int64(params.receiverId),
+          chatType: params.receiver.chatType,
+          receiverId: Int64(params.receiver.receiverId),
         ),
         messageIds: params.messageIds.map((id) => Int64(id)).toList(),
         revoke: false,
@@ -79,24 +79,58 @@ class ChatRemoteDataSource {
   }
 
   Future<SendMediaResponse> sendMedia(SendMediaParams params) async {
-  return await client.sendMedia(
-    SendMediaRequest(
-      receiver: Receiver(
-        chatType: params.chatType,
-        receiverId: Int64(params.receiverId),
-      ),
-      media: InputMedia(
-        file: common.InputFile(
-          id: Int64(params.fileId),
-          parts: params.parts,
-          name: params.fileName,
+    dynamic attribute;
+    InputMedia media;
+    if (params.media.fileType == 'photo') {
+      media = InputMedia(
+        photo: InputMediaUploadedPhoto(
+          file: common.InputFile(
+            id: Int64(params.file.id),
+            parts: params.file.parts,
+            name: params.file.name,
+          ),
         ),
-      ),
-      message: params.message ?? '',
-      replyToMsgId:
-          params.replyToMsgId != null ? Int64(params.replyToMsgId!) : null,
-    ),
-  );
-}
+      );
+    } else {
+      if (params.media.fileType == 'video') {
+        attribute = common.DocumentAttributeVideo(
+          duration: params.media.duration ?? 0,
+          width: params.media.width ?? 0,
+          height: params.media.height ?? 0,
+        );
+      } else if (params.media.fileType == 'audio') {
+        attribute = common.DocumentAttributeAudio(
+          duration: params.media.duration ?? 0,
+          name: params.media.fileName,
+        );
+      } else {
+        attribute = common.DocumentAttributeFilename(fileName: params.media.fileName);
+      }
 
+      media = InputMedia(
+        document: InputMediaUploadedDocument(
+          file: common.InputFile(
+            id: Int64(params.file.id),
+            parts: params.file.parts,
+            name: params.file.name,
+          ),
+          mimeType: params.media.mimeType,
+          attributes: attribute,
+        ),
+      );
+    }
+
+    return await client.sendMedia(
+      SendMediaRequest(
+        receiver: Receiver(
+          chatType: params.receiver.chatType,
+          receiverId: Int64(params.receiver.receiverId),
+        ),
+        media: media,
+        message: params.message ?? '',
+        replyToMsgId:
+            params.replyToMsgId != null ? Int64(params.replyToMsgId!) : null,
+      ),
+    );
+  }
 }
