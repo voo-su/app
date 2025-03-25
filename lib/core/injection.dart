@@ -27,6 +27,7 @@ import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_firebase_token_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_notify_settings_usecase.dart';
 import 'package:voo_su/domain/usecases/account/update_notify_settings_usecase.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_photo_usecase.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/login_usecase.dart';
 import 'package:voo_su/domain/usecases/auth/logout_usecase.dart';
@@ -169,13 +170,14 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UploadFileUseCase(sl()));
   sl.registerLazySingleton(() => SendMediaUseCase(sl()));
   sl.registerLazySingleton(() => EditGroupPhotoUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateProfilePhotoUseCase(sl()));
 
   // Bloc
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
   sl.registerFactory(() => ChatBloc(sl(), sl()));
   sl.registerFactory(() => ContactBloc(sl()));
   sl.registerFactory(() => MessageBloc(sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => SettingsBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => SettingsBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(
     () => GroupBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
   );

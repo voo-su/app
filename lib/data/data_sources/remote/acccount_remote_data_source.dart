@@ -69,4 +69,11 @@ class AccountRemoteDataSource {
       rethrow;
     }
   }
+
+  Future<bool> updateProfilePhoto(InputFile file) async {
+    final response = await client.updateProfilePhoto(
+      UpdateProfilePhotoRequest(file: file),
+    );
+    return response.success;
+  }
 }

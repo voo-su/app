@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voo_su/core/router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 import 'package:voo_su/generated/l10n/app_localizations.dart';
+import 'package:voo_su/presentation/cubit/upload_cubit.dart';
 import 'package:voo_su/presentation/widgets/avatar_widget.dart';
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 
@@ -18,7 +23,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
 
+  XFile? _pickedAvatarFile;
   int _selectedGender = 1;
   DateTime? _selectedDate;
   String avatarUrl = "";
@@ -33,42 +40,82 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalData)),
-      body: BlocListener<SettingsBloc, SettingsState>(
-        listener: (context, state) {
-          if (state is SettingsSuccessState) {
-            setState(() {
-              _nameController.text = state.account.name;
-              _surnameController.text = state.account.surname;
-              _emailController.text = state.account.email;
-              avatarUrl = state.account.avatar;
-              _selectedGender = state.account.gender;
-              _bioController.text = state.account.about;
-              _selectedDate =
-                  state.account.birthday.isNotEmpty
-                      ? DateTime.parse(state.account.birthday)
-                      : null;
-            });
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<SettingsBloc, SettingsState>(
+            listener: (context, state) {
+              if (state is SettingsSuccessState) {
+                setState(() {
+                  _nameController.text = state.account.name;
+                  _surnameController.text = state.account.surname;
+                  _emailController.text = state.account.email;
+                  avatarUrl = state.account.avatar;
+                  _selectedGender = state.account.gender;
+                  _bioController.text = state.account.about;
+                  _selectedDate =
+                      state.account.birthday.isNotEmpty
+                          ? DateTime.parse(state.account.birthday)
+                          : null;
+                });
+              }
+            },
+          ),
+          BlocListener<UploadCubit, UploadState>(
+            listener: (context, state) {
+              if (state is FileUploadSuccess &&
+                  state.purpose == UploadPurpose.userAvatar) {
+                final file = state.uploadedFile;
+
+                final inputFile = InputFile(
+                  id: Int64(file.id),
+                  parts: file.parts,
+                  name: file.name,
+                );
+
+                context.read<SettingsBloc>().add(
+                  UpdateProfilePhotoEvent(inputFile),
+                );
+              }
+            },
+          ),
+        ],
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: AvatarWidget(
-                  avatarUrl: avatarUrl,
-                  name: _nameController.text,
-                  surname: _surnameController.text,
-                  username: "",
-                  radius: 50,
+                child: GestureDetector(
+                  onTap: _pickAvatar,
+                  child:
+                      _pickedAvatarFile != null
+                          ? CircleAvatar(
+                            radius: 50,
+                            backgroundImage: FileImage(
+                              File(_pickedAvatarFile!.path),
+                            ),
+                          )
+                          : AvatarWidget(
+                            avatarUrl: avatarUrl,
+                            name: _nameController.text,
+                            surname: _surnameController.text,
+                            username: "",
+                            radius: 50,
+                          ),
                 ),
               ),
+
               const SizedBox(height: 16),
-              _buildLabel(AppLocalizations.of(context)!.firstName, isRequired: true),
+              _buildLabel(
+                AppLocalizations.of(context)!.firstName,
+                isRequired: true,
+              ),
               _buildTextField(_nameController),
               const SizedBox(height: 16),
-              _buildLabel(AppLocalizations.of(context)!.lastName, isRequired: true),
+              _buildLabel(
+                AppLocalizations.of(context)!.lastName,
+                isRequired: true,
+              ),
               _buildTextField(_surnameController),
               const SizedBox(height: 16),
               _buildLabel(AppLocalizations.of(context)!.gender),
@@ -104,7 +151,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  void _saveProfile() {
+  void _pickAvatar() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _pickedAvatarFile = image;
+      });
+    }
+  }
+
+  void _saveProfile() async {
     final params = UpdateProfileParams(
       name: _nameController.text.trim(),
       surname: _surnameController.text.trim(),
@@ -112,12 +168,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       birthday:
           _selectedDate != null
               ? "${_selectedDate!.year}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.day.toString().padLeft(2, '0')}"
-              : "", // Форматирование в `yyyy-MM-dd`
+              : "",
       about: _bioController.text.trim(),
     );
 
     context.read<SettingsBloc>().add(UpdateProfileEvent(params));
-    Navigator.popAndPushNamed(context, AppRouter.settings);
+
+    if (_pickedAvatarFile != null) {
+      final cubit = context.read<UploadCubit>();
+      cubit.selectFile(_pickedAvatarFile!.path, UploadPurpose.userAvatar);
+      await cubit.uploadFile();
+
+      final state = cubit.state;
+      if (state is FileUploadSuccess &&
+          state.purpose == UploadPurpose.userAvatar) {
+        final file = state.uploadedFile;
+        final inputFile = InputFile(
+          id: Int64(file.id),
+          parts: file.parts,
+          name: file.name,
+        );
+
+        context.read<SettingsBloc>().add(UpdateProfilePhotoEvent(inputFile));
+      }
+      Navigator.pop(context, true);
+    }
   }
 
   Future<void> _pickDate() async {
@@ -185,7 +260,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildGenderPicker() {
     final colors = Theme.of(context).colorScheme;
-    final genderMap = {1: AppLocalizations.of(context)!.male, 2: AppLocalizations.of(context)!.female};
+    final genderMap = {
+      1: AppLocalizations.of(context)!.male,
+      2: AppLocalizations.of(context)!.female,
+    };
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),

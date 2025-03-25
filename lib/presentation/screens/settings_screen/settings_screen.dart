@@ -135,14 +135,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               _buildSettingsItem(
                 icon: Icons.palette_outlined,
-                title:AppLocalizations.of(context)!.appearance,
+                title: AppLocalizations.of(context)!.appearance,
                 onTap: () {
                   Navigator.pushNamed(context, AppRouter.themes);
                 },
               ),
               _buildSettingsItem(
                 icon: Icons.logout_outlined,
-                title:AppLocalizations.of(context)!.logout,
+                title: AppLocalizations.of(context)!.logout,
                 onTap: () {
                   context.read<AuthBloc>().add(LogoutEvent());
                   Navigator.popAndPushNamed(context, AppRouter.auth);

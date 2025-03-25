@@ -2,12 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voo_su/core/error/failures.dart';
+import 'package:voo_su/domain/usecases/account/update_profile_photo_usecase.dart';
 import 'package:voo_su/generated/grpc_pb/account.pb.dart';
 import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/usecases/account/get_acccount_usecase.dart';
 import 'package:voo_su/domain/usecases/account/get_notify_settings_usecase.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
@@ -16,6 +18,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetAccountUseCase _getAccountUseCase;
   final GetNotifySettingsUseCase _getNotifySettingsUseCase;
   final UpdateProfileUseCase _updateProfileUseCase;
+    final UpdateProfilePhotoUseCase _updateProfilePhotoUseCase;
+
 
   bool _isLightTheme = true; // текущаятема
 
@@ -23,11 +27,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     this._getAccountUseCase,
     this._getNotifySettingsUseCase,
     this._updateProfileUseCase,
+    this._updateProfilePhotoUseCase
   ) : super(SettingsInitialState()) {
     on<GetAccountEvent>(_onGetAccount);
     on<GetNotifySettingsEvent>(_onGetNotifySettings);
     on<UpdateProfileEvent>(_onUpdateProfile);
     on<ChangeThemeEvent>(_onChangeTheme);
+    on<UpdateProfilePhotoEvent>(_onUpdateProfilePhoto);
     _loadTheme();
   }
 
@@ -120,5 +126,23 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final prefs = await SharedPreferences.getInstance();
     bool isLight = prefs.getBool("isLightTheme") ?? true;
     add(ChangeThemeEvent(isLight));
+  }
+
+  Future<void> _onUpdateProfilePhoto(
+    UpdateProfilePhotoEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    try {
+      emit(SettingsLoadingState());
+
+      final result = await _updateProfilePhotoUseCase(event.file);
+
+      result.fold(
+        (failure) => emit(SettingsErrorState(failure: failure)),
+        (success) => emit(SettingsProfilePhotoUpdatedState(success: success)),
+      );
+    } catch (e) {
+      emit(SettingsErrorState(failure: ExceptionFailure()));
+    }
   }
 }

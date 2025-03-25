@@ -1,6 +1,5 @@
 part of 'settings_bloc.dart';
 
-
 abstract class SettingsEvent extends Equatable {
   @override
   List<Object?> get props => [];
@@ -26,3 +25,13 @@ class ChangeThemeEvent extends SettingsEvent {
   @override
   List<Object?> get props => [isLight];
 }
+
+class UpdateProfilePhotoEvent extends SettingsEvent {
+  final InputFile file;
+
+  UpdateProfilePhotoEvent(this.file);
+
+  @override
+  List<Object?> get props => [file];
+}
+

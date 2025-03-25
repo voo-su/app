@@ -7,6 +7,7 @@ import 'package:voo_su/domain/entities/account.dart';
 import 'package:voo_su/domain/entities/notify_settings.dart';
 import 'package:voo_su/domain/repositories/account_repository.dart';
 import 'package:voo_su/domain/usecases/account/update_profile_usecase.dart';
+import 'package:voo_su/generated/grpc_pb/common/common.pb.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final AccountRemoteDataSource remoteDataSource;
@@ -101,6 +102,16 @@ class AccountRepositoryImpl implements AccountRepository {
       final response = await remoteDataSource.updateProfile(params);
       return Right(response);
     } catch (e) {
+      return Left(ExceptionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateProfilePhoto(InputFile file) async {
+    try {
+      final success = await remoteDataSource.updateProfilePhoto(file);
+      return Right(success);
+    } catch (_) {
       return Left(ExceptionFailure());
     }
   }

@@ -52,3 +52,12 @@ class SettingsProfileUpdatedState extends SettingsState {
 class SettingsLightThemeState extends SettingsState {}
 
 class SettingsDarkThemeState extends SettingsState {}
+
+class SettingsProfilePhotoUpdatedState extends SettingsState {
+  final bool success;
+
+  SettingsProfilePhotoUpdatedState({required this.success});
+
+  @override
+  List<Object?> get props => [success];
+}
