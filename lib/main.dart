@@ -21,6 +21,8 @@ import 'package:voo_su/presentation/screens/message_screen/bloc/message_bloc.dar
 import 'package:voo_su/presentation/screens/settings_screen/bloc/settings_bloc.dart';
 import 'package:voo_su/presentation/screens/splash_screen.dart';
 
+import 'package:ffmpeg_helper/ffmpeg_helper.dart';
+
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -35,6 +37,8 @@ Future<void> main() async {
 
   // https://firebase.google.com/docs/cloud-messaging/flutter/receive?hl=ru
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await FFMpegHelper.instance.initialize();
 
   runApp(const App());
 }

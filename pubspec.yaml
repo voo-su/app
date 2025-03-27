@@ -67,6 +67,9 @@ dependencies:
   # file
   file_picker: ^9.2.1
   mime: ^2.0.0
+  ffmpeg_helper: ^1.0.1
+  ffmpeg_kit_flutter_full_gpl: ^6.0.3
+  ffmpeg_kit_flutter_full: ^6.0.3
 
   # audio
   voice_message_package: ^2.2.1

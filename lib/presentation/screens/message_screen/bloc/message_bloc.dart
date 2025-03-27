@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:ffmpeg_helper/ffmpeg_helper.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
-import 'package:video_player/video_player.dart';
 import 'package:voo_su/core/error/failures.dart';
 import 'package:voo_su/domain/entities/common.dart';
 import 'package:voo_su/domain/entities/contact.dart';
@@ -119,21 +119,69 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       int width = 0;
       int height = 0;
 
+      // Определяем тип файла (фото, видео, аудио и т.д.)
       if (mimeType.startsWith('image/')) {
         fileType = 'photo';
-      } else if (mimeType.startsWith('video/')) {
-        final controller = VideoPlayerController.file(file);
-        await controller.initialize();
-        duration = controller.value.duration.inSeconds;
-        width = controller.value.size.width.toInt();
-        height = controller.value.size.height.toInt();
-        await controller.dispose();
+      } else if (mimeType.startsWith('video/') ||
+          mimeType.startsWith('audio/')) {
+        // Запрашиваем метаданные через ffmpeg_helper
+        final info = await FFMpegHelper.instance.runProbe(file.path);
 
-        fileType = 'video';
-      } else if (mimeType.startsWith('audio/')) {
-        fileType = 'audio';
+        // 1) Пробуем взять общую длительность из info?.getDuration()
+        final infoDurationStr = info?.getDuration();
+        if (infoDurationStr != null) {
+          duration = double.tryParse(infoDurationStr)?.round() ?? 0;
+        }
+
+        // 2) Если всё ещё 0, пробуем достать "duration" напрямую из formatProperties
+        if (duration == 0) {
+          final formatProps = info?.getFormatProperties();
+          if (formatProps != null) {
+            final formatDurationStr = formatProps['duration']?.toString();
+            if (formatDurationStr != null) {
+              duration = double.tryParse(formatDurationStr)?.round() ?? 0;
+            }
+          }
+        }
+
+        // 3) Если всё ещё 0, ищем стрим, у которого есть поле 'duration'
+        if (duration == 0) {
+          final streams = info?.getStreams() ?? [];
+          if (streams.isNotEmpty) {
+            final durationStream = streams.firstWhere(
+              (s) => s.getAllProperties()?['duration'] != null,
+              orElse: () => StreamInformation({}),
+            );
+            final streamDurationStr =
+                durationStream.getAllProperties()?['duration']?.toString();
+            if (streamDurationStr != null) {
+              duration = double.tryParse(streamDurationStr)?.round() ?? 0;
+            }
+          }
+        }
+
+        // Пытаемся получить ширину/высоту (из первого стрима, где codec_type == 'video')
+        final streams = info?.getStreams() ?? [];
+        final videoStream = streams.firstWhere(
+          (s) => s.getAllProperties()?['codec_type'] == 'video',
+          orElse: () => StreamInformation({}),
+        );
+
+        width =
+            int.tryParse(
+              videoStream.getAllProperties()?['width']?.toString() ?? '',
+            ) ??
+            0;
+        height =
+            int.tryParse(
+              videoStream.getAllProperties()?['height']?.toString() ?? '',
+            ) ??
+            0;
+
+        fileType = mimeType.startsWith('video/') ? 'video' : 'audio';
       }
 
+      // Формируем объект Media с нужными параметрами
       final media = Media(
         fileType: fileType,
         mimeType: mimeType,
@@ -143,6 +191,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         height: height,
       );
 
+      // Отправляем медиа
       final result = await _sendMediaUseCase(
         SendMediaParams(
           receiver: event.receiver,
@@ -160,6 +209,8 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         },
         (success) {
           print('<< VLog - Медиа успешно отправлено! >>');
+          print('Тип: $fileType | MIME: $mimeType | Name: $fileName');
+          print('Длительность: $duration | ${width}x$height');
           add(
             LoadHistoryEvent(
               MessageParams(receiver: event.receiver, messageId: 0, limit: 30),
